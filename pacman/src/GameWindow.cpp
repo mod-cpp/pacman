@@ -12,8 +12,8 @@ GameWindow::GameWindow(int width, int height) {
   auto sdl_renderer = createRenderer(sdl_window);
   createWindowSurface(sdl_window);
   setDrawColor(sdl_renderer);
-  maze_texture = loadTexture(sdl_renderer, "../../../../pacman/assets/maze.png");
-  sprite_texture = loadTexture(sdl_renderer, "../../../../pacman/assets/sprites32.png");
+  maze_texture = loadTexture(sdl_renderer, "maze.png");
+  sprite_texture = loadTexture(sdl_renderer, "sprites32.png");
 }
 
 void GameWindow::update(const PacMan & pacMan, Board board) {
