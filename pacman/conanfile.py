@@ -9,6 +9,7 @@ class ConanDependencies(ConanFile):
     }
 
     def requirements(self):
+        self.requires("gtest/1.10.0")
         self.requires("sdl2/2.0.9@bincrafters/stable")
         self.requires("sdl2_image/2.0.4@bincrafters/stable")
 
