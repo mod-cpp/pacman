@@ -1,16 +1,14 @@
-if (NOT APPLE AND NOT WIN32)
-    set(CMAKE_TOOLCHAIN_FILE toolchains/linux_clang_11.cmake)
-endif ()
-
-cmake_minimum_required(VERSION 3.10)
-project(modern_cpp C CXX)
+cmake_minimum_required(VERSION 3.17)
+project(pacman)
 
 set(CMAKE_CXX_STANDARD 20)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(CMAKE_CXX_EXTENSIONS NO)
 
-include_directories(include)
+# Download automatically, you can also just copy the conan.cmake file
+if (NOT EXISTS "${CMAKE_BINARY_DIR}/conan.cmake")
+    message(STATUS "Downloading conan.cmake from https://github.com/conan-io/cmake-conan")
+    file(DOWNLOAD "https://github.com/conan-io/cmake-conan/raw/v0.15/conan.cmake"
+            "${CMAKE_BINARY_DIR}/conan.cmake")
+endif ()
 
-add_subdirectory(01_foundation)
-add_subdirectory(02_foundation)
-add_subdirectory(11_intermediate)
+set(CMAKE_MODULE_PATH ${CMAKE_BINARY_DIR}/src)
+add_subdirectory(src)
