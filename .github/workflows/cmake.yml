@@ -27,10 +27,9 @@ jobs:
       run: |
         pip3 install wheel setuptools
         pip3 install conan --upgrade
-        mkdir build
         
     - name: Fix Path on Ubuntu
-      if: matrix.os == 'ubuntu-20.04' || matrix.os == 'ubuntu-18.04' ||  matrix.os == 'ubuntu-16.04'
+      if: matrix.configurations.os == 'ubuntu-20.04' || matrix.configurations.os == 'ubuntu-18.04'
       run: echo "::add-path::/home/runner/.local/bin"
 
     - name: Get Clang 11 on Ubuntu
