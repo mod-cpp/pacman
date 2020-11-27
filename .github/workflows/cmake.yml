@@ -30,7 +30,7 @@ jobs:
         
     - name: Fix Path on Ubuntu
       if: matrix.configurations.os == 'ubuntu-20.04' || matrix.configurations.os == 'ubuntu-18.04'
-      run: echo "::add-path::/home/runner/.local/bin"
+      run: echo "/home/runner/.local/bin" >> $GITHUB_PATH
 
     - name: Get Clang 11 on Ubuntu
       if: matrix.configurations.os == 'ubuntu-20.04' || matrix.configurations.os == 'ubuntu-18.04'
