@@ -20,6 +20,7 @@ public:
 private:
 
   Direction direction = Direction::NONE;
+  Direction desired_direction = Direction::NONE;
   Position pos = {14, 23};
   const SDL_Rect right_wide   = {0*32, 0, 32, 32};
   const SDL_Rect right_narrow = {1*32, 0, 32, 32};

@@ -29,13 +29,13 @@ void PacMan::update(std::chrono::milliseconds time_delta, InputState state, cons
 
 void PacMan::setDirection(const InputState & state) {
   if (state.left)
-    direction = Direction::LEFT;
+    desired_direction = Direction::LEFT;
   else if (state.right)
-    direction = Direction::RIGHT;
+    desired_direction = Direction::RIGHT;
   else if (state.up)
-    direction = Direction::UP;
+    desired_direction = Direction::UP;
   else if (state.down)
-    direction = Direction::DOWN;
+    desired_direction = Direction::DOWN;
 }
 
 void PacMan::updateAnimationPosition(std::chrono::milliseconds time_delta) {
@@ -46,6 +46,10 @@ void PacMan::updateAnimationPosition(std::chrono::milliseconds time_delta) {
 
 void PacMan::updateMazePosition(std::chrono::milliseconds time_delta, const Board & board) {
   float_t position_delta = (time_delta.count() / 128.0);
+
+  if (board.isWalkable(pos, position_delta, desired_direction)) {
+    direction = desired_direction;
+  }
 
   if (board.isWalkable(pos, position_delta, direction)) {
     switch (direction) {
