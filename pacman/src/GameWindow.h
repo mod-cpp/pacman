@@ -39,6 +39,7 @@ public:
   void update(const PacMan & pacMan, Board board);
 
 private:
+  static const int16_t SCALE_FACTOR = 1;
   std::unique_ptr<SDL_Window, SDL_Window_Deleter> window;
   std::unique_ptr<SDL_Renderer, SDL_Renderer_Deleter> renderer;
   std::unique_ptr<SDL_Surface, SDL_Surface_Deleter> window_surface;

@@ -8,7 +8,7 @@
 GameWindow::GameWindow(int width, int height) {
   initSDL();
   initSDLImage();
-  auto sdl_window = createWindow(width, height);
+  auto sdl_window = createWindow(width*SCALE_FACTOR, height*SCALE_FACTOR);
   auto sdl_renderer = createRenderer(sdl_window);
   createWindowSurface(sdl_window);
   setDrawColor(sdl_renderer);
@@ -39,7 +39,7 @@ void GameWindow::renderSuperPellets(Board & board) const {
   SDL_Rect sprite_rect = board.superPelletSprite();
   std::vector<SDL_Point> superPelletPositions = board.superPelletPositions();
   for (const auto & pos : superPelletPositions) {
-    SDL_Rect maze_rect = targetRect({ float_t(pos.x), float_t(pos.y) }, 16);
+    SDL_Rect maze_rect = targetRect({ float_t(pos.x), float_t(pos.y) }, 8*SCALE_FACTOR);
     renderTexture(sprite_texture.get(), &sprite_rect, &maze_rect);
   }
 }
@@ -48,20 +48,20 @@ void GameWindow::renderPellets(Board & board) const {
   SDL_Rect sprite_rect = board.pelletSprite();
   std::vector<SDL_Point> pelletPositions = board.pelletPositions();
   for (const auto & pos : pelletPositions) {
-    SDL_Rect maze_rect = targetRect({ float_t(pos.x), float_t(pos.y) }, 16);
+    SDL_Rect maze_rect = targetRect({ float_t(pos.x), float_t(pos.y) }, 8*SCALE_FACTOR);
     renderTexture(sprite_texture.get(), &sprite_rect, &maze_rect);
   }
 }
 
 void GameWindow::renderPacMan(const PacMan & pac_man) const {
   Position maze_position = pac_man.currentPosition();
-  SDL_Rect maze_rect = targetRect(maze_position, 16);
+  SDL_Rect maze_rect = targetRect(maze_position, 8*SCALE_FACTOR);
   SDL_Rect sprite_rect = pac_man.currentSprite();
   renderTexture(sprite_texture.get(), &sprite_rect, &maze_rect);
 }
 
 SDL_Rect GameWindow::targetRect(const Position & position, int pixel_increase) {
-  int pixels = 32;
+  int pixels = 16*SCALE_FACTOR;
   int displacement = pixel_increase / 2;
   return {
     int(pixels * position.x) - displacement,

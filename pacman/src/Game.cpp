@@ -5,7 +5,7 @@
 #include <chrono>
 
 Game::Game()
-  : window(448*2, 496*2) {
+  : window(448, 496) {
 }
 
 auto Game::now() {
