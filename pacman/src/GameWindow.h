@@ -36,6 +36,7 @@ class PacMan;
 class GameWindow {
 public:
   explicit GameWindow(int width, int height);
+
   void update(const PacMan & pacMan, Board board);
 
 private:
@@ -45,21 +46,38 @@ private:
   std::unique_ptr<SDL_Surface, SDL_Surface_Deleter> window_surface;
   std::unique_ptr<SDL_Texture, SDL_Texture_Deleter> maze_texture;
   std::unique_ptr<SDL_Texture, SDL_Texture_Deleter> sprite_texture;
+
   SDL_Window * createWindow(int width, int height);
+
   SDL_Renderer * createRenderer(SDL_Window * window);
+
   void createWindowSurface(SDL_Window * sdl_window);
+
   static void initSDL();
+
   static void initSDLImage();
+
   static void setDrawColor(SDL_Renderer * sdl_renderer);
-  static void exitFailure(const std::string& message);
-  static void exitImgFailure(const std::string& message);
-  static std::unique_ptr<SDL_Texture, SDL_Texture_Deleter> loadTexture(SDL_Renderer * sdl_renderer, const std::string& path);
+
+  static void exitFailure(const std::string & message);
+
+  static void exitImgFailure(const std::string & message);
+
+  static std::unique_ptr<SDL_Texture, SDL_Texture_Deleter>
+  loadTexture(SDL_Renderer * sdl_renderer, const std::string & path);
+
   void renderMaze() const;
+
   void renderPacMan(const PacMan & pac_man) const;
+
   void renderBoard(Board board);
+
   void renderPellets(Board & board) const;
+
   void renderSuperPellets(Board & board) const;
+
   static SDL_Rect targetRect(const Position & position, int pixel_increase);
+
   void renderTexture(SDL_Texture * texture, SDL_Rect * texture_rect, SDL_Rect * target_rect) const;
 };
 

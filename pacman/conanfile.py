@@ -1,7 +1,7 @@
 from conans import ConanFile, CMake
 
-class ConanDependencies(ConanFile):
 
+class ConanDependencies(ConanFile):
     settings = "os", "compiler", "build_type", "arch"
     generators = "cmake", "cmake_find_package"
     default_options = {

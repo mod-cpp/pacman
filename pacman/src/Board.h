@@ -25,9 +25,9 @@ public:
   std::vector<SDL_Point> superPelletPositions();
 
 private:
-  uint8_t board_state[ROWS][COLUMNS];
-  const SDL_Rect super_pellet = {0*32, 9*32, 32, 32};
-  const SDL_Rect pellet       = {1*32, 9*32, 32, 32};
+  uint8_t board_state[ROWS][COLUMNS]{};
+  const SDL_Rect super_pellet = {0 * 32, 9 * 32, 32, 32};
+  const SDL_Rect pellet = {1 * 32, 9 * 32, 32, 32};
 
   void resetBoardState();
 };

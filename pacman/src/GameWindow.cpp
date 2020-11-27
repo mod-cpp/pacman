@@ -8,7 +8,7 @@
 GameWindow::GameWindow(int width, int height) {
   initSDL();
   initSDLImage();
-  auto sdl_window = createWindow(width*SCALE_FACTOR, height*SCALE_FACTOR);
+  auto sdl_window = createWindow(width * SCALE_FACTOR, height * SCALE_FACTOR);
   auto sdl_renderer = createRenderer(sdl_window);
   createWindowSurface(sdl_window);
   setDrawColor(sdl_renderer);
@@ -39,7 +39,7 @@ void GameWindow::renderSuperPellets(Board & board) const {
   SDL_Rect sprite_rect = board.superPelletSprite();
   std::vector<SDL_Point> superPelletPositions = board.superPelletPositions();
   for (const auto & pos : superPelletPositions) {
-    SDL_Rect maze_rect = targetRect({ float_t(pos.x), float_t(pos.y) }, 8*SCALE_FACTOR);
+    SDL_Rect maze_rect = targetRect({float_t(pos.x), float_t(pos.y)}, 8 * SCALE_FACTOR);
     renderTexture(sprite_texture.get(), &sprite_rect, &maze_rect);
   }
 }
@@ -48,26 +48,26 @@ void GameWindow::renderPellets(Board & board) const {
   SDL_Rect sprite_rect = board.pelletSprite();
   std::vector<SDL_Point> pelletPositions = board.pelletPositions();
   for (const auto & pos : pelletPositions) {
-    SDL_Rect maze_rect = targetRect({ float_t(pos.x), float_t(pos.y) }, 8*SCALE_FACTOR);
+    SDL_Rect maze_rect = targetRect({float_t(pos.x), float_t(pos.y)}, 8 * SCALE_FACTOR);
     renderTexture(sprite_texture.get(), &sprite_rect, &maze_rect);
   }
 }
 
 void GameWindow::renderPacMan(const PacMan & pac_man) const {
   Position maze_position = pac_man.currentPosition();
-  SDL_Rect maze_rect = targetRect(maze_position, 8*SCALE_FACTOR);
+  SDL_Rect maze_rect = targetRect(maze_position, 8 * SCALE_FACTOR);
   SDL_Rect sprite_rect = pac_man.currentSprite();
   renderTexture(sprite_texture.get(), &sprite_rect, &maze_rect);
 }
 
 SDL_Rect GameWindow::targetRect(const Position & position, int pixel_increase) {
-  int pixels = 16*SCALE_FACTOR;
+  int pixels = 16 * SCALE_FACTOR;
   int displacement = pixel_increase / 2;
   return {
-    int(pixels * position.x) - displacement,
-    int(pixels * position.y) - displacement,
-    (pixels + pixel_increase),
-    (pixels + pixel_increase)
+      int(pixels * position.x) - displacement,
+      int(pixels * position.y) - displacement,
+      (pixels + pixel_increase),
+      (pixels + pixel_increase)
   };
 }
 
@@ -89,12 +89,12 @@ void GameWindow::initSDLImage() {
 
 SDL_Window * GameWindow::createWindow(int width, int height) {
   window = std::unique_ptr<SDL_Window, SDL_Window_Deleter>(SDL_CreateWindow(
-    "Pacman",
-    SDL_WINDOWPOS_CENTERED,
-    SDL_WINDOWPOS_CENTERED,
-    width,
-    height,
-    SDL_WINDOW_OPENGL));
+      "Pacman",
+      SDL_WINDOWPOS_CENTERED,
+      SDL_WINDOWPOS_CENTERED,
+      width,
+      height,
+      SDL_WINDOW_OPENGL));
 
   if (!window)
     exitFailure("Failed to create window");
@@ -104,9 +104,9 @@ SDL_Window * GameWindow::createWindow(int width, int height) {
 
 SDL_Renderer * GameWindow::createRenderer(SDL_Window * sdl_window) {
   renderer = std::unique_ptr<SDL_Renderer, SDL_Renderer_Deleter>(SDL_CreateRenderer(
-    sdl_window,
-    -1,
-    SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC));
+      sdl_window,
+      -1,
+      SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC));
 
   if (!renderer)
     exitFailure("Failed to create renderer");
@@ -125,24 +125,26 @@ void GameWindow::setDrawColor(SDL_Renderer * sdl_renderer) {
     exitFailure("Failed to set renderer color");
 }
 
-std::unique_ptr<SDL_Texture, SDL_Texture_Deleter> GameWindow::loadTexture(SDL_Renderer * sdl_renderer, const std::string& path) {
+std::unique_ptr<SDL_Texture, SDL_Texture_Deleter>
+GameWindow::loadTexture(SDL_Renderer * sdl_renderer, const std::string & path) {
   auto surface = std::unique_ptr<SDL_Surface, SDL_Surface_Deleter>(IMG_Load(path.c_str()));
   if (!surface)
     exitImgFailure("Failed to load image");
 
-  auto texture = std::unique_ptr<SDL_Texture, SDL_Texture_Deleter>(SDL_CreateTextureFromSurface(sdl_renderer, surface.get()));
+  auto texture = std::unique_ptr<SDL_Texture, SDL_Texture_Deleter>(
+      SDL_CreateTextureFromSurface(sdl_renderer, surface.get()));
   if (!texture)
     exitFailure("Failed to create texture from surface");
   return texture;
 }
 
-void GameWindow::exitFailure(const std::string& message) {
+void GameWindow::exitFailure(const std::string & message) {
   std::cerr << message << "\n";
   std::cerr << "SDL2 Error: " << SDL_GetError() << "\n";
   exit(1);
 }
 
-void GameWindow::exitImgFailure(const std::string& message) {
+void GameWindow::exitImgFailure(const std::string & message) {
   std::cerr << message << "\n";
   std::cerr << "SDL2_Image Error: " << IMG_GetError() << "\n";
   exit(1);
