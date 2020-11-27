@@ -1,4 +1,4 @@
-#include "Game.h"
+#include "../lib/Game.h"
 
 extern "C" int main([[maybe_unused]] int argc, [[maybe_unused]] char * argv[]) {
   Game game;
