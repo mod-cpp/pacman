@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.17)
-project(pacman)
+project(modern_cpp_exercises )
 
 set(CMAKE_CXX_STANDARD 20)
 
@@ -10,5 +10,5 @@ if (NOT EXISTS "${CMAKE_BINARY_DIR}/conan.cmake")
             "${CMAKE_BINARY_DIR}/conan.cmake")
 endif ()
 
-set(CMAKE_MODULE_PATH ${CMAKE_BINARY_DIR}/src)
-add_subdirectory(src)
+set(CMAKE_MODULE_PATH ${CMAKE_BINARY_DIR}/pacman/src)
+add_subdirectory(pacman)

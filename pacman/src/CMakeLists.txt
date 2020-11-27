@@ -8,5 +8,5 @@ find_package(sdl2_image REQUIRED)
 include_directories(${sdl2_INCLUDE_DIRS} ${sdl2_image_INCLUDE_DIRS})
 
 file(GLOB_RECURSE sources CONFIGURE_DEPENDS "*.cpp")
-add_executable(${PROJECT_NAME} ${sources})
-target_link_libraries(${PROJECT_NAME} sdl2::sdl2 sdl2_image::sdl2_image)
+add_executable(PacMan ${sources})
+target_link_libraries(PacMan sdl2::sdl2 sdl2_image::sdl2_image)
