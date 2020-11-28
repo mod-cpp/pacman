@@ -6,6 +6,8 @@ jobs:
   build:
     name: "${{ matrix.configurations.name }} | ${{ matrix.cmake-build-type }}"
     runs-on: ${{ matrix.configurations.os }}
+    env:
+      CONAN_SYSREQUIRES_MODE: enabled
     strategy:
       fail-fast: false
       matrix:
