@@ -11,7 +11,7 @@ public:
   explicit Pellets(const Board & board);
 
   [[nodiscard]] SDL_Rect currentSprite() const {
-    return pellet;
+    return sprite;
   };
 
   [[nodiscard]] std::vector<SDL_Point> currentPositions() const {
@@ -19,7 +19,7 @@ public:
   }
 
 private:
-  const SDL_Rect pellet = {1 * 32, 9 * 32, 32, 32};
+  const SDL_Rect sprite = {1 * 32, 9 * 32, 32, 32};
   std::vector<SDL_Point> positions;
 };
 

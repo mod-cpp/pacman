@@ -11,7 +11,7 @@ public:
   explicit SuperPellets(const Board & board);
 
   [[nodiscard]] SDL_Rect currentSprite() const {
-    return super_pellet;
+    return sprite;
   }
 
   [[nodiscard]] std::vector<SDL_Point> currentPositions() const {
@@ -19,7 +19,7 @@ public:
   }
 
 private:
-  const SDL_Rect super_pellet = {0 * 32, 9 * 32, 32, 32};
+  const SDL_Rect sprite = {0 * 32, 9 * 32, 32, 32};
   std::vector<SDL_Point> positions;
 };
 
