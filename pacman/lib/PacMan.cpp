@@ -1,25 +1,8 @@
 #include "PacMan.h"
-
-PacMan::PacMan() :
-    right_animation{right_wide, right_narrow, closed, right_narrow},
-    left_animation{left_wide, left_narrow, closed, left_narrow},
-    up_animation{up_wide, up_narrow, closed, up_narrow},
-    down_animation{down_wide, down_narrow, closed, down_narrow} {
-}
+#include "PacManAnimation.hpp"
 
 SDL_Rect PacMan::currentSprite() const {
-  switch (direction) {
-    case Direction::NONE:
-      return closed;
-    case Direction::LEFT:
-      return left_animation[animation_position];
-    case Direction::RIGHT:
-      return right_animation[animation_position];
-    case Direction::UP:
-      return up_animation[animation_position];
-    case Direction::DOWN:
-      return down_animation[animation_position];
-  }
+  return pacManAnimation.animationFrame(direction);
 }
 
 Position PacMan::currentPosition() const {
@@ -44,9 +27,7 @@ void PacMan::setDirection(const InputState & state) {
 }
 
 void PacMan::updateAnimationPosition(std::chrono::milliseconds time_delta) {
-  animation_position_delta += (time_delta.count() / 100.0);
-  animation_position = int(animation_position + animation_position_delta) % 4;
-  animation_position_delta = (animation_position_delta < 1) ? animation_position_delta : (animation_position_delta - 1);
+  pacManAnimation.updateAnimationPosition(time_delta);
 }
 
 void PacMan::updateMazePosition(std::chrono::milliseconds time_delta, const Board & board) {
