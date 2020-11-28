@@ -1,7 +1,4 @@
-
 conan_cmake_run(CONANFILE conanfile.py BASIC_SETUP CMAKE_TARGETS BUILD missing)
-
-set(CMAKE_MODULE_PATH ${CMAKE_BINARY_DIR}/pacman/)
 
 find_package(sdl2 REQUIRED)
 find_package(sdl2_image REQUIRED)
