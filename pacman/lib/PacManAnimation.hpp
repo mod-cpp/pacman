@@ -1,10 +1,10 @@
 #ifndef PACMAN_PACMAN_ANIMATION_HPP
 #define PACMAN_PACMAN_ANIMATION_HPP
 
-#include "Board.h"
-#include "Direction.h"
-#include "InputState.h"
-#include "Position.h"
+#include "Board.hpp"
+#include "Direction.hpp"
+#include "InputState.hpp"
+#include "Position.hpp"
 
 #include <SDL2/SDL_rect.h>
 #include <chrono>
@@ -12,7 +12,7 @@
 class PacManAnimation {
 public:
 
-  SDL_Rect animationFrame(Direction direction) const;
+  [[nodiscard]] SDL_Rect animationFrame(Direction direction) const;
 
   void updateAnimationPosition(std::chrono::milliseconds time_delta);
 

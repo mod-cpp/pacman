@@ -1,7 +1,7 @@
 #ifndef PACMAN_POSITION_H
 #define PACMAN_POSITION_H
 
-#include <math.h>
+#include <cmath>
 
 struct Position {
   float_t x;

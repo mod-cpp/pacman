@@ -1,12 +1,13 @@
-#include "Game.h"
-
-#include <SDL2/SDL.h>
+#include "Game.hpp"
 
 #include <chrono>
 
-Game::Game()
-    : window(448, 496) {
-}
+Game::Game() :
+    window(448, 496),
+    board(),
+    pacMan(board),
+    pellets(board),
+    superPellets(board) {}
 
 auto Game::now() {
   return std::chrono::system_clock::now();
@@ -21,7 +22,7 @@ void Game::run() {
     auto milli_delta = std::chrono::duration_cast<std::chrono::milliseconds>(time_delta);
     pacMan.update(milli_delta, inputState, board);
     current_time += time_delta;
-    window.update(pacMan, board);
+    window.update(pacMan, pellets, superPellets);
   }
 }
 

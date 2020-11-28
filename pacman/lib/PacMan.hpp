@@ -1,17 +1,20 @@
 #ifndef PACMAN_PACMAN_H
 #define PACMAN_PACMAN_H
 
-#include "Board.h"
-#include "Direction.h"
-#include "InputState.h"
-#include "Position.h"
+#include "Direction.hpp"
+#include "Position.hpp"
 #include "PacManAnimation.hpp"
 
 #include <SDL2/SDL_rect.h>
 #include <chrono>
 
+class Board;
+class InputState;
+
 class PacMan {
 public:
+  explicit PacMan(const Board & board);
+
   [[nodiscard]] SDL_Rect currentSprite() const;
 
   [[nodiscard]] Position currentPosition() const;
@@ -22,7 +25,7 @@ private:
 
   Direction direction = Direction::NONE;
   Direction desired_direction = Direction::NONE;
-  Position pos = {14, 23};
+  Position pos;
   PacManAnimation pacManAnimation;
 
   void setDirection(const InputState & state);

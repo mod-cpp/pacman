@@ -1,10 +1,13 @@
 #ifndef PACMAN_GAME_H
 #define PACMAN_GAME_H
 
-#include "Board.h"
-#include "GameWindow.h"
-#include "InputState.h"
-#include "PacMan.h"
+#include "Board.hpp"
+#include "GameWindow.hpp"
+#include "PacMan.hpp"
+#include "Pellets.hpp"
+#include "SuperPellets.hpp"
+
+class InputState;
 
 class Game {
 public:
@@ -14,8 +17,10 @@ public:
 
 private:
   GameWindow window;
-  PacMan pacMan;
   Board board;
+  PacMan pacMan;
+  Pellets pellets;
+  SuperPellets superPellets;
 
   static void processEvents(InputState & inputState);
 

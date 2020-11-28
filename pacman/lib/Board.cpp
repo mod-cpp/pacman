@@ -1,4 +1,4 @@
-#include "Board.h"
+#include "Board.hpp"
 
 // Legend
 // 0 - wall
@@ -6,9 +6,6 @@
 // 2 - nothing
 // 3 - door
 // 4 - superpower
-
-// 16 pixels per square
-// Maze in pixels - width: 448 - height - 496
 
 static const uint8_t board[ROWS][COLUMNS] = {
 //   0  1  2  3  4  5  6  7  8  9  0  1  2  3  4  5  6  7  8  9  0  1  2  3  4  5  6  7
@@ -46,17 +43,12 @@ static const uint8_t board[ROWS][COLUMNS] = {
 };
 
 Board::Board() {
-  resetBoardState();
-}
-
-void Board::resetBoardState() {
   for (uint8_t row = 0; row < ROWS; row++)
     for (uint8_t column = 0; column < COLUMNS; column++)
       board_state[row][column] = board[row][column];
 }
 
 bool Board::isWalkable(Position point, float_t position_delta, Direction direction) const {
-
   switch (direction) {
     case Direction::LEFT:
       return board_state[int(point.y)][int(point.x - position_delta)] != 0;
@@ -72,15 +64,7 @@ bool Board::isWalkable(Position point, float_t position_delta, Direction directi
   }
 }
 
-SDL_Rect Board::pelletSprite() {
-  return pellet;
-}
-
-SDL_Rect Board::superPelletSprite() {
-  return super_pellet;
-}
-
-std::vector<SDL_Point> Board::pelletPositions() {
+std::vector<SDL_Point> Board::initialPelletPositions() const {
   std::vector<SDL_Point> positions;
   for (uint8_t row = 0; row < ROWS; row++) {
     for (uint8_t column = 0; column < COLUMNS; column++) {
@@ -91,8 +75,7 @@ std::vector<SDL_Point> Board::pelletPositions() {
   return positions;
 }
 
-std::vector<SDL_Point> Board::superPelletPositions() {
-  // Hard coded is probably better than this
+std::vector<SDL_Point> Board::initialSuperPelletPositions() const {
   std::vector<SDL_Point> positions;
   for (uint8_t row = 0; row < ROWS; row++) {
     for (uint8_t column = 0; column < COLUMNS; column++) {

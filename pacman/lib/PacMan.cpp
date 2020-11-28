@@ -1,5 +1,7 @@
-#include "PacMan.h"
-#include "PacManAnimation.hpp"
+#include "PacMan.hpp"
+
+PacMan::PacMan(const Board & board) :
+    pos(board.initialPacManPosition()) {}
 
 SDL_Rect PacMan::currentSprite() const {
   return pacManAnimation.animationFrame(direction);

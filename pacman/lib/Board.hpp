@@ -1,8 +1,9 @@
 #ifndef PACMAN_BOARD_H
 #define PACMAN_BOARD_H
 
-#include "Direction.h"
-#include "Position.h"
+#include "Direction.hpp"
+#include "Position.hpp"
+
 #include <SDL2/SDL_rect.h>
 #include <cstdint>
 #include <vector>
@@ -16,20 +17,14 @@ public:
 
   [[nodiscard]] bool isWalkable(Position point, float_t d, Direction direction) const;
 
-  SDL_Rect pelletSprite();
+  [[nodiscard]] std::vector<SDL_Point> initialPelletPositions() const;
 
-  SDL_Rect superPelletSprite();
+  [[nodiscard]] std::vector<SDL_Point> initialSuperPelletPositions() const;
 
-  std::vector<SDL_Point> pelletPositions();
-
-  std::vector<SDL_Point> superPelletPositions();
+  static Position initialPacManPosition() { return {14, 23}; }
 
 private:
   uint8_t board_state[ROWS][COLUMNS]{};
-  const SDL_Rect super_pellet = {0 * 32, 9 * 32, 32, 32};
-  const SDL_Rect pellet = {1 * 32, 9 * 32, 32, 32};
-
-  void resetBoardState();
 };
 
 #endif //PACMAN_BOARD_H

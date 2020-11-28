@@ -1,9 +1,12 @@
-#include "GameWindow.h"
-#include "PacMan.h"
+#include "GameWindow.hpp"
 
 #include <SDL2/SDL_image.h>
 #include <iostream>
 #include <vector>
+
+#include "PacMan.hpp"
+#include "Pellets.hpp"
+#include "SuperPellets.hpp"
 
 GameWindow::GameWindow(int width, int height) {
   initSDL();
@@ -16,11 +19,12 @@ GameWindow::GameWindow(int width, int height) {
   sprite_texture = loadTexture(sdl_renderer, "sprites32.png");
 }
 
-void GameWindow::update(const PacMan & pacMan, Board board) {
+void GameWindow::update(const PacMan & pacMan, const Pellets & pellets, const SuperPellets & superPellets) {
   SDL_RenderClear(renderer.get());
 
   renderMaze();
-  renderBoard(board);
+  renderPellets(pellets);
+  renderSuperPellets(superPellets);
   renderPacMan(pacMan);
 
   SDL_RenderPresent(renderer.get());
@@ -30,23 +34,18 @@ void GameWindow::renderMaze() const {
   renderTexture(maze_texture.get(), nullptr, nullptr);
 }
 
-void GameWindow::renderBoard(Board board) {
-  renderPellets(board);
-  renderSuperPellets(board);
-}
-
-void GameWindow::renderSuperPellets(Board & board) const {
-  SDL_Rect sprite_rect = board.superPelletSprite();
-  std::vector<SDL_Point> superPelletPositions = board.superPelletPositions();
+void GameWindow::renderSuperPellets(const SuperPellets & superPellets) const {
+  SDL_Rect sprite_rect = superPellets.currentSprite();
+  std::vector<SDL_Point> superPelletPositions = superPellets.currentPositions();
   for (const auto & pos : superPelletPositions) {
     SDL_Rect maze_rect = targetRect({float_t(pos.x), float_t(pos.y)}, 8 * SCALE_FACTOR);
     renderTexture(sprite_texture.get(), &sprite_rect, &maze_rect);
   }
 }
 
-void GameWindow::renderPellets(Board & board) const {
-  SDL_Rect sprite_rect = board.pelletSprite();
-  std::vector<SDL_Point> pelletPositions = board.pelletPositions();
+void GameWindow::renderPellets(const Pellets & pellets) const {
+  SDL_Rect sprite_rect = pellets.currentSprite();
+  std::vector<SDL_Point> pelletPositions = pellets.currentPositions();
   for (const auto & pos : pelletPositions) {
     SDL_Rect maze_rect = targetRect({float_t(pos.x), float_t(pos.y)}, 8 * SCALE_FACTOR);
     renderTexture(sprite_texture.get(), &sprite_rect, &maze_rect);

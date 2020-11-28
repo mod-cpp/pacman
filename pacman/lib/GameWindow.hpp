@@ -3,8 +3,6 @@
 
 #include <memory>
 #include <string>
-
-#include "PacMan.h"
 #include <SDL2/SDL.h>
 
 struct SDL_Window_Deleter {
@@ -32,12 +30,15 @@ struct SDL_Texture_Deleter {
 };
 
 class PacMan;
+class Pellets;
+class Position;
+class SuperPellets;
 
 class GameWindow {
 public:
   explicit GameWindow(int width, int height);
 
-  void update(const PacMan & pacMan, Board board);
+  void update(const PacMan & pacMan, const Pellets & pellets, const SuperPellets & superPellets);
 
 private:
   static const int16_t SCALE_FACTOR = 1;
@@ -70,11 +71,9 @@ private:
 
   void renderPacMan(const PacMan & pac_man) const;
 
-  void renderBoard(Board board);
+  void renderPellets(const Pellets & pellets) const;
 
-  void renderPellets(Board & board) const;
-
-  void renderSuperPellets(Board & board) const;
+  void renderSuperPellets(const SuperPellets & superPellets) const;
 
   static SDL_Rect targetRect(const Position & position, int pixel_increase);
 
