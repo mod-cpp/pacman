@@ -9,7 +9,7 @@ class ConanDependencies(ConanFile):
 
     def requirements(self):
         # self.requires("gtest/1.10.0")
-        self.requires("qt/5.15.2@bincrafters/stable")
+        self.requires("qt/5.15.1@bincrafters/stable")
 
     def imports(self):
         self.copy("*.dll", dst="bin", src="bin")
