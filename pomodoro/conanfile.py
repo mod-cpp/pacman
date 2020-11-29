@@ -8,7 +8,7 @@ class ConanDependencies(ConanFile):
     default_options = {}
 
     def requirements(self):
-        # self.requires("gtest/1.10.0")
+        self.requires("gtest/1.10.0")
         self.requires("qt/5.15.1@bincrafters/stable")
 
     def imports(self):
