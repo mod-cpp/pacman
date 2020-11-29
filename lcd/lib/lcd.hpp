@@ -1,8 +1,12 @@
-#ifndef LCD_LCD_HPP
-#define LCD_LCD_HPP
+#pragma once
 
-class lcd {
+#include <string>
+#include <vector>
 
-};
+typedef std::vector<std::string> lcd_grid;
 
-#endif //LCD_LCD_HPP
+lcd_grid lcd(int value);
+
+lcd_grid lcd(std::string s1,
+             std::string s2,
+             std::string s3);
