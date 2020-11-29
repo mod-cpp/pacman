@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include "../lib/PacMan.hpp"
+#include "PacMan.hpp"
 
 TEST(PacManTest, InitialPosition) {
   Board board;

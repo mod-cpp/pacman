@@ -9,6 +9,8 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTORCC ON)
 
+include_directories(lib)
+
 add_subdirectory(lib)
 add_subdirectory(src)
 add_subdirectory(test)

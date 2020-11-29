@@ -2,7 +2,7 @@ conan_cmake_run(CONANFILE conanfile.py BASIC_SETUP CMAKE_TARGETS BUILD missing)
 
 find_package(sdl2 REQUIRED)
 find_package(sdl2_image REQUIRED)
-include_directories(${sdl2_INCLUDE_DIRS} ${sdl2_image_INCLUDE_DIRS})
+include_directories(lib ${sdl2_INCLUDE_DIRS} ${sdl2_image_INCLUDE_DIRS})
 
 add_subdirectory(lib)
 add_subdirectory(src)
