@@ -15,5 +15,6 @@ conan_add_remote(NAME bincrafters INDEX 1 URL https://api.bintray.com/conan/binc
 
 set(CMAKE_MODULE_PATH ${CMAKE_BINARY_DIR}/pacman/;${CMAKE_BINARY_DIR}/pomodoro/)
 
+add_subdirectory(lcd)
 add_subdirectory(pacman)
 add_subdirectory(pomodoro)

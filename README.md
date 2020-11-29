@@ -3,7 +3,9 @@
 
 ## Exercises
 
+* [LCD](lcd/README.md)
 * [Pac-Man](pacman/README.md)
+* [Pomodoro](pomodoro/README.md)
 
 ## Build instructions 
 
