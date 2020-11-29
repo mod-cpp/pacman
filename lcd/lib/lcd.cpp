@@ -1,8 +1,8 @@
 #include "lcd.hpp"
 
-lcd_grid lcd(std::string s1,
-             std::string s2,
-             std::string s3) {
+lcd_grid lcd(const std::string & s1,
+             const std::string & s2,
+             const std::string & s3) {
   lcd_grid result;
   result.push_back(s1);
   result.push_back(s2);
