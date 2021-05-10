@@ -18,7 +18,7 @@ public:
 
 private:
   uint8_t animation_position = 0;
-  float_t animation_position_delta = 0.0;
+  float animation_position_delta = 0.0;
   const SDL_Rect right_wide   = {0 * 32, 0 * 32, 32, 32};
   const SDL_Rect right_narrow = {1 * 32, 0 * 32, 32, 32};
   const SDL_Rect closed       = {2 * 32, 0 * 32, 32, 32};

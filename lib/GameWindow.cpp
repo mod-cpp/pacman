@@ -38,7 +38,7 @@ void GameWindow::renderSuperPellets(const SuperPellets & superPellets) const {
   SDL_Rect sprite_rect = superPellets.currentSprite();
   std::vector<SDL_Point> superPelletPositions = superPellets.currentPositions();
   for (const auto & pos : superPelletPositions) {
-    SDL_Rect maze_rect = targetRect({float_t(pos.x), float_t(pos.y)}, 8 * SCALE_FACTOR);
+    SDL_Rect maze_rect = targetRect({float(pos.x), float(pos.y)}, 8 * SCALE_FACTOR);
     renderTexture(sprite_texture.get(), &sprite_rect, &maze_rect);
   }
 }
@@ -47,7 +47,7 @@ void GameWindow::renderPellets(const Pellets & pellets) const {
   SDL_Rect sprite_rect = pellets.currentSprite();
   std::vector<SDL_Point> pelletPositions = pellets.currentPositions();
   for (const auto & pos : pelletPositions) {
-    SDL_Rect maze_rect = targetRect({float_t(pos.x), float_t(pos.y)}, 8 * SCALE_FACTOR);
+    SDL_Rect maze_rect = targetRect({float(pos.x), float(pos.y)}, 8 * SCALE_FACTOR);
     renderTexture(sprite_texture.get(), &sprite_rect, &maze_rect);
   }
 }

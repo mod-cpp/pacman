@@ -48,7 +48,7 @@ Board::Board() {
       board_state[row][column] = board[row][column];
 }
 
-bool Board::isWalkable(Position point, float_t position_delta, Direction direction) const {
+bool Board::isWalkable(Position point, float position_delta, Direction direction) const {
   switch (direction) {
     case Direction::LEFT:
       return board_state[int(point.y)][int(point.x - position_delta)] != 0;

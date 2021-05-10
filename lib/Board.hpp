@@ -15,7 +15,7 @@ class Board {
 public:
   Board();
 
-  [[nodiscard]] bool isWalkable(Position point, float_t d, Direction direction) const;
+  [[nodiscard]] bool isWalkable(Position point, float d, Direction direction) const;
 
   [[nodiscard]] std::vector<SDL_Point> initialPelletPositions() const;
 

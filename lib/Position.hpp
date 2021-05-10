@@ -4,8 +4,8 @@
 #include <cmath>
 
 struct Position {
-  float_t x;
-  float_t y;
+  float x;
+  float y;
 };
 
 #endif //PACMAN_POSITION_H
