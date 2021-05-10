@@ -1,8 +1,0 @@
-#ifndef POMODORO_POMODORO_HPP
-#define POMODORO_POMODORO_HPP
-
-class Pomodoro {
-
-};
-
-#endif //POMODORO_POMODORO_HPP

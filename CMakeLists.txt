@@ -1,20 +1,15 @@
+#This needs to be set before project()
+set(CMAKE_TOOLCHAIN_FILE ${CMAKE_CURRENT_SOURCE_DIR}/vcpkg/scripts/buildsystems/vcpkg.cmake
+  CACHE STRING "Vcpkg toolchain file")
+
 cmake_minimum_required(VERSION 3.17)
 project(modern_cpp_exercises )
 
 set(CMAKE_CXX_STANDARD 20)
 
-# Download automatically, you can also just copy the conan.cmake file
-if (NOT EXISTS "${CMAKE_BINARY_DIR}/conan.cmake")
-    message(STATUS "Downloading conan.cmake from https://github.com/conan-io/cmake-conan")
-    file(DOWNLOAD "https://github.com/conan-io/cmake-conan/raw/v0.15/conan.cmake"
-            "${CMAKE_BINARY_DIR}/conan.cmake")
-endif ()
+add_subdirectory(lib)
+add_subdirectory(src)
+add_subdirectory(test)
 
-include(${CMAKE_BINARY_DIR}/conan.cmake)
-conan_add_remote(NAME bincrafters INDEX 1 URL https://api.bintray.com/conan/bincrafters/public-conan)
-
-set(CMAKE_MODULE_PATH ${CMAKE_BINARY_DIR}/lcd/;${CMAKE_BINARY_DIR}/pacman/;${CMAKE_BINARY_DIR}/pomodoro/)
-
-add_subdirectory(lcd)
-add_subdirectory(pacman)
-add_subdirectory(pomodoro)
+file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/assets/maze.png DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/bin)
+file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/assets/sprites32.png DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/bin)
