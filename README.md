@@ -6,7 +6,7 @@
 On windows, run `.\vcpkg\bootstrap-vcpkg.bat`.
 On other platforms, run `./vcpkg/bootstrap-vcpkg.sh`
 
-On all platform run  `./vcpkg/vcpkg install sdl2-image gtest`
+Dependencies will be automatically when running CMake.
 
 ## Keep PacMan Score
 
