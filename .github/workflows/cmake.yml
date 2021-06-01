@@ -1,8 +1,13 @@
 name: CMake
 
+env:
+  VCPKG_BINARY_SOURCES: 'clear;nuget,GitHub,readwrite'
+
+
 on:
   push:
-    branches: [ main ]
+    branches:
+      - '*'
 
   workflow_dispatch:
 
@@ -10,8 +15,6 @@ jobs:
   build:
     name: "${{ matrix.configurations.name }} | ${{ matrix.cmake-build-type }}"
     runs-on: ${{ matrix.configurations.os }}
-    env:
-      CONAN_SYSREQUIRES_MODE: enabled
     strategy:
       fail-fast: false
       matrix:
@@ -37,20 +40,18 @@ jobs:
       if: matrix.configurations.os == 'ubuntu-20.04' || matrix.configurations.os == 'ubuntu-18.04'
       run: sudo bash -c "$(wget -O - https://apt.llvm.org/llvm.sh)"
 
-    - name: Bootstrap VCPKG
-      if: matrix.configurations.os == 'ubuntu-20.04' || matrix.configurations.os == 'ubuntu-18.04'
-      run: $GITHUB_WORKSPACE/vcpkg/bootstrap-vcpkg.sh
 
-    - name: Bootstrap VCPKG
-      if: matrix.configurations.os == 'windows-2019'
-      run: $GITHUB_WORKSPACE\\bootstrap-vcpkg.bat
+    - name: Create Build Environment
+      # Some projects don't allow in-source building, so create a separate build directory
+      # We'll use this as our working directory for all subsequent commands
+      run: cmake -E make_directory ${{runner.workspace}}/build
 
     - name: Configure CMake
-      working-directory: $GITHUB_WORKSPACE
+      working-directory: ${{runner.workspace}}/build
       # Use a bash shell so we can use the same syntax for environment variable
       # access regardless of the host operating system
       shell: bash
-      run: cmake -B ${{runner.workspace}}/build -DCMAKE_BUILD_TYPE=${{ matrix.cmake-build-type }}
+      run: cmake $GITHUB_WORKSPACE -DCMAKE_BUILD_TYPE=${{ matrix.cmake-build-type }}
 
     - name: Build
       working-directory: ${{runner.workspace}}/build
