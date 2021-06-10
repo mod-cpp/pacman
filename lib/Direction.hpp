@@ -1,5 +1,4 @@
-#ifndef PACMAN_DIRECTION_H
-#define PACMAN_DIRECTION_H
+#pragma once
 
 enum class Direction {
   NONE,
@@ -8,5 +7,3 @@ enum class Direction {
   UP,
   DOWN
 };
-
-#endif //PACMAN_DIRECTION_H

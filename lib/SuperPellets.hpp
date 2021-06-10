@@ -1,5 +1,4 @@
-#ifndef PACMAN_SUPERPELLETS_HPP
-#define PACMAN_SUPERPELLETS_HPP
+#pragma once
 
 #include "Position.hpp"
 #include "Board.hpp"
@@ -22,5 +21,3 @@ private:
   const SDL_Rect sprite = {0 * 32, 9 * 32, 32, 32};
   std::vector<SDL_Point> positions;
 };
-
-#endif //PACMAN_SUPERPELLETS_HPP

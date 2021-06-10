@@ -1,5 +1,4 @@
-#ifndef PACMAN_BOARD_H
-#define PACMAN_BOARD_H
+#pragma once
 
 #include "Direction.hpp"
 #include "Position.hpp"
@@ -26,5 +25,3 @@ public:
 private:
   uint8_t board_state[ROWS][COLUMNS]{};
 };
-
-#endif //PACMAN_BOARD_H

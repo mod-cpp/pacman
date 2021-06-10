@@ -1,5 +1,4 @@
-#ifndef PACMAN_INPUTSTATE_H
-#define PACMAN_INPUTSTATE_H
+#pragma once
 
 class InputState {
 public:
@@ -9,5 +8,3 @@ public:
   bool left = false;
   bool right = false;
 };
-
-#endif //PACMAN_INPUTSTATE_H

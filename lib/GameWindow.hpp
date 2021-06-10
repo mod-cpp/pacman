@@ -1,5 +1,4 @@
-#ifndef PACMAN_GAMEWINDOW_H
-#define PACMAN_GAMEWINDOW_H
+#pragma once
 
 #include <memory>
 #include <string>
@@ -79,5 +78,3 @@ private:
 
   void renderTexture(SDL_Texture * texture, SDL_Rect * texture_rect, SDL_Rect * target_rect) const;
 };
-
-#endif //PACMAN_GAMEWINDOW_H

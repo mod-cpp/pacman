@@ -1,5 +1,4 @@
-#ifndef PACMAN_GAME_H
-#define PACMAN_GAME_H
+#pragma once
 
 #include "Board.hpp"
 #include "GameWindow.hpp"
@@ -28,5 +27,3 @@ private:
 
   [[nodiscard]] static auto now();
 };
-
-#endif //PACMAN_GAME_H

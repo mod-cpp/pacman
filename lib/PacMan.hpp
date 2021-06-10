@@ -1,5 +1,4 @@
-#ifndef PACMAN_PACMAN_H
-#define PACMAN_PACMAN_H
+#pragma once
 
 #include "Direction.hpp"
 #include "Position.hpp"
@@ -34,5 +33,3 @@ private:
 
   void updateMazePosition(std::chrono::milliseconds time_delta, const Board & board);
 };
-
-#endif //PACMAN_PACMAN_H

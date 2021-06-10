@@ -1,5 +1,4 @@
-#ifndef PACMAN_PACMAN_ANIMATION_HPP
-#define PACMAN_PACMAN_ANIMATION_HPP
+#pragma once
 
 #include "Board.hpp"
 #include "Direction.hpp"
@@ -33,5 +32,3 @@ private:
   const SDL_Rect right_animation[4]{right_wide, right_narrow, closed, right_narrow};
   const SDL_Rect up_animation[4]{up_wide, up_narrow, closed, up_narrow};
 };
-
-#endif //PACMAN_PACMAN_ANIMATION_HPP
