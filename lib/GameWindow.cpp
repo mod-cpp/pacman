@@ -53,7 +53,7 @@ void GameWindow::renderPellets(const Pellets & pellets) const {
 }
 
 void GameWindow::renderPacMan(const PacMan & pac_man) const {
-  Position maze_position = pac_man.currentPosition();
+  Position maze_position = pac_man.position();
   SDL_Rect maze_rect = targetRect(maze_position, 8 * SCALE_FACTOR);
   SDL_Rect sprite_rect = pac_man.currentSprite();
   renderTexture(sprite_texture.get(), &sprite_rect, &maze_rect);

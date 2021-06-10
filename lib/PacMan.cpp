@@ -7,7 +7,7 @@ SDL_Rect PacMan::currentSprite() const {
   return pacManAnimation.animationFrame(direction);
 }
 
-Position PacMan::currentPosition() const {
+Position PacMan::position() const {
   return pos;
 }
 

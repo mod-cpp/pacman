@@ -17,7 +17,7 @@ public:
 
   [[nodiscard]] SDL_Rect currentSprite() const;
 
-  [[nodiscard]] Position currentPosition() const;
+  [[nodiscard]] Position position() const;
 
   void update(std::chrono::milliseconds time_delta, InputState state, const Board & board);
 

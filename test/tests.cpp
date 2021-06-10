@@ -4,8 +4,8 @@
 TEST(PacManTest, InitialPosition) {
   Board board;
   PacMan pacMan(board);
-  EXPECT_EQ(pacMan.currentPosition().x, 14);
-  EXPECT_EQ(pacMan.currentPosition().y, 23);
+  EXPECT_EQ(pacMan.position().x, 14);
+  EXPECT_EQ(pacMan.position().y, 23);
 }
 
 int main(int argc, char* argv[]) {
