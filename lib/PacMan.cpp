@@ -33,9 +33,17 @@ void PacMan::updateAnimationPosition(std::chrono::milliseconds time_delta) {
 }
 
 void PacMan::updateMazePosition(std::chrono::milliseconds time_delta, const Board & board) {
-  float position_delta = (time_delta.count() / 128.0);
+  float position_delta = std::min(1.0, (time_delta.count() / 128.0));
 
-  if (board.isWalkable(pos, position_delta, desired_direction)) {
+  // Handle teleport
+  if(pos.x >= COLUMNS-1 && direction == Direction::RIGHT) {
+      pos.x = -1;
+  }
+  else if(pos.x <= 0 && direction == Direction::LEFT) {
+      pos.x = COLUMNS;
+  }
+
+  else if (board.isWalkable(pos, position_delta, desired_direction)) {
     direction = desired_direction;
   }
 
