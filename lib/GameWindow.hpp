@@ -28,19 +28,34 @@ struct SDL_Texture_Deleter {
   }
 };
 
+struct TextureSize {
+  int width;
+  int height;
+};
+
 class PacMan;
 class Pellets;
-class Position;
+//class Position;
 class SuperPellets;
 
 class GameWindow {
 public:
-  explicit GameWindow(int width, int height);
+  explicit GameWindow();
 
   void update(const PacMan & pacMan, const Pellets & pellets, const SuperPellets & superPellets);
 
 private:
-  static const int16_t SCALE_FACTOR = 1;
+  static constexpr int16_t SCALE_FACTOR = 1;
+  static constexpr int16_t LEFT_MARGIN = 40;
+  static constexpr int16_t TOP_MARGIN = 40;
+  static constexpr int16_t BOTTOM_MARGIN = 40;
+  static constexpr int16_t MAZE_WIDTH = 448;
+  static constexpr int16_t MAZE_HEIGHT = 496;
+  static constexpr int16_t SCORE_WIDTH = 200;
+  static constexpr int16_t DEFAULT_TEXTURE_WIDTH = 32;
+  static constexpr int16_t DEFAULT_TEXTURE_HEIGHT = 32;
+  static constexpr float TEXTURE_SCALE_FACTOR = 0.5;
+
   std::unique_ptr<SDL_Window, SDL_Window_Deleter> window;
   std::unique_ptr<SDL_Renderer, SDL_Renderer_Deleter> renderer;
   std::unique_ptr<SDL_Surface, SDL_Surface_Deleter> window_surface;
@@ -74,7 +89,15 @@ private:
 
   void renderSuperPellets(const SuperPellets & superPellets) const;
 
-  static SDL_Rect targetRect(const Position & position, int pixel_increase);
+  //static SDL_Rect targetRect(const Position & position, int pixel_increase);
 
-  void renderTexture(SDL_Texture * texture, SDL_Rect * texture_rect, SDL_Rect * target_rect) const;
+  SDL_Rect windowDimensions() const;
+
+  // Given an x - y coordinate of a texture in the assets file,
+  // returns a rectangle for the whole texture.
+  // Assumes texture are laid out in a 32x32 grid
+  SDL_Rect textureGeometry(SDL_Point) const;
+
+  void renderTexture(SDL_Texture * texture, const SDL_Rect & src, SDL_Point) const;
+  void renderTexture(SDL_Texture * texture, const SDL_Rect & src, const SDL_Rect & target) const;
 };

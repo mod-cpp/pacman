@@ -1,6 +1,6 @@
 #include "PacManAnimation.hpp"
 
-SDL_Rect PacManAnimation::animationFrame(Direction direction) const {
+SDL_Point PacManAnimation::animationFrame(Direction direction) const {
   switch (direction) {
     case Direction::NONE:
       return closed;

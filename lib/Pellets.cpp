@@ -1,4 +1,4 @@
 #include "Pellets.hpp"
 
-Pellets::Pellets(const Board & board) :
-    positions(board.initialPelletPositions()) {}
+Pellets::Pellets(const Board & board)
+  : positions(board.initialPelletPositions()) {}

@@ -2,10 +2,8 @@
 
 #include <chrono>
 
-Game::Game() :
-    window(448, 496),
-    board(),
-    pacMan(board),
+Game::Game()
+  : pacMan(board),
     pellets(board),
     superPellets(board) {}
 

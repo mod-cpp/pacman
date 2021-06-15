@@ -9,7 +9,7 @@ class SuperPellets {
 public:
   explicit SuperPellets(const Board & board);
 
-  [[nodiscard]] SDL_Rect currentSprite() const {
+  [[nodiscard]] SDL_Point currentSprite() const {
     return sprite;
   }
 
@@ -18,6 +18,6 @@ public:
   }
 
 private:
-  const SDL_Rect sprite = {0 * 32, 9 * 32, 32, 32};
+  const SDL_Point sprite = { 0, 9 };
   std::vector<SDL_Point> positions;
 };

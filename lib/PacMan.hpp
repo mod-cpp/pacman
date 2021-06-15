@@ -14,7 +14,7 @@ class PacMan {
 public:
   explicit PacMan(const Board & board);
 
-  [[nodiscard]] SDL_Rect currentSprite() const;
+  [[nodiscard]] SDL_Point currentSprite() const;
 
   [[nodiscard]] Position position() const;
 

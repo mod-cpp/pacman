@@ -8,10 +8,13 @@
 #include "Pellets.hpp"
 #include "SuperPellets.hpp"
 
-GameWindow::GameWindow(int width, int height) {
+GameWindow::GameWindow() {
   initSDL();
   initSDLImage();
-  auto sdl_window = createWindow(width * SCALE_FACTOR, height * SCALE_FACTOR);
+
+  const auto window_dimension = windowDimensions();
+
+  auto sdl_window = createWindow(window_dimension.w, window_dimension.h);
   auto sdl_renderer = createRenderer(sdl_window);
   createWindowSurface(sdl_window);
   setDrawColor(sdl_renderer);
@@ -31,47 +34,54 @@ void GameWindow::update(const PacMan & pacMan, const Pellets & pellets, const Su
 }
 
 void GameWindow::renderMaze() const {
-  renderTexture(maze_texture.get(), nullptr, nullptr);
+  SDL_Rect maze_rect = { 0, 0, MAZE_WIDTH, MAZE_HEIGHT };
+  SDL_Rect maze_translated = { LEFT_MARGIN, TOP_MARGIN, MAZE_WIDTH, MAZE_HEIGHT };
+  renderTexture(maze_texture.get(), maze_rect, maze_translated);
 }
 
 void GameWindow::renderSuperPellets(const SuperPellets & superPellets) const {
-  SDL_Rect sprite_rect = superPellets.currentSprite();
+  SDL_Rect sprite_rect = textureGeometry(superPellets.currentSprite());
   std::vector<SDL_Point> superPelletPositions = superPellets.currentPositions();
   for (const auto & pos : superPelletPositions) {
-    SDL_Rect maze_rect = targetRect({float(pos.x), float(pos.y)}, 8 * SCALE_FACTOR);
-    renderTexture(sprite_texture.get(), &sprite_rect, &maze_rect);
+    renderTexture(sprite_texture.get(), sprite_rect, pos);
   }
 }
 
 void GameWindow::renderPellets(const Pellets & pellets) const {
-  SDL_Rect sprite_rect = pellets.currentSprite();
+  SDL_Rect sprite_rect = textureGeometry(pellets.currentSprite());
   std::vector<SDL_Point> pelletPositions = pellets.currentPositions();
   for (const auto & pos : pelletPositions) {
-    SDL_Rect maze_rect = targetRect({float(pos.x), float(pos.y)}, 8 * SCALE_FACTOR);
-    renderTexture(sprite_texture.get(), &sprite_rect, &maze_rect);
+    renderTexture(sprite_texture.get(), sprite_rect, pos);
   }
 }
 
 void GameWindow::renderPacMan(const PacMan & pac_man) const {
-  Position maze_position = pac_man.position();
-  SDL_Rect maze_rect = targetRect(maze_position, 8 * SCALE_FACTOR);
-  SDL_Rect sprite_rect = pac_man.currentSprite();
-  renderTexture(sprite_texture.get(), &sprite_rect, &maze_rect);
+  SDL_Rect sprite_rect = textureGeometry(pac_man.currentSprite());
+  Position pacman_pos = pac_man.position();
+  renderTexture(sprite_texture.get(), sprite_rect, SDL_Point{ int(pacman_pos.x), int(pacman_pos.y) });
 }
 
-SDL_Rect GameWindow::targetRect(const Position & position, int pixel_increase) {
-  int pixels = 16 * SCALE_FACTOR;
-  int displacement = pixel_increase / 2;
-  return {
-      int(pixels * position.x) - displacement,
-      int(pixels * position.y) - displacement,
-      (pixels + pixel_increase),
-      (pixels + pixel_increase)
+SDL_Rect GameWindow::textureGeometry(SDL_Point p) const {
+  return { p.x * 32, p.y * 32, 32, 32 };
+}
+
+SDL_Rect GameWindow::windowDimensions() const {
+  return { 0, 0, LEFT_MARGIN + MAZE_WIDTH + SCORE_WIDTH, TOP_MARGIN + MAZE_HEIGHT + BOTTOM_MARGIN };
+}
+
+void GameWindow::renderTexture(SDL_Texture * texture, const SDL_Rect & src, SDL_Point p) const {
+  SDL_Rect target = {
+    LEFT_MARGIN + int((p.x * DEFAULT_TEXTURE_WIDTH - src.w / 2) * TEXTURE_SCALE_FACTOR),
+    TOP_MARGIN + int((p.y * DEFAULT_TEXTURE_WIDTH - src.h / 2) * TEXTURE_SCALE_FACTOR),
+    src.w,
+    src.h
   };
+  renderTexture(texture, src, target);
 }
 
-void GameWindow::renderTexture(SDL_Texture * texture, SDL_Rect * texture_rect, SDL_Rect * target_rect) const {
-  if (SDL_RenderCopy(renderer.get(), texture, texture_rect, target_rect) < 0)
+void GameWindow::renderTexture(SDL_Texture * texture, const SDL_Rect & src, const SDL_Rect & target) const {
+
+  if (SDL_RenderCopy(renderer.get(), texture, &src, &target) < 0)
     exitFailure("Failed to copy texture to renderer");
 }
 
@@ -88,12 +98,12 @@ void GameWindow::initSDLImage() {
 
 SDL_Window * GameWindow::createWindow(int width, int height) {
   window = std::unique_ptr<SDL_Window, SDL_Window_Deleter>(SDL_CreateWindow(
-      "Pacman",
-      SDL_WINDOWPOS_CENTERED,
-      SDL_WINDOWPOS_CENTERED,
-      width,
-      height,
-      SDL_WINDOW_OPENGL));
+    "Pacman",
+    SDL_WINDOWPOS_CENTERED,
+    SDL_WINDOWPOS_CENTERED,
+    width,
+    height,
+    SDL_WINDOW_OPENGL | SDL_WINDOW_ALLOW_HIGHDPI));
 
   if (!window)
     exitFailure("Failed to create window");

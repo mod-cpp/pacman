@@ -3,7 +3,7 @@
 PacMan::PacMan(const Board & board) :
     pos(board.initialPacManPosition()) {}
 
-SDL_Rect PacMan::currentSprite() const {
+SDL_Point PacMan::currentSprite() const {
   return pacManAnimation.animationFrame(direction);
 }
 
