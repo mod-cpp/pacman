@@ -6,6 +6,7 @@
         "sdl2-image",
         "sdl2-ttf",
         "fmt",
+        "zlib",
         "gtest"
     ]
 }
