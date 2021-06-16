@@ -19,9 +19,16 @@ void Game::run() {
     auto time_delta = now() - current_time;
     auto milli_delta = std::chrono::duration_cast<std::chrono::milliseconds>(time_delta);
     pacMan.update(milli_delta, inputState, board);
+    eatPellets();
     current_time += time_delta;
     canvas.update(pacMan, pellets, superPellets);
   }
+}
+
+void Game::eatPellets() {
+  const auto pos = pacMan.positionInGrid();
+  pellets.eatPelletAtPosition(pos);
+  superPellets.eatPelletAtPosition(pos);
 }
 
 void Game::processEvents(InputState & inputState) {

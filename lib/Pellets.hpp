@@ -17,6 +17,8 @@ public:
     return positions;
   }
 
+  bool eatPelletAtPosition(Position p);
+
 private:
   const SDL_Point sprite = { 1, 9 };
   std::vector<SDL_Point> positions;

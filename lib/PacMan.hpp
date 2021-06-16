@@ -18,6 +18,8 @@ public:
 
   [[nodiscard]] Position position() const;
 
+  [[nodiscard]] Position positionInGrid() const;
+
   void update(std::chrono::milliseconds time_delta, InputState state, const Board & board);
 
 private:

@@ -11,6 +11,20 @@ Position PacMan::position() const {
   return pos;
 }
 
+Position PacMan::positionInGrid() const {
+  switch (direction) {
+    case Direction::LEFT:
+    case Direction::RIGHT:
+      return { floor(pos.x), round(pos.y) };
+    case Direction::UP:
+    case Direction::DOWN:
+      return { floor(pos.x), round(pos.y) };
+    default:
+      return pos;
+  }
+  return pos;
+}
+
 void PacMan::update(std::chrono::milliseconds time_delta, InputState state, const Board & board) {
   setDirection(state);
   updateAnimationPosition(time_delta);

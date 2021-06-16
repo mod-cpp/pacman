@@ -21,6 +21,8 @@ private:
   Pellets pellets;
   SuperPellets superPellets;
 
+  void eatPellets();
+
   static void processEvents(InputState & inputState);
 
   static void keyToggle(const SDL_Event & event, InputState & inputState, bool on);
