@@ -1,8 +1,9 @@
 #pragma once
 
+#include "Sprite.hpp"
+#include <SDL2/SDL.h>
 #include <memory>
 #include <string>
-#include <SDL2/SDL.h>
 
 struct SDL_Window_Deleter {
   void operator()(SDL_Window * window) {
@@ -37,23 +38,21 @@ class PacMan;
 class Pellets;
 class SuperPellets;
 
-class GameWindow {
+class SDLWindow {
 public:
-  explicit GameWindow();
+  explicit SDLWindow();
 
-  void update(const PacMan & pacMan, const Pellets & pellets, const SuperPellets & superPellets);
+  void clear();
+
+  void render();
+
+  Sprite getBackground() const;
+  Sprite getSprite(SDL_Point point) const;
+  void renderSprite(Sprite sprite, SDL_Point point) const;
+  void renderSprite(Sprite sprite, SDL_Rect target) const;
 
 private:
-  static constexpr int16_t SCALE_FACTOR = 1;
-  static constexpr int16_t LEFT_MARGIN = 40;
-  static constexpr int16_t TOP_MARGIN = 40;
-  static constexpr int16_t BOTTOM_MARGIN = 40;
-  static constexpr int16_t MAZE_WIDTH = 448;
-  static constexpr int16_t MAZE_HEIGHT = 496;
-  static constexpr int16_t SCORE_WIDTH = 200;
-  static constexpr int16_t DEFAULT_TEXTURE_WIDTH = 32;
-  static constexpr int16_t DEFAULT_TEXTURE_HEIGHT = 32;
-  static constexpr float TEXTURE_SCALE_FACTOR = 0.5;
+
 
   std::unique_ptr<SDL_Window, SDL_Window_Deleter> window;
   std::unique_ptr<SDL_Renderer, SDL_Renderer_Deleter> renderer;
@@ -61,32 +60,24 @@ private:
   std::unique_ptr<SDL_Texture, SDL_Texture_Deleter> maze_texture;
   std::unique_ptr<SDL_Texture, SDL_Texture_Deleter> sprite_texture;
 
-  SDL_Window * createWindow(int width, int height);
+  void createWindow(int width, int height);
 
-  SDL_Renderer * createRenderer(SDL_Window * window);
+  void createRenderer();
 
-  void createWindowSurface(SDL_Window * sdl_window);
+  void createWindowSurface();
 
   static void initSDL();
 
   static void initSDLImage();
 
-  static void setDrawColor(SDL_Renderer * sdl_renderer);
+  void setDrawColor();
 
   static void exitFailure(const std::string & message);
 
   static void exitImgFailure(const std::string & message);
 
-  static std::unique_ptr<SDL_Texture, SDL_Texture_Deleter>
-  loadTexture(SDL_Renderer * sdl_renderer, const std::string & path);
-
-  void renderMaze() const;
-
-  void renderPacMan(const PacMan & pac_man) const;
-
-  void renderPellets(const Pellets & pellets) const;
-
-  void renderSuperPellets(const SuperPellets & superPellets) const;
+  std::unique_ptr<SDL_Texture, SDL_Texture_Deleter>
+  loadTexture(const std::string & path);
 
   SDL_Rect windowDimensions() const;
 
