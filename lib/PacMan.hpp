@@ -1,8 +1,8 @@
 #pragma once
 
 #include "Direction.hpp"
-#include "Position.hpp"
 #include "PacManAnimation.hpp"
+#include "Position.hpp"
 
 #include <SDL2/SDL_rect.h>
 #include <chrono>
@@ -21,7 +21,6 @@ public:
   void update(std::chrono::milliseconds time_delta, InputState state, const Board & board);
 
 private:
-
   Direction direction = Direction::NONE;
   Direction desired_direction = Direction::NONE;
   Position pos;

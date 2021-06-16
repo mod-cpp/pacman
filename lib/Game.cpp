@@ -20,7 +20,7 @@ void Game::run() {
     auto milli_delta = std::chrono::duration_cast<std::chrono::milliseconds>(time_delta);
     pacMan.update(milli_delta, inputState, board);
     current_time += time_delta;
-    window.update(pacMan, pellets, superPellets);
+    canvas.update(pacMan, pellets, superPellets);
   }
 }
 

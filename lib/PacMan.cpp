@@ -1,7 +1,7 @@
 #include "PacMan.hpp"
 
-PacMan::PacMan(const Board & board) :
-    pos(board.initialPacManPosition()) {}
+PacMan::PacMan(const Board & board)
+  : pos(board.initialPacManPosition()) {}
 
 SDL_Point PacMan::currentSprite() const {
   return pacManAnimation.animationFrame(direction);
@@ -36,11 +36,10 @@ void PacMan::updateMazePosition(std::chrono::milliseconds time_delta, const Boar
   float position_delta = std::min(1.0, (time_delta.count() / 128.0));
 
   // Handle teleport
-  if(pos.x >= COLUMNS-1 && direction == Direction::RIGHT) {
-      pos.x = -1;
-  }
-  else if(pos.x <= 0 && direction == Direction::LEFT) {
-      pos.x = COLUMNS;
+  if (pos.x >= COLUMNS - 1 && direction == Direction::RIGHT) {
+    pos.x = -1;
+  } else if (pos.x <= 0 && direction == Direction::LEFT) {
+    pos.x = COLUMNS;
   }
 
   else if (board.isWalkable(pos, position_delta, desired_direction)) {

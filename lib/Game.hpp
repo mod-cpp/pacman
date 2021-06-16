@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Board.hpp"
-#include "GameWindow.hpp"
+#include "Canvas.hpp"
 #include "PacMan.hpp"
 #include "Pellets.hpp"
 #include "SuperPellets.hpp"
@@ -15,7 +15,7 @@ public:
   void run();
 
 private:
-  GameWindow window;
+  Canvas canvas;
   Board board;
   PacMan pacMan;
   Pellets pellets;

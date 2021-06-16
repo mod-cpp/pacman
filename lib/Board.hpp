@@ -20,7 +20,7 @@ public:
 
   [[nodiscard]] std::vector<SDL_Point> initialSuperPelletPositions() const;
 
-  static Position initialPacManPosition() { return {14, 23}; }
+  static Position initialPacManPosition() { return { 14, 23 }; }
 
 private:
   uint8_t board_state[ROWS][COLUMNS]{};

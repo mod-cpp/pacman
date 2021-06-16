@@ -49,10 +49,10 @@ Board::Board() {
 }
 
 bool Board::isWalkable(Position point, float position_delta, Direction direction) const {
-   if(point.x <= 0 || point.x >= COLUMNS-1)
-       return true;
+  if (point.x <= 0 || point.x >= COLUMNS - 1)
+    return true;
 
-   switch (direction) {
+  switch (direction) {
     case Direction::LEFT:
       return board_state[int(point.y)][int(point.x - position_delta)] != 0;
     case Direction::RIGHT:
@@ -72,7 +72,7 @@ std::vector<SDL_Point> Board::initialPelletPositions() const {
   for (uint8_t row = 0; row < ROWS; row++) {
     for (uint8_t column = 0; column < COLUMNS; column++) {
       if (board_state[row][column] == 1)
-        positions.push_back({column, row});
+        positions.push_back({ column, row });
     }
   }
   return positions;
@@ -83,7 +83,7 @@ std::vector<SDL_Point> Board::initialSuperPelletPositions() const {
   for (uint8_t row = 0; row < ROWS; row++) {
     for (uint8_t column = 0; column < COLUMNS; column++) {
       if (board_state[row][column] == 4)
-        positions.push_back({column, row});
+        positions.push_back({ column, row });
     }
   }
   return positions;
