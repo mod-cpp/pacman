@@ -27,6 +27,7 @@ private:
   void renderPellets(const Pellets & pellets) const;
   void renderSuperPellets(const SuperPellets & superPellets) const;
   void renderSprite(Sprite sprite, SDL_Point point) const;
+  void renderScore(int score);
 
   SDL_Rect windowDimensions() const;
   Sprite getSprite(SDL_Point rect) const;

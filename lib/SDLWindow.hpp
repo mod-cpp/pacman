@@ -2,6 +2,7 @@
 
 #include "Sprite.hpp"
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_ttf.h>
 #include <memory>
 #include <string>
 
@@ -29,10 +30,15 @@ struct SDL_Texture_Deleter {
   }
 };
 
-struct TextureSize {
-  int width;
-  int height;
+struct SDL_Font_Deleter {
+  void operator()(TTF_Font* font) {
+    TTF_CloseFont(font);
+  }
 };
+
+using SDLTexturePtr = std::unique_ptr<SDL_Texture, SDL_Texture_Deleter>;
+using SDLSurfacePtr = std::unique_ptr<SDL_Surface, SDL_Surface_Deleter>;
+
 
 class PacMan;
 class Pellets;
@@ -42,6 +48,8 @@ class SDLWindow {
 public:
   explicit SDLWindow(SDL_Rect windowGeometry);
 
+  static constexpr auto White = SDL_Color{0xFF, 0xFF, 0xFF};
+
   void clear();
 
   void render();
@@ -49,15 +57,17 @@ public:
   Sprite getBackground() const;
   Sprite getSprite(SDL_Rect rect) const;
   void renderSprite(Sprite sprite, SDL_Rect target) const;
+  void drawText(const std::string &text, SDL_Point position, SDL_Color textColor = White) const;
 
 private:
   static constexpr int16_t SCALE_FACTOR = 1;
 
   std::unique_ptr<SDL_Window, SDL_Window_Deleter> window;
   std::unique_ptr<SDL_Renderer, SDL_Renderer_Deleter> renderer;
-  std::unique_ptr<SDL_Surface, SDL_Surface_Deleter> window_surface;
-  std::unique_ptr<SDL_Texture, SDL_Texture_Deleter> maze_texture;
-  std::unique_ptr<SDL_Texture, SDL_Texture_Deleter> sprite_texture;
+  SDLSurfacePtr window_surface;
+  SDLTexturePtr maze_texture;
+  SDLTexturePtr sprite_texture;
+  std::unique_ptr<TTF_Font, SDL_Font_Deleter> font;
 
   void createWindow(int width, int height);
 
@@ -69,6 +79,8 @@ private:
 
   static void initSDLImage();
 
+  void initSDLTTF();
+
   void setDrawColor();
 
   static void exitFailure(const std::string & message);
@@ -79,4 +91,6 @@ private:
   loadTexture(const std::string & path);
 
   SDL_Rect windowDimensions() const;
+
+  std::tuple<int, int> textureSize(SDL_Texture* texture) const;
 };

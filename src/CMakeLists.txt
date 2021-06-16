@@ -16,6 +16,7 @@ add_custom_command(TARGET pacman POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E copy
         ${PROJECT_SOURCE_DIR}/assets/maze.png
         ${PROJECT_SOURCE_DIR}/assets/sprites32.png
+        ${PROJECT_SOURCE_DIR}/assets/joystix/joystix.ttf
         $<TARGET_FILE_DIR:pacman>)
 
 #target_compile_options(pacman PRIVATE -fsanitize=address) # /MD will be used implicitly

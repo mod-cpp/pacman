@@ -1,7 +1,6 @@
 #include "Canvas.hpp"
-
 #include <vector>
-
+#include <fmt/format.h>
 #include "PacMan.hpp"
 #include "Pellets.hpp"
 #include "SuperPellets.hpp"
@@ -16,6 +15,7 @@ void Canvas::update(const PacMan & pacMan, const Pellets & pellets, const SuperP
   renderPellets(pellets);
   renderSuperPellets(superPellets);
   renderPacMan(pacMan);
+  renderScore(0);
 
   window.render();
 }
@@ -46,6 +46,13 @@ void Canvas::renderPacMan(const PacMan & pac_man) const {
   Sprite pacmanSprite = getSprite(pac_man.currentSprite());
   const auto & pos = pac_man.position();
   renderSprite(pacmanSprite, SDL_Point{ int(pos.x), int(pos.y) });
+}
+
+void Canvas::renderScore(int score) {
+    const int x = LEFT_MARGIN + MAZE_WIDTH + LEFT_MARGIN;
+    const int y = TOP_MARGIN * 2;
+    window.drawText("SCORE", {x, y});
+    window.drawText(fmt::format("{}", score), {x, y + 20});
 }
 
 SDL_Rect Canvas::windowDimensions() const {
