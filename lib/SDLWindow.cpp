@@ -2,11 +2,6 @@
 
 #include <SDL2/SDL_image.h>
 #include <iostream>
-#include <vector>
-
-#include "PacMan.hpp"
-#include "Pellets.hpp"
-#include "SuperPellets.hpp"
 
 SDLWindow::SDLWindow(SDL_Rect windowGeometry) {
   initSDL();
@@ -30,21 +25,20 @@ void SDLWindow::render() {
 
 Sprite SDLWindow::getBackground() const {
   int w, h;
-  if(SDL_QueryTexture(maze_texture.get(), nullptr, nullptr, &w, &h) !=0) {
-      exitFailure("Failed to get texture geometry");
+  if (SDL_QueryTexture(maze_texture.get(), nullptr, nullptr, &w, &h) != 0) {
+    exitFailure("Failed to get texture geometry");
   }
 
   SDL_Rect maze_rect = { 0, 0, w, h };
-  return Sprite(maze_texture.get(), maze_rect);
+  return { maze_texture.get(), maze_rect };
 }
 
 Sprite SDLWindow::getSprite(SDL_Rect rect) const {
-  return Sprite(sprite_texture.get(), rect);
+  return { sprite_texture.get(), rect };
 }
 
 void SDLWindow::renderSprite(Sprite sprite, SDL_Rect target) const {
-  SDL_Rect sprite_rect = sprite.rect();
-  if (SDL_RenderCopy(renderer.get(), sprite.texture(), &sprite_rect, &target) < 0)
+  if (SDL_RenderCopy(renderer.get(), sprite.texture, &sprite.rect, &target) < 0)
     exitFailure("Failed to copy texture to renderer");
 }
 

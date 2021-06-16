@@ -1,4 +1,4 @@
 #include "SuperPellets.hpp"
 
-SuperPellets::SuperPellets(const Board & board) :
-    positions(board.initialSuperPelletPositions()) {}
+SuperPellets::SuperPellets(const Board & board)
+  : positions(board.initialSuperPelletPositions()) {}

@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Position.hpp"
 #include "Board.hpp"
+#include "Position.hpp"
 
 #include <SDL2/SDL_rect.h>
 
