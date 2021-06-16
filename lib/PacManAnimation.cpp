@@ -2,8 +2,6 @@
 
 SDL_Point PacManAnimation::animationFrame(Direction direction) const {
   switch (direction) {
-    case Direction::NONE:
-      return closed;
     case Direction::LEFT:
       return left_animation[animation_position];
     case Direction::RIGHT:
@@ -12,6 +10,9 @@ SDL_Point PacManAnimation::animationFrame(Direction direction) const {
       return up_animation[animation_position];
     case Direction::DOWN:
       return down_animation[animation_position];
+    case Direction::NONE:
+    default:
+      return closed;
   }
 }
 
