@@ -8,13 +8,11 @@
 #include "Pellets.hpp"
 #include "SuperPellets.hpp"
 
-SDLWindow::SDLWindow() {
+SDLWindow::SDLWindow(SDL_Rect windowGeometry) {
   initSDL();
   initSDLImage();
 
-  const auto window_dimension = windowDimensions();
-
-  createWindow(window_dimension.w, window_dimension.h);
+  createWindow(windowGeometry.w, windowGeometry.h);
   createRenderer();
   createWindowSurface();
   setDrawColor();
@@ -31,52 +29,23 @@ void SDLWindow::render() {
 }
 
 Sprite SDLWindow::getBackground() const {
-  SDL_Rect maze_rect = { 0, 0, MAZE_WIDTH, MAZE_HEIGHT };
+  int w, h;
+  if(SDL_QueryTexture(maze_texture.get(), nullptr, nullptr, &w, &h) !=0) {
+      exitFailure("Failed to get texture geometry");
+  }
+
+  SDL_Rect maze_rect = { 0, 0, w, h };
   return Sprite(maze_texture.get(), maze_rect);
 }
 
-Sprite SDLWindow::getSprite(SDL_Point point) const {
-  return Sprite(sprite_texture.get(), textureGeometry(point));
-}
-
-SDL_Rect SDLWindow::textureGeometry(SDL_Point p) const {
-  return { p.x * 32, p.y * 32, 32, 32 };
-}
-
-void SDLWindow::renderSprite(Sprite sprite, SDL_Point point) const {
-  SDL_Rect target = {
-    LEFT_MARGIN + int((point.x * DEFAULT_TEXTURE_WIDTH - sprite.rect().w / 2) * TEXTURE_SCALE_FACTOR),
-    TOP_MARGIN + int((point.y * DEFAULT_TEXTURE_WIDTH - sprite.rect().h / 2) * TEXTURE_SCALE_FACTOR),
-    sprite.rect().w,
-    sprite.rect().h
-  };
-  renderSprite(sprite, target);
+Sprite SDLWindow::getSprite(SDL_Rect rect) const {
+  return Sprite(sprite_texture.get(), rect);
 }
 
 void SDLWindow::renderSprite(Sprite sprite, SDL_Rect target) const {
   SDL_Rect sprite_rect = sprite.rect();
   if (SDL_RenderCopy(renderer.get(), sprite.texture(), &sprite_rect, &target) < 0)
     exitFailure("Failed to copy texture to renderer");
-}
-
-void SDLWindow::renderTexture(SDL_Texture * texture, const SDL_Rect & src, SDL_Point p) const {
-  SDL_Rect target = {
-    LEFT_MARGIN + int((p.x * DEFAULT_TEXTURE_WIDTH - src.w / 2) * TEXTURE_SCALE_FACTOR),
-    TOP_MARGIN + int((p.y * DEFAULT_TEXTURE_WIDTH - src.h / 2) * TEXTURE_SCALE_FACTOR),
-    src.w,
-    src.h
-  };
-  renderTexture(texture, src, target);
-}
-
-void SDLWindow::renderTexture(SDL_Texture * texture, const SDL_Rect & src, const SDL_Rect & target) const {
-
-  if (SDL_RenderCopy(renderer.get(), texture, &src, &target) < 0)
-    exitFailure("Failed to copy texture to renderer");
-}
-
-SDL_Rect SDLWindow::windowDimensions() const {
-  return { 0, 0, LEFT_MARGIN + MAZE_WIDTH + SCORE_WIDTH, TOP_MARGIN + MAZE_HEIGHT + BOTTOM_MARGIN };
 }
 
 void SDLWindow::initSDL() {

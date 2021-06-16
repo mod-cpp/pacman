@@ -40,19 +40,18 @@ class SuperPellets;
 
 class SDLWindow {
 public:
-  explicit SDLWindow();
+  explicit SDLWindow(SDL_Rect windowGeometry);
 
   void clear();
 
   void render();
 
   Sprite getBackground() const;
-  Sprite getSprite(SDL_Point point) const;
-  void renderSprite(Sprite sprite, SDL_Point point) const;
+  Sprite getSprite(SDL_Rect rect) const;
   void renderSprite(Sprite sprite, SDL_Rect target) const;
 
 private:
-
+  static constexpr int16_t SCALE_FACTOR = 1;
 
   std::unique_ptr<SDL_Window, SDL_Window_Deleter> window;
   std::unique_ptr<SDL_Renderer, SDL_Renderer_Deleter> renderer;
@@ -80,12 +79,4 @@ private:
   loadTexture(const std::string & path);
 
   SDL_Rect windowDimensions() const;
-
-  // Given an x - y coordinate of a texture in the assets file,
-  // returns a rectangle for the whole texture.
-  // Assumes texture are laid out in a 32x32 grid
-  SDL_Rect textureGeometry(SDL_Point) const;
-
-  void renderTexture(SDL_Texture * texture, const SDL_Rect & src, SDL_Point) const;
-  void renderTexture(SDL_Texture * texture, const SDL_Rect & src, const SDL_Rect & target) const;
 };
