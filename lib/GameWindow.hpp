@@ -35,7 +35,6 @@ struct TextureSize {
 
 class PacMan;
 class Pellets;
-//class Position;
 class SuperPellets;
 
 class GameWindow {
@@ -88,8 +87,6 @@ private:
   void renderPellets(const Pellets & pellets) const;
 
   void renderSuperPellets(const SuperPellets & superPellets) const;
-
-  //static SDL_Rect targetRect(const Position & position, int pixel_increase);
 
   SDL_Rect windowDimensions() const;
 
