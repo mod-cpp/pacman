@@ -3,23 +3,21 @@
 #include "Board.hpp"
 #include "Position.hpp"
 
-#include <SDL2/SDL_rect.h>
-
 class Pellets {
 public:
   explicit Pellets(const Board & board);
 
-  [[nodiscard]] SDL_Point currentSprite() const {
+  [[nodiscard]] PositionInt currentSprite() const {
     return sprite;
   };
 
-  [[nodiscard]] std::vector<SDL_Point> currentPositions() const {
+  [[nodiscard]] std::vector<PositionInt> currentPositions() const {
     return positions;
   }
 
   bool eatPelletAtPosition(Position p);
 
 private:
-  const SDL_Point sprite = { 1, 9 };
-  std::vector<SDL_Point> positions;
+  const PositionInt sprite = { 1, 9 };
+  std::vector<PositionInt> positions;
 };

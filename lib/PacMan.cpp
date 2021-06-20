@@ -1,9 +1,10 @@
 #include "PacMan.hpp"
+#include <cmath>
 
 PacMan::PacMan(const Board & board)
   : pos(board.initialPacManPosition()) {}
 
-SDL_Point PacMan::currentSprite() const {
+PositionInt PacMan::currentSprite() const {
   return pacManAnimation.animationFrame(direction);
 }
 
@@ -15,10 +16,10 @@ Position PacMan::positionInGrid() const {
   switch (direction) {
     case Direction::LEFT:
     case Direction::RIGHT:
-      return { floor(pos.x), round(pos.y) };
+      return { std::floor(pos.x), std::round(pos.y) };
     case Direction::UP:
     case Direction::DOWN:
-      return { floor(pos.x), round(pos.y) };
+      return { std::floor(pos.x), std::round(pos.y) };
     default:
       return pos;
   }
@@ -47,7 +48,7 @@ void PacMan::updateAnimationPosition(std::chrono::milliseconds time_delta) {
 }
 
 void PacMan::updateMazePosition(std::chrono::milliseconds time_delta, const Board & board) {
-  float position_delta = time_delta.count() / 128.0;
+  float position_delta = time_delta.count() / 150.0;
 
   // Handle teleport
   if (pos.x >= COLUMNS - 1 && direction == Direction::RIGHT) {

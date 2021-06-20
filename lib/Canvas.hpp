@@ -1,6 +1,7 @@
 #pragma once
 
-#include "SDLWindow.hpp"
+#include "Position.hpp"
+#include <optional>
 
 class PacMan;
 class Pellets;
@@ -10,6 +11,7 @@ class Canvas {
 public:
   Canvas();
   void update(const PacMan & pacMan, const Pellets & pellets, const SuperPellets & superPellets);
+  std::optional<sf::Event> pollEvent();
 
 private:
   static constexpr int16_t LEFT_MARGIN = 40;
@@ -20,16 +22,28 @@ private:
   static constexpr int16_t SCORE_WIDTH = 200;
   static constexpr int16_t DEFAULT_SPRITE_WIDTH = 32;
   static constexpr int16_t DEFAULT_SPRITE_HEIGHT = 32;
-  static constexpr float TEXTURE_SCALE_FACTOR = 0.5;
 
-  void renderMaze() const;
-  void renderPacMan(const PacMan & pac_man) const;
-  void renderPellets(const Pellets & pellets) const;
-  void renderSuperPellets(const SuperPellets & superPellets) const;
-  void renderSprite(Sprite sprite, SDL_Point point) const;
+  void clear();
+  void render();
+  void renderMaze();
+  void renderPacMan(const PacMan & pac_man);
+  void renderPellets(const Pellets & pellets);
+  void renderSuperPellets(const SuperPellets & superPellets);
+  void renderSprite(Sprite sprite, PositionInt point);
+  void renderSprite(Sprite sprite, Rect target);
+
   void renderScore(int score);
 
-  SDL_Rect windowDimensions() const;
-  Sprite getSprite(SDL_Point rect) const;
-  SDLWindow window;
+  Rect windowDimensions() const;
+
+  void loadTextures();
+  sf::Texture loadTexture(std::string_view path);
+  sf::Font loadFont(std::string_view path);
+
+  Sprite getSprite(PositionInt rect) const;
+
+  sf::RenderWindow window;
+  sf::Texture maze_texture;
+  sf::Texture sprites_texture;
+  sf::Font game_font;
 };

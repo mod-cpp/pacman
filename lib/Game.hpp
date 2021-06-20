@@ -23,9 +23,7 @@ private:
 
   void eatPellets();
 
-  static void processEvents(InputState & inputState);
-
-  static void keyToggle(const SDL_Event & event, InputState & inputState, bool on);
+  void processEvents(InputState & inputState);
 
   [[nodiscard]] static auto now();
 };
