@@ -3,10 +3,8 @@
     "name": "pacman",
     "version": "0.1",
     "dependencies": [
-        "sdl2-image",
-        "sdl2-ttf",
+        "sfml",
         "fmt",
-        "zlib",
         "gtest"
     ]
 }

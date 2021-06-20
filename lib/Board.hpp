@@ -1,9 +1,9 @@
 #pragma once
 
+#include <SFML/Graphics.hpp>
+
 #include "Direction.hpp"
 #include "Position.hpp"
-
-#include <SDL2/SDL_rect.h>
 #include <cstdint>
 #include <vector>
 
@@ -16,9 +16,9 @@ public:
 
   [[nodiscard]] bool isWalkable(Position point, float d, Direction direction) const;
 
-  [[nodiscard]] std::vector<SDL_Point> initialPelletPositions() const;
+  [[nodiscard]] std::vector<PositionInt> initialPelletPositions() const;
 
-  [[nodiscard]] std::vector<SDL_Point> initialSuperPelletPositions() const;
+  [[nodiscard]] std::vector<PositionInt> initialSuperPelletPositions() const;
 
   static Position initialPacManPosition() { return { 14, 23 }; }
 

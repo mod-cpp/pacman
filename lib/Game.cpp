@@ -32,35 +32,17 @@ void Game::eatPellets() {
 }
 
 void Game::processEvents(InputState & inputState) {
-  SDL_Event event;
-  while (SDL_PollEvent(&event)) {
-    switch (event.type) {
-      case SDL_QUIT:
-        inputState.close = true;
-        break;
-      case SDL_KEYDOWN:
-        keyToggle(event, inputState, true);
-        break;
-      case SDL_KEYUP:
-        keyToggle(event, inputState, false);
-        break;
-    }
-  }
-}
 
-void Game::keyToggle(const SDL_Event & event, InputState & inputState, bool on) {
-  switch (event.key.keysym.sym) {
-    case SDLK_UP:
-      inputState.up = on;
-      break;
-    case SDLK_DOWN:
-      inputState.down = on;
-      break;
-    case SDLK_LEFT:
-      inputState.left = on;
-      break;
-    case SDLK_RIGHT:
-      inputState.right = on;
-      break;
+  auto event = canvas.pollEvent();
+  if (event->type == sf::Event::Closed) {
+    inputState.close = true;
+    return;
   }
+
+  inputState.down = inputState.up = inputState.left = inputState.right = false;
+
+  inputState.down = sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Down);
+  inputState.up = sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Up);
+  inputState.left = sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Left);
+  inputState.right = sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Right);
 }

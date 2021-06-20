@@ -4,7 +4,6 @@
 #include "PacManAnimation.hpp"
 #include "Position.hpp"
 
-#include <SDL2/SDL_rect.h>
 #include <chrono>
 
 class Board;
@@ -14,7 +13,7 @@ class PacMan {
 public:
   explicit PacMan(const Board & board);
 
-  [[nodiscard]] SDL_Point currentSprite() const;
+  [[nodiscard]] PositionInt currentSprite() const;
 
   [[nodiscard]] Position position() const;
 
