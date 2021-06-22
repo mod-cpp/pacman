@@ -1,5 +1,5 @@
-#include <gtest/gtest.h>
 #include "PacMan.hpp"
+#include <gtest/gtest.h>
 
 TEST(PacManTest, InitialPosition) {
   Board board;
@@ -8,7 +8,7 @@ TEST(PacManTest, InitialPosition) {
   EXPECT_EQ(pacMan.position().y, 23);
 }
 
-int main(int argc, char* argv[]) {
+int main(int argc, char * argv[]) {
   testing::InitGoogleTest(&argc, argv);
   return RUN_ALL_TESTS();
 }
