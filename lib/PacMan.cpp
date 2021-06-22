@@ -2,7 +2,7 @@
 #include <cmath>
 
 PacMan::PacMan(const Board & board)
-  : pos(board.initialPacManPosition()) {}
+  : pos(Board::initialPacManPosition()) {}
 
 PositionInt PacMan::currentSprite() const {
   return pacManAnimation.animationFrame(direction);
