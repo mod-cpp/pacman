@@ -53,7 +53,7 @@ void Canvas::renderPellets(const Pellets & pellets) {
   Sprite pellet = getSprite(pellets.currentSprite());
   std::vector<PositionInt> pelletPositions = pellets.currentPositions();
   for (const auto & pos : pelletPositions) {
-    renderSprite(pellet, pos);
+    renderSprite(pellet, { float(pos.x), float(pos.y) });
   }
 }
 
@@ -61,14 +61,14 @@ void Canvas::renderSuperPellets(const SuperPellets & superPellets) {
   Sprite pellet = getSprite(superPellets.currentSprite());
   std::vector<PositionInt> superPelletPositions = superPellets.currentPositions();
   for (const auto & pos : superPelletPositions) {
-    renderSprite(pellet, pos);
+    renderSprite(pellet, { float(pos.x), float(pos.y) });
   }
 }
 
 void Canvas::renderPacMan(const PacMan & pac_man) {
   Sprite pacmanSprite = getSprite(pac_man.currentSprite());
   const auto & pos = pac_man.position();
-  renderSprite(pacmanSprite, { int(pos.x), int(pos.y) });
+  renderSprite(pacmanSprite, pos);
 }
 
 void Canvas::renderScore(int score) {
@@ -99,7 +99,7 @@ Sprite Canvas::getSprite(PositionInt coordinate) const {
   return sprite;
 }
 
-void Canvas::renderSprite(Sprite sprite, PositionInt pos) {
+void Canvas::renderSprite(Sprite sprite, Position pos) {
   pos.x = LEFT_MARGIN + (pos.x * DEFAULT_SPRITE_WIDTH / 2);
   pos.y = TOP_MARGIN + (pos.y * DEFAULT_SPRITE_HEIGHT / 2);
   sprite.setPosition(pos.x, pos.y);

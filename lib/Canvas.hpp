@@ -29,7 +29,7 @@ private:
   void renderPacMan(const PacMan & pac_man);
   void renderPellets(const Pellets & pellets);
   void renderSuperPellets(const SuperPellets & superPellets);
-  void renderSprite(Sprite sprite, PositionInt point);
+  void renderSprite(Sprite sprite, Position pos);
 
   void renderScore(int score);
 
