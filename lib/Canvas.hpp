@@ -33,10 +33,9 @@ private:
 
   void renderScore(int score);
 
-  Rect windowDimensions() const;
-
-  sf::Texture loadTexture(std::string_view path);
-  sf::Font loadFont(std::string_view path);
+  static Rect windowDimensions() ;
+  static sf::Texture loadTexture(std::string_view path);
+  static sf::Font loadFont(std::string_view path);
 
   Sprite getSprite(PositionInt rect) const;
 

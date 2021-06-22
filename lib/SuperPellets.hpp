@@ -2,6 +2,7 @@
 
 #include "Board.hpp"
 #include "Position.hpp"
+
 class SuperPellets {
 public:
   explicit SuperPellets(const Board & board);

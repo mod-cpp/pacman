@@ -84,7 +84,7 @@ void Canvas::renderScore(int score) {
   window.draw(text);
 }
 
-Rect Canvas::windowDimensions() const {
+Rect Canvas::windowDimensions() {
   return { 0, 0, LEFT_MARGIN + MAZE_WIDTH + SCORE_WIDTH, TOP_MARGIN + MAZE_HEIGHT + BOTTOM_MARGIN };
 }
 
