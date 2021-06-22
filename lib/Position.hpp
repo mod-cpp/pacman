@@ -19,3 +19,11 @@ using Sprite = sf::Sprite;
 inline bool operator==(const PositionInt & b, const Position & a) {
   return a.x == b.x && a.y == b.y;
 }
+
+inline bool operator==(const Position & a, const Position & b) {
+  return a.x == b.x && a.y == b.y;
+}
+
+inline bool operator!=(const Position & a, const Position & b) {
+  return !(a == b);
+}
