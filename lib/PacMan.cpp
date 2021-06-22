@@ -28,8 +28,10 @@ Position PacMan::positionInGrid() const {
 
 void PacMan::update(std::chrono::milliseconds time_delta, InputState state, const Board & board) {
   setDirection(state);
-  updateAnimationPosition(time_delta);
+  auto old = pos;
   updateMazePosition(time_delta, board);
+  if(old != pos)
+      updateAnimationPosition(time_delta);
 }
 
 void PacMan::setDirection(const InputState & state) {
