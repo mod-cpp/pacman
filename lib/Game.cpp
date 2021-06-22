@@ -12,17 +12,31 @@ auto Game::now() {
 }
 
 void Game::run() {
-  InputState inputState;
-  auto current_time = now();
-  while (!inputState.close) {
-    processEvents(inputState);
-    auto time_delta = now() - current_time;
-    auto milli_delta = std::chrono::duration_cast<std::chrono::milliseconds>(time_delta);
-    pacMan.update(milli_delta, inputState, board);
-    eatPellets();
-    current_time += time_delta;
-    canvas.update(pacMan, pellets, superPellets);
-  }
+
+    const std::chrono::milliseconds delta_time (1000/60);
+
+    std::chrono::milliseconds t(0);
+    std::chrono::milliseconds accumulator(0);
+    auto current_time = now();
+
+    InputState inputState;
+
+    while (true) {
+        auto newTime = now();
+        auto frameTime = std::chrono::duration_cast<std::chrono::milliseconds>(newTime - current_time);
+        current_time = newTime;
+        accumulator += frameTime;
+        processEvents(inputState);
+        if(inputState.close)
+            return;
+        while ( accumulator >= delta_time ) {
+            pacMan.update(delta_time, inputState, board);
+            eatPellets();
+            accumulator -= delta_time;
+            t += delta_time;
+        }
+        canvas.update(pacMan, pellets, superPellets);
+    }
 }
 
 void Game::eatPellets() {
