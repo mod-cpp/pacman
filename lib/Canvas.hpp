@@ -30,13 +30,11 @@ private:
   void renderPellets(const Pellets & pellets);
   void renderSuperPellets(const SuperPellets & superPellets);
   void renderSprite(Sprite sprite, PositionInt point);
-  void renderSprite(Sprite sprite, Rect target);
 
   void renderScore(int score);
 
   Rect windowDimensions() const;
 
-  void loadTextures();
   sf::Texture loadTexture(std::string_view path);
   sf::Font loadFont(std::string_view path);
 
