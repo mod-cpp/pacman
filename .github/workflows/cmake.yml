@@ -29,8 +29,6 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-      with:
-          submodules: recursive
 
     - name: Fix Path on Ubuntu
       if: matrix.configurations.os == 'ubuntu-20.04' || matrix.configurations.os == 'ubuntu-18.04'
