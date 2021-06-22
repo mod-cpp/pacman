@@ -13,17 +13,7 @@ Position PacMan::position() const {
 }
 
 Position PacMan::positionInGrid() const {
-  switch (direction) {
-    case Direction::LEFT:
-    case Direction::RIGHT:
-      return { std::floor(pos.x), std::round(pos.y) };
-    case Direction::UP:
-    case Direction::DOWN:
-      return { std::floor(pos.x), std::round(pos.y) };
-    default:
-      return pos;
-  }
-  return pos;
+  return { std::round(pos.x), std::round(pos.y) };
 }
 
 void PacMan::update(std::chrono::milliseconds time_delta, InputState state, const Board & board) {
@@ -50,7 +40,7 @@ void PacMan::updateAnimationPosition(std::chrono::milliseconds time_delta) {
 }
 
 void PacMan::updateMazePosition(std::chrono::milliseconds time_delta, const Board & board) {
-  float position_delta = time_delta.count() / 150.0;
+  float position_delta = 0.004 * time_delta.count();
 
   // Handle teleport
   if (pos.x >= COLUMNS - 1 && direction == Direction::RIGHT) {

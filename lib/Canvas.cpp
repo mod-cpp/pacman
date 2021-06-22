@@ -9,6 +9,7 @@
 
 Canvas::Canvas()
   : window(sf::VideoMode(windowDimensions().width, windowDimensions().height), "Pacman", sf::Style::Titlebar | sf::Style::Close) {
+  window.setFramerateLimit(60);
   window.setVerticalSyncEnabled(true);
 
   maze_texture = loadTexture("maze.png");
