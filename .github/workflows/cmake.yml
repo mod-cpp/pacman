@@ -38,7 +38,7 @@ jobs:
 
     - name: Install Linux dependencies
       if: matrix.configurations.os == 'ubuntu-20.04' || matrix.configurations.os == 'ubuntu-18.04'
-      run: sudo apt-get install -y libx11-dev libxrandr-dev libxi-dev libgl1-mesa-dev
+      run: sudo apt-get install -y libx11-dev libxrandr-dev libxi-dev libgl1-mesa-dev libudev-dev make ninja-build cmake
 
     - name: Get Clang 11 on Ubuntu
       if: matrix.configurations.os == 'ubuntu-20.04' || matrix.configurations.os == 'ubuntu-18.04'
