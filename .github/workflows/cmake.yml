@@ -26,6 +26,8 @@ jobs:
             os: ubuntu-20.04
           - name: Windows 2019
             os: windows-2019
+          - name: MacOS 10.15
+            os: macos-10.15
         cmake-build-type: [Debug, Release]
 
     steps:
