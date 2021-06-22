@@ -37,7 +37,7 @@ void Canvas::render() {
 }
 
 std::optional<sf::Event> Canvas::pollEvent() {
-  sf::Event event;
+  sf::Event event{};
   if (window.pollEvent(event))
     return event;
   return std::nullopt;
