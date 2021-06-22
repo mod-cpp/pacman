@@ -3,6 +3,8 @@
 
 ## Setup VCPKG
 
+git submodule init
+git submodule update
 On windows, run `.\vcpkg\bootstrap-vcpkg.bat`.
 On other platforms, run `./vcpkg/bootstrap-vcpkg.sh`
 
