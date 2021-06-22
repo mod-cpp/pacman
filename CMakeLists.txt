@@ -24,7 +24,7 @@ set(CMAKE_TOOLCHAIN_FILE ${CMAKE_CURRENT_SOURCE_DIR}/vcpkg/scripts/buildsystems/
         CACHE STRING "Vcpkg toolchain file")
 
 enable_language(CXX)
-project(modern_cpp_exercises)
+project(pacman)
 
 set(CMAKE_CXX_STANDARD 20)
 
