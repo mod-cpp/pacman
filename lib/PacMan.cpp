@@ -18,10 +18,11 @@ Position PacMan::positionInGrid() const {
 
 void PacMan::update(std::chrono::milliseconds time_delta, InputState state, const Board & board) {
   setDirection(state);
-  auto old = pos;
+  const auto old = pos;
   updateMazePosition(time_delta, board);
-  if(old != pos)
-      updateAnimationPosition(time_delta);
+
+  const bool paused = pos == old;
+  updateAnimationPosition(time_delta, paused);
 }
 
 void PacMan::setDirection(const InputState & state) {
@@ -35,8 +36,13 @@ void PacMan::setDirection(const InputState & state) {
     desired_direction = Direction::DOWN;
 }
 
-void PacMan::updateAnimationPosition(std::chrono::milliseconds time_delta) {
-  pacManAnimation.updateAnimationPosition(time_delta);
+void PacMan::updateAnimationPosition(std::chrono::milliseconds time_delta, bool paused) {
+    if(paused) {
+         pacManAnimation.pause();
+    }
+    else {
+        pacManAnimation.updateAnimationPosition(time_delta);
+    }
 }
 
 void PacMan::updateMazePosition(std::chrono::milliseconds time_delta, const Board & board) {

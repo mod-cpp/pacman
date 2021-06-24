@@ -21,3 +21,8 @@ void PacManAnimation::updateAnimationPosition(std::chrono::milliseconds time_del
   animation_position = int(animation_position + animation_position_delta) % 4;
   animation_position_delta = (animation_position_delta < 1) ? animation_position_delta : (animation_position_delta - 1);
 }
+
+void PacManAnimation::pause() {
+    animation_position = 0;
+    animation_position_delta = 0;
+}

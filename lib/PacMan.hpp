@@ -29,7 +29,6 @@ private:
 
   void setDirection(const InputState & state);
 
-  void updateAnimationPosition(std::chrono::milliseconds time_delta);
-
+  void updateAnimationPosition(std::chrono::milliseconds time_delta, bool paused);
   void updateMazePosition(std::chrono::milliseconds time_delta, const Board & board);
 };
