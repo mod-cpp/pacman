@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Position.hpp"
+#include "Score.hpp"
 #include <optional>
 
 class PacMan;
@@ -10,7 +11,7 @@ class SuperPellets;
 class Canvas {
 public:
   Canvas();
-  void update(const PacMan & pacMan, const Pellets & pellets, const SuperPellets & superPellets);
+  void update(const PacMan & pacMan, const Pellets & pellets, const SuperPellets & superPellets, const Score &);
   std::optional<sf::Event> pollEvent();
 
 private:

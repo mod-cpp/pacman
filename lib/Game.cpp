@@ -2,10 +2,21 @@
 
 #include <chrono>
 
+constexpr int DEFAULT_LIVES = 3;
+constexpr int NORMAL_PELLET_POINTS = 10;
+constexpr int POWER_PELLET_POINTS  = 50;
+//constexpr int GHOST_POINTS[] = {200, 400, 800, 1600};
+
+
+
+
 Game::Game()
   : pacMan(board),
     pellets(board),
-    superPellets(board) {}
+    superPellets(board)
+{
+    score.lives = DEFAULT_LIVES;
+}
 
 auto Game::now() {
   return std::chrono::system_clock::now();
@@ -35,14 +46,22 @@ void Game::run() {
             accumulator -= delta_time;
             t += delta_time;
         }
-        canvas.update(pacMan, pellets, superPellets);
+        canvas.update(pacMan, pellets, superPellets, score);
     }
 }
 
 void Game::eatPellets() {
   const auto pos = pacMan.positionInGrid();
-  pellets.eatPelletAtPosition(pos);
-  superPellets.eatPelletAtPosition(pos);
+  if(pellets.eatPelletAtPosition(pos)) {
+      score.eatenPellets++;
+      score.points += NORMAL_PELLET_POINTS;
+  }
+
+  if(superPellets.eatPelletAtPosition(pos)) {
+      score.eatenPellets++;
+      score.points += POWER_PELLET_POINTS;
+  }
+
 }
 
 void Game::processEvents(InputState & inputState) {
