@@ -25,6 +25,7 @@ void Canvas::update(const PacMan & pacMan, const Pellets & pellets, const SuperP
   renderSuperPellets(superPellets);
   renderPacMan(pacMan);
   renderScore(score.points);
+  renderLives(score.lives);
 
   render();
 }
@@ -83,6 +84,19 @@ void Canvas::renderScore(int score) {
   text.setCharacterSize(20);
   text.setFillColor(sf::Color::White);
   window.draw(text);
+}
+
+void Canvas::renderLives(int lives) {
+    constexpr PositionInt liveSprite{3, 0};
+    const int x = LEFT_MARGIN + MAZE_WIDTH + LEFT_MARGIN;
+    const int y = maze_texture.getSize().y;
+
+    Sprite pacmanSprite = getSprite(liveSprite);
+    for(int i = 0; i < lives - 1; i++) {
+        PositionInt pos{x + i * pacmanSprite.getTextureRect().width, y};
+        pacmanSprite.setPosition(pos.x, pos.y);
+        window.draw(pacmanSprite);
+    }
 }
 
 Rect Canvas::windowDimensions() {

@@ -33,6 +33,7 @@ private:
   void renderSprite(Sprite sprite, Position pos);
 
   void renderScore(int score);
+  void renderLives(int lives);
 
   static Rect windowDimensions();
   static sf::Texture loadTexture(std::string_view path);
