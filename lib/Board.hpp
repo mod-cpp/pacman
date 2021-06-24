@@ -12,6 +12,15 @@ const uint8_t COLUMNS = 28;
 
 class Board {
 public:
+  enum class Cell {
+    wall = 0,
+    pellet = 1,
+    nothing = 2,
+    door = 3,
+    power_pellet = 4,
+    pen_door = 5,
+  };
+
   Board();
 
   [[nodiscard]] bool isWalkableForPacMan(Position point, float d, Direction direction) const;
@@ -21,7 +30,19 @@ public:
 
   [[nodiscard]] std::vector<PositionInt> initialSuperPelletPositions() const;
 
-  static Position initialPacManPosition() { return { 14, 23 }; }
+  static Position initialPacManPosition() { return { 13.5, 23 }; }
+
+  static Position initialBlinkyPosition() { return { 13.5, 11 }; }
+  static Position blinkyScatterTarget() { return { 25, -2 }; }
+
+  static Position initialSpeedyPosition() { return { 11.5, 14 }; }
+  static Position speedyScatterTarget() { return { 3, -2 }; }
+
+  static Position initialInkyPosition() { return { 13.5, 14 }; }
+  static Position inkyScatterTarget() { return { 27, 30 }; }
+
+  static Position initialClydePosition() { return { 15.5, 14 }; }
+  static Position clydeScatterTarget() { return { 0, 30 }; }
 
 private:
   [[nodiscard]] bool isWalkable(Position point, float d, Direction direction, bool pacman) const;

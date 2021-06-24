@@ -4,6 +4,8 @@
 #include "Score.hpp"
 #include <optional>
 
+class Game;
+class Ghost;
 class PacMan;
 class Pellets;
 class SuperPellets;
@@ -11,7 +13,7 @@ class SuperPellets;
 class Canvas {
 public:
   Canvas();
-  void update(const PacMan & pacMan, const Pellets & pellets, const SuperPellets & superPellets, const Score &);
+  void update(const Game & game);
   std::optional<sf::Event> pollEvent();
 
 private:
@@ -28,6 +30,7 @@ private:
   void render();
   void renderMaze();
   void renderPacMan(const PacMan & pac_man);
+  void renderGhost(const Ghost & ghost);
   void renderPellets(const Pellets & pellets);
   void renderSuperPellets(const SuperPellets & superPellets);
   void renderSprite(Sprite sprite, Position pos);

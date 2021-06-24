@@ -9,7 +9,7 @@
 // 5 - pen doors
 
 static const uint8_t board[ROWS][COLUMNS] = {
-  //   0  1  2  3  4  5  6  7  8  9  0  1  2  3  4  5  6  7  8  9  0  1  2  3  4  5  6  7
+ // 0  1  2  3  4  5  6  7  8  9  0  1  2  3  4  5  6  7  8  9  0  1  2  3  4  5  6  7
   { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }, // 0
   { 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0 }, // 1
   { 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0 }, // 2
@@ -50,11 +50,11 @@ Board::Board() {
 }
 
 bool Board::isWalkableForPacMan(Position point, float d, Direction direction) const {
-    return isWalkable(point, d, direction, true);
+  return isWalkable(point, d, direction, true);
 }
 
 bool Board::isWalkableForGhost(Position point, float d, Direction direction) const {
-    return isWalkable(point, d, direction, false);
+  return isWalkable(point, d, direction, false);
 }
 
 bool Board::isWalkable(Position point, float position_delta, Direction direction, bool pacman) const {
@@ -62,29 +62,29 @@ bool Board::isWalkable(Position point, float position_delta, Direction direction
     return true;
 
   auto cellAtPosition = [&](Position point, float position_delta, Direction direction) {
-      switch (direction) {
-        case Direction::LEFT:
-          return board_state[int(point.y)][int(point.x - position_delta)];
-        case Direction::RIGHT:
-          return board_state[int(point.y)][int(point.x) + 1];
-        case Direction::UP:
-          return board_state[int(point.y - position_delta)][int(point.x)];
-        case Direction::DOWN:
-          return board_state[int(point.y) + 1][int(point.x)];
-        case Direction::NONE:
-        default:
-          return uint8_t(0);
-      }
+    switch (direction) {
+      case Direction::LEFT:
+        return board_state[int(point.y)][int(point.x - position_delta)];
+      case Direction::RIGHT:
+        return board_state[int(point.y)][int(point.x) + 1];
+      case Direction::UP:
+        return board_state[int(point.y - position_delta)][int(point.x)];
+      case Direction::DOWN:
+        return board_state[int(point.y) + 1][int(point.x)];
+      case Direction::NONE:
+      default:
+        return uint8_t(Cell::wall);
+    }
   };
-  auto cell = cellAtPosition(point, position_delta, direction);
-  return pacman ? cell != 0 : cell != 0 && cell != 5;
+  Cell cell = Cell(cellAtPosition(point, position_delta, direction));
+  return pacman ? cell != Cell::wall : cell != Cell::wall && cell != Cell::pen_door;
 }
 
 std::vector<PositionInt> Board::initialPelletPositions() const {
   std::vector<PositionInt> positions;
   for (uint8_t row = 0; row < ROWS; row++) {
     for (uint8_t column = 0; column < COLUMNS; column++) {
-      if (board_state[row][column] == 1)
+      if (board_state[row][column] == uint8_t(Cell::pellet))
         positions.push_back({ column, row });
     }
   }
@@ -95,7 +95,7 @@ std::vector<PositionInt> Board::initialSuperPelletPositions() const {
   std::vector<PositionInt> positions;
   for (uint8_t row = 0; row < ROWS; row++) {
     for (uint8_t column = 0; column < COLUMNS; column++) {
-      if (board_state[row][column] == 4)
+      if (board_state[row][column] == uint8_t(Cell::power_pellet))
         positions.push_back({ column, row });
     }
   }

@@ -12,7 +12,7 @@ PositionInt PacManAnimation::animationFrame(Direction direction) const {
       return down_animation[animation_position];
     case Direction::NONE:
     default:
-      return closed;
+      return Atlas::pacman_closed;
   }
 }
 
@@ -23,6 +23,6 @@ void PacManAnimation::updateAnimationPosition(std::chrono::milliseconds time_del
 }
 
 void PacManAnimation::pause() {
-    animation_position = 0;
-    animation_position_delta = 0;
+  animation_position = 0;
+  animation_position_delta = 0;
 }
