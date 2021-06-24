@@ -6,6 +6,7 @@
 // 2 - nothing
 // 3 - door
 // 4 - superpower
+// 5 - pen doors
 
 static const uint8_t board[ROWS][COLUMNS] = {
   //   0  1  2  3  4  5  6  7  8  9  0  1  2  3  4  5  6  7  8  9  0  1  2  3  4  5  6  7
@@ -21,10 +22,10 @@ static const uint8_t board[ROWS][COLUMNS] = {
   { 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 2, 0, 0, 2, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0 }, // 9
   { 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 2, 0, 0, 2, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0 }, // 10
   { 0, 0, 0, 0, 0, 0, 1, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0, 1, 0, 0, 0, 0, 0, 0 }, // 11
-  { 0, 0, 0, 0, 0, 0, 1, 0, 0, 2, 0, 0, 0, 3, 3, 0, 0, 0, 2, 0, 0, 1, 0, 0, 0, 0, 0, 0 }, // 12
-  { 0, 0, 0, 0, 0, 0, 1, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 1, 0, 0, 0, 0, 0, 0 }, // 13
-  { 3, 2, 2, 2, 2, 2, 1, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 1, 2, 2, 2, 2, 2, 3 }, // 14
-  { 0, 0, 0, 0, 0, 0, 1, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 1, 0, 0, 0, 0, 0, 0 }, // 15
+  { 0, 0, 0, 0, 0, 0, 1, 0, 0, 2, 0, 0, 0, 5, 5, 0, 0, 0, 2, 0, 0, 1, 0, 0, 0, 0, 0, 0 }, // 12
+  { 0, 0, 0, 0, 0, 0, 1, 0, 0, 2, 0, 2, 2, 2, 2, 2, 2, 0, 2, 0, 0, 1, 0, 0, 0, 0, 0, 0 }, // 13
+  { 3, 2, 2, 2, 2, 2, 1, 2, 2, 2, 0, 2, 2, 2, 2, 2, 2, 0, 2, 2, 2, 1, 2, 2, 2, 2, 2, 3 }, // 14
+  { 0, 0, 0, 0, 0, 0, 1, 0, 0, 2, 0, 2, 2, 2, 2, 2, 2, 0, 2, 0, 0, 1, 0, 0, 0, 0, 0, 0 }, // 15
   { 0, 0, 0, 0, 0, 0, 1, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 1, 0, 0, 0, 0, 0, 0 }, // 16
   { 0, 0, 0, 0, 0, 0, 1, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0, 1, 0, 0, 0, 0, 0, 0 }, // 17
   { 0, 0, 0, 0, 0, 0, 1, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 1, 0, 0, 0, 0, 0, 0 }, // 18
@@ -48,23 +49,35 @@ Board::Board() {
       board_state[row][column] = board[row][column];
 }
 
-bool Board::isWalkable(Position point, float position_delta, Direction direction) const {
+bool Board::isWalkableForPacMan(Position point, float d, Direction direction) const {
+    return isWalkable(point, d, direction, true);
+}
+
+bool Board::isWalkableForGhost(Position point, float d, Direction direction) const {
+    return isWalkable(point, d, direction, false);
+}
+
+bool Board::isWalkable(Position point, float position_delta, Direction direction, bool pacman) const {
   if (point.x <= 0 || point.x >= COLUMNS - 1)
     return true;
 
-  switch (direction) {
-    case Direction::LEFT:
-      return board_state[int(point.y)][int(point.x - position_delta)] != 0;
-    case Direction::RIGHT:
-      return board_state[int(point.y)][int(point.x) + 1] != 0;
-    case Direction::UP:
-      return board_state[int(point.y - position_delta)][int(point.x)] != 0;
-    case Direction::DOWN:
-      return board_state[int(point.y) + 1][int(point.x)] != 0;
-    case Direction::NONE:
-    default:
-      return true;
-  }
+  auto cellAtPosition = [&](Position point, float position_delta, Direction direction) {
+      switch (direction) {
+        case Direction::LEFT:
+          return board_state[int(point.y)][int(point.x - position_delta)];
+        case Direction::RIGHT:
+          return board_state[int(point.y)][int(point.x) + 1];
+        case Direction::UP:
+          return board_state[int(point.y - position_delta)][int(point.x)];
+        case Direction::DOWN:
+          return board_state[int(point.y) + 1][int(point.x)];
+        case Direction::NONE:
+        default:
+          return uint8_t(0);
+      }
+  };
+  auto cell = cellAtPosition(point, position_delta, direction);
+  return pacman ? cell != 0 : cell != 0 && cell != 5;
 }
 
 std::vector<PositionInt> Board::initialPelletPositions() const {
