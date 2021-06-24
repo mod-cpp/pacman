@@ -55,11 +55,11 @@ void PacMan::updateMazePosition(std::chrono::milliseconds time_delta, const Boar
     pos.x = COLUMNS;
   }
 
-  else if (board.isWalkable(pos, position_delta, desired_direction)) {
+  else if (board.isWalkableForPacMan(pos, position_delta, desired_direction)) {
     direction = desired_direction;
   }
 
-  if (board.isWalkable(pos, position_delta, direction)) {
+  if (board.isWalkableForPacMan(pos, position_delta, direction)) {
     switch (direction) {
       case Direction::NONE:
         break;
