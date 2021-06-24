@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Score.hpp"
 #include "Board.hpp"
 #include "Canvas.hpp"
 #include "PacMan.hpp"
@@ -20,6 +21,7 @@ private:
   PacMan pacMan;
   Pellets pellets;
   SuperPellets superPellets;
+  Score score;
 
   void eatPellets();
 

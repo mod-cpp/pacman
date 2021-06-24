@@ -17,14 +17,14 @@ Canvas::Canvas()
   game_font = loadFont("joystix.ttf");
 }
 
-void Canvas::update(const PacMan & pacMan, const Pellets & pellets, const SuperPellets & superPellets) {
+void Canvas::update(const PacMan & pacMan, const Pellets & pellets, const SuperPellets & superPellets, const Score & score) {
   clear();
 
   renderMaze();
   renderPellets(pellets);
   renderSuperPellets(superPellets);
   renderPacMan(pacMan);
-  renderScore(0);
+  renderScore(score.points);
 
   render();
 }
