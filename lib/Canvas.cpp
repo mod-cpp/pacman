@@ -1,5 +1,6 @@
 #include "Canvas.hpp"
-
+#include "Game.hpp"
+#include "Ghost.hpp"
 #include "PacMan.hpp"
 #include "Pellets.hpp"
 #include "SuperPellets.hpp"
@@ -17,15 +18,21 @@ Canvas::Canvas()
   game_font = loadFont("joystix.ttf");
 }
 
-void Canvas::update(const PacMan & pacMan, const Pellets & pellets, const SuperPellets & superPellets, const Score & score) {
+void Canvas::update(const Game & game) {
   clear();
 
   renderMaze();
-  renderPellets(pellets);
-  renderSuperPellets(superPellets);
-  renderPacMan(pacMan);
-  renderScore(score.points);
-  renderLives(score.lives);
+  renderPellets(game.pellets);
+  renderSuperPellets(game.superPellets);
+  renderPacMan(game.pacMan);
+
+  renderGhost(game.blinky);
+  renderGhost(game.speedy);
+  renderGhost(game.inky);
+  renderGhost(game.clyde);
+
+  renderScore(game.score.points);
+  renderLives(game.score.lives);
 
   render();
 }
@@ -73,6 +80,12 @@ void Canvas::renderPacMan(const PacMan & pac_man) {
   renderSprite(pacmanSprite, pos);
 }
 
+void Canvas::renderGhost(const Ghost & ghost) {
+  Sprite sprite = getSprite(ghost.currentSprite());
+  const auto & pos = ghost.position();
+  renderSprite(sprite, pos);
+}
+
 void Canvas::renderScore(int score) {
   const int x = LEFT_MARGIN + MAZE_WIDTH + LEFT_MARGIN;
   const int y = TOP_MARGIN * 2;
@@ -87,16 +100,16 @@ void Canvas::renderScore(int score) {
 }
 
 void Canvas::renderLives(int lives) {
-    constexpr PositionInt liveSprite{3, 0};
-    const int x = LEFT_MARGIN + MAZE_WIDTH + LEFT_MARGIN;
-    const int y = maze_texture.getSize().y;
+  constexpr PositionInt liveSprite = Atlas::pacman_left_narrow;
+  const int x = LEFT_MARGIN + MAZE_WIDTH + LEFT_MARGIN;
+  const int y = maze_texture.getSize().y;
 
-    Sprite pacmanSprite = getSprite(liveSprite);
-    for(int i = 0; i < lives - 1; i++) {
-        PositionInt pos{x + i * pacmanSprite.getTextureRect().width, y};
-        pacmanSprite.setPosition(pos.x, pos.y);
-        window.draw(pacmanSprite);
-    }
+  Sprite pacmanSprite = getSprite(liveSprite);
+  for (int i = 0; i < lives - 1; i++) {
+    PositionInt pos{ x + i * pacmanSprite.getTextureRect().width, y };
+    pacmanSprite.setPosition(pos.x, pos.y);
+    window.draw(pacmanSprite);
+  }
 }
 
 Rect Canvas::windowDimensions() {

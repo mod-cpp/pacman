@@ -37,12 +37,11 @@ void PacMan::setDirection(const InputState & state) {
 }
 
 void PacMan::updateAnimationPosition(std::chrono::milliseconds time_delta, bool paused) {
-    if(paused) {
-         pacManAnimation.pause();
-    }
-    else {
-        pacManAnimation.updateAnimationPosition(time_delta);
-    }
+  if (paused) {
+    pacManAnimation.pause();
+  } else {
+    pacManAnimation.updateAnimationPosition(time_delta);
+  }
 }
 
 void PacMan::updateMazePosition(std::chrono::milliseconds time_delta, const Board & board) {

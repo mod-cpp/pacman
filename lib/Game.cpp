@@ -4,18 +4,18 @@
 
 constexpr int DEFAULT_LIVES = 3;
 constexpr int NORMAL_PELLET_POINTS = 10;
-constexpr int POWER_PELLET_POINTS  = 50;
+constexpr int POWER_PELLET_POINTS = 50;
 //constexpr int GHOST_POINTS[] = {200, 400, 800, 1600};
-
-
-
 
 Game::Game()
   : pacMan(board),
     pellets(board),
-    superPellets(board)
-{
-    score.lives = DEFAULT_LIVES;
+    superPellets(board),
+    blinky(board),
+    speedy(board),
+    inky(board),
+    clyde(board) {
+  score.lives = DEFAULT_LIVES;
 }
 
 auto Game::now() {
@@ -24,44 +24,53 @@ auto Game::now() {
 
 void Game::run() {
 
-    const std::chrono::milliseconds delta_time (1000/60);
+  const std::chrono::milliseconds delta_time(1000 / 60);
 
-    std::chrono::milliseconds t(0);
-    std::chrono::milliseconds accumulator(0);
-    auto current_time = now();
+  std::chrono::milliseconds t(0);
+  std::chrono::milliseconds accumulator(0);
+  auto current_time = now();
 
-    InputState inputState;
+  InputState inputState;
 
-    while (true) {
-        auto newTime = now();
-        auto frameTime = std::chrono::duration_cast<std::chrono::milliseconds>(newTime - current_time);
-        current_time = newTime;
-        accumulator += frameTime;
-        processEvents(inputState);
-        if(inputState.close)
-            return;
-        while ( accumulator >= delta_time ) {
-            pacMan.update(delta_time, inputState, board);
-            eatPellets();
-            accumulator -= delta_time;
-            t += delta_time;
-        }
-        canvas.update(pacMan, pellets, superPellets, score);
+  while (true) {
+    auto newTime = now();
+    auto frameTime = std::chrono::duration_cast<std::chrono::milliseconds>(newTime - current_time);
+    current_time = newTime;
+    accumulator += frameTime;
+    processEvents(inputState);
+    if (inputState.close)
+      return;
+    while (accumulator >= delta_time) {
+      step(delta_time, inputState);
+      accumulator -= delta_time;
+      t += delta_time;
     }
+    canvas.update(*this);
+  }
+}
+
+void Game::step(std::chrono::milliseconds delta, InputState inputState) {
+  pacMan.update(delta, inputState, board);
+
+  blinky.update(delta, board);
+  speedy.update(delta, board);
+  inky.update(delta, board);
+  clyde.update(delta, board);
+
+  eatPellets();
 }
 
 void Game::eatPellets() {
   const auto pos = pacMan.positionInGrid();
-  if(pellets.eatPelletAtPosition(pos)) {
-      score.eatenPellets++;
-      score.points += NORMAL_PELLET_POINTS;
+  if (pellets.eatPelletAtPosition(pos)) {
+    score.eatenPellets++;
+    score.points += NORMAL_PELLET_POINTS;
   }
 
-  if(superPellets.eatPelletAtPosition(pos)) {
-      score.eatenPellets++;
-      score.points += POWER_PELLET_POINTS;
+  if (superPellets.eatPelletAtPosition(pos)) {
+    score.eatenPellets++;
+    score.points += POWER_PELLET_POINTS;
   }
-
 }
 
 void Game::processEvents(InputState & inputState) {
