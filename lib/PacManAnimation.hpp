@@ -12,6 +12,8 @@ public:
   [[nodiscard]] PositionInt animationFrame(Direction direction) const;
 
   void updateAnimationPosition(std::chrono::milliseconds time_delta);
+  void pause();
+
 
 private:
   uint8_t animation_position = 0;
