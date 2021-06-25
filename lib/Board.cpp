@@ -23,9 +23,9 @@ static const uint8_t board[ROWS][COLUMNS] = {
   { 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 2, 0, 0, 2, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0 }, // 10
   { 0, 0, 0, 0, 0, 0, 1, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0, 1, 0, 0, 0, 0, 0, 0 }, // 11
   { 0, 0, 0, 0, 0, 0, 1, 0, 0, 2, 0, 0, 0, 5, 5, 0, 0, 0, 2, 0, 0, 1, 0, 0, 0, 0, 0, 0 }, // 12
-  { 0, 0, 0, 0, 0, 0, 1, 0, 0, 2, 0, 2, 2, 2, 2, 2, 2, 0, 2, 0, 0, 1, 0, 0, 0, 0, 0, 0 }, // 13
-  { 3, 2, 2, 2, 2, 2, 1, 2, 2, 2, 0, 2, 2, 2, 2, 2, 2, 0, 2, 2, 2, 1, 2, 2, 2, 2, 2, 3 }, // 14
-  { 0, 0, 0, 0, 0, 0, 1, 0, 0, 2, 0, 2, 2, 2, 2, 2, 2, 0, 2, 0, 0, 1, 0, 0, 0, 0, 0, 0 }, // 15
+  { 0, 0, 0, 0, 0, 0, 1, 0, 0, 2, 0, 5, 5, 5, 5, 5, 5, 0, 2, 0, 0, 1, 0, 0, 0, 0, 0, 0 }, // 13
+  { 3, 2, 2, 2, 2, 2, 1, 2, 2, 2, 0, 5, 5, 5, 5, 5, 5, 0, 2, 2, 2, 1, 2, 2, 2, 2, 2, 3 }, // 14
+  { 0, 0, 0, 0, 0, 0, 1, 0, 0, 2, 0, 5, 5, 5, 5, 5, 5, 0, 2, 0, 0, 1, 0, 0, 0, 0, 0, 0 }, // 15
   { 0, 0, 0, 0, 0, 0, 1, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 1, 0, 0, 0, 0, 0, 0 }, // 16
   { 0, 0, 0, 0, 0, 0, 1, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0, 1, 0, 0, 0, 0, 0, 0 }, // 17
   { 0, 0, 0, 0, 0, 0, 1, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 1, 0, 0, 0, 0, 0, 0 }, // 18
@@ -57,6 +57,19 @@ bool Board::isWalkableForGhost(Position point, float d, Direction direction) con
   return isWalkable(point, d, direction, false);
 }
 
+bool Board::isWalkable(Position point) const {
+     return board_state[int(point.y)][int(point.x)] != uint8_t(Cell::wall);
+}
+
+bool Board::isWalkableForGost(Position point, Position origin) const
+{
+    return isWalkable(point) && (isInPen(origin) || !isInPen(point));
+}
+
+bool Board::isInPen(Position point) const {
+    return board_state[int(point.y)][int(point.x)] == uint8_t(Cell::pen);
+}
+
 bool Board::isWalkable(Position point, float position_delta, Direction direction, bool pacman) const {
   if (point.x <= 0 || point.x >= COLUMNS - 1)
     return true;
@@ -77,7 +90,7 @@ bool Board::isWalkable(Position point, float position_delta, Direction direction
     }
   };
   Cell cell = Cell(cellAtPosition(point, position_delta, direction));
-  return pacman ? cell != Cell::wall : cell != Cell::wall && cell != Cell::pen_door;
+  return pacman ? cell != Cell::wall : cell != Cell::wall && cell != Cell::pen;
 }
 
 std::vector<PositionInt> Board::initialPelletPositions() const {

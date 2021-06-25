@@ -25,6 +25,12 @@ public:
 
   void update(std::chrono::milliseconds time_delta, const Board & board);
 
+private:
+  void updateAnimation(std::chrono::milliseconds time_delta);
+  void updatePosition(std::chrono::milliseconds time_delta, const Board & board);
+  void updateDirection(const Board & board);
+  Position target(const Board & board) const;
+
 protected:
   Atlas::Ghost spritesSet;
   Direction direction = Direction::NONE;
@@ -34,6 +40,7 @@ protected:
   Position pos;
   Position startingPosition;
   Position scatterTarget;
+  Position lastIntersection = {-1, -1};
 };
 
 class Blinky : public Ghost {
