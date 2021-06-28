@@ -44,7 +44,7 @@ void Ghost::reset() {
     case State::Frightened:
       if (timeFrighten < 3500)
         return (animationIndex % 2) == 0 ? Atlas::ghost_frightened2 : Atlas::ghost_frightened1;
-      return std::array{ Atlas::ghost_frightened1,
+      return std::array<PositionInt, 4>{ Atlas::ghost_frightened1,
                          Atlas::ghost_frightened2,
                          Atlas::ghost_frightened3,
                          Atlas::ghost_frightened4 }[animationIndex];
@@ -123,7 +123,7 @@ void Ghost::updateDirection(const Board & board) {
   };
 
   auto [x, y] = cell;
-  std::array directions = {
+  std::array<NewDirection, 4> directions = {
     NewDirection{ Direction::UP, { x, y - 1 }, 0 },
     NewDirection{ Direction::LEFT, { x - 1, y }, 0 },
     NewDirection{ Direction::DOWN, { x, y + 1 }, 0 },
