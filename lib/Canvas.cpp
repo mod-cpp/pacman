@@ -26,10 +26,9 @@ void Canvas::update(const Game & game) {
   renderSuperPellets(game.superPellets);
   renderPacMan(game.pacMan);
 
-  renderGhost(game.blinky);
-  renderGhost(game.speedy);
-  renderGhost(game.inky);
-  renderGhost(game.clyde);
+  std::apply([&](const auto&... ghost) {
+      (renderGhost(ghost),...);
+  }, game.ghosts);
 
   renderScore(game.score.points);
   renderLives(game.score.lives);

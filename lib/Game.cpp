@@ -11,12 +11,10 @@ Game::Game()
   : pacMan(board),
     pellets(board),
     superPellets(board),
-    blinky(board),
-    speedy(board),
-    inky(board),
-    clyde(board) {
+    ghosts(Blinky(board), Speedy(board), Inky(board), Clyde(board)) {
   score.lives = DEFAULT_LIVES;
 }
+
 
 auto Game::now() {
   return std::chrono::system_clock::now();
@@ -52,10 +50,9 @@ void Game::run() {
 void Game::step(std::chrono::milliseconds delta, InputState inputState) {
   pacMan.update(delta, inputState, board);
 
-  blinky.update(delta, board);
-  speedy.update(delta, board);
-  inky.update(delta, board);
-  clyde.update(delta, board);
+  std::apply([&](auto &... ghost) {
+      (ghost.update(delta, board),...);
+  }, ghosts);
 
   eatPellets();
 }
