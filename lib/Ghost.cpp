@@ -57,30 +57,33 @@ void Ghost::updateDirection(const Board & board) {
     if(cell == lastIntersection)
         return;
 
-    using P = std::tuple<Direction, Position, double>;
+    struct NewDirection {
+        Direction direction;
+        Position position;
+        double distance;
+    };
 
     auto [x , y] = cell;
-    std::array<P, 4> positions = {{
-        P{Direction::UP,    {x, y-1}, 0},
-        P{Direction::LEFT,  {x-1, y}, 0},
-        P{Direction::DOWN,  {x, y+1}, 0},
-        P{Direction::RIGHT, {x+1, y}, 0}
-    }};
+    std::array directions = {
+        NewDirection{Direction::UP,    {x, y-1}, 0},
+        NewDirection{Direction::LEFT,  {x-1, y}, 0},
+        NewDirection{Direction::DOWN,  {x, y+1}, 0},
+        NewDirection{Direction::RIGHT, {x+1, y}, 0}
+    };
     const Position target = this->target(board);
 
-    std::for_each(positions.begin(), positions.end(), [&](P & p) {
-        get<2>(p) = (get<0>(p) != oppositeDirection(direction) && board.isWalkableForGost(get<1>(p), cell)) ?
-                   std::hypot(get<1>(p).x - target.x, get<1>(p).y - target.y)
+    for(auto && d : directions) {
+        d.distance = (d.direction != oppositeDirection(direction) && board.isWalkableForGost(d.position, cell)) ?
+                   std::hypot(d.position.x - target.x, d.position.y - target.y)
                  : std::numeric_limits<double>::infinity();
-    });
+    }
 
-    auto it = std::min_element(positions.begin(), positions.end(), [](const auto & a, const auto &b)
-    {
-        return get<2>(a) < get<2>(b);
+    auto it = std::min_element(directions.begin(), directions.end(), [](const auto & a, const auto &b) {
+        return a.distance < b.distance;
     });
 
     lastIntersection = cell;
-    direction = std::get<0>(*it);
+    direction = it->direction;
 }
 
 Position Ghost::target(const Board & board) const {
