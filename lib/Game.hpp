@@ -23,10 +23,7 @@ private:
   PacMan pacMan;
   Pellets pellets;
   SuperPellets superPellets;
-  Blinky blinky;
-  Speedy speedy;
-  Inky inky;
-  Clyde clyde;
+  std::tuple<Blinky, Speedy, Inky, Clyde> ghosts;
   Score score;
 
   void step(std::chrono::milliseconds delta, InputState inputState);
