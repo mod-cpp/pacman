@@ -21,11 +21,18 @@ public:
 
   void update(std::chrono::milliseconds time_delta, InputState state, const Board & board);
 
+  void eat();
+  void reset(const Board & b);
+  bool onTheMove() const {
+    return direction != Direction::NONE;
+  }
+
 private:
   Direction direction = Direction::NONE;
   Direction desired_direction = Direction::NONE;
   Position pos;
   PacManAnimation pacManAnimation;
+  bool eaten = false;
 
   void setDirection(const InputState & state);
 

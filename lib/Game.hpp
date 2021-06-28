@@ -25,10 +25,12 @@ private:
   SuperPellets superPellets;
   std::tuple<Blinky, Speedy, Inky, Clyde> ghosts;
   Score score;
+  std::chrono::milliseconds timeSinceDeath;
 
   void step(std::chrono::milliseconds delta, InputState inputState);
   void eatPellets();
   void processEvents(InputState & inputState);
+  void checkCollision(Ghost & g);
 
   [[nodiscard]] static auto now();
 };

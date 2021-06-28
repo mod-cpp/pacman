@@ -24,14 +24,16 @@ void Canvas::update(const Game & game) {
   renderMaze();
   renderPellets(game.pellets);
   renderSuperPellets(game.superPellets);
-  renderPacMan(game.pacMan);
 
-  std::apply([&](const auto&... ghost) {
-      (renderGhost(ghost),...);
-  }, game.ghosts);
+  std::apply([&](const auto &... ghost) {
+    (renderGhost(ghost), ...);
+  },
+             game.ghosts);
 
   renderScore(game.score.points);
   renderLives(game.score.lives);
+
+  renderPacMan(game.pacMan);
 
   render();
 }

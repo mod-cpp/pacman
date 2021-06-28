@@ -11,8 +11,9 @@
 class PacManAnimation {
 public:
   [[nodiscard]] PositionInt animationFrame(Direction direction) const;
+  [[nodiscard]] PositionInt deathAnimationFrame(Direction direction) const;
 
-  void updateAnimationPosition(std::chrono::milliseconds time_delta);
+  void updateAnimationPosition(std::chrono::milliseconds time_delta, bool dead);
   void pause();
 
 private:

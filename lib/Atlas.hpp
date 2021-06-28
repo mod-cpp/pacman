@@ -22,6 +22,33 @@ namespace Atlas {
   constexpr PositionInt pacman_down_wide = { 7, 0 };
   constexpr PositionInt pacman_down_narrow = { 8, 0 };
 
+  constexpr PositionInt ghost_frightened1 = { 0, 7 };
+  constexpr PositionInt ghost_frightened2 = { 1, 7 };
+  constexpr PositionInt ghost_frightened3 = { 2, 7 };
+  constexpr PositionInt ghost_frightened4 = { 3, 7 };
+
+  constexpr PositionInt eyeSprite(Direction direction) {
+    int x = 0;
+    switch (direction) {
+      case Direction::RIGHT:
+        x = 0;
+        break;
+      case Direction::DOWN:
+        x = 2;
+        break;
+      case Direction::LEFT:
+        x = 4;
+        break;
+      case Direction::UP:
+        x = 6;
+        break;
+      default:
+        x = 0;
+        break;
+    }
+    return { x, 6 };
+  }
+
   constexpr PositionInt ghostSprite(Ghost ghost, Direction direction, bool alternative) {
     assert(ghost >= Ghost::blinky && ghost <= Ghost::clyde && "Invalid Ghost");
     int y = static_cast<int>(ghost);

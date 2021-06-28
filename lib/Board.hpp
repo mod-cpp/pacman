@@ -26,7 +26,7 @@ public:
   [[nodiscard]] bool isWalkableForPacMan(Position point, float d, Direction direction) const;
   [[nodiscard]] bool isWalkableForGhost(Position point, float d, Direction direction) const;
 
-  [[nodiscard]] bool isWalkableForGost(Position point, Position origin) const;
+  [[nodiscard]] bool isWalkableForGost(Position point, Position origin, bool isEyes) const;
   [[nodiscard]] bool isWalkable(Position point) const;
   [[nodiscard]] bool isInPen(Position point) const;
 

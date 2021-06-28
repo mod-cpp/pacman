@@ -16,9 +16,20 @@ PositionInt PacManAnimation::animationFrame(Direction direction) const {
   }
 }
 
-void PacManAnimation::updateAnimationPosition(std::chrono::milliseconds time_delta) {
+[[nodiscard]] PositionInt PacManAnimation::deathAnimationFrame(Direction direction) const {
+  return PositionInt{ animation_position, 1 };
+}
+
+void PacManAnimation::updateAnimationPosition(std::chrono::milliseconds time_delta, bool dead) {
+  if (dead && animation_position >= 11)
+    return;
+
   animation_position_delta += (0.02) * float(time_delta.count());
-  animation_position = int(animation_position + animation_position_delta) % 4;
+  animation_position = int(animation_position + animation_position_delta);
+
+  if (!dead)
+    animation_position = animation_position % 4;
+
   animation_position_delta = (animation_position_delta < 1) ? animation_position_delta : (animation_position_delta - 1);
 }
 
