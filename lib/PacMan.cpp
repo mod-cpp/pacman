@@ -5,7 +5,7 @@ PacMan::PacMan(const Board & board)
   : pos(Board::initialPacManPosition()) {}
 
 PositionInt PacMan::currentSprite() const {
-  return pacManAnimation.animationFrame(direction);
+  return eaten ? pacManAnimation.deathAnimationFrame(direction) : pacManAnimation.animationFrame(direction);
 }
 
 Position PacMan::position() const {
@@ -16,11 +16,27 @@ Position PacMan::positionInGrid() const {
   return { std::round(pos.x), std::round(pos.y) };
 }
 
-void PacMan::update(std::chrono::milliseconds time_delta, InputState state, const Board & board) {
-  setDirection(state);
-  const auto old = pos;
-  updateMazePosition(time_delta, board);
+void PacMan::eat() {
+  if (eaten)
+    return;
+  eaten = true;
+  direction = Direction::NONE;
+}
 
+void PacMan::reset(const Board & b) {
+  eaten = false;
+  direction = Direction::NONE;
+  pos = b.initialPacManPosition();
+}
+
+void PacMan::update(std::chrono::milliseconds time_delta, InputState state, const Board & board) {
+  if (eaten) {
+    updateAnimationPosition(time_delta, false);
+    return;
+  }
+  const auto old = pos;
+  setDirection(state);
+  updateMazePosition(time_delta, board);
   const bool paused = pos == old;
   updateAnimationPosition(time_delta, paused);
 }
@@ -40,7 +56,7 @@ void PacMan::updateAnimationPosition(std::chrono::milliseconds time_delta, bool 
   if (paused) {
     pacManAnimation.pause();
   } else {
-    pacManAnimation.updateAnimationPosition(time_delta);
+    pacManAnimation.updateAnimationPosition(time_delta, eaten);
   }
 }
 

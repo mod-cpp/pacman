@@ -8,8 +8,50 @@ Ghost::Ghost(Atlas::Ghost spritesSet, Position startingPosition, Position scatte
     scatterTarget(scatterTarget) {
 }
 
+void Ghost::frighten() {
+  if (state > State::Scatter)
+    return;
+  direction = oppositeDirection(direction);
+  state = State::Frightened;
+  timeFrighten = 0;
+}
+
+bool Ghost::isFrightened() const {
+  return state == State::Frightened;
+}
+
+bool Ghost::isEyes() const {
+  return state == State::Eyes;
+}
+
+void Ghost::eat() {
+  if (state == State::Eyes)
+    return;
+  direction = oppositeDirection(direction);
+  state = State::Eyes;
+  timeFrighten = 0;
+  timeChase = 0;
+}
+
+void Ghost::reset() {
+  pos = startingPosition;
+}
+
 [[nodiscard]] PositionInt Ghost::currentSprite() const {
-  return Atlas::ghostSprite(spritesSet, direction, alternate_animation);
+  switch (state) {
+    default:
+      return Atlas::ghostSprite(spritesSet, direction, (animationIndex % 2) == 0);
+    case State::Frightened:
+      if (timeFrighten < 3500)
+        return (animationIndex % 2) == 0 ? Atlas::ghost_frightened2 : Atlas::ghost_frightened1;
+      return std::array{ Atlas::ghost_frightened1,
+                         Atlas::ghost_frightened2,
+                         Atlas::ghost_frightened3,
+                         Atlas::ghost_frightened4 }[animationIndex];
+    case State::Eyes:
+      return Atlas::eyeSprite(direction);
+  }
+  return {};
 }
 
 Position Ghost::position() const {
@@ -17,89 +59,107 @@ Position Ghost::position() const {
 }
 
 Position Ghost::positionInGrid() const {
-    return { std::round(pos.x), std::round(pos.y) };
+  return { std::round(pos.x), std::round(pos.y) };
 }
 
 void Ghost::update(std::chrono::milliseconds time_delta, const Board & board) {
-    updateAnimation(time_delta);
-    updatePosition(time_delta, board);
+  if (state == State::Eyes && board.isInPen(positionInGrid()))
+    state = State::Scatter;
+
+  if (state == State::Frightened) {
+    timeFrighten += time_delta.count();
+    if (timeFrighten > 6000)
+      state = State::Scatter;
+  }
+
+  updateAnimation(time_delta);
+  updatePosition(time_delta, board);
 }
 
 void Ghost::updatePosition(std::chrono::milliseconds time_delta, const Board & board) {
-    updateDirection(board);
+  updateDirection(board);
 
-    float position_delta = (0.004 * time_delta.count()) * 0.75;
+  float position_delta = (0.004 * time_delta.count()) * speed();
 
-    switch (direction) {
-      case Direction::NONE:
-        break;
-      case Direction::LEFT:
-        pos.x -= position_delta;
-        pos.y = round(pos.y);
-        break;
-      case Direction::RIGHT:
-        pos.x += position_delta;
-        pos.y = round(pos.y);
-        break;
-      case Direction::UP:
-        pos.x = round(pos.x);
-        pos.y -= position_delta;
-        break;
-      case Direction::DOWN:
-        pos.x = round(pos.x);
-        pos.y += position_delta;
-        break;
-    }
+  switch (direction) {
+    case Direction::NONE:
+      break;
+    case Direction::LEFT:
+      pos.x -= position_delta;
+      pos.y = round(pos.y);
+      break;
+    case Direction::RIGHT:
+      pos.x += position_delta;
+      pos.y = round(pos.y);
+      break;
+    case Direction::UP:
+      pos.x = round(pos.x);
+      pos.y -= position_delta;
+      break;
+    case Direction::DOWN:
+      pos.x = round(pos.x);
+      pos.y += position_delta;
+      break;
+  }
+}
+
+double Ghost::speed() const {
+  if (state == State::Eyes)
+    return 2;
+  if (state == State::Frightened)
+    return 0.5;
+  return 0.75;
 }
 
 void Ghost::updateDirection(const Board & board) {
-    auto cell  = positionInGrid();
-    if(cell == lastIntersection)
-        return;
+  auto cell = positionInGrid();
+  if (cell == lastIntersection)
+    return;
 
-    struct NewDirection {
-        Direction direction;
-        Position position;
-        double distance;
-    };
+  struct NewDirection {
+    Direction direction;
+    Position position;
+    double distance;
+  };
 
-    auto [x , y] = cell;
-    std::array directions = {
-        NewDirection{Direction::UP,    {x, y-1}, 0},
-        NewDirection{Direction::LEFT,  {x-1, y}, 0},
-        NewDirection{Direction::DOWN,  {x, y+1}, 0},
-        NewDirection{Direction::RIGHT, {x+1, y}, 0}
-    };
-    const Position target = this->target(board);
+  auto [x, y] = cell;
+  std::array directions = {
+    NewDirection{ Direction::UP, { x, y - 1 }, 0 },
+    NewDirection{ Direction::LEFT, { x - 1, y }, 0 },
+    NewDirection{ Direction::DOWN, { x, y + 1 }, 0 },
+    NewDirection{ Direction::RIGHT, { x + 1, y }, 0 }
+  };
+  const Position target = this->target(board);
 
-    for(auto && d : directions) {
-        d.distance = (d.direction != oppositeDirection(direction) && board.isWalkableForGost(d.position, cell)) ?
-                   std::hypot(d.position.x - target.x, d.position.y - target.y)
-                 : std::numeric_limits<double>::infinity();
-    }
+  for (auto && d : directions) {
+    d.distance = (d.direction != oppositeDirection(direction) && board.isWalkableForGost(d.position, cell, state == State::Eyes)) ? std::hypot(d.position.x - target.x, d.position.y - target.y)
+                                                                                                                                  : std::numeric_limits<double>::infinity();
+  }
 
-    auto it = std::min_element(directions.begin(), directions.end(), [](const auto & a, const auto &b) {
-        return a.distance < b.distance;
-    });
+  auto it = std::min_element(directions.begin(), directions.end(), [](const auto & a, const auto & b) {
+    return a.distance < b.distance;
+  });
 
-    lastIntersection = cell;
-    direction = it->direction;
+  lastIntersection = cell;
+  direction = it->direction;
 }
 
 Position Ghost::target(const Board & board) const {
-    if(board.isInPen(positionInGrid()))
-        return board.penDoorPosition();
+  if (state == State::Eyes)
+    return startingPosition;
 
-    return scatterTarget;
+  if (board.isInPen(positionInGrid()))
+    return board.penDoorPosition();
+
+  return scatterTarget;
 }
 
-void Ghost::updateAnimation(std::chrono::milliseconds time_delta)
-{
-    time += time_delta.count();
-    if (time >= 250) {
-      time = 0;
-      alternate_animation = !alternate_animation;
-    }
+void Ghost::updateAnimation(std::chrono::milliseconds time_delta) {
+  timeForAnimation += time_delta.count();
+  if (timeForAnimation >= 250) {
+    timeForAnimation = 0;
+    animationIndex = (animationIndex + 1) % 4;
+  }
 }
 
 Blinky::Blinky(const Board & board)

@@ -58,16 +58,15 @@ bool Board::isWalkableForGhost(Position point, float d, Direction direction) con
 }
 
 bool Board::isWalkable(Position point) const {
-     return board_state[int(point.y)][int(point.x)] != uint8_t(Cell::wall);
+  return board_state[int(point.y)][int(point.x)] != uint8_t(Cell::wall);
 }
 
-bool Board::isWalkableForGost(Position point, Position origin) const
-{
-    return isWalkable(point) && (isInPen(origin) || !isInPen(point));
+bool Board::isWalkableForGost(Position point, Position origin, bool isEyes) const {
+  return isWalkable(point) && (isEyes || (isInPen(origin) || !isInPen(point)));
 }
 
 bool Board::isInPen(Position point) const {
-    return board_state[int(point.y)][int(point.x)] == uint8_t(Cell::pen);
+  return board_state[int(point.y)][int(point.x)] == uint8_t(Cell::pen);
 }
 
 bool Board::isWalkable(Position point, float position_delta, Direction direction, bool pacman) const {

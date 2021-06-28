@@ -5,7 +5,7 @@
 constexpr int DEFAULT_LIVES = 3;
 constexpr int NORMAL_PELLET_POINTS = 10;
 constexpr int POWER_PELLET_POINTS = 50;
-//constexpr int GHOST_POINTS[] = {200, 400, 800, 1600};
+constexpr int GHOST_POINTS = 200;
 
 Game::Game()
   : pacMan(board),
@@ -14,7 +14,6 @@ Game::Game()
     ghosts(Blinky(board), Speedy(board), Inky(board), Clyde(board)) {
   score.lives = DEFAULT_LIVES;
 }
-
 
 auto Game::now() {
   return std::chrono::system_clock::now();
@@ -48,13 +47,52 @@ void Game::run() {
 }
 
 void Game::step(std::chrono::milliseconds delta, InputState inputState) {
+
   pacMan.update(delta, inputState, board);
 
+  if (timeSinceDeath.count() != 0) {
+    timeSinceDeath += delta;
+  }
+
+  if (timeSinceDeath.count() > 1000) {
+    std::apply([&](auto &... ghost) {
+      (ghost.reset(), ...);
+    },
+               ghosts);
+    pacMan.reset(board);
+    timeSinceDeath = std::chrono::milliseconds(0);
+  }
+
+  if (timeSinceDeath.count())
+    return;
+
+  if (!pacMan.onTheMove())
+    return;
+
   std::apply([&](auto &... ghost) {
-      (ghost.update(delta, board),...);
-  }, ghosts);
+    (ghost.update(delta, board), ...);
+    (checkCollision(ghost), ...);
+  },
+             ghosts);
 
   eatPellets();
+}
+
+void Game::checkCollision(Ghost & g) {
+  if (timeSinceDeath.count() || g.isEyes())
+    return;
+
+  if (g.positionInGrid() != pacMan.positionInGrid())
+    return;
+
+  if (g.isFrightened()) {
+    g.eat();
+    score.points += GHOST_POINTS;
+  } else {
+    pacMan.eat();
+    score.lives--;
+    timeSinceDeath = std::chrono::milliseconds(1);
+  }
 }
 
 void Game::eatPellets() {
@@ -67,6 +105,10 @@ void Game::eatPellets() {
   if (superPellets.eatPelletAtPosition(pos)) {
     score.eatenPellets++;
     score.points += POWER_PELLET_POINTS;
+    std::apply([&](auto &... ghost) {
+      (ghost.frighten(), ...);
+    },
+               ghosts);
   }
 }
 
