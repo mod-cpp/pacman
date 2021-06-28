@@ -1,5 +1,6 @@
 #include "Ghost.hpp"
 #include <cmath>
+#include <array>
 
 Ghost::Ghost(Atlas::Ghost spritesSet, Position startingPosition, Position scatterTarget)
   : spritesSet(spritesSet),
@@ -44,10 +45,10 @@ void Ghost::reset() {
     case State::Frightened:
       if (timeFrighten < 3500)
         return (animationIndex % 2) == 0 ? Atlas::ghost_frightened2 : Atlas::ghost_frightened1;
-      return std::array<PositionInt, 4>{ Atlas::ghost_frightened1,
+      return std::array<PositionInt, 4>{{ Atlas::ghost_frightened1,
                          Atlas::ghost_frightened2,
                          Atlas::ghost_frightened3,
-                         Atlas::ghost_frightened4 }[animationIndex];
+                         Atlas::ghost_frightened4 }}[animationIndex];
     case State::Eyes:
       return Atlas::eyeSprite(direction);
   }
@@ -123,12 +124,12 @@ void Ghost::updateDirection(const Board & board) {
   };
 
   auto [x, y] = cell;
-  std::array<NewDirection, 4> directions = {
+  std::array<NewDirection, 4> directions = {{
     NewDirection{ Direction::UP, { x, y - 1 }, 0 },
     NewDirection{ Direction::LEFT, { x - 1, y }, 0 },
     NewDirection{ Direction::DOWN, { x, y + 1 }, 0 },
     NewDirection{ Direction::RIGHT, { x + 1, y }, 0 }
-  };
+  }};
   const Position target = this->target(board);
 
   for (auto && d : directions) {
