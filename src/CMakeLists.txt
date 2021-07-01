@@ -1,5 +1,4 @@
-file(GLOB_RECURSE sources CONFIGURE_DEPENDS "*.cpp")
-add_executable(pacman ${sources})
+add_executable(pacman main.cpp)
 target_link_libraries(pacman PUBLIC libpacman)
 
 set_target_properties(pacman
