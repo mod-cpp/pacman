@@ -1,6 +1,6 @@
 #include "Ghost.hpp"
-#include <cmath>
 #include <array>
+#include <cmath>
 
 Ghost::Ghost(Atlas::Ghost spritesSet, Position startingPosition, Position scatterTarget)
   : spritesSet(spritesSet),
@@ -42,17 +42,14 @@ void Ghost::reset() {
   switch (state) {
     default:
       return Atlas::ghostSprite(spritesSet, direction, (animationIndex % 2) == 0);
-    case State::Frightened:
-      if (timeFrighten < 3500)
-        return (animationIndex % 2) == 0 ? Atlas::ghost_frightened2 : Atlas::ghost_frightened1;
-      return std::array<PositionInt, 4>{{ Atlas::ghost_frightened1,
-                         Atlas::ghost_frightened2,
-                         Atlas::ghost_frightened3,
-                         Atlas::ghost_frightened4 }}[animationIndex];
     case State::Eyes:
       return Atlas::eyeSprite(direction);
+    case State::Frightened:
+      if (timeFrighten < 3500)
+        return Atlas::initialFrightened(animationIndex);
+      else
+        return Atlas::endingFrightened(animationIndex);
   }
-  return {};
 }
 
 Position Ghost::position() const {
@@ -64,7 +61,7 @@ Position Ghost::positionInGrid() const {
 }
 
 void Ghost::update(std::chrono::milliseconds time_delta, const Board & board) {
-  if (state == State::Eyes && board.isInPen(positionInGrid()))
+  if (state == State::Eyes && isInPen(board))
     state = State::Scatter;
 
   if (state == State::Frightened) {
@@ -75,6 +72,10 @@ void Ghost::update(std::chrono::milliseconds time_delta, const Board & board) {
 
   updateAnimation(time_delta);
   updatePosition(time_delta, board);
+}
+
+bool Ghost::isInPen(const Board & board) const {
+  return board.isInPen(positionInGrid());
 }
 
 void Ghost::updatePosition(std::chrono::milliseconds time_delta, const Board & board) {
@@ -124,12 +125,10 @@ void Ghost::updateDirection(const Board & board) {
   };
 
   auto [x, y] = cell;
-  std::array<NewDirection, 4> directions = {{
-    NewDirection{ Direction::UP, { x, y - 1 }, 0 },
-    NewDirection{ Direction::LEFT, { x - 1, y }, 0 },
-    NewDirection{ Direction::DOWN, { x, y + 1 }, 0 },
-    NewDirection{ Direction::RIGHT, { x + 1, y }, 0 }
-  }};
+  std::array<NewDirection, 4> directions = { { NewDirection{ Direction::UP, { x, y - 1 }, 0 },
+                                               NewDirection{ Direction::LEFT, { x - 1, y }, 0 },
+                                               NewDirection{ Direction::DOWN, { x, y + 1 }, 0 },
+                                               NewDirection{ Direction::RIGHT, { x + 1, y }, 0 } } };
   const Position target = this->target(board);
 
   for (auto && d : directions) {

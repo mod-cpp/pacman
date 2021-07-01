@@ -1,7 +1,10 @@
 #pragma once
+
 #include "Direction.hpp"
 #include "Position.hpp"
 #include "assert.h"
+
+#include <array>
 
 namespace Atlas {
 
@@ -73,5 +76,17 @@ namespace Atlas {
     if (alternative)
       x++;
     return { x, y };
+  }
+
+  constexpr PositionInt initialFrightened(int animationIndex) {
+    return (animationIndex % 2) == 0 ? Atlas::ghost_frightened2 : Atlas::ghost_frightened1;
+  }
+
+  constexpr PositionInt endingFrightened(int animationIndex) {
+    std::array<PositionInt, 4> positions = { Atlas::ghost_frightened1,
+                                             Atlas::ghost_frightened2,
+                                             Atlas::ghost_frightened3,
+                                             Atlas::ghost_frightened4 };
+    return positions[animationIndex];
   }
 }

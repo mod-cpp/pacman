@@ -49,6 +49,7 @@ protected:
   Position startingPosition;
   Position scatterTarget;
   Position lastIntersection = { -1, -1 };
+  bool isInPen(const Board & board) const;
 };
 
 class Blinky : public Ghost {
