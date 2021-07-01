@@ -8,7 +8,7 @@
 // 4 - superpower
 // 5 - pen doors
 
-static const uint8_t board[ROWS][COLUMNS] = {
+std::array<std::array<int, COLUMNS>, ROWS> Board::board = {{
  // 0  1  2  3  4  5  6  7  8  9  0  1  2  3  4  5  6  7  8  9  0  1  2  3  4  5  6  7
   { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }, // 0
   { 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0 }, // 1
@@ -41,73 +41,67 @@ static const uint8_t board[ROWS][COLUMNS] = {
   { 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0 }, // 28
   { 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0 }, // 29
   { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }, // 30
-};
+}};
 
-Board::Board() {
-  for (uint8_t row = 0; row < ROWS; row++)
-    for (uint8_t column = 0; column < COLUMNS; column++)
-      board_state[row][column] = board[row][column];
-}
-
-bool Board::isWalkableForPacMan(Position point, float d, Direction direction) const {
+bool Board::isWalkableForPacMan(Position point, float d, Direction direction) {
   return isWalkable(point, d, direction, true);
 }
 
-bool Board::isWalkableForGhost(Position point, float d, Direction direction) const {
+bool Board::isWalkableForGhost(Position point, float d, Direction direction) {
   return isWalkable(point, d, direction, false);
 }
 
-bool Board::isWalkable(Position point) const {
-  return board_state[int(point.y)][int(point.x)] != uint8_t(Cell::wall);
+bool Board::isWalkable(Position point) {
+  return board[int(point.y)][int(point.x)] != int(Cell::wall);
 }
 
-bool Board::isWalkableForGost(Position point, Position origin, bool isEyes) const {
+bool Board::isWalkableForGost(Position point, Position origin, bool isEyes) {
   return isWalkable(point) && (isEyes || (isInPen(origin) || !isInPen(point)));
 }
 
-bool Board::isInPen(Position point) const {
-  return board_state[int(point.y)][int(point.x)] == uint8_t(Cell::pen);
+bool Board::isInPen(Position point) {
+  return board[int(point.y)][int(point.x)] == int(Cell::pen);
 }
 
-bool Board::isWalkable(Position point, float position_delta, Direction direction, bool pacman) const {
+bool Board::isWalkable(Position point, float position_delta, Direction direction, bool pacman) {
   if (point.x <= 0 || point.x >= COLUMNS - 1)
     return true;
 
   auto cellAtPosition = [&](Position point, float position_delta, Direction direction) {
     switch (direction) {
       case Direction::LEFT:
-        return board_state[int(point.y)][int(point.x - position_delta)];
+        return board[int(point.y)][int(point.x - position_delta)];
       case Direction::RIGHT:
-        return board_state[int(point.y)][int(point.x) + 1];
+        return board[int(point.y)][int(point.x) + 1];
       case Direction::UP:
-        return board_state[int(point.y - position_delta)][int(point.x)];
+        return board[int(point.y - position_delta)][int(point.x)];
       case Direction::DOWN:
-        return board_state[int(point.y) + 1][int(point.x)];
+        return board[int(point.y) + 1][int(point.x)];
       case Direction::NONE:
       default:
-        return uint8_t(Cell::wall);
+        return int(Cell::wall);
     }
   };
   Cell cell = Cell(cellAtPosition(point, position_delta, direction));
   return pacman ? cell != Cell::wall : cell != Cell::wall && cell != Cell::pen;
 }
 
-std::vector<PositionInt> Board::initialPelletPositions() const {
+std::vector<PositionInt> Board::initialPelletPositions() {
   std::vector<PositionInt> positions;
-  for (uint8_t row = 0; row < ROWS; row++) {
-    for (uint8_t column = 0; column < COLUMNS; column++) {
-      if (board_state[row][column] == uint8_t(Cell::pellet))
+  for (int row = 0; row < ROWS; row++) {
+    for (int column = 0; column < COLUMNS; column++) {
+      if (board[row][column] == int(Cell::pellet))
         positions.push_back({ column, row });
     }
   }
   return positions;
 }
 
-std::vector<PositionInt> Board::initialSuperPelletPositions() const {
+std::vector<PositionInt> Board::initialSuperPelletPositions() {
   std::vector<PositionInt> positions;
-  for (uint8_t row = 0; row < ROWS; row++) {
-    for (uint8_t column = 0; column < COLUMNS; column++) {
-      if (board_state[row][column] == uint8_t(Cell::power_pellet))
+  for (int row = 0; row < ROWS; row++) {
+    for (int column = 0; column < COLUMNS; column++) {
+      if (board[row][column] == int(Cell::power_pellet))
         positions.push_back({ column, row });
     }
   }

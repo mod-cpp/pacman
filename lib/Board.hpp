@@ -4,11 +4,12 @@
 
 #include "Direction.hpp"
 #include "Position.hpp"
+#include <array>
 #include <cstdint>
 #include <vector>
 
-const uint8_t ROWS = 31;
-const uint8_t COLUMNS = 28;
+const std::size_t ROWS = 31;
+const std::size_t COLUMNS = 28;
 
 class Board {
 public:
@@ -21,18 +22,16 @@ public:
     pen = 5,
   };
 
-  Board();
+  [[nodiscard]] static bool isWalkableForPacMan(Position point, float d, Direction direction) ;
+  [[nodiscard]] static bool isWalkableForGhost(Position point, float d, Direction direction) ;
 
-  [[nodiscard]] bool isWalkableForPacMan(Position point, float d, Direction direction) const;
-  [[nodiscard]] bool isWalkableForGhost(Position point, float d, Direction direction) const;
+  [[nodiscard]] static bool isWalkableForGost(Position point, Position origin, bool isEyes) ;
+  [[nodiscard]] static bool isWalkable(Position point) ;
+  [[nodiscard]] static bool isInPen(Position point) ;
 
-  [[nodiscard]] bool isWalkableForGost(Position point, Position origin, bool isEyes) const;
-  [[nodiscard]] bool isWalkable(Position point) const;
-  [[nodiscard]] bool isInPen(Position point) const;
+  [[nodiscard]] static std::vector<PositionInt> initialPelletPositions() ;
 
-  [[nodiscard]] std::vector<PositionInt> initialPelletPositions() const;
-
-  [[nodiscard]] std::vector<PositionInt> initialSuperPelletPositions() const;
+  [[nodiscard]] static std::vector<PositionInt> initialSuperPelletPositions() ;
 
   static Position initialPacManPosition() { return { 13.5, 23 }; }
 
@@ -51,6 +50,9 @@ public:
   static Position clydeScatterTarget() { return { 0, 30 }; }
 
 private:
-  [[nodiscard]] bool isWalkable(Position point, float d, Direction direction, bool pacman) const;
-  uint8_t board_state[ROWS][COLUMNS]{};
+  [[nodiscard]] static bool isWalkable(Position point, float d, Direction direction, bool pacman) ;
+  static std::array<
+    std::array<int, COLUMNS>,
+    ROWS>
+    board;
 };
