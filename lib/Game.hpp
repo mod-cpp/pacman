@@ -25,7 +25,7 @@ private:
   SuperPellets superPellets;
   std::tuple<Blinky, Speedy, Inky, Clyde> ghosts;
   Score score;
-  std::chrono::milliseconds timeSinceDeath;
+  std::chrono::milliseconds timeSinceDeath{};
 
   void step(std::chrono::milliseconds delta, InputState inputState);
   void eatPellets();
