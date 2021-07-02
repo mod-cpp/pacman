@@ -1,18 +1,15 @@
 #include "Canvas.hpp"
 #include "Game.hpp"
-#include "Ghost.hpp"
-#include "PacMan.hpp"
-#include "Pellets.hpp"
-#include "SuperPellets.hpp"
 #include <fmt/format.h>
 #include <string>
 #include <vector>
 
 Canvas::Canvas()
-  : window(sf::VideoMode(windowDimensions().width, windowDimensions().height), "Pacman", sf::Style::Titlebar | sf::Style::Close) {
+  : window(sf::VideoMode(windowDimensions().width, windowDimensions().height),
+           "Pacman",
+           sf::Style::Titlebar | sf::Style::Close) {
   window.setFramerateLimit(60);
   window.setVerticalSyncEnabled(true);
-
   maze_texture = loadTexture("maze.png");
   sprites_texture = loadTexture("sprites32.png");
   game_font = loadFont("joystix.ttf");
