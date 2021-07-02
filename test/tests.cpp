@@ -4,7 +4,7 @@
 TEST(PacManTest, InitialPosition) {
   Board board;
   PacMan pacMan(board);
-  EXPECT_EQ(pacMan.position().x, 14);
+  EXPECT_EQ(pacMan.position().x, 13.5);
   EXPECT_EQ(pacMan.position().y, 23);
 }
 
