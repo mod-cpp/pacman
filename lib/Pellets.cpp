@@ -4,7 +4,7 @@
 Pellets::Pellets(const Board & board)
   : positions(board.initialPelletPositions()) {}
 
-bool Pellets::eatPelletAtPosition(Position p) {
+bool Pellets::eatPelletAtPosition(GridPosition p) {
   auto it = std::find(positions.begin(), positions.end(), p);
   if (it == positions.end())
     return false;

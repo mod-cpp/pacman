@@ -21,7 +21,7 @@ public:
 
   [[nodiscard]] Position position() const;
 
-  [[nodiscard]] Position positionInGrid() const;
+  [[nodiscard]] GridPosition positionInGrid() const;
 
   void update(std::chrono::milliseconds time_delta, const Board & board);
   void frighten();
@@ -48,7 +48,7 @@ protected:
   Position pos;
   Position startingPosition;
   Position scatterTarget;
-  Position lastIntersection = { -1, -1 };
+  GridPosition lastIntersection = { -1, -1 };
   bool isInPen(const Board & board) const;
 };
 

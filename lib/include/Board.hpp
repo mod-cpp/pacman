@@ -22,11 +22,9 @@ public:
     pen = 5,
   };
 
-  [[nodiscard]] static bool isWalkableForPacMan(Position point, double d, Direction direction) ;
-
-  [[nodiscard]] static bool isWalkableForGost(Position point, Position origin, bool isEyes) ;
-  [[nodiscard]] static bool isWalkable(Position point) ;
-  [[nodiscard]] static bool isInPen(Position point) ;
+  [[nodiscard]] static bool isWalkableForPacMan(GridPosition point);
+  [[nodiscard]] static bool isWalkableForGost(GridPosition point, GridPosition origin, bool isEyes) ;
+  [[nodiscard]] static bool isInPen(GridPosition point) ;
 
   [[nodiscard]] static std::vector<GridPosition> initialPelletPositions() ;
 
@@ -49,7 +47,7 @@ public:
   static Position clydeScatterTarget() { return { 0, 30 }; }
 
 private:
-  [[nodiscard]] static bool isWalkable(Position point, double d, Direction direction, bool pacman) ;
+  [[nodiscard]] static Cell cellAtPosition(GridPosition point);
   static std::array<
     std::array<int, COLUMNS>,
     ROWS>

@@ -12,8 +12,8 @@ Position PacMan::position() const {
   return pos;
 }
 
-Position PacMan::positionInGrid() const {
-  return { std::round(pos.x), std::round(pos.y) };
+GridPosition PacMan::positionInGrid() const {
+  return { int(std::round(pos.x)), int(std::round(pos.y)) };
 }
 
 void PacMan::eat() {
@@ -63,18 +63,33 @@ void PacMan::updateAnimationPosition(std::chrono::milliseconds time_delta, bool 
 void PacMan::updateMazePosition(std::chrono::milliseconds time_delta, const Board & board) {
   double position_delta = 0.004 * time_delta.count();
 
+  auto cellAtPosition = [&](Position point, double position_delta, Direction direction) {
+      switch (direction) {
+      case Direction::LEFT:
+        return GridPosition{int(point.x - position_delta), int(point.y)};
+      case Direction::RIGHT:
+        return GridPosition{int(point.x) + 1, int(point.y)};
+      case Direction::UP:
+        return GridPosition{int(point.x), int(point.y - position_delta)};
+      case Direction::DOWN:
+        return GridPosition{int(point.x), int(point.y) + 1};
+      case Direction::NONE:
+      default:
+        return positionInGrid();
+    }
+  };
+
   // Handle teleport
   if (pos.x >= COLUMNS - 1 && direction == Direction::RIGHT) {
     pos.x = -1;
   } else if (pos.x <= 0 && direction == Direction::LEFT) {
     pos.x = COLUMNS;
   }
-
-  else if (board.isWalkableForPacMan(pos, position_delta, desired_direction)) {
+  else if (board.isWalkableForPacMan(cellAtPosition(pos, position_delta, desired_direction))) {
     direction = desired_direction;
   }
 
-  if (board.isWalkableForPacMan(pos, position_delta, direction)) {
+  if (board.isWalkableForPacMan(cellAtPosition(pos, position_delta, direction))) {
     switch (direction) {
       case Direction::NONE:
         break;

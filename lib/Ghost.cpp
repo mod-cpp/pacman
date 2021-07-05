@@ -56,8 +56,8 @@ Position Ghost::position() const {
   return pos;
 }
 
-Position Ghost::positionInGrid() const {
-  return { std::round(pos.x), std::round(pos.y) };
+GridPosition Ghost::positionInGrid() const {
+  return { int(std::round(pos.x)), int(std::round(pos.y)) };
 }
 
 void Ghost::update(std::chrono::milliseconds time_delta, const Board & board) {
@@ -119,8 +119,8 @@ void Ghost::updateDirection(const Board & board) {
     return;
 
   struct NewDirection {
-    Direction direction;
-    Position position;
+    Direction    direction;
+    GridPosition position;
     double distance;
   };
 

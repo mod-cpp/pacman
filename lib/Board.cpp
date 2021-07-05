@@ -8,6 +8,7 @@
 // 4 - superpower
 // 5 - pen doors
 
+// clang-format off
 std::array<std::array<int, COLUMNS>, ROWS> Board::board = {{
  // 0  1  2  3  4  5  6  7  8  9  0  1  2  3  4  5  6  7  8  9  0  1  2  3  4  5  6  7
   { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }, // 0
@@ -42,52 +43,35 @@ std::array<std::array<int, COLUMNS>, ROWS> Board::board = {{
   { 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0 }, // 29
   { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }, // 30
 }};
+// clang-format on
 
-bool Board::isWalkableForPacMan(Position point, double d, Direction direction) {
-  return isWalkable(point, d, direction, true);
+bool Board::isWalkableForPacMan(GridPosition point) {
+  return cellAtPosition(point) != Cell::wall;
 }
 
-bool Board::isWalkable(Position point) {
-  return board[int(point.y)][int(point.x)] != int(Cell::wall);
+bool Board::isWalkableForGost(GridPosition point, GridPosition origin, bool isEyes) {
+  Cell cell = cellAtPosition(point);
+  if (cell == Cell::wall)
+    return false;
+  return isEyes || (isInPen(origin) || !isInPen(point));
 }
 
-bool Board::isWalkableForGost(Position point, Position origin, bool isEyes) {
-  return isWalkable(point) && (isEyes || (isInPen(origin) || !isInPen(point)));
+bool Board::isInPen(GridPosition point) {
+  return cellAtPosition(point) == Cell::pen;
 }
 
-bool Board::isInPen(Position point) {
-  return board[int(point.y)][int(point.x)] == int(Cell::pen);
-}
-
-bool Board::isWalkable(Position point, double position_delta, Direction direction, bool pacman) {
-  if (point.x <= 0 || point.x >= COLUMNS - 1)
-    return true;
-
-  auto cellAtPosition = [&](Position point, double position_delta, Direction direction) {
-    switch (direction) {
-      case Direction::LEFT:
-        return board[int(point.y)][int(point.x - position_delta)];
-      case Direction::RIGHT:
-        return board[int(point.y)][int(point.x) + 1];
-      case Direction::UP:
-        return board[int(point.y - position_delta)][int(point.x)];
-      case Direction::DOWN:
-        return board[int(point.y) + 1][int(point.x)];
-      case Direction::NONE:
-      default:
-        return int(Cell::wall);
-    }
-  };
-  Cell cell = Cell(cellAtPosition(point, position_delta, direction));
-  return pacman ? cell != Cell::wall : cell != Cell::wall && cell != Cell::pen;
+Board::Cell Board::cellAtPosition(GridPosition point) {
+  if (point.x < 0 || point.x >= int(COLUMNS) || point.y < 0 || point.y >= int(ROWS))
+    return Cell::wall;
+  return Cell(board[point.y][point.x]);
 }
 
 std::vector<GridPosition> Board::initialPelletPositions() {
   std::vector<GridPosition> positions;
-  for (int row = 0; row < ROWS; row++) {
-    for (int column = 0; column < COLUMNS; column++) {
+  for (std::size_t row = 0; row < ROWS; row++) {
+    for (std::size_t column = 0; column < COLUMNS; column++) {
       if (board[row][column] == int(Cell::pellet))
-        positions.push_back({ column, row });
+        positions.push_back({ int(column), int(row) });
     }
   }
   return positions;
@@ -95,10 +79,10 @@ std::vector<GridPosition> Board::initialPelletPositions() {
 
 std::vector<GridPosition> Board::initialSuperPelletPositions() {
   std::vector<GridPosition> positions;
-  for (int row = 0; row < ROWS; row++) {
-    for (int column = 0; column < COLUMNS; column++) {
+  for (std::size_t row = 0; row < ROWS; row++) {
+    for (std::size_t column = 0; column < COLUMNS; column++) {
       if (board[row][column] == int(Cell::power_pellet))
-        positions.push_back({ column, row });
+        positions.push_back({ int(column), int(row) });
     }
   }
   return positions;

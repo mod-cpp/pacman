@@ -15,7 +15,7 @@ public:
     return positions;
   }
 
-  bool eatPelletAtPosition(Position p);
+  bool eatPelletAtPosition(GridPosition p);
 
 private:
   const GridPosition sprite = { 0, 9 };
