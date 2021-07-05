@@ -1,5 +1,7 @@
 #pragma once
 
+namespace pacman {
+
 class InputState {
 public:
   bool close = false;
@@ -8,3 +10,5 @@ public:
   bool left = false;
   bool right = false;
 };
+
+} // namespace pacman

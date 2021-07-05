@@ -2,8 +2,8 @@
 #include <gtest/gtest.h>
 
 TEST(PacManTest, InitialPosition) {
-  Board board;
-  PacMan pacMan(board);
+  pacman::Board board;
+  pacman::PacMan pacMan(board);
   EXPECT_EQ(pacMan.position().x, 13.5);
   EXPECT_EQ(pacMan.position().y, 23);
 }

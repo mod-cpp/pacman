@@ -4,6 +4,8 @@
 #include <string>
 #include <vector>
 
+namespace pacman {
+
 Canvas::Canvas()
   : window(sf::VideoMode(windowDimensions().width, windowDimensions().height),
            "Pacman",
@@ -152,3 +154,5 @@ sf::Font Canvas::loadFont(std::string_view path) {
   }
   return font;
 }
+
+} // namespace pacman

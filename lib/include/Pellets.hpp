@@ -3,6 +3,8 @@
 #include "Board.hpp"
 #include "Position.hpp"
 
+namespace pacman {
+
 class Pellets {
 public:
   explicit Pellets(const Board & board);
@@ -21,3 +23,5 @@ private:
   const GridPosition sprite = { 1, 9 };
   std::vector<GridPosition> positions;
 };
+
+} // namespace pacman

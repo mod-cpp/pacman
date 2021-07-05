@@ -8,6 +8,8 @@
 #include "Score.hpp"
 #include "SuperPellets.hpp"
 
+namespace pacman {
+
 class InputState;
 
 class Game {
@@ -34,3 +36,5 @@ private:
 
   [[nodiscard]] static auto now();
 };
+
+} // namespace pacman

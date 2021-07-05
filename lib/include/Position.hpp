@@ -2,6 +2,8 @@
 
 #include <SFML/Graphics.hpp>
 
+namespace pacman {
+
 struct Position {
   double x;
   double y;
@@ -31,3 +33,5 @@ inline bool operator==(const Position & a, const Position & b) {
 inline bool operator!=(const Position & a, const Position & b) {
   return !(a == b);
 }
+
+} // namespace pacman

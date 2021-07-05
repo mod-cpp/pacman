@@ -8,6 +8,8 @@
 #include <cstdint>
 #include <vector>
 
+namespace pacman {
+
 const std::size_t ROWS = 31;
 const std::size_t COLUMNS = 28;
 
@@ -23,12 +25,12 @@ public:
   };
 
   [[nodiscard]] static bool isWalkableForPacMan(GridPosition point);
-  [[nodiscard]] static bool isWalkableForGost(GridPosition point, GridPosition origin, bool isEyes) ;
-  [[nodiscard]] static bool isInPen(GridPosition point) ;
+  [[nodiscard]] static bool isWalkableForGost(GridPosition point, GridPosition origin, bool isEyes);
+  [[nodiscard]] static bool isInPen(GridPosition point);
 
-  [[nodiscard]] static std::vector<GridPosition> initialPelletPositions() ;
+  [[nodiscard]] static std::vector<GridPosition> initialPelletPositions();
 
-  [[nodiscard]] static std::vector<GridPosition> initialSuperPelletPositions() ;
+  [[nodiscard]] static std::vector<GridPosition> initialSuperPelletPositions();
 
   static Position initialPacManPosition() { return { 13.5, 23 }; }
 
@@ -53,3 +55,5 @@ private:
     ROWS>
     board;
 };
+
+} // namespace pacman

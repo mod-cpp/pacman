@@ -1,6 +1,8 @@
 #include "PacMan.hpp"
 #include <cmath>
 
+namespace pacman {
+
 PacMan::PacMan(const Board & board)
   : pos(Board::initialPacManPosition()) {}
 
@@ -64,15 +66,15 @@ void PacMan::updateMazePosition(std::chrono::milliseconds time_delta, const Boar
   double position_delta = 0.004 * time_delta.count();
 
   auto cellAtPosition = [&](Position point, double position_delta, Direction direction) {
-      switch (direction) {
+    switch (direction) {
       case Direction::LEFT:
-        return GridPosition{int(point.x - position_delta), int(point.y)};
+        return GridPosition{ int(point.x - position_delta), int(point.y) };
       case Direction::RIGHT:
-        return GridPosition{int(point.x) + 1, int(point.y)};
+        return GridPosition{ int(point.x) + 1, int(point.y) };
       case Direction::UP:
-        return GridPosition{int(point.x), int(point.y - position_delta)};
+        return GridPosition{ int(point.x), int(point.y - position_delta) };
       case Direction::DOWN:
-        return GridPosition{int(point.x), int(point.y) + 1};
+        return GridPosition{ int(point.x), int(point.y) + 1 };
       case Direction::NONE:
       default:
         return positionInGrid();
@@ -84,8 +86,7 @@ void PacMan::updateMazePosition(std::chrono::milliseconds time_delta, const Boar
     pos.x = -1;
   } else if (pos.x <= 0 && direction == Direction::LEFT) {
     pos.x = COLUMNS;
-  }
-  else if (board.isWalkableForPacMan(cellAtPosition(pos, position_delta, desired_direction))) {
+  } else if (board.isWalkableForPacMan(cellAtPosition(pos, position_delta, desired_direction))) {
     direction = desired_direction;
   }
 
@@ -112,3 +113,5 @@ void PacMan::updateMazePosition(std::chrono::milliseconds time_delta, const Boar
     }
   }
 }
+
+} // namespace pacman

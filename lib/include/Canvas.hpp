@@ -4,6 +4,8 @@
 #include "Score.hpp"
 #include <optional>
 
+namespace pacman {
+
 class Game;
 class Ghost;
 class PacMan;
@@ -49,3 +51,5 @@ private:
   sf::Texture sprites_texture;
   sf::Font game_font;
 };
+
+} // namespace pacman

@@ -1,5 +1,7 @@
 #pragma once
 
+namespace pacman {
+
 enum class Direction {
   NONE,
   LEFT,
@@ -23,3 +25,5 @@ inline Direction oppositeDirection(Direction d) {
   }
   return d;
 }
+
+} // namespace pacman

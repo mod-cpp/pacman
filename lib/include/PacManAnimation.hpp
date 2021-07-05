@@ -8,6 +8,8 @@
 
 #include <chrono>
 
+namespace pacman {
+
 class PacManAnimation {
 public:
   [[nodiscard]] GridPosition animationFrame(Direction direction) const;
@@ -24,3 +26,5 @@ private:
   const GridPosition right_animation[4]{ Atlas::pacman_right_wide, Atlas::pacman_right_narrow, Atlas::pacman_closed, Atlas::pacman_right_narrow };
   const GridPosition up_animation[4]{ Atlas::pacman_up_wide, Atlas::pacman_up_narrow, Atlas::pacman_closed, Atlas::pacman_up_narrow };
 };
+
+} // namespace pacman

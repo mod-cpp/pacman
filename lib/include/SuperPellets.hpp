@@ -3,6 +3,8 @@
 #include "Board.hpp"
 #include "Position.hpp"
 
+namespace pacman {
+
 class SuperPellets {
 public:
   explicit SuperPellets(const Board & board);
@@ -21,3 +23,5 @@ private:
   const GridPosition sprite = { 0, 9 };
   std::vector<GridPosition> positions;
 };
+
+} // namespace pacman

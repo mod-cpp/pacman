@@ -6,6 +6,8 @@
 
 #include <chrono>
 
+namespace pacman {
+
 class Board;
 class InputState;
 
@@ -39,3 +41,5 @@ private:
   void updateAnimationPosition(std::chrono::milliseconds time_delta, bool paused);
   void updateMazePosition(std::chrono::milliseconds time_delta, const Board & board);
 };
+
+} // namespace pacman

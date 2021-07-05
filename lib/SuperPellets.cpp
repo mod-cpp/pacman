@@ -1,6 +1,8 @@
 #include "SuperPellets.hpp"
 #include <algorithm>
 
+namespace pacman {
+
 SuperPellets::SuperPellets(const Board & board)
   : positions(board.initialSuperPelletPositions()) {}
 
@@ -11,3 +13,5 @@ bool SuperPellets::eatPelletAtPosition(GridPosition p) {
   positions.erase(it);
   return true;
 }
+
+} // namespace pacman

@@ -2,6 +2,8 @@
 
 #include <chrono>
 
+namespace pacman {
+
 constexpr int DEFAULT_LIVES = 3;
 constexpr int NORMAL_PELLET_POINTS = 10;
 constexpr int POWER_PELLET_POINTS = 50;
@@ -127,3 +129,5 @@ void Game::processEvents(InputState & inputState) {
   inputState.left = sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Left);
   inputState.right = sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Right);
 }
+
+} // namespace pacman

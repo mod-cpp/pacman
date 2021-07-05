@@ -1,5 +1,7 @@
 #include "PacManAnimation.hpp"
 
+namespace pacman {
+
 GridPosition PacManAnimation::animationFrame(Direction direction) const {
   switch (direction) {
     case Direction::LEFT:
@@ -37,3 +39,5 @@ void PacManAnimation::pause() {
   animation_position = 0;
   animation_position_delta = 0;
 }
+
+} // namespace pacman

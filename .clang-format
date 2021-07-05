@@ -9,8 +9,8 @@ BreakConstructorInitializers: BeforeColon
 BreakInheritanceList: BeforeColon
 ColumnLimit: '0'
 ConstructorInitializerAllOnOneLineOrOnePerLine: true
-NamespaceIndentation: All
 PenaltyReturnTypeOnItsOwnLine: '10000'
 PointerAlignment: Middle
-
+FixNamespaceComments: true
+NamespaceIndentation: None
 ...

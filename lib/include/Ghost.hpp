@@ -6,6 +6,8 @@
 #include "Board.hpp"
 #include "Position.hpp"
 
+namespace pacman {
+
 class Ghost {
 public:
   enum class State {
@@ -71,3 +73,5 @@ class Clyde : public Ghost {
 public:
   explicit Clyde(const Board & board);
 };
+
+} // namespace pacman

@@ -1,6 +1,8 @@
 #include "Pellets.hpp"
 #include <algorithm>
 
+namespace pacman {
+
 Pellets::Pellets(const Board & board)
   : positions(board.initialPelletPositions()) {}
 
@@ -11,3 +13,5 @@ bool Pellets::eatPelletAtPosition(GridPosition p) {
   positions.erase(it);
   return true;
 }
+
+} // namespace pacman

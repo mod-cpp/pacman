@@ -2,6 +2,8 @@
 #include <array>
 #include <cmath>
 
+namespace pacman {
+
 Ghost::Ghost(Atlas::Ghost spritesSet, Position startingPosition, Position scatterTarget)
   : spritesSet(spritesSet),
     pos(startingPosition),
@@ -119,7 +121,7 @@ void Ghost::updateDirection(const Board & board) {
     return;
 
   struct NewDirection {
-    Direction    direction;
+    Direction direction;
     GridPosition position;
     double distance;
   };
@@ -177,3 +179,5 @@ Inky::Inky(const Board & board)
 Clyde::Clyde(const Board & board)
   : Ghost(Atlas::Ghost::clyde, board.initialClydePosition(), board.clydeScatterTarget()) {
 }
+
+} // namespace pacman

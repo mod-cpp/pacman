@@ -1,5 +1,7 @@
 #include "Board.hpp"
 
+namespace pacman {
+
 // Legend
 // 0 - wall
 // 1 - pellet
@@ -87,3 +89,5 @@ std::vector<GridPosition> Board::initialSuperPelletPositions() {
   }
   return positions;
 }
+
+} // namespace pacman
