@@ -25,10 +25,10 @@ namespace Atlas {
   constexpr PositionInt pacman_down_wide = { 7, 0 };
   constexpr PositionInt pacman_down_narrow = { 8, 0 };
 
-  constexpr PositionInt ghost_frightened1 = { 0, 7 };
-  constexpr PositionInt ghost_frightened2 = { 1, 7 };
-  constexpr PositionInt ghost_frightened3 = { 2, 7 };
-  constexpr PositionInt ghost_frightened4 = { 3, 7 };
+  constexpr PositionInt ghost_blue_frightened = { 0, 7 };
+  constexpr PositionInt ghost_blue_frightened2 = { 1, 7 };
+  constexpr PositionInt ghost_white_frightened = { 2, 7 };
+  constexpr PositionInt ghost_white_frightened2 = { 3, 7 };
 
   constexpr PositionInt eyeSprite(Direction direction) {
     int x = 0;
@@ -79,14 +79,14 @@ namespace Atlas {
   }
 
   constexpr PositionInt initialFrightened(int animationIndex) {
-    return (animationIndex % 2) == 0 ? Atlas::ghost_frightened2 : Atlas::ghost_frightened1;
+    return (animationIndex % 2) == 0 ? Atlas::ghost_blue_frightened2 : Atlas::ghost_blue_frightened;
   }
 
   constexpr PositionInt endingFrightened(int animationIndex) {
-    std::array<PositionInt, 4> positions = { Atlas::ghost_frightened1,
-                                             Atlas::ghost_frightened2,
-                                             Atlas::ghost_frightened3,
-                                             Atlas::ghost_frightened4 };
+    std::array<PositionInt, 4> positions = { Atlas::ghost_blue_frightened,
+                                             Atlas::ghost_blue_frightened2,
+                                             Atlas::ghost_white_frightened,
+                                             Atlas::ghost_white_frightened2 };
     return positions[animationIndex];
   }
 }
