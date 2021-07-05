@@ -9,7 +9,7 @@ file(GLOB_RECURSE sources CONFIGURE_DEPENDS "*.cpp")
 
 add_library(libpacman ${sources})
 
-target_include_directories(libpacman PUBLIC .)
+target_include_directories(libpacman PUBLIC include)
 target_link_libraries(libpacman PUBLIC fmt::fmt sfml-graphics)
 
 if (${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
