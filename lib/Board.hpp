@@ -22,8 +22,8 @@ public:
     pen = 5,
   };
 
-  [[nodiscard]] static bool isWalkableForPacMan(Position point, float d, Direction direction) ;
-  [[nodiscard]] static bool isWalkableForGhost(Position point, float d, Direction direction) ;
+  [[nodiscard]] static bool isWalkableForPacMan(Position point, double d, Direction direction) ;
+  [[nodiscard]] static bool isWalkableForGhost(Position point, double d, Direction direction) ;
 
   [[nodiscard]] static bool isWalkableForGost(Position point, Position origin, bool isEyes) ;
   [[nodiscard]] static bool isWalkable(Position point) ;
@@ -50,7 +50,7 @@ public:
   static Position clydeScatterTarget() { return { 0, 30 }; }
 
 private:
-  [[nodiscard]] static bool isWalkable(Position point, float d, Direction direction, bool pacman) ;
+  [[nodiscard]] static bool isWalkable(Position point, double d, Direction direction, bool pacman) ;
   static std::array<
     std::array<int, COLUMNS>,
     ROWS>

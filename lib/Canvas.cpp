@@ -60,7 +60,7 @@ void Canvas::renderPellets(const Pellets & pellets) {
   Sprite pellet = getSprite(pellets.currentSprite());
   std::vector<PositionInt> pelletPositions = pellets.currentPositions();
   for (const auto & pos : pelletPositions) {
-    renderSprite(pellet, { float(pos.x), float(pos.y) });
+    renderSprite(pellet, { double(pos.x), double(pos.y) });
   }
 }
 
@@ -68,7 +68,7 @@ void Canvas::renderSuperPellets(const SuperPellets & superPellets) {
   Sprite pellet = getSprite(superPellets.currentSprite());
   std::vector<PositionInt> superPelletPositions = superPellets.currentPositions();
   for (const auto & pos : superPelletPositions) {
-    renderSprite(pellet, { float(pos.x), float(pos.y) });
+    renderSprite(pellet, { double(pos.x), double(pos.y) });
   }
 }
 

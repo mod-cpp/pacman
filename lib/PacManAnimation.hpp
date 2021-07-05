@@ -18,7 +18,7 @@ public:
 
 private:
   uint8_t animation_position = 0;
-  float animation_position_delta = 0.0;
+  double animation_position_delta = 0.0;
   const PositionInt down_animation[4]{ Atlas::pacman_down_wide, Atlas::pacman_down_narrow, Atlas::pacman_closed, Atlas::pacman_down_narrow };
   const PositionInt left_animation[4]{ Atlas::pacman_left_wide, Atlas::pacman_left_narrow, Atlas::pacman_closed, Atlas::pacman_left_narrow };
   const PositionInt right_animation[4]{ Atlas::pacman_right_wide, Atlas::pacman_right_narrow, Atlas::pacman_closed, Atlas::pacman_right_narrow };

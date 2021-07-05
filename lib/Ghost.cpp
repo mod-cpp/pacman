@@ -81,7 +81,7 @@ bool Ghost::isInPen(const Board & board) const {
 void Ghost::updatePosition(std::chrono::milliseconds time_delta, const Board & board) {
   updateDirection(board);
 
-  float position_delta = (0.004 * time_delta.count()) * speed();
+  double position_delta = (0.004 * time_delta.count()) * speed();
 
   switch (direction) {
     case Direction::NONE:

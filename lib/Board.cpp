@@ -43,11 +43,11 @@ std::array<std::array<int, COLUMNS>, ROWS> Board::board = {{
   { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }, // 30
 }};
 
-bool Board::isWalkableForPacMan(Position point, float d, Direction direction) {
+bool Board::isWalkableForPacMan(Position point, double d, Direction direction) {
   return isWalkable(point, d, direction, true);
 }
 
-bool Board::isWalkableForGhost(Position point, float d, Direction direction) {
+bool Board::isWalkableForGhost(Position point, double d, Direction direction) {
   return isWalkable(point, d, direction, false);
 }
 
@@ -63,11 +63,11 @@ bool Board::isInPen(Position point) {
   return board[int(point.y)][int(point.x)] == int(Cell::pen);
 }
 
-bool Board::isWalkable(Position point, float position_delta, Direction direction, bool pacman) {
+bool Board::isWalkable(Position point, double position_delta, Direction direction, bool pacman) {
   if (point.x <= 0 || point.x >= COLUMNS - 1)
     return true;
 
-  auto cellAtPosition = [&](Position point, float position_delta, Direction direction) {
+  auto cellAtPosition = [&](Position point, double position_delta, Direction direction) {
     switch (direction) {
       case Direction::LEFT:
         return board[int(point.y)][int(point.x - position_delta)];
