@@ -23,7 +23,6 @@ public:
   };
 
   [[nodiscard]] static bool isWalkableForPacMan(Position point, double d, Direction direction) ;
-  [[nodiscard]] static bool isWalkableForGhost(Position point, double d, Direction direction) ;
 
   [[nodiscard]] static bool isWalkableForGost(Position point, Position origin, bool isEyes) ;
   [[nodiscard]] static bool isWalkable(Position point) ;

@@ -47,10 +47,6 @@ bool Board::isWalkableForPacMan(Position point, double d, Direction direction) {
   return isWalkable(point, d, direction, true);
 }
 
-bool Board::isWalkableForGhost(Position point, double d, Direction direction) {
-  return isWalkable(point, d, direction, false);
-}
-
 bool Board::isWalkable(Position point) {
   return board[int(point.y)][int(point.x)] != int(Cell::wall);
 }
