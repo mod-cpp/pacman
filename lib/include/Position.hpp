@@ -34,4 +34,8 @@ inline bool operator!=(const Position & a, const Position & b) {
   return !(a == b);
 }
 
+inline bool operator!=(const GridPosition & a, const GridPosition & b) {
+  return !(a == b);
+}
+
 } // namespace pacman
