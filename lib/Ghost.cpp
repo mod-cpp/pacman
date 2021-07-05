@@ -38,7 +38,7 @@ void Ghost::reset() {
   pos = startingPosition;
 }
 
-[[nodiscard]] PositionInt Ghost::currentSprite() const {
+[[nodiscard]] GridPosition Ghost::currentSprite() const {
   switch (state) {
     default:
       return Atlas::ghostSprite(spritesSet, direction, (animationIndex % 2) == 0);

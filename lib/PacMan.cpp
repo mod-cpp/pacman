@@ -4,7 +4,7 @@
 PacMan::PacMan(const Board & board)
   : pos(Board::initialPacManPosition()) {}
 
-PositionInt PacMan::currentSprite() const {
+GridPosition PacMan::currentSprite() const {
   return eaten ? pacManAnimation.deathAnimationFrame(direction) : pacManAnimation.animationFrame(direction);
 }
 

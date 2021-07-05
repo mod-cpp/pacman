@@ -42,7 +42,7 @@ private:
   static sf::Texture loadTexture(std::string_view path);
   static sf::Font loadFont(std::string_view path);
 
-  Sprite getSprite(PositionInt rect) const;
+  Sprite getSprite(GridPosition rect) const;
 
   sf::RenderWindow window;
   sf::Texture maze_texture;

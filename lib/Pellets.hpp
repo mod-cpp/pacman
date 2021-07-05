@@ -7,17 +7,17 @@ class Pellets {
 public:
   explicit Pellets(const Board & board);
 
-  [[nodiscard]] PositionInt currentSprite() const {
+  [[nodiscard]] GridPosition currentSprite() const {
     return sprite;
   };
 
-  [[nodiscard]] std::vector<PositionInt> currentPositions() const {
+  [[nodiscard]] std::vector<GridPosition> currentPositions() const {
     return positions;
   }
 
   bool eatPelletAtPosition(Position p);
 
 private:
-  const PositionInt sprite = { 1, 9 };
-  std::vector<PositionInt> positions;
+  const GridPosition sprite = { 1, 9 };
+  std::vector<GridPosition> positions;
 };

@@ -15,22 +15,22 @@ namespace Atlas {
     clyde = 5,
   };
 
-  constexpr PositionInt pacman_right_wide = { 0, 0 };
-  constexpr PositionInt pacman_right_narrow = { 1, 0 };
-  constexpr PositionInt pacman_closed = { 2, 0 };
-  constexpr PositionInt pacman_left_narrow = { 3, 0 };
-  constexpr PositionInt pacman_left_wide = { 4, 0 };
-  constexpr PositionInt pacman_up_wide = { 5, 0 };
-  constexpr PositionInt pacman_up_narrow = { 6, 0 };
-  constexpr PositionInt pacman_down_wide = { 7, 0 };
-  constexpr PositionInt pacman_down_narrow = { 8, 0 };
+  constexpr GridPosition pacman_right_wide = { 0, 0 };
+  constexpr GridPosition pacman_right_narrow = { 1, 0 };
+  constexpr GridPosition pacman_closed = { 2, 0 };
+  constexpr GridPosition pacman_left_narrow = { 3, 0 };
+  constexpr GridPosition pacman_left_wide = { 4, 0 };
+  constexpr GridPosition pacman_up_wide = { 5, 0 };
+  constexpr GridPosition pacman_up_narrow = { 6, 0 };
+  constexpr GridPosition pacman_down_wide = { 7, 0 };
+  constexpr GridPosition pacman_down_narrow = { 8, 0 };
 
-  constexpr PositionInt ghost_blue_frightened = { 0, 7 };
-  constexpr PositionInt ghost_blue_frightened2 = { 1, 7 };
-  constexpr PositionInt ghost_white_frightened = { 2, 7 };
-  constexpr PositionInt ghost_white_frightened2 = { 3, 7 };
+  constexpr GridPosition ghost_blue_frightened = { 0, 7 };
+  constexpr GridPosition ghost_blue_frightened2 = { 1, 7 };
+  constexpr GridPosition ghost_white_frightened = { 2, 7 };
+  constexpr GridPosition ghost_white_frightened2 = { 3, 7 };
 
-  constexpr PositionInt eyeSprite(Direction direction) {
+  constexpr GridPosition eyeSprite(Direction direction) {
     int x = 0;
     switch (direction) {
       case Direction::RIGHT:
@@ -52,7 +52,7 @@ namespace Atlas {
     return { x, 6 };
   }
 
-  constexpr PositionInt ghostSprite(Ghost ghost, Direction direction, bool alternative) {
+  constexpr GridPosition ghostSprite(Ghost ghost, Direction direction, bool alternative) {
     assert(ghost >= Ghost::blinky && ghost <= Ghost::clyde && "Invalid Ghost");
     int y = static_cast<int>(ghost);
     int x = 0;
@@ -78,12 +78,12 @@ namespace Atlas {
     return { x, y };
   }
 
-  constexpr PositionInt initialFrightened(int animationIndex) {
+  constexpr GridPosition initialFrightened(int animationIndex) {
     return (animationIndex % 2) == 0 ? Atlas::ghost_blue_frightened2 : Atlas::ghost_blue_frightened;
   }
 
-  constexpr PositionInt endingFrightened(int animationIndex) {
-    std::array<PositionInt, 4> positions = { Atlas::ghost_blue_frightened,
+  constexpr GridPosition endingFrightened(int animationIndex) {
+    std::array<GridPosition, 4> positions = { Atlas::ghost_blue_frightened,
                                              Atlas::ghost_blue_frightened2,
                                              Atlas::ghost_white_frightened,
                                              Atlas::ghost_white_frightened2 };

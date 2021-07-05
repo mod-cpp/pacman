@@ -7,7 +7,7 @@ struct Position {
   double y;
 };
 
-struct PositionInt {
+struct GridPosition {
   int x;
   int y;
 };
@@ -16,7 +16,7 @@ using Rect = sf::Rect<int>;
 
 using Sprite = sf::Sprite;
 
-inline bool operator==(const PositionInt & b, const Position & a) {
+inline bool operator==(const GridPosition & b, const Position & a) {
   return a.x == b.x && a.y == b.y;
 }
 

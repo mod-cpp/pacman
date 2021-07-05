@@ -17,7 +17,7 @@ public:
 
   explicit Ghost(Atlas::Ghost spritesSet, Position startingPosition, Position scatterTarget);
 
-  [[nodiscard]] PositionInt currentSprite() const;
+  [[nodiscard]] GridPosition currentSprite() const;
 
   [[nodiscard]] Position position() const;
 

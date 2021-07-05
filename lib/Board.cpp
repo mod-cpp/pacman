@@ -86,8 +86,8 @@ bool Board::isWalkable(Position point, double position_delta, Direction directio
   return pacman ? cell != Cell::wall : cell != Cell::wall && cell != Cell::pen;
 }
 
-std::vector<PositionInt> Board::initialPelletPositions() {
-  std::vector<PositionInt> positions;
+std::vector<GridPosition> Board::initialPelletPositions() {
+  std::vector<GridPosition> positions;
   for (int row = 0; row < ROWS; row++) {
     for (int column = 0; column < COLUMNS; column++) {
       if (board[row][column] == int(Cell::pellet))
@@ -97,8 +97,8 @@ std::vector<PositionInt> Board::initialPelletPositions() {
   return positions;
 }
 
-std::vector<PositionInt> Board::initialSuperPelletPositions() {
-  std::vector<PositionInt> positions;
+std::vector<GridPosition> Board::initialSuperPelletPositions() {
+  std::vector<GridPosition> positions;
   for (int row = 0; row < ROWS; row++) {
     for (int column = 0; column < COLUMNS; column++) {
       if (board[row][column] == int(Cell::power_pellet))

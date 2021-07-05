@@ -13,7 +13,7 @@ class PacMan {
 public:
   explicit PacMan(const Board & board);
 
-  [[nodiscard]] PositionInt currentSprite() const;
+  [[nodiscard]] GridPosition currentSprite() const;
 
   [[nodiscard]] Position position() const;
 

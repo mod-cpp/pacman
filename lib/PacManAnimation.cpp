@@ -1,6 +1,6 @@
 #include "PacManAnimation.hpp"
 
-PositionInt PacManAnimation::animationFrame(Direction direction) const {
+GridPosition PacManAnimation::animationFrame(Direction direction) const {
   switch (direction) {
     case Direction::LEFT:
       return left_animation[animation_position];
@@ -16,8 +16,8 @@ PositionInt PacManAnimation::animationFrame(Direction direction) const {
   }
 }
 
-[[nodiscard]] PositionInt PacManAnimation::deathAnimationFrame(Direction direction) const {
-  return PositionInt{ animation_position, 1 };
+[[nodiscard]] GridPosition PacManAnimation::deathAnimationFrame(Direction direction) const {
+  return GridPosition{ animation_position, 1 };
 }
 
 void PacManAnimation::updateAnimationPosition(std::chrono::milliseconds time_delta, bool dead) {

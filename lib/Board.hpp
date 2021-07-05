@@ -29,9 +29,9 @@ public:
   [[nodiscard]] static bool isWalkable(Position point) ;
   [[nodiscard]] static bool isInPen(Position point) ;
 
-  [[nodiscard]] static std::vector<PositionInt> initialPelletPositions() ;
+  [[nodiscard]] static std::vector<GridPosition> initialPelletPositions() ;
 
-  [[nodiscard]] static std::vector<PositionInt> initialSuperPelletPositions() ;
+  [[nodiscard]] static std::vector<GridPosition> initialSuperPelletPositions() ;
 
   static Position initialPacManPosition() { return { 13.5, 23 }; }
 

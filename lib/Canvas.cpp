@@ -58,7 +58,7 @@ void Canvas::renderMaze() {
 
 void Canvas::renderPellets(const Pellets & pellets) {
   Sprite pellet = getSprite(pellets.currentSprite());
-  std::vector<PositionInt> pelletPositions = pellets.currentPositions();
+  std::vector<GridPosition> pelletPositions = pellets.currentPositions();
   for (const auto & pos : pelletPositions) {
     renderSprite(pellet, { double(pos.x), double(pos.y) });
   }
@@ -66,7 +66,7 @@ void Canvas::renderPellets(const Pellets & pellets) {
 
 void Canvas::renderSuperPellets(const SuperPellets & superPellets) {
   Sprite pellet = getSprite(superPellets.currentSprite());
-  std::vector<PositionInt> superPelletPositions = superPellets.currentPositions();
+  std::vector<GridPosition> superPelletPositions = superPellets.currentPositions();
   for (const auto & pos : superPelletPositions) {
     renderSprite(pellet, { double(pos.x), double(pos.y) });
   }
@@ -98,13 +98,13 @@ void Canvas::renderScore(int score) {
 }
 
 void Canvas::renderLives(int lives) {
-  constexpr PositionInt liveSprite = Atlas::pacman_left_narrow;
+  constexpr GridPosition liveSprite = Atlas::pacman_left_narrow;
   const int x = LEFT_MARGIN + MAZE_WIDTH + LEFT_MARGIN;
   const int y = maze_texture.getSize().y;
 
   Sprite pacmanSprite = getSprite(liveSprite);
   for (int i = 0; i < lives - 1; i++) {
-    PositionInt pos{ x + i * pacmanSprite.getTextureRect().width, y };
+    GridPosition pos{ x + i * pacmanSprite.getTextureRect().width, y };
     pacmanSprite.setPosition(pos.x, pos.y);
     window.draw(pacmanSprite);
   }
@@ -114,7 +114,7 @@ Rect Canvas::windowDimensions() {
   return { 0, 0, LEFT_MARGIN + MAZE_WIDTH + SCORE_WIDTH, TOP_MARGIN + MAZE_HEIGHT + BOTTOM_MARGIN };
 }
 
-Sprite Canvas::getSprite(PositionInt coordinate) const {
+Sprite Canvas::getSprite(GridPosition coordinate) const {
   sf::Sprite sprite;
   sprite.setTexture(sprites_texture);
   sprite.setTextureRect(sf::IntRect{ coordinate.x * DEFAULT_SPRITE_WIDTH,
