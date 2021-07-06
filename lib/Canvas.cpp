@@ -6,6 +6,8 @@
 
 namespace pacman {
 
+static const double SCALE_FACTOR = 0.5;
+
 Canvas::Canvas()
   : window(sf::VideoMode(windowDimensions().width, windowDimensions().height),
            "Pacman",
@@ -53,8 +55,15 @@ std::optional<sf::Event> Canvas::pollEvent() {
 }
 
 void Canvas::renderMaze() {
-  Sprite maze(maze_texture);
-  maze.setPosition(LEFT_MARGIN, TOP_MARGIN);
+  Sprite maze;
+  maze.setTexture(maze_texture);
+  maze.setTextureRect(sf::IntRect{
+    0,
+    0,
+    DEFAULT_MAZE_WIDTH,
+    DEFAULT_MAZE_HEIGHT });
+  maze.setScale(DEFAULT_MAZE_SCALE_UP * SCALE_FACTOR, DEFAULT_MAZE_SCALE_UP * SCALE_FACTOR);
+  maze.setPosition(LEFT_MARGIN * SCALE_FACTOR, TOP_MARGIN * SCALE_FACTOR);
   window.draw(maze);
 }
 
@@ -87,26 +96,26 @@ void Canvas::renderGhost(const Ghost & ghost) {
 }
 
 void Canvas::renderScore(int score) {
-  const int x = LEFT_MARGIN + MAZE_WIDTH + LEFT_MARGIN;
-  const int y = TOP_MARGIN * 2;
+  const int x = (LEFT_MARGIN + DEFAULT_TARGET_MAZE_WIDTH + LEFT_MARGIN) * SCALE_FACTOR;
+  const int y = (TOP_MARGIN * 2) * SCALE_FACTOR;
 
   sf::Text text;
   text.setPosition(x, y);
   text.setFont(game_font);
   text.setString(fmt::format("SCORE\n{}", score));
-  text.setCharacterSize(20);
+  text.setCharacterSize(40 * SCALE_FACTOR);
   text.setFillColor(sf::Color::White);
   window.draw(text);
 }
 
 void Canvas::renderLives(int lives) {
   constexpr GridPosition liveSprite = Atlas::pacman_left_narrow;
-  const size_t x = LEFT_MARGIN + MAZE_WIDTH + LEFT_MARGIN;
-  const size_t y = maze_texture.getSize().y;
+  const size_t x = (LEFT_MARGIN + DEFAULT_TARGET_MAZE_WIDTH + LEFT_MARGIN) * SCALE_FACTOR;
+  const size_t y = DEFAULT_TARGET_MAZE_HEIGHT * SCALE_FACTOR;
 
   Sprite pacmanSprite = getSprite(liveSprite);
   for (int i = 0; i < lives - 1; i++) {
-    size_t life_position = i * pacmanSprite.getTextureRect().width;
+    size_t life_position = i * (DEFAULT_SPRITE_WIDTH * SCALE_FACTOR);
     GridPosition pos{ x + life_position, y };
     pacmanSprite.setPosition(pos.x, pos.y);
     window.draw(pacmanSprite);
@@ -114,7 +123,9 @@ void Canvas::renderLives(int lives) {
 }
 
 Rect Canvas::windowDimensions() {
-  return { 0, 0, LEFT_MARGIN + MAZE_WIDTH + SCORE_WIDTH, TOP_MARGIN + MAZE_HEIGHT + BOTTOM_MARGIN };
+  const double width = (LEFT_MARGIN + DEFAULT_TARGET_MAZE_WIDTH + SCORE_WIDTH) * SCALE_FACTOR;
+  const double height = (TOP_MARGIN + DEFAULT_TARGET_MAZE_HEIGHT + BOTTOM_MARGIN) * SCALE_FACTOR;
+  return { 0, 0, int(width), int(height) };
 }
 
 Sprite Canvas::getSprite(GridPosition coordinate) const {
@@ -124,13 +135,13 @@ Sprite Canvas::getSprite(GridPosition coordinate) const {
                                      int(coordinate.y * DEFAULT_SPRITE_HEIGHT),
                                      DEFAULT_SPRITE_WIDTH,
                                      DEFAULT_SPRITE_HEIGHT });
-  sprite.scale(0.5, 0.5);
+  sprite.scale(SCALE_FACTOR, SCALE_FACTOR);
   return sprite;
 }
 
 void Canvas::renderSprite(Sprite sprite, Position pos) {
-  pos.x = LEFT_MARGIN + (pos.x * DEFAULT_SPRITE_WIDTH / 2);
-  pos.y = TOP_MARGIN + (pos.y * DEFAULT_SPRITE_HEIGHT / 2);
+  pos.x = (LEFT_MARGIN * SCALE_FACTOR) + (pos.x * (DEFAULT_SPRITE_WIDTH * SCALE_FACTOR));
+  pos.y = (TOP_MARGIN * SCALE_FACTOR) + (pos.y * (DEFAULT_SPRITE_HEIGHT * SCALE_FACTOR));
   sprite.setPosition(pos.x, pos.y);
   window.draw(sprite);
 }
