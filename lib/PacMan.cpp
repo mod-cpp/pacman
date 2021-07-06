@@ -68,10 +68,10 @@ void PacMan::updateMazePosition(std::chrono::milliseconds time_delta, const Boar
   const size_t right = COLUMNS - 1;
   const size_t left = 0;
 
-  if (std::round(pos.x) == right && direction == Direction::RIGHT) {
+  if (std::size_t(pos.x) == right && direction == Direction::RIGHT) {
     pos.x = left;
     return;
-  } else if (std::round(pos.x) == left && direction == Direction::LEFT) {
+  } else if (std::size_t(pos.x) == left && direction == Direction::LEFT) {
     pos.x = right;
     return;
   }
