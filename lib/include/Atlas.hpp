@@ -8,7 +8,7 @@
 
 namespace pacman::Atlas {
 
-enum class Ghost {
+enum class Ghost : unsigned int {
   blinky = 2,
   speedy = 3,
   inky = 4,
@@ -31,7 +31,7 @@ constexpr GridPosition ghost_white_frightened = { 2, 7 };
 constexpr GridPosition ghost_white_frightened2 = { 3, 7 };
 
 constexpr GridPosition eyeSprite(Direction direction) {
-  int x = 0;
+  size_t x = 0;
   switch (direction) {
     case Direction::RIGHT:
       x = 0;
@@ -54,8 +54,8 @@ constexpr GridPosition eyeSprite(Direction direction) {
 
 constexpr GridPosition ghostSprite(Ghost ghost, Direction direction, bool alternative) {
   assert(ghost >= Ghost::blinky && ghost <= Ghost::clyde && "Invalid Ghost");
-  int y = static_cast<int>(ghost);
-  int x = 0;
+  size_t y = static_cast<size_t>(ghost);
+  size_t x = 0;
   switch (direction) {
     case Direction::RIGHT:
       x = 0;

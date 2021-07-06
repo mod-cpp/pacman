@@ -15,7 +15,7 @@ Position PacMan::position() const {
 }
 
 GridPosition PacMan::positionInGrid() const {
-  return { int(std::round(pos.x)), int(std::round(pos.y)) };
+  return positionToGridPosition(pos);
 }
 
 void PacMan::eat() {
@@ -63,22 +63,26 @@ void PacMan::updateAnimationPosition(std::chrono::milliseconds time_delta, bool 
 }
 
 void PacMan::updateMazePosition(std::chrono::milliseconds time_delta, const Board & board) {
-  double position_delta = 0.004 * time_delta.count();
+  const double position_delta = 0.004 * time_delta.count();
 
-  auto cellAtPosition = [&](Position point, double position_delta, Direction direction) {
+  auto moveToPosition = [&](Position point, double position_delta, Direction direction) {
     switch (direction) {
       case Direction::LEFT:
-        return GridPosition{ int(point.x - position_delta), int(point.y) };
+        return Position{ std::floor(point.x - position_delta), std::floor(point.y) };
       case Direction::RIGHT:
-        return GridPosition{ int(point.x) + 1, int(point.y) };
+        return Position{ std::floor(point.x + 1), std::floor(point.y) };
       case Direction::UP:
-        return GridPosition{ int(point.x), int(point.y - position_delta) };
+        return Position{ std::floor(point.x), std::floor(point.y - position_delta) };
       case Direction::DOWN:
-        return GridPosition{ int(point.x), int(point.y) + 1 };
+        return Position{ std::floor(point.x), std::floor(point.y + 1) };
       case Direction::NONE:
       default:
-        return positionInGrid();
+        return point;
     }
+  };
+
+  auto canGo = [&](Direction desired_direction) {
+    return board.isWalkableForPacMan(positionToGridPosition(moveToPosition(pos, position_delta, desired_direction)));
   };
 
   // Handle teleport
@@ -86,11 +90,11 @@ void PacMan::updateMazePosition(std::chrono::milliseconds time_delta, const Boar
     pos.x = -1;
   } else if (pos.x <= 0 && direction == Direction::LEFT) {
     pos.x = COLUMNS;
-  } else if (board.isWalkableForPacMan(cellAtPosition(pos, position_delta, desired_direction))) {
+  } else if (canGo(desired_direction)) {
     direction = desired_direction;
   }
 
-  if (board.isWalkableForPacMan(cellAtPosition(pos, position_delta, direction))) {
+  if (canGo(direction)) {
     switch (direction) {
       case Direction::NONE:
         break;

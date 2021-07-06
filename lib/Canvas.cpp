@@ -101,12 +101,13 @@ void Canvas::renderScore(int score) {
 
 void Canvas::renderLives(int lives) {
   constexpr GridPosition liveSprite = Atlas::pacman_left_narrow;
-  const int x = LEFT_MARGIN + MAZE_WIDTH + LEFT_MARGIN;
-  const int y = maze_texture.getSize().y;
+  const size_t x = LEFT_MARGIN + MAZE_WIDTH + LEFT_MARGIN;
+  const size_t y = maze_texture.getSize().y;
 
   Sprite pacmanSprite = getSprite(liveSprite);
   for (int i = 0; i < lives - 1; i++) {
-    GridPosition pos{ x + i * pacmanSprite.getTextureRect().width, y };
+    size_t life_position = i * pacmanSprite.getTextureRect().width;
+    GridPosition pos{ x + life_position, y };
     pacmanSprite.setPosition(pos.x, pos.y);
     window.draw(pacmanSprite);
   }
@@ -119,8 +120,8 @@ Rect Canvas::windowDimensions() {
 Sprite Canvas::getSprite(GridPosition coordinate) const {
   sf::Sprite sprite;
   sprite.setTexture(sprites_texture);
-  sprite.setTextureRect(sf::IntRect{ coordinate.x * DEFAULT_SPRITE_WIDTH,
-                                     coordinate.y * DEFAULT_SPRITE_HEIGHT,
+  sprite.setTextureRect(sf::IntRect{ int(coordinate.x * DEFAULT_SPRITE_WIDTH),
+                                     int(coordinate.y * DEFAULT_SPRITE_HEIGHT),
                                      DEFAULT_SPRITE_WIDTH,
                                      DEFAULT_SPRITE_HEIGHT });
   sprite.scale(0.5, 0.5);

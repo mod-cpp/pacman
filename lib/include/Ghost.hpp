@@ -50,7 +50,7 @@ protected:
   Position pos;
   Position startingPosition;
   Position scatterTarget;
-  GridPosition lastIntersection = { -1, -1 };
+  GridPosition last_grid_position = { 0, 0 };
   bool isInPen(const Board & board) const;
 };
 

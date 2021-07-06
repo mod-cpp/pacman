@@ -59,7 +59,7 @@ Position Ghost::position() const {
 }
 
 GridPosition Ghost::positionInGrid() const {
-  return { int(std::round(pos.x)), int(std::round(pos.y)) };
+  return positionToGridPosition(pos);
 }
 
 void Ghost::update(std::chrono::milliseconds time_delta, const Board & board) {
@@ -116,34 +116,48 @@ double Ghost::speed() const {
 }
 
 void Ghost::updateDirection(const Board & board) {
-  auto cell = positionInGrid();
-  if (cell == lastIntersection)
+  const auto current_grid_position = positionInGrid();
+  if (current_grid_position == last_grid_position)
     return;
 
-  struct NewDirection {
+  struct Move {
     Direction direction;
-    GridPosition position;
-    double distance;
+    Position position;
+    double distance = std::numeric_limits<double>::infinity();
   };
 
-  auto [x, y] = cell;
-  std::array<NewDirection, 4> directions = { { NewDirection{ Direction::UP, { x, y - 1 }, 0 },
-                                               NewDirection{ Direction::LEFT, { x - 1, y }, 0 },
-                                               NewDirection{ Direction::DOWN, { x, y + 1 }, 0 },
-                                               NewDirection{ Direction::RIGHT, { x + 1, y }, 0 } } };
-  const Position target = this->target(board);
+  const Position current_position = { double(current_grid_position.x), double(current_grid_position.y) };
+  const auto [x, y] = current_position;
+  std::array<Move, 4> possible_moves = { { Move{ Direction::UP, { x, y - 1 } },
+                                           Move{ Direction::LEFT, { x - 1, y } },
+                                           Move{ Direction::DOWN, { x, y + 1 } },
+                                           Move{ Direction::RIGHT, { x + 1, y } } } };
 
-  for (auto && d : directions) {
-    d.distance = (d.direction != oppositeDirection(direction) && board.isWalkableForGost(d.position, cell, state == State::Eyes)) ? std::hypot(d.position.x - target.x, d.position.y - target.y)
-                                                                                                                                  : std::numeric_limits<double>::infinity();
+  const Position target_position = target(board);
+
+  for (auto & move : possible_moves) {
+    const bool invalid_position = (move.position.x < 0 || move.position.y < 0);
+    if (invalid_position)
+      continue;
+
+    const bool opposite_direction = (move.direction == oppositeDirection(direction));
+    if (opposite_direction)
+      continue;
+
+    const GridPosition grid_position = {size_t(move.position.x), size_t(move.position.y)};
+    const bool can_walk = board.isWalkableForGost(grid_position, current_grid_position, isEyes());
+    if (!can_walk)
+      continue;
+
+    move.distance = std::hypot(move.position.x - target_position.x, move.position.y - target_position.y);
   }
 
-  auto it = std::min_element(directions.begin(), directions.end(), [](const auto & a, const auto & b) {
+  const auto optimal_move = std::min_element(possible_moves.begin(), possible_moves.end(), [](const auto & a, const auto & b) {
     return a.distance < b.distance;
   });
 
-  lastIntersection = cell;
-  direction = it->direction;
+  last_grid_position = current_grid_position;
+  direction = optimal_move->direction;
 }
 
 Position Ghost::target(const Board & board) const {

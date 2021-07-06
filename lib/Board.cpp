@@ -63,7 +63,7 @@ bool Board::isInPen(GridPosition point) {
 }
 
 Board::Cell Board::cellAtPosition(GridPosition point) {
-  if (point.x < 0 || point.x >= int(COLUMNS) || point.y < 0 || point.y >= int(ROWS))
+  if (point.x >= COLUMNS || point.y >= ROWS)
     return Cell::wall;
   return Cell(board[point.y][point.x]);
 }
