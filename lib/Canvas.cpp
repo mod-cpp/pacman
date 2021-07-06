@@ -14,7 +14,7 @@ Canvas::Canvas()
   window.setVerticalSyncEnabled(true);
   maze_texture = loadTexture("maze.png");
   sprites_texture = loadTexture("sprites32.png");
-  game_font = loadFont("joystix.ttf");
+  game_font = loadFont("retro_font.ttf");
 }
 
 void Canvas::update(const Game & game) {
@@ -150,7 +150,7 @@ sf::Texture Canvas::loadTexture(std::string_view path) {
 
 sf::Font Canvas::loadFont(std::string_view path) {
   sf::Font font;
-  if (!font.loadFromFile("joystix.ttf")) {
+  if (!font.loadFromFile("retro_font.ttf")) {
     exitFailure(fmt::format("Failed to load font {}", path));
   }
   return font;
