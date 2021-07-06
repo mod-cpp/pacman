@@ -64,6 +64,7 @@ void PacMan::updateAnimationPosition(std::chrono::milliseconds time_delta, bool 
 
 void PacMan::updateMazePosition(std::chrono::milliseconds time_delta, const Board & board) {
 
+  // Handle teleport
   const size_t right = COLUMNS - 1;
   const size_t left = 0;
 
