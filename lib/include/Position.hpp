@@ -12,6 +12,7 @@ struct Position {
 struct GridPosition {
   size_t x;
   size_t y;
+  constexpr GridPosition(size_t x, size_t y) : x(x), y(y) {}
 };
 
 using Rect = sf::Rect<int>;
