@@ -63,34 +63,42 @@ void PacMan::updateAnimationPosition(std::chrono::milliseconds time_delta, bool 
 }
 
 void PacMan::updateMazePosition(std::chrono::milliseconds time_delta, const Board & board) {
-  const double position_delta = 0.004 * time_delta.count();
 
-  auto moveToPosition = [&](Position point, double position_delta, Direction direction) {
-    switch (direction) {
+  const size_t right = COLUMNS - 1;
+  const size_t left = 0;
+
+  if (std::round(pos.x) == right && direction == Direction::RIGHT) {
+    pos.x = left;
+    return;
+  } else if (std::round(pos.x) == left && direction == Direction::LEFT) {
+    pos.x = right;
+    return;
+  }
+
+  const double position_delta = 0.004 * time_delta.count();
+  const auto pacman_size = 1.0;
+
+  auto moveToPosition = [&](Position point, Direction move_direction) {
+    switch (move_direction) {
       case Direction::LEFT:
-        return Position{ std::floor(point.x - position_delta), std::floor(point.y) };
+        return GridPosition{ std::size_t(point.x - position_delta), std::size_t(point.y) };
       case Direction::RIGHT:
-        return Position{ std::floor(point.x + 1), std::floor(point.y) };
+        return GridPosition{ std::size_t(point.x + pacman_size), std::size_t(point.y) };
       case Direction::UP:
-        return Position{ std::floor(point.x), std::floor(point.y - position_delta) };
+        return GridPosition{ std::size_t(point.x), std::size_t(point.y - position_delta) };
       case Direction::DOWN:
-        return Position{ std::floor(point.x), std::floor(point.y + 1) };
+        return GridPosition{ std::size_t(point.x), std::size_t(point.y + pacman_size) };
       case Direction::NONE:
       default:
-        return point;
+        return positionToGridPosition(point);
     }
   };
 
-  auto canGo = [&](Direction desired_direction) {
-    return board.isWalkableForPacMan(positionToGridPosition(moveToPosition(pos, position_delta, desired_direction)));
+  auto canGo = [&](Direction move_direction) {
+    return pacman::Board::isWalkableForPacMan(moveToPosition(pos, move_direction));
   };
 
-  // Handle teleport
-  if (pos.x >= COLUMNS - 1 && direction == Direction::RIGHT) {
-    pos.x = -1;
-  } else if (pos.x <= 0 && direction == Direction::LEFT) {
-    pos.x = COLUMNS;
-  } else if (canGo(desired_direction)) {
+  if (canGo(desired_direction)) {
     direction = desired_direction;
   }
 
@@ -100,18 +108,18 @@ void PacMan::updateMazePosition(std::chrono::milliseconds time_delta, const Boar
         break;
       case Direction::LEFT:
         pos.x -= position_delta;
-        pos.y = floor(pos.y);
+        pos.y = std::floor(pos.y);
         break;
       case Direction::RIGHT:
         pos.x += position_delta;
-        pos.y = floor(pos.y);
+        pos.y = std::floor(pos.y);
         break;
       case Direction::UP:
-        pos.x = floor(pos.x);
+        pos.x = std::floor(pos.x);
         pos.y -= position_delta;
         break;
       case Direction::DOWN:
-        pos.x = floor(pos.x);
+        pos.x = std::floor(pos.x);
         pos.y += position_delta;
         break;
     }
