@@ -19,12 +19,15 @@ public:
   std::optional<sf::Event> pollEvent();
 
 private:
-  static constexpr uint16_t LEFT_MARGIN = 40;
-  static constexpr uint16_t TOP_MARGIN = 40;
-  static constexpr uint16_t BOTTOM_MARGIN = 40;
-  static constexpr uint16_t MAZE_WIDTH = 448;
-  static constexpr uint16_t MAZE_HEIGHT = 496;
-  static constexpr uint16_t SCORE_WIDTH = 200;
+  static constexpr uint16_t LEFT_MARGIN = 40 * 2;
+  static constexpr uint16_t TOP_MARGIN = 40 * 2;
+  static constexpr uint16_t BOTTOM_MARGIN = 40 * 2;
+  static constexpr uint16_t DEFAULT_MAZE_WIDTH = 448;
+  static constexpr uint16_t DEFAULT_MAZE_HEIGHT = 496;
+  static constexpr uint16_t DEFAULT_MAZE_SCALE_UP = 2;
+  static constexpr uint16_t DEFAULT_TARGET_MAZE_WIDTH = DEFAULT_MAZE_WIDTH * DEFAULT_MAZE_SCALE_UP;
+  static constexpr uint16_t DEFAULT_TARGET_MAZE_HEIGHT = DEFAULT_MAZE_HEIGHT * DEFAULT_MAZE_SCALE_UP;
+  static constexpr uint16_t SCORE_WIDTH = 200 * 2;
   static constexpr uint16_t DEFAULT_SPRITE_WIDTH = 32;
   static constexpr uint16_t DEFAULT_SPRITE_HEIGHT = 32;
 
