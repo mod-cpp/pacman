@@ -117,7 +117,7 @@ void Game::eatPellets() {
 void Game::processEvents(InputState & inputState) {
 
   auto event = canvas.pollEvent();
-  if (event && event->type == sf::Event::Closed) {
+  if (event && event.value().type == sf::Event::Closed) {
     inputState.close = true;
     return;
   }

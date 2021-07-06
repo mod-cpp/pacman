@@ -156,8 +156,9 @@ void Ghost::updateDirection(const Board & board) {
     return a.distance < b.distance;
   });
 
+  auto move = *optimal_move;
+  direction = move.direction;
   last_grid_position = current_grid_position;
-  direction = optimal_move->direction;
 }
 
 Position Ghost::target(const Board & board) const {
