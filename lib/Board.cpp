@@ -73,7 +73,7 @@ std::vector<GridPosition> Board::initialPelletPositions() {
   for (std::size_t row = 0; row < ROWS; row++) {
     for (std::size_t column = 0; column < COLUMNS; column++) {
       if (board[row][column] == int(Cell::pellet))
-        positions.push_back({ int(column), int(row) });
+        positions.emplace_back(column, row);
     }
   }
   return positions;
@@ -84,7 +84,7 @@ std::vector<GridPosition> Board::initialSuperPelletPositions() {
   for (std::size_t row = 0; row < ROWS; row++) {
     for (std::size_t column = 0; column < COLUMNS; column++) {
       if (board[row][column] == int(Cell::power_pellet))
-        positions.push_back({ int(column), int(row) });
+        positions.emplace_back(column, row);
     }
   }
   return positions;
