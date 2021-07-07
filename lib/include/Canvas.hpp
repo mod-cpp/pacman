@@ -19,6 +19,7 @@ public:
   std::optional<sf::Event> pollEvent();
 
 private:
+  static constexpr float_t SCALE_FACTOR = 0.5;
   static constexpr uint16_t LEFT_MARGIN = 40 * 2;
   static constexpr uint16_t TOP_MARGIN = 40 * 2;
   static constexpr uint16_t BOTTOM_MARGIN = 40 * 2;
@@ -30,6 +31,9 @@ private:
   static constexpr uint16_t SCORE_WIDTH = 200 * 2;
   static constexpr uint16_t DEFAULT_SPRITE_WIDTH = 32;
   static constexpr uint16_t DEFAULT_SPRITE_HEIGHT = 32;
+  static constexpr uint16_t RIGHT_PANEL_X = LEFT_MARGIN + DEFAULT_TARGET_MAZE_WIDTH + LEFT_MARGIN;
+  static constexpr uint16_t WINDOW_WIDTH = LEFT_MARGIN + DEFAULT_TARGET_MAZE_WIDTH + SCORE_WIDTH;
+  static constexpr uint16_t WINDOW_HEIGHT = TOP_MARGIN + DEFAULT_TARGET_MAZE_HEIGHT + BOTTOM_MARGIN;
 
   void clear();
   void render();
@@ -46,6 +50,7 @@ private:
   static Rect windowDimensions();
   static sf::Texture loadTexture(std::string_view path);
   static sf::Font loadFont(std::string_view path);
+  static float_t scale(int value);
 
   Sprite getSprite(GridPosition rect) const;
 
