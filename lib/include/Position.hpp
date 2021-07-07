@@ -24,6 +24,10 @@ inline GridPosition positionToGridPosition(Position pos) {
   return { size_t(std::round(pos.x)), size_t(std::round(pos.y)) };
 }
 
+inline Position gridPositionToPosition(GridPosition pos) {
+  return { double(pos.x), double(pos.y) };
+}
+
 constexpr bool operator==(const GridPosition & a, const GridPosition & b) {
   return a.x == b.x && a.y == b.y;
 }

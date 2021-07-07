@@ -6,8 +6,6 @@
 
 namespace pacman {
 
-static const double SCALE_FACTOR = 0.5;
-
 Canvas::Canvas()
   : window(sf::VideoMode(windowDimensions().width, windowDimensions().height),
            "Pacman",
@@ -26,10 +24,7 @@ void Canvas::update(const Game & game) {
   renderPellets(game.pellets);
   renderSuperPellets(game.superPellets);
 
-  std::apply([&](const auto &... ghost) {
-    (renderGhost(ghost), ...);
-  },
-             game.ghosts);
+  std::apply([&](const auto &... ghost) { (renderGhost(ghost), ...); }, game.ghosts);
 
   renderScore(game.score.points);
   renderLives(game.score.lives);
@@ -62,8 +57,8 @@ void Canvas::renderMaze() {
     0,
     DEFAULT_MAZE_WIDTH,
     DEFAULT_MAZE_HEIGHT });
-  maze.setScale(DEFAULT_MAZE_SCALE_UP * SCALE_FACTOR, DEFAULT_MAZE_SCALE_UP * SCALE_FACTOR);
-  maze.setPosition(LEFT_MARGIN * SCALE_FACTOR, TOP_MARGIN * SCALE_FACTOR);
+  maze.setScale(scale(DEFAULT_MAZE_SCALE_UP), scale(DEFAULT_MAZE_SCALE_UP));
+  maze.setPosition(scale(LEFT_MARGIN), scale(TOP_MARGIN));
   window.draw(maze);
 }
 
@@ -71,7 +66,7 @@ void Canvas::renderPellets(const Pellets & pellets) {
   Sprite pellet = getSprite(pellets.currentSprite());
   std::vector<GridPosition> pelletPositions = pellets.currentPositions();
   for (const auto & pos : pelletPositions) {
-    renderSprite(pellet, { double(pos.x), double(pos.y) });
+    renderSprite(pellet, gridPositionToPosition(pos));
   }
 }
 
@@ -79,7 +74,7 @@ void Canvas::renderSuperPellets(const SuperPellets & superPellets) {
   Sprite pellet = getSprite(superPellets.currentSprite());
   std::vector<GridPosition> superPelletPositions = superPellets.currentPositions();
   for (const auto & pos : superPelletPositions) {
-    renderSprite(pellet, { double(pos.x), double(pos.y) });
+    renderSprite(pellet, gridPositionToPosition(pos));
   }
 }
 
@@ -96,36 +91,30 @@ void Canvas::renderGhost(const Ghost & ghost) {
 }
 
 void Canvas::renderScore(int score) {
-  const int x = (LEFT_MARGIN + DEFAULT_TARGET_MAZE_WIDTH + LEFT_MARGIN) * SCALE_FACTOR;
-  const int y = (TOP_MARGIN * 2) * SCALE_FACTOR;
-
   sf::Text text;
-  text.setPosition(x, y);
+  text.setPosition(scale(RIGHT_PANEL_X), scale(TOP_MARGIN * 2));
   text.setFont(game_font);
   text.setString(fmt::format("SCORE\n{}", score));
-  text.setCharacterSize(40 * SCALE_FACTOR);
+  text.setCharacterSize(int(scale(40)));
   text.setFillColor(sf::Color::White);
   window.draw(text);
 }
 
 void Canvas::renderLives(int lives) {
   constexpr GridPosition liveSprite = Atlas::pacman_left_narrow;
-  const size_t x = (LEFT_MARGIN + DEFAULT_TARGET_MAZE_WIDTH + LEFT_MARGIN) * SCALE_FACTOR;
-  const size_t y = DEFAULT_TARGET_MAZE_HEIGHT * SCALE_FACTOR;
+  const auto x = scale(RIGHT_PANEL_X);
+  const auto y = scale(DEFAULT_TARGET_MAZE_HEIGHT);
 
   Sprite pacmanSprite = getSprite(liveSprite);
   for (int i = 0; i < lives - 1; i++) {
-    size_t life_position = i * (DEFAULT_SPRITE_WIDTH * SCALE_FACTOR);
-    GridPosition pos{ x + life_position, y };
-    pacmanSprite.setPosition(pos.x, pos.y);
+    auto life_position = scale(i * DEFAULT_SPRITE_WIDTH);
+    pacmanSprite.setPosition(x + life_position, y);
     window.draw(pacmanSprite);
   }
 }
 
 Rect Canvas::windowDimensions() {
-  const double width = (LEFT_MARGIN + DEFAULT_TARGET_MAZE_WIDTH + SCORE_WIDTH) * SCALE_FACTOR;
-  const double height = (TOP_MARGIN + DEFAULT_TARGET_MAZE_HEIGHT + BOTTOM_MARGIN) * SCALE_FACTOR;
-  return { 0, 0, int(width), int(height) };
+  return { 0, 0, int(scale(WINDOW_WIDTH)), int(scale(WINDOW_HEIGHT)) };
 }
 
 Sprite Canvas::getSprite(GridPosition coordinate) const {
@@ -140,9 +129,9 @@ Sprite Canvas::getSprite(GridPosition coordinate) const {
 }
 
 void Canvas::renderSprite(Sprite sprite, Position pos) {
-  pos.x = (LEFT_MARGIN * SCALE_FACTOR) + (pos.x * (DEFAULT_SPRITE_WIDTH * SCALE_FACTOR));
-  pos.y = (TOP_MARGIN * SCALE_FACTOR) + (pos.y * (DEFAULT_SPRITE_HEIGHT * SCALE_FACTOR));
-  sprite.setPosition(pos.x, pos.y);
+  const auto x = scale(LEFT_MARGIN + int(pos.x * DEFAULT_SPRITE_WIDTH));
+  const auto y = scale(TOP_MARGIN + int(pos.y * DEFAULT_SPRITE_HEIGHT));
+  sprite.setPosition(x, y);
   window.draw(sprite);
 }
 
@@ -165,6 +154,10 @@ sf::Font Canvas::loadFont(std::string_view path) {
     exitFailure(fmt::format("Failed to load font {}", path));
   }
   return font;
+}
+
+float_t Canvas::scale(int value) {
+  return float_t(value) * SCALE_FACTOR;
 }
 
 } // namespace pacman
