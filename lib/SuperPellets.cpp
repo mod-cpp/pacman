@@ -3,7 +3,7 @@
 
 namespace pacman {
 
-SuperPellets::SuperPellets(const Board & board)
+SuperPellets::SuperPellets()
   : positions(pacman::Board::initialSuperPelletPositions()) {}
 
 bool SuperPellets::eatPelletAtPosition(GridPosition p) {

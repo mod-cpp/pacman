@@ -7,7 +7,7 @@ namespace pacman {
 
 class Pellets {
 public:
-  explicit Pellets(const Board & board);
+  explicit Pellets();
 
   [[nodiscard]] GridPosition currentSprite() const {
     return sprite;

@@ -10,10 +10,10 @@ constexpr int POWER_PELLET_POINTS = 50;
 constexpr int GHOST_POINTS = 200;
 
 Game::Game()
-  : pacMan(board),
-    pellets(board),
-    superPellets(board),
-    ghosts(Blinky(board), Speedy(board), Inky(board), Clyde(board)) {
+  : pacMan(),
+    pellets(),
+    superPellets(),
+    ghosts(Blinky(), Speedy(), Inky(), Clyde()) {
   score.lives = DEFAULT_LIVES;
 }
 
@@ -50,7 +50,7 @@ void Game::run() {
 
 void Game::step(std::chrono::milliseconds delta, InputState inputState) {
 
-  pacMan.update(delta, inputState, board);
+  pacMan.update(delta, inputState);
 
   if (timeSinceDeath.count() != 0) {
     timeSinceDeath += delta;
@@ -61,7 +61,7 @@ void Game::step(std::chrono::milliseconds delta, InputState inputState) {
       (ghost.reset(), ...);
     },
                ghosts);
-    pacMan.reset(board);
+    pacMan.reset();
     timeSinceDeath = std::chrono::milliseconds(0);
   }
 
@@ -72,7 +72,7 @@ void Game::step(std::chrono::milliseconds delta, InputState inputState) {
     return;
 
   std::apply([&](auto &... ghost) {
-    (ghost.update(delta, board), ...);
+    (ghost.update(delta), ...);
     (checkCollision(ghost), ...);
   },
              ghosts);

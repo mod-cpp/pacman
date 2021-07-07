@@ -13,7 +13,7 @@ class InputState;
 
 class PacMan {
 public:
-  explicit PacMan(const Board & board);
+  explicit PacMan();
 
   [[nodiscard]] GridPosition currentSprite() const;
 
@@ -21,10 +21,10 @@ public:
 
   [[nodiscard]] GridPosition positionInGrid() const;
 
-  void update(std::chrono::milliseconds time_delta, InputState state, const Board & board);
+  void update(std::chrono::milliseconds time_delta, InputState state);
 
   void eat();
-  void reset(const Board & b);
+  void reset();
   [[nodiscard]] bool onTheMove() const {
     return direction != Direction::NONE;
   }
@@ -39,7 +39,7 @@ private:
   void setDirection(const InputState & state);
 
   void updateAnimationPosition(std::chrono::milliseconds time_delta, bool paused);
-  void updateMazePosition(std::chrono::milliseconds time_delta, const Board & board);
+  void updateMazePosition(std::chrono::milliseconds time_delta);
 };
 
 } // namespace pacman

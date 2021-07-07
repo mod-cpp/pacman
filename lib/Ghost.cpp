@@ -62,8 +62,8 @@ GridPosition Ghost::positionInGrid() const {
   return positionToGridPosition(pos);
 }
 
-void Ghost::update(std::chrono::milliseconds time_delta, const Board & board) {
-  if (state == State::Eyes && isInPen(board))
+void Ghost::update(std::chrono::milliseconds time_delta) {
+  if (state == State::Eyes && isInPen())
     state = State::Scatter;
 
   if (state == State::Frightened) {
@@ -73,15 +73,15 @@ void Ghost::update(std::chrono::milliseconds time_delta, const Board & board) {
   }
 
   updateAnimation(time_delta);
-  updatePosition(time_delta, board);
+  updatePosition(time_delta);
 }
 
-bool Ghost::isInPen(const Board & board) const {
+bool Ghost::isInPen() const {
   return pacman::Board::isInPen(positionInGrid());
 }
 
-void Ghost::updatePosition(std::chrono::milliseconds time_delta, const Board & board) {
-  updateDirection(board);
+void Ghost::updatePosition(std::chrono::milliseconds time_delta) {
+  updateDirection();
 
   double position_delta = (0.004 * time_delta.count()) * speed();
 
@@ -131,7 +131,7 @@ double Ghost::speed() const {
  *  In the scatter state, each ghost tries to reach an unreachable position outside of the map.
  *  This makes ghosts run in circle around the island at each of the 4 map corner.
  */
-void Ghost::updateDirection(const Board & board) {
+void Ghost::updateDirection() {
   const auto current_grid_position = positionInGrid();
   if (current_grid_position == last_grid_position)
     return;
@@ -149,7 +149,7 @@ void Ghost::updateDirection(const Board & board) {
                                            Move{ Direction::DOWN, { x, y + 1 } },
                                            Move{ Direction::RIGHT, { x + 1, y } } } };
 
-  const Position target_position = target(board);
+  const Position target_position = target();
 
   for (auto & move : possible_moves) {
     const bool invalid_position = (move.position.x < 0 || move.position.y < 0);
@@ -177,7 +177,7 @@ void Ghost::updateDirection(const Board & board) {
   last_grid_position = current_grid_position;
 }
 
-Position Ghost::target(const Board & board) const {
+Position Ghost::target() const {
   if (state == State::Eyes)
     return startingPosition;
 
@@ -195,19 +195,19 @@ void Ghost::updateAnimation(std::chrono::milliseconds time_delta) {
   }
 }
 
-Blinky::Blinky(const Board & board)
+Blinky::Blinky()
   : Ghost(Atlas::Ghost::blinky, pacman::Board::initialBlinkyPosition(), pacman::Board::blinkyScatterTarget()) {
 }
 
-Speedy::Speedy(const Board & board)
+Speedy::Speedy()
   : Ghost(Atlas::Ghost::speedy, pacman::Board::initialSpeedyPosition(), pacman::Board::speedyScatterTarget()) {
 }
 
-Inky::Inky(const Board & board)
+Inky::Inky()
   : Ghost(Atlas::Ghost::inky, pacman::Board::initialInkyPosition(), pacman::Board::inkyScatterTarget()) {
 }
 
-Clyde::Clyde(const Board & board)
+Clyde::Clyde()
   : Ghost(Atlas::Ghost::clyde, pacman::Board::initialClydePosition(), pacman::Board::clydeScatterTarget()) {
 }
 

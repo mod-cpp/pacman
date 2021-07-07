@@ -25,7 +25,7 @@ public:
 
   [[nodiscard]] GridPosition positionInGrid() const;
 
-  void update(std::chrono::milliseconds time_delta, const Board & board);
+  void update(std::chrono::milliseconds time_delta);
   void frighten();
   void eat();
   [[nodiscard]] bool isFrightened() const;
@@ -35,9 +35,9 @@ public:
 private:
   [[nodiscard]] double speed() const;
   void updateAnimation(std::chrono::milliseconds time_delta);
-  void updatePosition(std::chrono::milliseconds time_delta, const Board & board);
-  void updateDirection(const Board & board);
-  [[nodiscard]] Position target(const Board & board) const;
+  void updatePosition(std::chrono::milliseconds time_delta);
+  void updateDirection();
+  [[nodiscard]] Position target() const;
 
 protected:
   Atlas::Ghost spritesSet;
@@ -51,27 +51,27 @@ protected:
   Position startingPosition;
   Position scatterTarget;
   GridPosition last_grid_position = { 0, 0 };
-  [[nodiscard]] bool isInPen(const Board & board) const;
+  [[nodiscard]] bool isInPen() const;
 };
 
 class Blinky : public Ghost {
 public:
-  explicit Blinky(const Board & board);
+  explicit Blinky();
 };
 
 class Speedy : public Ghost {
 public:
-  explicit Speedy(const Board & board);
+  explicit Speedy();
 };
 
 class Inky : public Ghost {
 public:
-  explicit Inky(const Board & board);
+  explicit Inky();
 };
 
 class Clyde : public Ghost {
 public:
-  explicit Clyde(const Board & board);
+  explicit Clyde();
 };
 
 } // namespace pacman

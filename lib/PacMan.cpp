@@ -3,7 +3,7 @@
 
 namespace pacman {
 
-PacMan::PacMan(const Board & board)
+PacMan::PacMan()
   : pos(Board::initialPacManPosition()) {}
 
 GridPosition PacMan::currentSprite() const {
@@ -25,20 +25,20 @@ void PacMan::eat() {
   direction = Direction::NONE;
 }
 
-void PacMan::reset(const Board & b) {
+void PacMan::reset() {
   eaten = false;
   direction = Direction::NONE;
   pos = pacman::Board::initialPacManPosition();
 }
 
-void PacMan::update(std::chrono::milliseconds time_delta, InputState state, const Board & board) {
+void PacMan::update(std::chrono::milliseconds time_delta, InputState state) {
   if (eaten) {
     updateAnimationPosition(time_delta, false);
     return;
   }
   const auto old = pos;
   setDirection(state);
-  updateMazePosition(time_delta, board);
+  updateMazePosition(time_delta);
   const bool paused = pos == old;
   updateAnimationPosition(time_delta, paused);
 }
@@ -62,7 +62,7 @@ void PacMan::updateAnimationPosition(std::chrono::milliseconds time_delta, bool 
   }
 }
 
-void PacMan::updateMazePosition(std::chrono::milliseconds time_delta, const Board & board) {
+void PacMan::updateMazePosition(std::chrono::milliseconds time_delta) {
 
   // Handle teleport
   const size_t right = COLUMNS - 1;

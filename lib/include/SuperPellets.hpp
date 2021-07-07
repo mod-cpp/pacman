@@ -7,7 +7,7 @@ namespace pacman {
 
 class SuperPellets {
 public:
-  explicit SuperPellets(const Board & board);
+  explicit SuperPellets();
 
   [[nodiscard]] GridPosition currentSprite() const {
     return sprite;
