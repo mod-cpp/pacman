@@ -77,7 +77,7 @@ void Ghost::update(std::chrono::milliseconds time_delta, const Board & board) {
 }
 
 bool Ghost::isInPen(const Board & board) const {
-  return board.isInPen(positionInGrid());
+  return pacman::Board::isInPen(positionInGrid());
 }
 
 void Ghost::updatePosition(std::chrono::milliseconds time_delta, const Board & board) {
@@ -128,7 +128,7 @@ double Ghost::speed() const {
  *  from that cell is considered infinite (due to the shape of the maze, there is always one direction
  *  a ghost can take).
  *
- *  In the scatter state, each ghost tries to reach an unreacheable position outside of the map.
+ *  In the scatter state, each ghost tries to reach an unreachable position outside of the map.
  *  This makes ghosts run in circle around the island at each of the 4 map corner.
  */
 void Ghost::updateDirection(const Board & board) {
@@ -161,7 +161,7 @@ void Ghost::updateDirection(const Board & board) {
       continue;
 
     const GridPosition grid_position = {size_t(move.position.x), size_t(move.position.y)};
-    const bool can_walk = board.isWalkableForGost(grid_position, current_grid_position, isEyes());
+    const bool can_walk = pacman::Board::isWalkableForGhost(grid_position, current_grid_position, isEyes());
     if (!can_walk)
       continue;
 
@@ -181,8 +181,8 @@ Position Ghost::target(const Board & board) const {
   if (state == State::Eyes)
     return startingPosition;
 
-  if (board.isInPen(positionInGrid()))
-    return board.penDoorPosition();
+  if (pacman::Board::isInPen(positionInGrid()))
+    return pacman::Board::penDoorPosition();
 
   return scatterTarget;
 }
@@ -196,19 +196,19 @@ void Ghost::updateAnimation(std::chrono::milliseconds time_delta) {
 }
 
 Blinky::Blinky(const Board & board)
-  : Ghost(Atlas::Ghost::blinky, board.initialBlinkyPosition(), board.blinkyScatterTarget()) {
+  : Ghost(Atlas::Ghost::blinky, pacman::Board::initialBlinkyPosition(), pacman::Board::blinkyScatterTarget()) {
 }
 
 Speedy::Speedy(const Board & board)
-  : Ghost(Atlas::Ghost::speedy, board.initialSpeedyPosition(), board.speedyScatterTarget()) {
+  : Ghost(Atlas::Ghost::speedy, pacman::Board::initialSpeedyPosition(), pacman::Board::speedyScatterTarget()) {
 }
 
 Inky::Inky(const Board & board)
-  : Ghost(Atlas::Ghost::inky, board.initialInkyPosition(), board.inkyScatterTarget()) {
+  : Ghost(Atlas::Ghost::inky, pacman::Board::initialInkyPosition(), pacman::Board::inkyScatterTarget()) {
 }
 
 Clyde::Clyde(const Board & board)
-  : Ghost(Atlas::Ghost::clyde, board.initialClydePosition(), board.clydeScatterTarget()) {
+  : Ghost(Atlas::Ghost::clyde, pacman::Board::initialClydePosition(), pacman::Board::clydeScatterTarget()) {
 }
 
 } // namespace pacman

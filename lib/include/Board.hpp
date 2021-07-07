@@ -25,7 +25,7 @@ public:
   };
 
   [[nodiscard]] static bool isWalkableForPacMan(GridPosition point);
-  [[nodiscard]] static bool isWalkableForGost(GridPosition point, GridPosition origin, bool isEyes);
+  [[nodiscard]] static bool isWalkableForGhost(GridPosition point, GridPosition origin, bool isEyes);
   [[nodiscard]] static bool isInPen(GridPosition point);
 
   [[nodiscard]] static std::vector<GridPosition> initialPelletPositions();

@@ -51,7 +51,7 @@ bool Board::isWalkableForPacMan(GridPosition point) {
   return cellAtPosition(point) != Cell::wall;
 }
 
-bool Board::isWalkableForGost(GridPosition point, GridPosition origin, bool isEyes) {
+bool Board::isWalkableForGhost(GridPosition point, GridPosition origin, bool isEyes) {
   Cell cell = cellAtPosition(point);
   if (cell == Cell::wall)
     return false;

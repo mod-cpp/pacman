@@ -4,7 +4,7 @@
 namespace pacman {
 
 SuperPellets::SuperPellets(const Board & board)
-  : positions(board.initialSuperPelletPositions()) {}
+  : positions(pacman::Board::initialSuperPelletPositions()) {}
 
 bool SuperPellets::eatPelletAtPosition(GridPosition p) {
   auto it = std::find(positions.begin(), positions.end(), p);

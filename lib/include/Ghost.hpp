@@ -28,16 +28,16 @@ public:
   void update(std::chrono::milliseconds time_delta, const Board & board);
   void frighten();
   void eat();
-  bool isFrightened() const;
-  bool isEyes() const;
+  [[nodiscard]] bool isFrightened() const;
+  [[nodiscard]] bool isEyes() const;
   void reset();
 
 private:
-  double speed() const;
+  [[nodiscard]] double speed() const;
   void updateAnimation(std::chrono::milliseconds time_delta);
   void updatePosition(std::chrono::milliseconds time_delta, const Board & board);
   void updateDirection(const Board & board);
-  Position target(const Board & board) const;
+  [[nodiscard]] Position target(const Board & board) const;
 
 protected:
   Atlas::Ghost spritesSet;
@@ -51,7 +51,7 @@ protected:
   Position startingPosition;
   Position scatterTarget;
   GridPosition last_grid_position = { 0, 0 };
-  bool isInPen(const Board & board) const;
+  [[nodiscard]] bool isInPen(const Board & board) const;
 };
 
 class Blinky : public Ghost {

@@ -7,7 +7,7 @@ PacMan::PacMan(const Board & board)
   : pos(Board::initialPacManPosition()) {}
 
 GridPosition PacMan::currentSprite() const {
-  return eaten ? pacManAnimation.deathAnimationFrame(direction) : pacManAnimation.animationFrame(direction);
+  return eaten ? pacManAnimation.deathAnimationFrame() : pacManAnimation.animationFrame(direction);
 }
 
 Position PacMan::position() const {
@@ -28,7 +28,7 @@ void PacMan::eat() {
 void PacMan::reset(const Board & b) {
   eaten = false;
   direction = Direction::NONE;
-  pos = b.initialPacManPosition();
+  pos = pacman::Board::initialPacManPosition();
 }
 
 void PacMan::update(std::chrono::milliseconds time_delta, InputState state, const Board & board) {

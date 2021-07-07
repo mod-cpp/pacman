@@ -25,7 +25,7 @@ public:
 
   void eat();
   void reset(const Board & b);
-  bool onTheMove() const {
+  [[nodiscard]] bool onTheMove() const {
     return direction != Direction::NONE;
   }
 

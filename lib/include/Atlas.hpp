@@ -2,7 +2,7 @@
 
 #include "Direction.hpp"
 #include "Position.hpp"
-#include "assert.h"
+#include <cassert>
 
 #include <array>
 
@@ -31,30 +31,23 @@ constexpr GridPosition ghost_white_frightened = { 2, 7 };
 constexpr GridPosition ghost_white_frightened2 = { 3, 7 };
 
 constexpr GridPosition eyeSprite(Direction direction) {
-  size_t x = 0;
   switch (direction) {
     case Direction::RIGHT:
-      x = 0;
-      break;
+      return { 0, 6 };
     case Direction::DOWN:
-      x = 2;
-      break;
+      return { 2, 6 };
     case Direction::LEFT:
-      x = 4;
-      break;
+      return { 4, 6 };
     case Direction::UP:
-      x = 6;
-      break;
+      return { 6, 6 };
     default:
-      x = 0;
-      break;
+      return { 0, 6 };
   }
-  return { x, 6 };
 }
 
 constexpr GridPosition ghostSprite(Ghost ghost, Direction direction, bool alternative) {
   assert(ghost >= Ghost::blinky && ghost <= Ghost::clyde && "Invalid Ghost");
-  size_t y = static_cast<size_t>(ghost);
+  auto y = static_cast<size_t>(ghost);
   size_t x = 0;
   switch (direction) {
     case Direction::RIGHT:
