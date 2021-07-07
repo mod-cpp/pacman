@@ -115,6 +115,22 @@ double Ghost::speed() const {
   return 0.75;
 }
 
+/*
+ *  Each time a ghost finds itself at an intersection,
+ *  it picks a target position - the specific target depends on the state
+ *  of the ghost and the specific ghost.
+ *
+ *  For each 4 cells around the current ghost position the straight-line distance
+ *  to the target is calculated (this ignores all obstacles, including walls)
+ *
+ *  The ghost then selects among these 4 cells the one with the shortest euclidean distance to the target.
+ *  If a cell is a wall or would cause a ghost to move in the opposite direction, the distance to the target
+ *  from that cell is considered infinite (due to the shape of the maze, there is always one direction
+ *  a ghost can take).
+ *
+ *  In the scatter state, each ghost tries to reach an unreacheable position outside of the map.
+ *  This makes ghosts run in circle around the island at each of the 4 map corner.
+ */
 void Ghost::updateDirection(const Board & board) {
   const auto current_grid_position = positionInGrid();
   if (current_grid_position == last_grid_position)
