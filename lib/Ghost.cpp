@@ -77,7 +77,7 @@ void Ghost::update(std::chrono::milliseconds time_delta) {
 }
 
 bool Ghost::isInPen() const {
-  return pacman::Board::isInPen(positionInGrid());
+  return pacman::isInPen(positionInGrid());
 }
 
 void Ghost::updatePosition(std::chrono::milliseconds time_delta) {
@@ -161,7 +161,7 @@ void Ghost::updateDirection() {
       continue;
 
     const GridPosition grid_position = {size_t(move.position.x), size_t(move.position.y)};
-    const bool can_walk = pacman::Board::isWalkableForGhost(grid_position, current_grid_position, isEyes());
+    const bool can_walk = pacman::isWalkableForGhost(grid_position, current_grid_position, isEyes());
     if (!can_walk)
       continue;
 
@@ -181,8 +181,8 @@ Position Ghost::target() const {
   if (state == State::Eyes)
     return startingPosition;
 
-  if (pacman::Board::isInPen(positionInGrid()))
-    return pacman::Board::penDoorPosition();
+  if (pacman::isInPen(positionInGrid()))
+    return pacman::penDoorPosition();
 
   return scatterTarget;
 }
@@ -196,19 +196,19 @@ void Ghost::updateAnimation(std::chrono::milliseconds time_delta) {
 }
 
 Blinky::Blinky()
-  : Ghost(Atlas::Ghost::blinky, pacman::Board::initialBlinkyPosition(), pacman::Board::blinkyScatterTarget()) {
+  : Ghost(Atlas::Ghost::blinky, pacman::initialBlinkyPosition(), pacman::blinkyScatterTarget()) {
 }
 
 Speedy::Speedy()
-  : Ghost(Atlas::Ghost::speedy, pacman::Board::initialSpeedyPosition(), pacman::Board::speedyScatterTarget()) {
+  : Ghost(Atlas::Ghost::speedy, pacman::initialSpeedyPosition(), pacman::speedyScatterTarget()) {
 }
 
 Inky::Inky()
-  : Ghost(Atlas::Ghost::inky, pacman::Board::initialInkyPosition(), pacman::Board::inkyScatterTarget()) {
+  : Ghost(Atlas::Ghost::inky, pacman::initialInkyPosition(), pacman::inkyScatterTarget()) {
 }
 
 Clyde::Clyde()
-  : Ghost(Atlas::Ghost::clyde, pacman::Board::initialClydePosition(), pacman::Board::clydeScatterTarget()) {
+  : Ghost(Atlas::Ghost::clyde, pacman::initialClydePosition(), pacman::clydeScatterTarget()) {
 }
 
 } // namespace pacman

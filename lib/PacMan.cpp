@@ -4,7 +4,7 @@
 namespace pacman {
 
 PacMan::PacMan()
-  : pos(Board::initialPacManPosition()) {}
+  : pos(initialPacManPosition()) {}
 
 GridPosition PacMan::currentSprite() const {
   return eaten ? pacManAnimation.deathAnimationFrame() : pacManAnimation.animationFrame(direction);
@@ -28,7 +28,7 @@ void PacMan::eat() {
 void PacMan::reset() {
   eaten = false;
   direction = Direction::NONE;
-  pos = pacman::Board::initialPacManPosition();
+  pos = pacman::initialPacManPosition();
 }
 
 void PacMan::update(std::chrono::milliseconds time_delta, Direction input_direction) {
@@ -54,17 +54,9 @@ void PacMan::updateAnimationPosition(std::chrono::milliseconds time_delta, bool 
 
 void PacMan::updateMazePosition(std::chrono::milliseconds time_delta) {
 
-  // Handle teleport
-  const size_t right = COLUMNS - 1;
-  const size_t left = 0;
-
-  if (std::size_t(pos.x) == right && direction == Direction::RIGHT) {
-    pos.x = left;
-    return;
-  } else if (std::size_t(pos.x) == left && direction == Direction::LEFT) {
-    pos.x = right;
-    return;
-  }
+    if(isPortal(positionInGrid())) {
+       // TODO: patricia
+    }
 
   const double position_delta = 0.004 * time_delta.count();
   const auto pacman_size = 1;
@@ -86,7 +78,7 @@ void PacMan::updateMazePosition(std::chrono::milliseconds time_delta) {
   };
 
   auto canGo = [&](Direction move_direction) {
-    return pacman::Board::isWalkableForPacMan(moveToPosition(pos, move_direction));
+    return pacman::isWalkableForPacMan(moveToPosition(pos, move_direction));
   };
 
   if (canGo(desired_direction)) {

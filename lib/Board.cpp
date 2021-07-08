@@ -2,6 +2,18 @@
 
 namespace pacman {
 
+const std::size_t ROWS = 31;
+const std::size_t COLUMNS = 28;
+
+enum class Cell {
+    wall = 0,
+    pellet = 1,
+    nothing = 2,
+    door = 3,
+    power_pellet = 4,
+    pen = 5,
+};
+
 // Legend
 // 0 - wall
 // 1 - pellet
@@ -11,7 +23,7 @@ namespace pacman {
 // 5 - pen doors
 
 // clang-format off
-std::array<std::array<int, COLUMNS>, ROWS> Board::board = {{
+constexpr std::array<std::array<int, COLUMNS>, ROWS> board = {{
  // 0  1  2  3  4  5  6  7  8  9  0  1  2  3  4  5  6  7  8  9  0  1  2  3  4  5  6  7
   { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }, // 0
   { 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0 }, // 1
@@ -47,28 +59,32 @@ std::array<std::array<int, COLUMNS>, ROWS> Board::board = {{
 }};
 // clang-format on
 
-bool Board::isWalkableForPacMan(GridPosition point) {
+static Cell cellAtPosition(GridPosition point) {
+  if (point.x >= COLUMNS || point.y >= ROWS)
+    return Cell::wall;
+  return Cell(board[point.y][point.x]);
+}
+
+bool isWalkableForPacMan(GridPosition point) {
   return cellAtPosition(point) != Cell::wall;
 }
 
-bool Board::isWalkableForGhost(GridPosition point, GridPosition origin, bool isEyes) {
+bool isWalkableForGhost(GridPosition point, GridPosition origin, bool isEyes) {
   Cell cell = cellAtPosition(point);
   if (cell == Cell::wall)
     return false;
   return isEyes || (isInPen(origin) || !isInPen(point));
 }
 
-bool Board::isInPen(GridPosition point) {
+bool isInPen(GridPosition point) {
   return cellAtPosition(point) == Cell::pen;
 }
 
-Board::Cell Board::cellAtPosition(GridPosition point) {
-  if (point.x >= COLUMNS || point.y >= ROWS)
-    return Cell::wall;
-  return Cell(board[point.y][point.x]);
+bool isPortal(GridPosition point) {
+  return cellAtPosition(point) == Cell::door;
 }
 
-std::vector<GridPosition> Board::initialPelletPositions() {
+std::vector<GridPosition> initialPelletPositions() {
   std::vector<GridPosition> positions;
   for (std::size_t row = 0; row < ROWS; row++) {
     for (std::size_t column = 0; column < COLUMNS; column++) {
@@ -79,7 +95,7 @@ std::vector<GridPosition> Board::initialPelletPositions() {
   return positions;
 }
 
-std::vector<GridPosition> Board::initialSuperPelletPositions() {
+std::vector<GridPosition> initialSuperPelletPositions() {
   std::vector<GridPosition> positions;
   for (std::size_t row = 0; row < ROWS; row++) {
     for (std::size_t column = 0; column < COLUMNS; column++) {
