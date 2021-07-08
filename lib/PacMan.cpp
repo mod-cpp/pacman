@@ -54,9 +54,10 @@ void PacMan::updateAnimationPosition(std::chrono::milliseconds time_delta, bool 
 
 void PacMan::updateMazePosition(std::chrono::milliseconds time_delta) {
 
-    if(isPortal(positionInGrid())) {
-       // TODO: patricia
-    }
+  if (isPortal(positionInGrid(), direction)) {
+    pos = gridPositionToPosition(teleport(positionInGrid()));
+    return;
+  }
 
   const double position_delta = 0.004 * time_delta.count();
   const auto pacman_size = 1;

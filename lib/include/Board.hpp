@@ -13,6 +13,8 @@ namespace pacman {
   [[nodiscard]] bool isWalkableForPacMan(GridPosition point);
   [[nodiscard]] bool isWalkableForGhost(GridPosition point, GridPosition origin, bool isEyes);
   [[nodiscard]] bool isInPen(GridPosition point);
+  [[nodiscard]] bool isPortal(GridPosition point, Direction direction);
+  [[nodiscard]] GridPosition teleport(GridPosition point);
 
   [[nodiscard]] std::vector<GridPosition> initialPelletPositions();
 

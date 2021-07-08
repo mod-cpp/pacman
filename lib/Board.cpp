@@ -9,9 +9,11 @@ enum class Cell {
     wall = 0,
     pellet = 1,
     nothing = 2,
-    door = 3,
+    // missing 3
     power_pellet = 4,
     pen = 5,
+    left_portal = 6,
+    right_portal = 7
 };
 
 // Legend
@@ -39,7 +41,7 @@ constexpr std::array<std::array<int, COLUMNS>, ROWS> board = {{
   { 0, 0, 0, 0, 0, 0, 1, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0, 1, 0, 0, 0, 0, 0, 0 }, // 11
   { 0, 0, 0, 0, 0, 0, 1, 0, 0, 2, 0, 0, 0, 5, 5, 0, 0, 0, 2, 0, 0, 1, 0, 0, 0, 0, 0, 0 }, // 12
   { 0, 0, 0, 0, 0, 0, 1, 0, 0, 2, 0, 5, 5, 5, 5, 5, 5, 0, 2, 0, 0, 1, 0, 0, 0, 0, 0, 0 }, // 13
-  { 3, 2, 2, 2, 2, 2, 1, 2, 2, 2, 0, 5, 5, 5, 5, 5, 5, 0, 2, 2, 2, 1, 2, 2, 2, 2, 2, 3 }, // 14
+  { 6, 2, 2, 2, 2, 2, 1, 2, 2, 2, 0, 5, 5, 5, 5, 5, 5, 0, 2, 2, 2, 1, 2, 2, 2, 2, 2, 7 }, // 14
   { 0, 0, 0, 0, 0, 0, 1, 0, 0, 2, 0, 5, 5, 5, 5, 5, 5, 0, 2, 0, 0, 1, 0, 0, 0, 0, 0, 0 }, // 15
   { 0, 0, 0, 0, 0, 0, 1, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 1, 0, 0, 0, 0, 0, 0 }, // 16
   { 0, 0, 0, 0, 0, 0, 1, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0, 1, 0, 0, 0, 0, 0, 0 }, // 17
@@ -80,8 +82,19 @@ bool isInPen(GridPosition point) {
   return cellAtPosition(point) == Cell::pen;
 }
 
-bool isPortal(GridPosition point) {
-  return cellAtPosition(point) == Cell::door;
+bool isPortal(GridPosition point, Direction direction) {
+  return (cellAtPosition(point) == Cell::left_portal && direction == Direction::LEFT) ||
+         (cellAtPosition(point) == Cell::right_portal && direction == Direction::RIGHT);
+}
+
+GridPosition teleport(GridPosition point) {
+  size_t right = COLUMNS - 1;
+  size_t left = 0;
+  if (point.x == left)
+    point.x = right;
+  else if (point.x == right)
+    point.x = left;
+  return point;
 }
 
 std::vector<GridPosition> initialPelletPositions() {
