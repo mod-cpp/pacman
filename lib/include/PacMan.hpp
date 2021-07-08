@@ -21,11 +21,11 @@ public:
 
   [[nodiscard]] GridPosition positionInGrid() const;
 
-  void update(std::chrono::milliseconds time_delta, InputState state);
+  void update(std::chrono::milliseconds time_delta, Direction input_direction);
 
   void eat();
   void reset();
-  [[nodiscard]] bool onTheMove() const {
+  [[nodiscard]] bool hasDirection() const {
     return direction != Direction::NONE;
   }
 
@@ -35,8 +35,6 @@ private:
   Position pos;
   PacManAnimation pacManAnimation;
   bool eaten = false;
-
-  void setDirection(const InputState & state);
 
   void updateAnimationPosition(std::chrono::milliseconds time_delta, bool paused);
   void updateMazePosition(std::chrono::milliseconds time_delta);

@@ -8,11 +8,10 @@
 namespace pacman {
 
 Canvas::Canvas()
-  : window(sf::VideoMode((viewDimensions().width/2.0), (viewDimensions().height/2.0)),
+  : window(sf::VideoMode((viewDimensions().width / 2.0), (viewDimensions().height / 2.0)),
            "Pacman",
-           sf::Style::Titlebar | sf::Style::Close)
-  , view(sf::FloatRect(0, 0, viewDimensions().width, viewDimensions().height))
-{
+           sf::Style::Titlebar | sf::Style::Close),
+    view(sf::FloatRect(0, 0, viewDimensions().width, viewDimensions().height)) {
 
   window.setView(view);
   window.setFramerateLimit(60);
@@ -21,30 +20,29 @@ Canvas::Canvas()
   // We render the game in view at twice the native resolution,
   // Then project it on a scaled window - on some mac we get the
   // scaling factor of the window to adjust the resolution
-  const auto scale  = scaling_factor_for_window(window.getSystemHandle());
-  const auto width  = viewDimensions().width/2.0 * scale;
-  const auto height = viewDimensions().height/2.0 * scale;
+  const auto scale = scaling_factor_for_window(window.getSystemHandle());
+  const auto width = viewDimensions().width / 2.0 * scale;
+  const auto height = viewDimensions().height / 2.0 * scale;
   window.setSize(sf::Vector2u(width, height));
-
 
   maze_texture = loadTexture("maze.png");
   sprites_texture = loadTexture("sprites32.png");
   game_font = loadFont("retro_font.ttf");
 }
 
-void Canvas::update(const Game & game) {
+void Canvas::update(const GameState & gameState, const Score & score) {
   clear();
 
   renderMaze();
-  renderPellets(game.pellets);
-  renderSuperPellets(game.superPellets);
+  renderPellets(gameState.pellets);
+  renderSuperPellets(gameState.superPellets);
 
-  std::apply([&](const auto &... ghost) { (renderGhost(ghost), ...); }, game.ghosts);
+  std::apply([&](const auto &... ghost) { (renderGhost(ghost), ...); }, gameState.ghosts);
 
-  renderScore(game.score.points);
-  renderLives(game.score.lives);
+  renderScore(score.points);
+  renderLives(score.lives);
 
-  renderPacMan(game.pacMan);
+  renderPacMan(gameState.pacMan);
 
   render();
 }
@@ -107,7 +105,7 @@ void Canvas::renderGhost(const Ghost & ghost) {
 
 void Canvas::renderScore(int score) {
   const int x = (LEFT_MARGIN + TARGET_MAZE_WIDTH + LEFT_MARGIN);
-  const int y = (TOP_MARGIN * 2) ;
+  const int y = (TOP_MARGIN * 2);
 
   sf::Text text;
   text.setPosition(x, y);
@@ -133,8 +131,8 @@ void Canvas::renderLives(int lives) {
 }
 
 Rect Canvas::viewDimensions() {
-  const double width  = (LEFT_MARGIN + TARGET_MAZE_WIDTH  + SCORE_WIDTH);
-  const double height = (TOP_MARGIN  + TARGET_MAZE_HEIGHT + BOTTOM_MARGIN);
+  const double width = (LEFT_MARGIN + TARGET_MAZE_WIDTH + SCORE_WIDTH);
+  const double height = (TOP_MARGIN + TARGET_MAZE_HEIGHT + BOTTOM_MARGIN);
   return { 0, 0, int(width), int(height) };
 }
 
@@ -150,7 +148,7 @@ Sprite Canvas::getSprite(GridPosition coordinate) const {
 
 void Canvas::renderSprite(Sprite sprite, Position pos) {
   pos.x = LEFT_MARGIN + (pos.x * SPRITE_WIDTH);
-  pos.y = TOP_MARGIN  + (pos.y * SPRITE_HEIGHT);
+  pos.y = TOP_MARGIN + (pos.y * SPRITE_HEIGHT);
   sprite.setPosition(pos.x, pos.y);
   window.draw(sprite);
 }

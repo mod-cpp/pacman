@@ -3,7 +3,6 @@
 #include "Atlas.hpp"
 #include "Board.hpp"
 #include "Direction.hpp"
-#include "InputState.hpp"
 #include "Position.hpp"
 
 #include <chrono>

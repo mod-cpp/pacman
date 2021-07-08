@@ -31,27 +31,17 @@ void PacMan::reset() {
   pos = pacman::Board::initialPacManPosition();
 }
 
-void PacMan::update(std::chrono::milliseconds time_delta, InputState state) {
+void PacMan::update(std::chrono::milliseconds time_delta, Direction input_direction) {
   if (eaten) {
     updateAnimationPosition(time_delta, false);
     return;
   }
+  if (input_direction != Direction::NONE)
+    desired_direction = input_direction;
   const auto old = pos;
-  setDirection(state);
   updateMazePosition(time_delta);
   const bool paused = pos == old;
   updateAnimationPosition(time_delta, paused);
-}
-
-void PacMan::setDirection(const InputState & state) {
-  if (state.left)
-    desired_direction = Direction::LEFT;
-  else if (state.right)
-    desired_direction = Direction::RIGHT;
-  else if (state.up)
-    desired_direction = Direction::UP;
-  else if (state.down)
-    desired_direction = Direction::DOWN;
 }
 
 void PacMan::updateAnimationPosition(std::chrono::milliseconds time_delta, bool paused) {

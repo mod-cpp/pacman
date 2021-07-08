@@ -1,16 +1,10 @@
 #pragma once
 
-#include "Board.hpp"
 #include "Canvas.hpp"
-#include "Ghost.hpp"
-#include "PacMan.hpp"
-#include "Pellets.hpp"
-#include "Score.hpp"
-#include "SuperPellets.hpp"
+#include "GameState.hpp"
+#include "InputState.hpp"
 
 namespace pacman {
-
-class InputState;
 
 class Game {
 public:
@@ -18,21 +12,15 @@ public:
   void run();
 
 private:
-  friend class Canvas;
-
   Canvas canvas;
-  Board board;
-  PacMan pacMan;
-  Pellets pellets;
-  SuperPellets superPellets;
-  std::tuple<Blinky, Speedy, Inky, Clyde> ghosts;
+  GameState gameState;
   Score score;
   std::chrono::milliseconds timeSinceDeath{};
 
   void step(std::chrono::milliseconds delta, InputState inputState);
   void eatPellets();
   void processEvents(InputState & inputState);
-  void checkCollision(Ghost & g);
+  void checkCollision(Ghost & ghost);
 
   [[nodiscard]] static auto now();
 };
