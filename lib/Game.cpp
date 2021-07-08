@@ -14,22 +14,16 @@ Game::Game() {
   score.lives = DEFAULT_LIVES;
 }
 
-auto Game::now() {
-  return std::chrono::system_clock::now();
-}
-
 void Game::run() {
 
   const std::chrono::milliseconds delta_time(1000 / 60);
-
-  std::chrono::milliseconds t(0);
   std::chrono::milliseconds accumulator(0);
-  auto current_time = now();
+  auto current_time = std::chrono::system_clock::now();
 
   InputState inputState;
 
   while (true) {
-    auto newTime = now();
+    auto newTime = std::chrono::system_clock::now();
     auto frameTime = std::chrono::duration_cast<std::chrono::milliseconds>(newTime - current_time);
     current_time = newTime;
     accumulator += frameTime;
@@ -39,7 +33,6 @@ void Game::run() {
     while (accumulator >= delta_time) {
       step(delta_time, inputState);
       accumulator -= delta_time;
-      t += delta_time;
     }
     canvas.update(gameState, score);
   }

@@ -21,8 +21,6 @@ private:
   void eatPellets();
   void processEvents(InputState & inputState);
   void checkCollision(Ghost & ghost);
-
-  [[nodiscard]] static auto now();
 };
 
 } // namespace pacman
