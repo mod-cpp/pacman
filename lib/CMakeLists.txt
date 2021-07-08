@@ -10,14 +10,8 @@ file(GLOB_RECURSE sources CONFIGURE_DEPENDS "*.cpp")
 add_library(libpacman ${sources})
 
 target_include_directories(libpacman PUBLIC include)
-target_link_libraries(libpacman PUBLIC fmt::fmt sfml-graphics)
+target_link_libraries(libpacman PUBLIC scaling-lib fmt::fmt sfml-graphics)
 
 if (${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
     target_link_libraries(libpacman PUBLIC OpenGL::OpenGL OpenGL::GLX)
-endif ()
-
-if (${CMAKE_SYSTEM_NAME} STREQUAL "Darwin")
-    target_sources(libpacman PRIVATE Scaling.mm)
-else()
-    target_sources(libpacman PRIVATE Scaling.cpp)
 endif ()

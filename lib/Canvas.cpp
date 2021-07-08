@@ -1,10 +1,9 @@
 #include "Canvas.hpp"
 #include "Game.hpp"
+#include "Scaling.hpp"
 #include <fmt/format.h>
 #include <string>
 #include <vector>
-
-double scaling_factor_for_window(sf::WindowHandle);
 
 namespace pacman {
 

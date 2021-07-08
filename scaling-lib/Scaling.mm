@@ -5,10 +5,15 @@ It is not a C++ file and is not part of this course!
 */
 #import "AppKit/NSWindow.h"
 #include <cassert>
+#include "Scaling.hpp"
 
-double scaling_factor_for_window(void* ptr) {
+namespace pacman {
+
+double scaling_factor_for_window(sf::WindowHandle) {
     NSWindow* window = static_cast<NSWindow*>(ptr);
     assert(window);
     double d = [window backingScaleFactor];
     return d;
+}
+
 }

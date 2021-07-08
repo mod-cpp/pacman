@@ -28,6 +28,7 @@ project(pacman)
 
 set(CMAKE_CXX_STANDARD 20)
 
+add_subdirectory(scaling-lib)
 add_subdirectory(lib)
 add_subdirectory(src)
 add_subdirectory(test)
