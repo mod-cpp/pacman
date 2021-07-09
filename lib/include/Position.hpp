@@ -32,8 +32,8 @@ constexpr bool operator==(const GridPosition & a, const GridPosition & b) {
   return a.x == b.x && a.y == b.y;
 }
 
-constexpr bool operator==(const GridPosition & a, const Position & b) {
-  return a.x == b.x && a.y == b.y;
+constexpr bool operator!=(const GridPosition & a, const GridPosition & b) {
+  return !(a == b);
 }
 
 constexpr bool operator==(const Position & a, const Position & b) {
@@ -44,8 +44,6 @@ constexpr bool operator!=(const Position & a, const Position & b) {
   return !(a == b);
 }
 
-constexpr bool operator!=(const GridPosition & a, const GridPosition & b) {
-  return !(a == b);
-}
+
 
 } // namespace pacman
