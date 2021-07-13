@@ -3,11 +3,8 @@
 
 namespace pacman {
 
-PacMan::PacMan()
-  : pos(initialPacManPosition()) {}
-
 GridPosition PacMan::currentSprite() const {
-  return eaten ? pacManAnimation.deathAnimationFrame() : pacManAnimation.animationFrame(direction);
+  return dead ? pacManAnimation.deathAnimationFrame() : pacManAnimation.animationFrame(direction);
 }
 
 Position PacMan::position() const {
@@ -18,21 +15,21 @@ GridPosition PacMan::positionInGrid() const {
   return positionToGridPosition(pos);
 }
 
-void PacMan::eat() {
-  if (eaten)
+void PacMan::die() {
+  if (dead)
     return;
-  eaten = true;
-  direction = Direction::NONE;
+  dead = true;
 }
 
 void PacMan::reset() {
-  eaten = false;
+  dead = false;
   direction = Direction::NONE;
+  desired_direction = Direction::NONE;
   pos = pacman::initialPacManPosition();
 }
 
 void PacMan::update(std::chrono::milliseconds time_delta, Direction input_direction) {
-  if (eaten) {
+  if (dead) {
     updateAnimationPosition(time_delta, false);
     return;
   }
@@ -48,7 +45,7 @@ void PacMan::updateAnimationPosition(std::chrono::milliseconds time_delta, bool 
   if (paused) {
     pacManAnimation.pause();
   } else {
-    pacManAnimation.updateAnimationPosition(time_delta, eaten);
+    pacManAnimation.updateAnimationPosition(time_delta, dead);
   }
 }
 

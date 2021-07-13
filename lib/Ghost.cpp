@@ -27,7 +27,7 @@ bool Ghost::isEyes() const {
   return state == State::Eyes;
 }
 
-void Ghost::eat() {
+void Ghost::die() {
   if (state == State::Eyes)
     return;
   direction = oppositeDirection(direction);
@@ -160,7 +160,7 @@ void Ghost::updateDirection() {
     if (opposite_direction)
       continue;
 
-    const GridPosition grid_position = {size_t(move.position.x), size_t(move.position.y)};
+    const GridPosition grid_position = { size_t(move.position.x), size_t(move.position.y) };
     const bool can_walk = pacman::isWalkableForGhost(grid_position, current_grid_position, isEyes());
     if (!can_walk)
       continue;

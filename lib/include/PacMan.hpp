@@ -13,8 +13,6 @@ class InputState;
 
 class PacMan {
 public:
-  explicit PacMan();
-
   [[nodiscard]] GridPosition currentSprite() const;
 
   [[nodiscard]] Position position() const;
@@ -23,7 +21,7 @@ public:
 
   void update(std::chrono::milliseconds time_delta, Direction input_direction);
 
-  void eat();
+  void die();
   void reset();
   [[nodiscard]] bool hasDirection() const {
     return direction != Direction::NONE;
@@ -32,9 +30,9 @@ public:
 private:
   Direction direction = Direction::NONE;
   Direction desired_direction = Direction::NONE;
-  Position pos;
+  Position pos = initialPacManPosition();
   PacManAnimation pacManAnimation;
-  bool eaten = false;
+  bool dead = false;
 
   void updateAnimationPosition(std::chrono::milliseconds time_delta, bool paused);
   void updateMazePosition(std::chrono::milliseconds time_delta);

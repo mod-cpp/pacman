@@ -27,7 +27,7 @@ public:
 
   void update(std::chrono::milliseconds time_delta);
   void frighten();
-  void eat();
+  void die();
   [[nodiscard]] bool isFrightened() const;
   [[nodiscard]] bool isEyes() const;
   void reset();

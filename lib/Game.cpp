@@ -38,13 +38,18 @@ void Game::run() {
   }
 }
 
-void Game::step(std::chrono::milliseconds delta, InputState inputState) {
+void Game::killPacMan() {
+  gameState.pacMan.die();
+  score.lives--;
+  timeSinceDeath = std::chrono::milliseconds(1);
+}
 
-  gameState.pacMan.update(delta, inputState.direction());
+bool Game::pacManDying() const {
+  return timeSinceDeath.count() != 0;
+}
 
-  if (timeSinceDeath.count() != 0) {
-    timeSinceDeath += delta;
-  }
+void Game::handleDeathAnimation(std::chrono::milliseconds delta) {
+  timeSinceDeath += delta;
 
   if (timeSinceDeath.count() > 1000) {
     std::apply([&](auto &... ghost) {
@@ -54,9 +59,16 @@ void Game::step(std::chrono::milliseconds delta, InputState inputState) {
     gameState.pacMan.reset();
     timeSinceDeath = std::chrono::milliseconds(0);
   }
+}
 
-  if (timeSinceDeath.count())
+void Game::step(std::chrono::milliseconds delta, InputState inputState) {
+
+  gameState.pacMan.update(delta, inputState.direction());
+
+  if (pacManDying()) {
+    handleDeathAnimation(delta);
     return;
+  }
 
   if (!gameState.pacMan.hasDirection())
     return;
@@ -71,19 +83,17 @@ void Game::step(std::chrono::milliseconds delta, InputState inputState) {
 }
 
 void Game::checkCollision(Ghost & ghost) {
-  if (timeSinceDeath.count() || ghost.isEyes())
+  if (pacManDying() || ghost.isEyes())
     return;
 
   if (ghost.positionInGrid() != gameState.pacMan.positionInGrid())
     return;
 
   if (ghost.isFrightened()) {
-    ghost.eat();
+    ghost.die();
     score.points += GHOST_POINTS;
   } else {
-    gameState.pacMan.eat();
-    score.lives--;
-    timeSinceDeath = std::chrono::milliseconds(1);
+    killPacMan();
   }
 }
 

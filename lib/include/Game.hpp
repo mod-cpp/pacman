@@ -21,6 +21,9 @@ private:
   void eatPellets();
   void processEvents(InputState & inputState);
   void checkCollision(Ghost & ghost);
+  void killPacMan();
+  bool pacManDying() const;
+  void handleDeathAnimation(std::chrono::milliseconds delta);
 };
 
 } // namespace pacman
