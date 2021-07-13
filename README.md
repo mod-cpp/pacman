@@ -1,35 +1,47 @@
 # Mod(C++) - Pac-Man Exercise
 
+## Make Speedy
 
-## Setup VCPKG
+1) Make a new ghost class for Speedy
+2) Pic the right sprite
+3) Pic the right scatter target
 
-git submodule init
-git submodule update
-On windows, run `.\vcpkg\bootstrap-vcpkg.bat`.
-On other platforms, run `./vcpkg/bootstrap-vcpkg.sh`
+Advanced:
 
-Dependencies will be automatically when running CMake.
+4) Try to chase PacMan
 
-## Keep PacMan Score
+Hints: (links)
 
-* Implement score by implementing eating of pellets by Pac-Man
-* Use the existing test.cpp file for TDD scoring
-* Pellets are worth 10 points - SuperPellets 50 points
-* Implement support for the pellets to be eaten
-* Implement support for counting pellets eaten by PacMan
-* (Extra: Display score - if you have a LOT of time)
+## Implement eating of pellets
 
-## Make a ghost
+1) Make a Pellets class (look at SuperPellets)
+2) Implement eating of pellets
 
-* Use the PacMan class as inspiration
-* Pic a sprite from [sprites32.png](assets/sprites32.png) for the ghost
-* Make an algorithm for movement (simple is fine)
-* For fancy algorithm see next section
+Advanced:
+
+3) Try to keep score
+
+Hints: (links)
+
+## Add cherries
+
+1) Implement cherries (look at SuperPellets)
+2) Change the ghost speed and look
+
+Hints: (link)
+
+## Add Levels
+
+## Add kill screen
+
+## Add win
+
+## Add high score (std::filesystem)
 
 ### Ghosts characters and algorithms
 These will probably become relevant
 * https://en.wikipedia.org/wiki/Ghosts_(Pac-Man)
-* https://youtu.be/ataGotQ7ir8
+* [Video: Pac-Man Ghost AI Explained](https://youtu.be/ataGotQ7ir8)
 * https://gameinternals.com/understanding-pac-man-ghost-behavior
 * https://www.gamasutra.com/view/feature/3938/the_pacman_dossier.php?print=1
 * https://www.slideshare.net/grimlockt/pac-man-6561257
