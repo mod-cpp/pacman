@@ -9,7 +9,10 @@
 namespace pacman {
 
 struct GameState {
-  std::tuple<Blinky, Speedy, Inky, Clyde> ghosts;
+  Blinky blinky;
+  Speedy speedy;
+  Inky inky;
+  Clyde clyde;
   PacMan pacMan;
   Pellets pellets;
   SuperPellets superPellets;

@@ -52,10 +52,10 @@ void Game::handleDeathAnimation(std::chrono::milliseconds delta) {
   timeSinceDeath += delta;
 
   if (timeSinceDeath.count() > 1000) {
-    std::apply([&](auto &... ghost) {
-      (ghost.reset(), ...);
-    },
-               gameState.ghosts);
+    gameState.blinky.reset();
+    gameState.speedy.reset();
+    gameState.inky.reset();
+    gameState.clyde.reset();
     gameState.pacMan.reset();
     timeSinceDeath = std::chrono::milliseconds(0);
   }
@@ -107,10 +107,12 @@ void Game::eatPellets() {
   if (gameState.superPellets.eatPelletAtPosition(pos)) {
     score.eatenPellets++;
     score.points += POWER_PELLET_POINTS;
-    std::apply([&](auto &... ghost) {
-      (ghost.frighten(), ...);
-    },
-               gameState.ghosts);
+
+    gameState.blinky.frighten();
+    gameState.speedy.frighten();
+    gameState.inky.frighten();
+    gameState.clyde.frighten();
+
   }
 }
 
