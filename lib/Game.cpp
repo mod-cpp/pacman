@@ -83,15 +83,15 @@ void Game::step(std::chrono::milliseconds delta, InputState inputState) {
   checkCollision(gameState.inky);
   checkCollision(gameState.clyde);
 
-
   eatPellets();
 }
 
-void Game::checkCollision(Ghost ghost) {
+template<typename Ghost>
+void Game::checkCollision(Ghost & ghost) {
   if (pacManDying() || ghost.isEyes())
     return;
 
-  if (ghost.positionInGrid() != gameState.pacMan.positionInGrid())
+  if (positionToGridPosition(ghost.position()) != gameState.pacMan.positionInGrid())
     return;
 
   if (ghost.isFrightened()) {
@@ -117,7 +117,6 @@ void Game::eatPellets() {
     gameState.pinky.frighten();
     gameState.inky.frighten();
     gameState.clyde.frighten();
-
   }
 }
 

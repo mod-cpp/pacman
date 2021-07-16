@@ -30,7 +30,10 @@ private:
   void render();
   void renderMaze();
   void renderPacMan(const PacMan & pac_man);
+
+  template<typename Ghost>
   void renderGhost(const Ghost & ghost);
+
   void renderPellets(const Pellets & pellets);
   void renderSuperPellets(const SuperPellets & superPellets);
   void renderSprite(Sprite sprite, Position pos);

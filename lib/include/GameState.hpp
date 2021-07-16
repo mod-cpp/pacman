@@ -1,6 +1,11 @@
 #pragma once
 
+#include "Blinky.hpp"
+#include "Clyde.hpp"
 #include "Ghost.hpp"
+#include "Inky.hpp"
+#include "Pinky.hpp"
+
 #include "PacMan.hpp"
 #include "Pellets.hpp"
 #include "Score.hpp"

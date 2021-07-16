@@ -100,6 +100,7 @@ void Canvas::renderPacMan(const PacMan & pac_man) {
   renderSprite(pacmanSprite, pos);
 }
 
+template<typename Ghost>
 void Canvas::renderGhost(const Ghost & ghost) {
   Sprite sprite = getSprite(ghost.currentSprite());
   const auto & pos = ghost.position();
