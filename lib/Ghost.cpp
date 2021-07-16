@@ -199,7 +199,7 @@ Blinky::Blinky()
   : Ghost(Atlas::Ghost::blinky, pacman::initialBlinkyPosition(), pacman::blinkyScatterTarget()) {
 }
 
-Speedy::Speedy()
+Pinky::Pinky()
   : Ghost(Atlas::Ghost::speedy, pacman::initialSpeedyPosition(), pacman::speedyScatterTarget()) {
 }
 

@@ -38,7 +38,7 @@ void Canvas::update(const GameState & gameState, const Score & score) {
   renderSuperPellets(gameState.superPellets);
 
   renderGhost(gameState.blinky);
-  renderGhost(gameState.speedy);
+  renderGhost(gameState.pinky);
   renderGhost(gameState.inky);
   renderGhost(gameState.clyde);
 

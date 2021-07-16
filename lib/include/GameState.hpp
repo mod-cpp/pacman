@@ -10,7 +10,7 @@ namespace pacman {
 
 struct GameState {
   Blinky blinky;
-  Speedy speedy;
+  Pinky pinky;
   Inky inky;
   Clyde clyde;
   PacMan pacMan;

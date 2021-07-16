@@ -53,7 +53,7 @@ void Game::handleDeathAnimation(std::chrono::milliseconds delta) {
 
   if (timeSinceDeath.count() > 1000) {
     gameState.blinky.reset();
-    gameState.speedy.reset();
+    gameState.pinky.reset();
     gameState.inky.reset();
     gameState.clyde.reset();
     gameState.pacMan.reset();
@@ -74,12 +74,12 @@ void Game::step(std::chrono::milliseconds delta, InputState inputState) {
     return;
 
   gameState.blinky.update(delta);
-  gameState.speedy.update(delta);
+  gameState.pinky.update(delta);
   gameState.inky.update(delta);
   gameState.clyde.update(delta);
 
   checkCollision(gameState.blinky);
-  checkCollision(gameState.speedy);
+  checkCollision(gameState.pinky);
   checkCollision(gameState.inky);
   checkCollision(gameState.clyde);
 
@@ -87,7 +87,7 @@ void Game::step(std::chrono::milliseconds delta, InputState inputState) {
   eatPellets();
 }
 
-void Game::checkCollision(Ghost & ghost) {
+void Game::checkCollision(Ghost ghost) {
   if (pacManDying() || ghost.isEyes())
     return;
 
@@ -114,7 +114,7 @@ void Game::eatPellets() {
     score.points += POWER_PELLET_POINTS;
 
     gameState.blinky.frighten();
-    gameState.speedy.frighten();
+    gameState.pinky.frighten();
     gameState.inky.frighten();
     gameState.clyde.frighten();
 

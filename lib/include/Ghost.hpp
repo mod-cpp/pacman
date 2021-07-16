@@ -59,9 +59,9 @@ public:
   explicit Blinky();
 };
 
-class Speedy : public Ghost {
+class Pinky : public Ghost {
 public:
-  explicit Speedy();
+  explicit Pinky();
 };
 
 class Inky : public Ghost {
