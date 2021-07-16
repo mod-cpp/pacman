@@ -16,14 +16,6 @@ enum class Cell {
     right_portal = 7
 };
 
-// Legend
-// 0 - wall
-// 1 - pellet
-// 2 - nothing
-// 3 - door
-// 4 - superpower
-// 5 - pen doors
-
 // clang-format off
 constexpr std::array<std::array<int, COLUMNS>, ROWS> board = {{
  // 0  1  2  3  4  5  6  7  8  9  0  1  2  3  4  5  6  7  8  9  0  1  2  3  4  5  6  7
@@ -99,6 +91,8 @@ GridPosition teleport(GridPosition point) {
 
 std::vector<GridPosition> initialPelletPositions() {
   std::vector<GridPosition> positions;
+  positions.reserve(4); // Reserve space for 4 supper pellets
+
   for (std::size_t row = 0; row < ROWS; row++) {
     for (std::size_t column = 0; column < COLUMNS; column++) {
       if (board[row][column] == int(Cell::pellet))
@@ -110,6 +104,17 @@ std::vector<GridPosition> initialPelletPositions() {
 
 std::vector<GridPosition> initialSuperPelletPositions() {
   std::vector<GridPosition> positions;
+
+  // To avoid having to resize the vector too many times, we can
+  // presemptively reserve space for elements.
+  // At a glance, we can estimate that there are pellets on a third of the grid.
+  // This is not accurate so we might either reserve too much or too little memory,
+  // but this is will still be faster than not calling reserve at all!
+  // This will be very noticeable on both very large vectors (10 thousands of elements),
+  // Or small vectors in functions called very frequently.
+
+  positions.reserve((ROWS * COLUMNS) / 3);
+
   for (std::size_t row = 0; row < ROWS; row++) {
     for (std::size_t column = 0; column < COLUMNS; column++) {
       if (board[row][column] == int(Cell::power_pellet))

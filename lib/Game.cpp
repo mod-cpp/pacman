@@ -73,11 +73,16 @@ void Game::step(std::chrono::milliseconds delta, InputState inputState) {
   if (!gameState.pacMan.hasDirection())
     return;
 
-  std::apply([&](auto &... ghost) {
-    (ghost.update(delta), ...);
-    (checkCollision(ghost), ...);
-  },
-             gameState.ghosts);
+  gameState.blinky.update(delta);
+  gameState.speedy.update(delta);
+  gameState.inky.update(delta);
+  gameState.clyde.update(delta);
+
+  checkCollision(gameState.blinky);
+  checkCollision(gameState.speedy);
+  checkCollision(gameState.inky);
+  checkCollision(gameState.clyde);
+
 
   eatPellets();
 }
