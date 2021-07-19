@@ -23,6 +23,7 @@ namespace pacman {
 inline Position penDoorPosition() {
   return { 13, 11 };
 }
+
 inline Position initialPacManPosition() {
   return { 13.5, 23 };
 }
@@ -30,6 +31,7 @@ inline Position initialPacManPosition() {
 inline Position initialBlinkyPosition() {
   return { 13.5, 11 };
 }
+
 inline Position blinkyScatterTarget() {
   return { 25, -3 };
 }
@@ -37,6 +39,7 @@ inline Position blinkyScatterTarget() {
 inline Position initialPinkyPosition() {
   return { 11.5, 14 };
 }
+
 inline Position pinkyScatterTarget() {
   return { 3, -2 };
 }
@@ -44,6 +47,7 @@ inline Position pinkyScatterTarget() {
 inline Position initialInkyPosition() {
   return { 13.5, 14 };
 }
+
 inline Position inkyScatterTarget() {
   return { 27, 30 };
 }

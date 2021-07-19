@@ -12,7 +12,7 @@ void Inky::frighten() {
     return;
   direction = oppositeDirection(direction);
   state = GhostState::Frightened;
-  timeFrighten = 0;
+  timeFrighten = {};
 }
 
 bool Inky::isFrightened() const {
@@ -28,7 +28,7 @@ void Inky::die() {
     return;
   direction = oppositeDirection(direction);
   state = GhostState::Eyes;
-  timeFrighten = 0;
+  timeFrighten = {};
 }
 
 void Inky::reset() {
@@ -48,8 +48,8 @@ void Inky::update(std::chrono::milliseconds time_delta) {
     state = GhostState::Scatter;
 
   if (state == GhostState::Frightened) {
-    timeFrighten += time_delta.count();
-    if (timeFrighten > 6000)
+    timeFrighten += time_delta;
+    if (timeFrighten.count() > 6000)
       state = GhostState::Scatter;
   }
 
@@ -60,7 +60,7 @@ void Inky::update(std::chrono::milliseconds time_delta) {
 void Inky::updatePosition(std::chrono::milliseconds time_delta) {
   const auto position_in_grid = positionToGridPosition(position());
   if (position_in_grid != last_grid_position) {
-    direction = calculateNewGhostDirection(*this);
+    direction = calculateNewGhostDirection(*this, target());
     last_grid_position = position_in_grid;
   }
 
@@ -77,13 +77,7 @@ double Inky::speed() const {
 }
 
 Position Inky::target() const {
-  if (state == GhostState::Eyes)
-    return initialInkyPosition();
-
-  if (pacman::isInPen(positionToGridPosition(position())))
-    return pacman::penDoorPosition();
-
-  return inkyScatterTarget();
+    return ghostTargetPosition(*this, initialInkyPosition(), inkyScatterTarget());
 }
 
 } // namespace pacman

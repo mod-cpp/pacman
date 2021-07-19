@@ -73,8 +73,8 @@ void Game::step(std::chrono::milliseconds delta, InputState inputState) {
   if (!gameState.pacMan.hasDirection())
     return;
 
-  gameState.blinky.update(delta);
-  gameState.pinky.update(delta);
+  gameState.blinky.update(delta, gameState.pacMan.positionInGrid());
+  gameState.pinky.update(delta,  gameState.pacMan.positionInGrid(), gameState.pacMan.currentDirection());
   gameState.inky.update(delta);
   gameState.clyde.update(delta);
 

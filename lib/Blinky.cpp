@@ -12,7 +12,7 @@ void Blinky::frighten() {
     return;
   direction = oppositeDirection(direction);
   state = GhostState::Frightened;
-  timeFrighten = 0;
+  timeFrighten = {};
 }
 
 bool Blinky::isFrightened() const {
@@ -28,11 +28,12 @@ void Blinky::die() {
     return;
   direction = oppositeDirection(direction);
   state = GhostState::Eyes;
-  timeFrighten = 0;
+  timeFrighten = {};
 }
 
 void Blinky::reset() {
   pos = initialBlinkyPosition();
+  timeChase = {};
 }
 
 [[nodiscard]] GridPosition Blinky::currentSprite() const {
@@ -43,24 +44,33 @@ Position Blinky::position() const {
   return pos;
 }
 
-void Blinky::update(std::chrono::milliseconds time_delta) {
+void Blinky::update(std::chrono::milliseconds time_delta, GridPosition pacman_position) {
   if (state == GhostState::Eyes && ghostIsInPen(*this))
-    state = GhostState::Scatter;
+    state = defaultStateAtDuration(std::chrono::duration_cast<std::chrono::seconds>(timeChase));
 
   if (state == GhostState::Frightened) {
-    timeFrighten += time_delta.count();
-    if (timeFrighten > 6000)
+    timeFrighten += time_delta;
+    if (timeFrighten.count() > 6000)
       state = GhostState::Scatter;
   }
 
+  if(state == GhostState::Scatter || state == GhostState::Chase) {
+      timeChase += time_delta;
+      auto newState = defaultStateAtDuration(std::chrono::duration_cast<std::chrono::seconds>(timeChase));
+      if(newState != state) {
+          direction = oppositeDirection(direction);
+          state = newState;
+      }
+  }
+
   animation.updateAnimation(time_delta);
-  updatePosition(time_delta);
+  updatePosition(time_delta, pacman_position);
 }
 
-void Blinky::updatePosition(std::chrono::milliseconds time_delta) {
+void Blinky::updatePosition(std::chrono::milliseconds time_delta, GridPosition pacman_position) {
   const auto position_in_grid = positionToGridPosition(position());
   if (position_in_grid != last_grid_position) {
-    direction = calculateNewGhostDirection(*this);
+    direction = calculateNewGhostDirection(*this, target(pacman_position));
     last_grid_position = position_in_grid;
   }
 
@@ -76,14 +86,10 @@ double Blinky::speed() const {
   return 0.75;
 }
 
-Position Blinky::target() const {
-  if (state == GhostState::Eyes)
-    return initialBlinkyPosition();
-
-  if (pacman::isInPen(positionToGridPosition(position())))
-    return pacman::penDoorPosition();
-
-  return blinkyScatterTarget();
+Position Blinky::target(GridPosition pacman_position) const {
+  return ghostTargetPosition(*this, initialBlinkyPosition(),
+                             state == GhostState::Chase ?
+                                 gridPositionToPosition(pacman_position) : blinkyScatterTarget());
 }
 
 } // namespace pacman

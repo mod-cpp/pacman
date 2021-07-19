@@ -21,6 +21,10 @@ public:
 
   void update(std::chrono::milliseconds time_delta, Direction input_direction);
 
+  [[nodiscard]] Direction currentDirection() const {
+      return direction;
+  }
+
   void die();
   void reset();
   [[nodiscard]] bool hasDirection() const {

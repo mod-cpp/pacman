@@ -34,7 +34,7 @@ private:
 protected:
   Direction direction = Direction::NONE;
   GhostState state = GhostState::Chase;
-  int timeFrighten = 0;
+  std::chrono::milliseconds timeFrighten = {};
   Position pos;
   GhostAnimation animation = Atlas::Ghost::inky;
   GridPosition last_grid_position = { 0, 0 };

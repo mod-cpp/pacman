@@ -12,7 +12,7 @@ void Clyde::frighten() {
     return;
   direction = oppositeDirection(direction);
   state = GhostState::Frightened;
-  timeFrighten = 0;
+  timeFrighten = {};
 }
 
 bool Clyde::isFrightened() const {
@@ -28,7 +28,7 @@ void Clyde::die() {
     return;
   direction = oppositeDirection(direction);
   state = GhostState::Eyes;
-  timeFrighten = 0;
+  timeFrighten = {};
 }
 
 void Clyde::reset() {
@@ -48,8 +48,8 @@ void Clyde::update(std::chrono::milliseconds time_delta) {
     state = GhostState::Scatter;
 
   if (state == GhostState::Frightened) {
-    timeFrighten += time_delta.count();
-    if (timeFrighten > 6000)
+    timeFrighten += time_delta;
+    if (timeFrighten.count() > 6000)
       state = GhostState::Scatter;
   }
 
@@ -60,7 +60,7 @@ void Clyde::update(std::chrono::milliseconds time_delta) {
 void Clyde::updatePosition(std::chrono::milliseconds time_delta) {
   const auto position_in_grid = positionToGridPosition(position());
   if (position_in_grid != last_grid_position) {
-    direction = calculateNewGhostDirection(*this);
+    direction = calculateNewGhostDirection(*this, target());
     last_grid_position = position_in_grid;
   }
 
@@ -77,13 +77,7 @@ double Clyde::speed() const {
 }
 
 Position Clyde::target() const {
-  if (state == GhostState::Eyes)
-    return initialClydePosition();
-
-  if (pacman::isInPen(positionToGridPosition(position())))
-    return pacman::penDoorPosition();
-
-  return clydeScatterTarget();
+  return ghostTargetPosition(*this, initialClydePosition(), clydeScatterTarget());
 }
 
 } // namespace pacman

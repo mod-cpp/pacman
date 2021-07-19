@@ -32,7 +32,7 @@ enum class GhostState {
  *  This makes ghosts run in circle around the island at each of the 4 map corner.
  */
 template<typename Ghost>
-[[nodiscard]] Direction calculateNewGhostDirection(const Ghost & ghost) {
+[[nodiscard]] Direction calculateNewGhostDirection(const Ghost & ghost, Position target_position) {
   const auto current_grid_position = positionToGridPosition(ghost.position());
 
   struct Move {
@@ -47,8 +47,6 @@ template<typename Ghost>
                                            Move{ Direction::LEFT, { x - 1, y } },
                                            Move{ Direction::DOWN, { x, y + 1 } },
                                            Move{ Direction::RIGHT, { x + 1, y } } } };
-
-  const Position target_position = ghost.target();
 
   for (auto & move : possible_moves) {
     const bool invalid_position = (move.position.x < 0 || move.position.y < 0);
@@ -102,6 +100,18 @@ template<typename Ghost>
 }
 
 template<typename Ghost>
+Position ghostTargetPosition(const Ghost & ghost, Position initial_position, Position default_target)
+{
+    if (ghost.isEyes())
+      return initial_position;
+
+    if (ghostIsInPen(ghost))
+      return penDoorPosition();
+
+    return default_target;
+}
+
+template<typename Ghost>
 bool ghostIsInPen(const Ghost & ghost) {
   return isInPen(positionToGridPosition(ghost.position()));
 }
@@ -109,7 +119,7 @@ bool ghostIsInPen(const Ghost & ghost) {
 class GhostAnimation {
 public:
   GhostAnimation(Atlas::Ghost spriteSet);
-  GridPosition currentSprite(GhostState state, Direction direction, int timeFrighten) const;
+  GridPosition currentSprite(GhostState state, Direction direction, std::chrono::milliseconds timeFrighten) const;
   void updateAnimation(std::chrono::milliseconds time_delta);
 
 private:
@@ -117,5 +127,7 @@ private:
   double timeForAnimation = 0;
   int animationIndex = 0;
 };
+
+GhostState defaultStateAtDuration(std::chrono::seconds s);
 
 } // namespace pacman
