@@ -33,6 +33,7 @@ void Clyde::die() {
 
 void Clyde::reset() {
   pos = initialClydePosition();
+  timeChase = {};
 }
 
 [[nodiscard]] GridPosition Clyde::currentSprite() const {
@@ -43,7 +44,7 @@ Position Clyde::position() const {
   return pos;
 }
 
-void Clyde::update(std::chrono::milliseconds time_delta) {
+void Clyde::update(std::chrono::milliseconds time_delta, GridPosition pacman_position) {
   if (state == GhostState::Eyes && ghostIsInPen(*this))
     state = GhostState::Scatter;
 
@@ -54,13 +55,13 @@ void Clyde::update(std::chrono::milliseconds time_delta) {
   }
 
   animation.updateAnimation(time_delta);
-  updatePosition(time_delta);
+  updatePosition(time_delta, pacman_position);
 }
 
-void Clyde::updatePosition(std::chrono::milliseconds time_delta) {
+void Clyde::updatePosition(std::chrono::milliseconds time_delta, GridPosition pacman_position) {
   const auto position_in_grid = positionToGridPosition(position());
   if (position_in_grid != last_grid_position) {
-    direction = calculateNewGhostDirection(*this, target());
+    direction = calculateNewGhostDirection(*this, target(pacman_position));
     last_grid_position = position_in_grid;
   }
 
@@ -76,8 +77,15 @@ double Clyde::speed() const {
   return 0.75;
 }
 
-Position Clyde::target() const {
-  return ghostTargetPosition(*this, initialClydePosition(), clydeScatterTarget());
+Position Clyde::target(GridPosition pacman_position) const {
+    // Clyde always target its scatter target, unless pacman is further than 8 tiles away
+    auto targetPosition = clydeScatterTarget();
+
+    auto distanceFomPacMan = std::hypot(pos.x - pacman_position.x, pos.y - pacman_position.y);
+    if(state == GhostState::Chase && distanceFomPacMan > 8)
+        targetPosition = gridPositionToPosition(pacman_position);
+
+    return ghostTargetPosition(*this, initialClydePosition(), targetPosition);
 }
 
 } // namespace pacman

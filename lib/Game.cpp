@@ -75,8 +75,9 @@ void Game::step(std::chrono::milliseconds delta, InputState inputState) {
 
   gameState.blinky.update(delta, gameState.pacMan.positionInGrid());
   gameState.pinky.update(delta,  gameState.pacMan.positionInGrid(), gameState.pacMan.currentDirection());
-  gameState.inky.update(delta);
-  gameState.clyde.update(delta);
+  gameState.inky.update(delta, gameState.pacMan.positionInGrid(), gameState.pacMan.currentDirection(),
+                        positionToGridPosition(gameState.blinky.position()));
+  gameState.clyde.update(delta,  gameState.pacMan.positionInGrid());
 
   checkCollision(gameState.blinky);
   checkCollision(gameState.pinky);
