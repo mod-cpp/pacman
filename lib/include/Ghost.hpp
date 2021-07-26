@@ -49,16 +49,20 @@ template<typename Ghost>
                                            Move{ Direction::RIGHT, { x + 1, y } } } };
 
   for (auto & move : possible_moves) {
+
+    if(isPortal(current_grid_position, move.direction))
+        move.position = gridPositionToPosition(teleport(current_grid_position));
+
     const bool invalid_position = (move.position.x < 0 || move.position.y < 0);
     if (invalid_position)
-      continue;
+        continue;
 
     const bool opposite_direction = (move.direction == oppositeDirection(ghost.currentDirection()));
     if (opposite_direction)
       continue;
 
     const GridPosition grid_position = { size_t(move.position.x), size_t(move.position.y) };
-    const bool can_walk = pacman::isWalkableForGhost(grid_position, current_grid_position, ghost.isEyes());
+    const bool can_walk = isWalkableForGhost(grid_position, current_grid_position, ghost.isEyes());
     if (!can_walk)
       continue;
 
@@ -96,6 +100,13 @@ template<typename Ghost>
       pos.y += position_delta;
       break;
   }
+
+  const auto gridPosition = positionToGridPosition(pos);
+  if (isPortal(gridPosition, direction)) {
+      return gridPositionToPosition(teleport(gridPosition));
+  }
+
+
   return pos;
 }
 
