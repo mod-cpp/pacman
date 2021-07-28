@@ -3,7 +3,7 @@
 namespace pacman {
 
 Pinky::Pinky()
-  : Ghost(Atlas::Ghost::speedy, pacman::initialSpeedyPosition(), pacman::speedyScatterTarget()) {
+  : Ghost(Atlas::Ghost::speedy, pacman::initialSpeedyPosition()) {
 }
 
 double Pinky::speed(const GameState & gameState) const {

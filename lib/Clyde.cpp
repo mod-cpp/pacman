@@ -3,7 +3,7 @@
 namespace pacman {
 
 Clyde::Clyde()
-  : Ghost(Atlas::Ghost::clyde, initialClydePosition(), clydeScatterTarget()) {
+  : Ghost(Atlas::Ghost::clyde, initialClydePosition()) {
 }
 
 double Clyde::speed(const GameState & gameState) const {

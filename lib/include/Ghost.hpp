@@ -19,7 +19,7 @@ public:
     Eyes,
   };
 
-  explicit Ghost(Atlas::Ghost spritesSet, Position startingPosition, Position scatterTarget);
+  explicit Ghost(Atlas::Ghost spritesSet, Position startingPosition);
 
   [[nodiscard]] GridPosition currentSprite() const;
 

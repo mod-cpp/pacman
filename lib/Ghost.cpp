@@ -4,7 +4,7 @@
 
 namespace pacman {
 
-Ghost::Ghost(Atlas::Ghost spritesSet, Position startingPosition, Position scatterTarget)
+Ghost::Ghost(Atlas::Ghost spritesSet, Position startingPosition)
   : spritesSet(spritesSet),
     pos(startingPosition),
     startingPosition(startingPosition) {

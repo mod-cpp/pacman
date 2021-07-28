@@ -3,7 +3,7 @@
 namespace pacman {
 
 Blinky::Blinky()
-  : Ghost(Atlas::Ghost::blinky, pacman::initialBlinkyPosition(), pacman::blinkyScatterTarget()) {
+  : Ghost(Atlas::Ghost::blinky, pacman::initialBlinkyPosition()) {
 }
 
 double Blinky::speed(const GameState & gameState) const {

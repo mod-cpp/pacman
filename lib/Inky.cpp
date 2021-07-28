@@ -3,7 +3,7 @@
 namespace pacman {
 
 Inky::Inky()
-  : Ghost(Atlas::Ghost::inky, pacman::initialInkyPosition(), pacman::inkyScatterTarget()) {
+  : Ghost(Atlas::Ghost::inky, pacman::initialInkyPosition()) {
 }
 
 double Inky::speed(const GameState & gameState) const {
