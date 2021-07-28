@@ -73,10 +73,10 @@ void Game::step(std::chrono::milliseconds delta, InputState inputState) {
   if (!gameState.pacMan.hasDirection())
     return;
 
-  gameState.blinky.update(delta);
-  gameState.pinky.update(delta);
-  gameState.inky.update(delta);
-  gameState.clyde.update(delta);
+  gameState.blinky.update(delta, gameState);
+  gameState.pinky.update(delta, gameState);
+  gameState.inky.update(delta, gameState);
+  gameState.clyde.update(delta, gameState);
 
   checkCollision(gameState.blinky);
   checkCollision(gameState.pinky);
@@ -87,7 +87,7 @@ void Game::step(std::chrono::milliseconds delta, InputState inputState) {
   eatPellets();
 }
 
-void Game::checkCollision(Ghost ghost) {
+void Game::checkCollision(Ghost & ghost) {
   if (pacManDying() || ghost.isEyes())
     return;
 

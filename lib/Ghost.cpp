@@ -7,8 +7,7 @@ namespace pacman {
 Ghost::Ghost(Atlas::Ghost spritesSet, Position startingPosition, Position scatterTarget)
   : spritesSet(spritesSet),
     pos(startingPosition),
-    startingPosition(startingPosition),
-    scatterTarget(scatterTarget) {
+    startingPosition(startingPosition) {
 }
 
 void Ghost::frighten() {
@@ -62,7 +61,7 @@ GridPosition Ghost::positionInGrid() const {
   return positionToGridPosition(pos);
 }
 
-void Ghost::update(std::chrono::milliseconds time_delta) {
+void Ghost::update(std::chrono::milliseconds time_delta, const GameState & gameState) {
   if (state == State::Eyes && isInPen())
     state = State::Scatter;
 
@@ -73,17 +72,17 @@ void Ghost::update(std::chrono::milliseconds time_delta) {
   }
 
   updateAnimation(time_delta);
-  updatePosition(time_delta);
+  updatePosition(time_delta, gameState);
 }
 
 bool Ghost::isInPen() const {
   return pacman::isInPen(positionInGrid());
 }
 
-void Ghost::updatePosition(std::chrono::milliseconds time_delta) {
-  updateDirection();
+void Ghost::updatePosition(std::chrono::milliseconds time_delta, const GameState & gameState) {
+  updateDirection(gameState);
 
-  double position_delta = (0.004 * time_delta.count()) * speed();
+  double position_delta = (0.004 * time_delta.count()) * speed(gameState);
 
   switch (direction) {
     case Direction::NONE:
@@ -107,14 +106,6 @@ void Ghost::updatePosition(std::chrono::milliseconds time_delta) {
   }
 }
 
-double Ghost::speed() const {
-  if (state == State::Eyes)
-    return 2;
-  if (state == State::Frightened)
-    return 0.5;
-  return 0.75;
-}
-
 /*
  *  Each time a ghost finds itself at an intersection,
  *  it picks a target position - the specific target depends on the state
@@ -131,7 +122,7 @@ double Ghost::speed() const {
  *  In the scatter state, each ghost tries to reach an unreachable position outside of the map.
  *  This makes ghosts run in circle around the island at each of the 4 map corner.
  */
-void Ghost::updateDirection() {
+void Ghost::updateDirection(const GameState & gameState) {
   const auto current_grid_position = positionInGrid();
   if (current_grid_position == last_grid_position)
     return;
@@ -149,7 +140,7 @@ void Ghost::updateDirection() {
                                            Move{ Direction::DOWN, { x, y + 1 } },
                                            Move{ Direction::RIGHT, { x + 1, y } } } };
 
-  const Position target_position = target();
+  const Position target_position = target(gameState);
 
   for (auto & move : possible_moves) {
     const bool invalid_position = (move.position.x < 0 || move.position.y < 0);
@@ -177,38 +168,12 @@ void Ghost::updateDirection() {
   last_grid_position = current_grid_position;
 }
 
-Position Ghost::target() const {
-  if (state == State::Eyes)
-    return startingPosition;
-
-  if (pacman::isInPen(positionInGrid()))
-    return pacman::penDoorPosition();
-
-  return scatterTarget;
-}
-
 void Ghost::updateAnimation(std::chrono::milliseconds time_delta) {
   timeForAnimation += time_delta.count();
   if (timeForAnimation >= 250) {
     timeForAnimation = 0;
     animationIndex = (animationIndex + 1) % 4;
   }
-}
-
-Blinky::Blinky()
-  : Ghost(Atlas::Ghost::blinky, pacman::initialBlinkyPosition(), pacman::blinkyScatterTarget()) {
-}
-
-Pinky::Pinky()
-  : Ghost(Atlas::Ghost::speedy, pacman::initialSpeedyPosition(), pacman::speedyScatterTarget()) {
-}
-
-Inky::Inky()
-  : Ghost(Atlas::Ghost::inky, pacman::initialInkyPosition(), pacman::inkyScatterTarget()) {
-}
-
-Clyde::Clyde()
-  : Ghost(Atlas::Ghost::clyde, pacman::initialClydePosition(), pacman::clydeScatterTarget()) {
 }
 
 } // namespace pacman

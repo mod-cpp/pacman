@@ -8,6 +8,8 @@
 
 namespace pacman {
 
+class GameState;
+
 class Ghost {
 public:
   enum class State {
@@ -25,7 +27,7 @@ public:
 
   [[nodiscard]] GridPosition positionInGrid() const;
 
-  void update(std::chrono::milliseconds time_delta);
+  void update(std::chrono::milliseconds time_delta, const GameState & gameState);
   void frighten();
   void die();
   [[nodiscard]] bool isFrightened() const;
@@ -33,13 +35,15 @@ public:
   void reset();
 
 private:
-  [[nodiscard]] double speed() const;
   void updateAnimation(std::chrono::milliseconds time_delta);
-  void updatePosition(std::chrono::milliseconds time_delta);
-  void updateDirection();
-  [[nodiscard]] Position target() const;
+  void updatePosition(std::chrono::milliseconds time_delta, const GameState & gameState);
+  void updateDirection(const GameState & gameState);
 
 protected:
+
+  [[nodiscard]] virtual double speed(const GameState & gameState) const = 0;
+  [[nodiscard]] virtual Position target(const GameState & gameState) const = 0;
+
   Atlas::Ghost spritesSet;
   Direction direction = Direction::NONE;
   double timeForAnimation = 0;
@@ -49,29 +53,8 @@ protected:
   int timeChase = 0;
   Position pos;
   Position startingPosition;
-  Position scatterTarget;
   GridPosition last_grid_position = { 0, 0 };
   [[nodiscard]] bool isInPen() const;
-};
-
-class Blinky : public Ghost {
-public:
-  explicit Blinky();
-};
-
-class Pinky : public Ghost {
-public:
-  explicit Pinky();
-};
-
-class Inky : public Ghost {
-public:
-  explicit Inky();
-};
-
-class Clyde : public Ghost {
-public:
-  explicit Clyde();
 };
 
 } // namespace pacman
