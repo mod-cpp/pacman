@@ -25,7 +25,7 @@ void PacMan::reset() {
   dead = false;
   direction = Direction::NONE;
   desired_direction = Direction::NONE;
-  pos = pacman::initialPacManPosition();
+  pos = initialPacManPosition();
 }
 
 void PacMan::update(std::chrono::milliseconds time_delta, Direction input_direction) {
@@ -76,7 +76,7 @@ void PacMan::updateMazePosition(std::chrono::milliseconds time_delta) {
   };
 
   auto canGo = [&](Direction move_direction) {
-    return pacman::isWalkableForPacMan(moveToPosition(pos, move_direction));
+    return isWalkableForPacMan(moveToPosition(pos, move_direction));
   };
 
   if (canGo(desired_direction)) {
