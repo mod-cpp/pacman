@@ -16,17 +16,20 @@ double Inky::speed(const GameState & gameState) const {
 
 Position Inky::target(const GameState & gameState) const {
   if (state == State::Eyes)
-    return initialInkyPosition();
+    return initialPosition();
 
   if (isInPen())
     return penDoorPosition();
 
-  return inkyScatterTarget();
+  return scatterTarget();
 }
 
 Position Inky::initialPosition() const {
-    return initialInkyPosition();
+  return { 13.5, 14 };
 }
 
+Position Inky::scatterTarget() const {
+  return { 27, 30 };
+}
 
 }

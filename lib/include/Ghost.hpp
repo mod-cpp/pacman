@@ -46,7 +46,6 @@ protected:
   virtual Position target(const GameState & gameState) const = 0;
   virtual Position initialPosition() const = 0;
 
-
   Atlas::Ghost spritesSet;
   Direction direction = Direction::NONE;
   double timeForAnimation = 0;

@@ -16,17 +16,20 @@ double Clyde::speed(const GameState & gameState) const {
 
 Position Clyde::target(const GameState & gameState) const {
   if (state == State::Eyes)
-    return initialClydePosition();
+    return initialPosition();
 
   if (isInPen())
     return penDoorPosition();
 
-  return clydeScatterTarget();
+  return scatterTarget();
 }
 
 Position Clyde::initialPosition() const {
-    return initialClydePosition();
+  return { 15.5, 14 };
 }
 
+Position Clyde::scatterTarget() const {
+  return { 0, 30 };
+}
 
 }

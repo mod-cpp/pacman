@@ -16,16 +16,20 @@ double Pinky::speed(const GameState & gameState) const {
 
 Position Pinky::target(const GameState & gameState) const {
   if (state == State::Eyes)
-    return initialPinkyPosition();
+    return initialPosition();
 
   if (isInPen())
     return penDoorPosition();
 
-  return pinkyScatterTarget();
+  return scatterTarget();
 }
 
 Position Pinky::initialPosition() const {
-    return initialPinkyPosition();
+  return { 11.5, 14 };
+}
+
+Position Pinky::scatterTarget() const {
+  return { 3, -2 };
 }
 
 }

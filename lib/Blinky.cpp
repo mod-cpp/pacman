@@ -16,16 +16,20 @@ double Blinky::speed(const GameState & gameState) const {
 
 Position Blinky::target(const GameState & gameState) const {
   if (state == State::Eyes)
-    return initialBlinkyPosition();
+    return initialPosition();
 
   if (isInPen())
     return penDoorPosition();
 
-  return blinkyScatterTarget();
+  return scatterTarget();
 }
 
 Position Blinky::initialPosition() const {
-    return initialBlinkyPosition();
+  return { 13.5, 11 };
+}
+
+Position Blinky::scatterTarget() const {
+  return { 25, -3 };
 }
 
 }
