@@ -4,6 +4,7 @@ namespace pacman {
 
 Inky::Inky()
   : Ghost(Atlas::Ghost::inky) {
+  pos = initialPosition();
 }
 
 double Inky::speed(const GameState & gameState) const {

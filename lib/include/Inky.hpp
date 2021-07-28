@@ -4,7 +4,7 @@
 
 namespace pacman {
 
-class Inky : public Ghost {
+class Inky final : public Ghost {
 public:
   explicit Inky();
 

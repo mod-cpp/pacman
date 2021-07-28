@@ -4,6 +4,7 @@ namespace pacman {
 
 Clyde::Clyde()
   : Ghost(Atlas::Ghost::clyde) {
+  pos = initialPosition();
 }
 
 double Clyde::speed(const GameState & gameState) const {

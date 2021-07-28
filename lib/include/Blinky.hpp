@@ -4,7 +4,7 @@
 
 namespace pacman {
 
-class Blinky : public Ghost {
+class Blinky final : public Ghost {
 public:
   Blinky();
 

@@ -4,6 +4,7 @@ namespace pacman {
 
 Blinky::Blinky()
   : Ghost(Atlas::Ghost::blinky) {
+  pos = initialPosition();
 }
 
 double Blinky::speed(const GameState & gameState) const {

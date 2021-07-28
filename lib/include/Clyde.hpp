@@ -4,7 +4,7 @@
 
 namespace pacman {
 
-class Clyde : public Ghost {
+class Clyde final : public Ghost {
 public:
   explicit Clyde();
 

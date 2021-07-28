@@ -4,6 +4,7 @@ namespace pacman {
 
 Pinky::Pinky()
   : Ghost(Atlas::Ghost::pinky) {
+  pos = initialPosition();
 }
 
 double Pinky::speed(const GameState & gameState) const {
