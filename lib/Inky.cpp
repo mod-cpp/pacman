@@ -3,7 +3,7 @@
 namespace pacman {
 
 Inky::Inky()
-  : Ghost(Atlas::Ghost::inky, initialInkyPosition()) {
+  : Ghost(Atlas::Ghost::inky) {
 }
 
 double Inky::speed(const GameState & gameState) const {
@@ -16,12 +16,17 @@ double Inky::speed(const GameState & gameState) const {
 
 Position Inky::target(const GameState & gameState) const {
   if (state == State::Eyes)
-    return startingPosition;
+    return initialInkyPosition();
 
   if (isInPen())
     return penDoorPosition();
 
   return inkyScatterTarget();
 }
+
+Position Inky::initialPosition() const {
+    return initialInkyPosition();
+}
+
 
 }

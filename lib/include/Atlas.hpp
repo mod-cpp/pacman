@@ -10,7 +10,7 @@ namespace pacman::Atlas {
 
 enum class Ghost : unsigned int {
   blinky = 2,
-  speedy = 3,
+  pinky = 3,
   inky = 4,
   clyde = 5,
 };

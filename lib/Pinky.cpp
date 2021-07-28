@@ -3,7 +3,7 @@
 namespace pacman {
 
 Pinky::Pinky()
-  : Ghost(Atlas::Ghost::speedy, initialSpeedyPosition()) {
+  : Ghost(Atlas::Ghost::pinky) {
 }
 
 double Pinky::speed(const GameState & gameState) const {
@@ -16,12 +16,16 @@ double Pinky::speed(const GameState & gameState) const {
 
 Position Pinky::target(const GameState & gameState) const {
   if (state == State::Eyes)
-    return startingPosition;
+    return initialPinkyPosition();
 
   if (isInPen())
     return penDoorPosition();
 
-  return speedyScatterTarget();
+  return pinkyScatterTarget();
+}
+
+Position Pinky::initialPosition() const {
+    return initialPinkyPosition();
 }
 
 }

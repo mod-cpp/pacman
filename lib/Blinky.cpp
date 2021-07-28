@@ -3,7 +3,7 @@
 namespace pacman {
 
 Blinky::Blinky()
-  : Ghost(Atlas::Ghost::blinky, initialBlinkyPosition()) {
+  : Ghost(Atlas::Ghost::blinky) {
 }
 
 double Blinky::speed(const GameState & gameState) const {
@@ -16,12 +16,16 @@ double Blinky::speed(const GameState & gameState) const {
 
 Position Blinky::target(const GameState & gameState) const {
   if (state == State::Eyes)
-    return startingPosition;
+    return initialBlinkyPosition();
 
   if (isInPen())
     return penDoorPosition();
 
   return blinkyScatterTarget();
+}
+
+Position Blinky::initialPosition() const {
+    return initialBlinkyPosition();
 }
 
 }

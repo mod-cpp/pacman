@@ -26,8 +26,8 @@ namespace pacman {
   inline Position initialBlinkyPosition() { return { 13.5, 11 }; }
   inline Position blinkyScatterTarget() { return { 25, -3 }; }
 
-  inline Position initialSpeedyPosition() { return { 11.5, 14 }; }
-  inline Position speedyScatterTarget() { return { 3, -2 }; }
+  inline Position initialPinkyPosition() { return { 11.5, 14 }; }
+  inline Position pinkyScatterTarget() { return { 3, -2 }; }
 
   inline Position initialInkyPosition() { return { 13.5, 14 }; }
   inline Position inkyScatterTarget() { return { 27, 30 }; }

@@ -3,7 +3,7 @@
 namespace pacman {
 
 Clyde::Clyde()
-  : Ghost(Atlas::Ghost::clyde, initialClydePosition()) {
+  : Ghost(Atlas::Ghost::clyde) {
 }
 
 double Clyde::speed(const GameState & gameState) const {
@@ -16,12 +16,17 @@ double Clyde::speed(const GameState & gameState) const {
 
 Position Clyde::target(const GameState & gameState) const {
   if (state == State::Eyes)
-    return startingPosition;
+    return initialClydePosition();
 
   if (isInPen())
     return penDoorPosition();
 
   return clydeScatterTarget();
 }
+
+Position Clyde::initialPosition() const {
+    return initialClydePosition();
+}
+
 
 }

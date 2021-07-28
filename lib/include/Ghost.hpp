@@ -19,7 +19,8 @@ public:
     Eyes,
   };
 
-  explicit Ghost(Atlas::Ghost spritesSet, Position startingPosition);
+  explicit Ghost(Atlas::Ghost spritesSet);
+  virtual ~Ghost() = default;
 
   [[nodiscard]] GridPosition currentSprite() const;
 
@@ -41,8 +42,10 @@ private:
 
 protected:
 
-  [[nodiscard]] virtual double speed(const GameState & gameState) const = 0;
-  [[nodiscard]] virtual Position target(const GameState & gameState) const = 0;
+  virtual double speed(const GameState & gameState) const = 0;
+  virtual Position target(const GameState & gameState) const = 0;
+  virtual Position initialPosition() const = 0;
+
 
   Atlas::Ghost spritesSet;
   Direction direction = Direction::NONE;
@@ -52,7 +55,6 @@ protected:
   int timeFrighten = 0;
   int timeChase = 0;
   Position pos;
-  Position startingPosition;
   GridPosition last_grid_position = { 0, 0 };
   [[nodiscard]] bool isInPen() const;
 };

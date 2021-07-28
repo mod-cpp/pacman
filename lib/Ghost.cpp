@@ -4,10 +4,8 @@
 
 namespace pacman {
 
-Ghost::Ghost(Atlas::Ghost spritesSet, Position startingPosition)
-  : spritesSet(spritesSet),
-    pos(startingPosition),
-    startingPosition(startingPosition) {
+Ghost::Ghost(Atlas::Ghost spritesSet)
+  : spritesSet(spritesSet) {
 }
 
 void Ghost::frighten() {
@@ -36,7 +34,10 @@ void Ghost::die() {
 }
 
 void Ghost::reset() {
-  pos = startingPosition;
+  pos = initialPosition();
+  state = State::Scatter;
+  timeFrighten = 0;
+  timeChase = 0;
 }
 
 [[nodiscard]] GridPosition Ghost::currentSprite() const {
