@@ -4,8 +4,8 @@
 
 namespace pacman {
 
-Ghost::Ghost(Atlas::Ghost spritesSet)
-  : spritesSet(spritesSet) {
+Ghost::Ghost(Atlas::Ghost spriteSet)
+  : spriteSet(spriteSet) {
 }
 
 void Ghost::frighten() {
@@ -43,7 +43,7 @@ void Ghost::reset() {
 [[nodiscard]] GridPosition Ghost::currentSprite() const {
   switch (state) {
     default:
-      return Atlas::ghostSprite(spritesSet, direction, (animationIndex % 2) == 0);
+      return Atlas::ghostSprite(spriteSet, direction, (animationIndex % 2) == 0);
     case State::Eyes:
       return Atlas::eyeSprite(direction);
     case State::Frightened:

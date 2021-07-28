@@ -19,7 +19,7 @@ public:
     Eyes,
   };
 
-  explicit Ghost(Atlas::Ghost spritesSet);
+  explicit Ghost(Atlas::Ghost spriteSet);
   virtual ~Ghost() = default;
 
   [[nodiscard]] GridPosition currentSprite() const;
@@ -46,7 +46,7 @@ protected:
   virtual Position target(const GameState & gameState) const = 0;
   virtual Position initialPosition() const = 0;
 
-  Atlas::Ghost spritesSet;
+  Atlas::Ghost spriteSet;
   Direction direction = Direction::NONE;
   double timeForAnimation = 0;
   int animationIndex = 0;
