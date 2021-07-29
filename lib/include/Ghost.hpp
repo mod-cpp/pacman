@@ -41,6 +41,7 @@ private:
   void updateDirection(const GameState & gameState);
 
 protected:
+  State defaultStateAtDuration(std::chrono::seconds s);
 
   virtual double speed(const GameState & gameState) const = 0;
   virtual Position target(const GameState & gameState) const = 0;
@@ -51,8 +52,8 @@ protected:
   double timeForAnimation = 0;
   int animationIndex = 0;
   State state = State::Chase;
-  int timeFrighten = 0;
-  int timeChase = 0;
+  std::chrono::milliseconds timeFrighten = {};
+  std::chrono::milliseconds timeChase = {};
   Position pos;
   GridPosition last_grid_position = { 0, 0 };
   [[nodiscard]] bool isInPen() const;

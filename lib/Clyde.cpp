@@ -1,4 +1,5 @@
 #include "Clyde.hpp"
+#include "GameState.hpp"
 
 namespace pacman {
 
@@ -22,7 +23,15 @@ Position Clyde::target(const GameState & gameState) const {
   if (isInPen())
     return penDoorPosition();
 
-  return scatterTarget();
+  // Clyde always target its scatter target, unless pacman is further than 8 tiles away
+  auto targetPosition = scatterTarget();
+
+  const auto & pacmanPosition = gameState.pacMan.positionInGrid();
+  auto distanceFomPacMan = std::hypot(pos.x - pacmanPosition.x, pos.y - pacmanPosition.y);
+  if (state == State::Chase && distanceFomPacMan > 8)
+    targetPosition = gridPositionToPosition(pacmanPosition);
+
+  return targetPosition;
 }
 
 Position Clyde::initialPosition() const {

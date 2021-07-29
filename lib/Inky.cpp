@@ -1,4 +1,5 @@
 #include "Inky.hpp"
+#include "GameState.hpp"
 
 namespace pacman {
 
@@ -22,7 +23,40 @@ Position Inky::target(const GameState & gameState) const {
   if (isInPen())
     return penDoorPosition();
 
-  return scatterTarget();
+  if (state == State::Scatter)
+    return scatterTarget();
+
+  // Inky first selects a position 2 cell away from pacman in his direction.
+  GridPosition targetPosition = gameState.pacMan.positionInGrid();
+  switch (gameState.pacMan.currentDirection()) {
+    case Direction::LEFT:
+      targetPosition.x -= 2;
+      break;
+    case Direction::RIGHT:
+      targetPosition.x += 2;
+      break;
+    case Direction::UP:
+      targetPosition.y -= 2;
+      targetPosition.x -= 2;
+      break;
+    case Direction::DOWN:
+      targetPosition.y += 2;
+      break;
+    case Direction::NONE:
+      assert("Pacman should be moving!");
+      break;
+  }
+
+  // Then it calculates the distance between Blinky and this position
+  const auto & blinkyPosition = gameState.blinky.positionInGrid();
+  auto distanceBetweenBlinkyAndTarget = std::hypot(blinkyPosition.x - targetPosition.x, blinkyPosition.y - targetPosition.y);
+
+  // And selects a point on the line crossing blinky and this position that is at twice that distance
+  // away from blinky
+  targetPosition.x += ((targetPosition.x - blinkyPosition.x) / distanceBetweenBlinkyAndTarget) * 2;
+  targetPosition.y += ((targetPosition.y - blinkyPosition.y) / distanceBetweenBlinkyAndTarget) * 2;
+
+  return gridPositionToPosition(targetPosition);
 }
 
 Position Inky::initialPosition() const {

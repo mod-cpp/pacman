@@ -27,6 +27,10 @@ public:
     return direction != Direction::NONE;
   }
 
+  Direction currentDirection() const {
+    return direction;
+  }
+
 private:
   Direction direction = Direction::NONE;
   Direction desired_direction = Direction::NONE;

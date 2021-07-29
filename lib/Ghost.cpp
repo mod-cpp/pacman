@@ -1,6 +1,7 @@
 #include "Ghost.hpp"
 #include <array>
 #include <cmath>
+#include <numeric>
 
 namespace pacman {
 
@@ -13,7 +14,7 @@ void Ghost::frighten() {
     return;
   direction = oppositeDirection(direction);
   state = State::Frightened;
-  timeFrighten = 0;
+  timeFrighten = {};
 }
 
 bool Ghost::isFrightened() const {
@@ -29,15 +30,15 @@ void Ghost::die() {
     return;
   direction = oppositeDirection(direction);
   state = State::Eyes;
-  timeFrighten = 0;
-  timeChase = 0;
+  timeFrighten = {};
+  timeChase = {};
 }
 
 void Ghost::reset() {
   pos = initialPosition();
   state = State::Scatter;
-  timeFrighten = 0;
-  timeChase = 0;
+  timeFrighten = {};
+  timeChase = {};
 }
 
 [[nodiscard]] GridPosition Ghost::currentSprite() const {
@@ -47,7 +48,7 @@ void Ghost::reset() {
     case State::Eyes:
       return Atlas::eyeSprite(direction);
     case State::Frightened:
-      if (timeFrighten < 3500)
+      if (timeFrighten.count() < 3500)
         return Atlas::initialFrightened(animationIndex);
       else
         return Atlas::endingFrightened(animationIndex);
@@ -67,9 +68,18 @@ void Ghost::update(std::chrono::milliseconds time_delta, const GameState & gameS
     state = State::Scatter;
 
   if (state == State::Frightened) {
-    timeFrighten += time_delta.count();
-    if (timeFrighten > 6000)
+    timeFrighten += time_delta;
+    if (timeFrighten.count() > 6000)
       state = State::Scatter;
+  }
+
+  if (state == State::Scatter || state == State::Chase) {
+    timeChase += time_delta;
+    auto newState = defaultStateAtDuration(std::chrono::duration_cast<std::chrono::seconds>(timeChase));
+    if (newState != state) {
+      direction = oppositeDirection(direction);
+      state = newState;
+    }
   }
 
   updateAnimation(time_delta);
@@ -104,6 +114,10 @@ void Ghost::updatePosition(std::chrono::milliseconds time_delta, const GameState
       pos.x = round(pos.x);
       pos.y += position_delta;
       break;
+  }
+
+  if (isPortal(positionInGrid(), direction)) {
+    pos = gridPositionToPosition(teleport(positionInGrid()));
   }
 }
 
@@ -144,6 +158,10 @@ void Ghost::updateDirection(const GameState & gameState) {
   const Position target_position = target(gameState);
 
   for (auto & move : possible_moves) {
+
+    if (isPortal(current_grid_position, move.direction))
+      move.position = gridPositionToPosition(teleport(current_grid_position));
+
     const bool invalid_position = (move.position.x < 0 || move.position.y < 0);
     if (invalid_position)
       continue;
@@ -175,6 +193,25 @@ void Ghost::updateAnimation(std::chrono::milliseconds time_delta) {
     timeForAnimation = 0;
     animationIndex = (animationIndex + 1) % 4;
   }
+}
+
+/*
+ *  Ghosts alternate between the scatter and chase states at
+ *  specific intervals
+ */
+Ghost::State Ghost::defaultStateAtDuration(std::chrono::seconds s) {
+  // This array denotes the duration of each state, alternating between scatter and chase
+  std::array changes = { /*scatter*/ 7, 20, 7, 20, 5, 20, 5 };
+  // To know the current state we first compute the cumulative time using std::partial_sum
+  // This gives us {7, 27, 34, 54, 59, 79, 84}
+  std::partial_sum(std::begin(changes), std::end(changes), std::begin(changes));
+  // Then we look for the first value in the array greater than the time spend in chase/scatter states
+  auto it = std::upper_bound(std::begin(changes), std::end(changes), s.count());
+  // We get the position of that iterator in the array
+  auto count = std::distance(std::begin(changes), it);
+  // Because the first positition is scatter, all the even positions will be scatter
+  // all the odd positions will be chase
+  return count % 2 == 0 ? State::Scatter : State::Chase;
 }
 
 } // namespace pacman

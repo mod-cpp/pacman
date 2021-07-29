@@ -1,4 +1,5 @@
 #include "Blinky.hpp"
+#include "GameState.hpp"
 
 namespace pacman {
 
@@ -22,7 +23,7 @@ Position Blinky::target(const GameState & gameState) const {
   if (isInPen())
     return penDoorPosition();
 
-  return scatterTarget();
+  return state == State::Chase ? gridPositionToPosition(gameState.pacMan.positionInGrid()) : scatterTarget();
 }
 
 Position Blinky::initialPosition() const {

@@ -1,4 +1,5 @@
 #include "Pinky.hpp"
+#include "GameState.hpp"
 
 namespace pacman {
 
@@ -22,7 +23,30 @@ Position Pinky::target(const GameState & gameState) const {
   if (isInPen())
     return penDoorPosition();
 
-  return scatterTarget();
+  if (state == State::Scatter)
+    return scatterTarget();
+
+  // Inky first selects a position 2 cell away from pacman in his direction.
+  GridPosition targetPosition = gameState.pacMan.positionInGrid();
+  switch (gameState.pacMan.currentDirection()) {
+    case Direction::LEFT:
+      targetPosition.x -= 4;
+      break;
+    case Direction::RIGHT:
+      targetPosition.x += 4;
+      break;
+    case Direction::UP:
+      targetPosition.y -= 4;
+      targetPosition.x -= 4;
+      break;
+    case Direction::DOWN:
+      targetPosition.y += 4;
+      break;
+    case Direction::NONE:
+      assert("Pacman should be moving!");
+      break;
+  }
+  return gridPositionToPosition(targetPosition);
 }
 
 Position Pinky::initialPosition() const {
