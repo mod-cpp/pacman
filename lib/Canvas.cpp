@@ -8,10 +8,10 @@
 namespace pacman {
 
 Canvas::Canvas()
-  : window(sf::VideoMode((viewDimensions().width / 2.0), (viewDimensions().height / 2.0)),
+  : window(sf::VideoMode((viewDimensions().width / 2), (viewDimensions().height / 2)),
            "Pacman",
            sf::Style::Titlebar | sf::Style::Close),
-    view(sf::FloatRect(0, 0, viewDimensions().width, viewDimensions().height)) {
+    view(sf::FloatRect(0, 0, float(viewDimensions().width), float(viewDimensions().height))) {
 
   window.setView(view);
   window.setFramerateLimit(60);
@@ -21,9 +21,9 @@ Canvas::Canvas()
   // Then project it on a scaled window - on some mac we get the
   // scaling factor of the window to adjust the resolution
   const auto scale = scaling_factor_for_window(window.getSystemHandle());
-  const auto width = viewDimensions().width / 2.0 * scale;
-  const auto height = viewDimensions().height / 2.0 * scale;
-  window.setSize(sf::Vector2u(width, height));
+  const auto width = (viewDimensions().width / 2) * scale;
+  const auto height = (viewDimensions().height / 2) * scale;
+  window.setSize(sf::Vector2u(unsigned(width), unsigned(height)));
 
   maze_texture = loadTexture("maze.png");
   sprites_texture = loadTexture("sprites32.png");
@@ -126,8 +126,8 @@ void Canvas::renderLives(int lives) {
 
   Sprite pacmanSprite = getSprite(liveSprite);
   for (int i = 0; i < lives - 1; i++) {
-    size_t life_position = i * SPRITE_WIDTH * 1.5;
-    GridPosition pos{ x + life_position, y };
+    auto life_position = i * SPRITE_WIDTH * 1.5f;
+    sf::Vector2f pos{ x + life_position, y };
     pacmanSprite.setPosition(pos.x, pos.y);
     window.draw(pacmanSprite);
   }
@@ -152,7 +152,7 @@ Sprite Canvas::getSprite(GridPosition coordinate) const {
 void Canvas::renderSprite(Sprite sprite, Position pos) {
   pos.x = LEFT_MARGIN + (pos.x * SPRITE_WIDTH);
   pos.y = TOP_MARGIN + (pos.y * SPRITE_HEIGHT);
-  sprite.setPosition(pos.x, pos.y);
+  sprite.setPosition(float(pos.x), float(pos.y));
   window.draw(sprite);
 }
 

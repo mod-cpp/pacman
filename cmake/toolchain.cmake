@@ -13,9 +13,7 @@ else()
     add_link_options("$<$<CONFIG:DEBUG>:-fsanitize=address>")
 endif()
 
-
 #enable ubsan in debug
-
 if(NOT MSVC)
     add_compile_options("$<$<CONFIG:DEBUG>:-fsanitize=undefined>"
                         "$<$<CONFIG:DEBUG>:-fno-omit-frame-pointer>")

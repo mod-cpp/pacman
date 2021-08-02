@@ -8,7 +8,7 @@
 
 namespace pacman {
 
-class GameState;
+struct GameState;
 
 class Ghost {
 public:
