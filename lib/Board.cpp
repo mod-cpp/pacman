@@ -8,8 +8,8 @@ const std::size_t COLUMNS = 28;
 enum class Cell {
     wall = 0,
     pellet = 1,
-    nothing = 2,
-    // missing 3
+    // nothing = 2,
+    // missing 3,
     power_pellet = 4,
     pen = 5,
     left_portal = 6,

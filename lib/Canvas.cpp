@@ -1,5 +1,4 @@
 #include "Canvas.hpp"
-#include "Game.hpp"
 #include "Scaling.hpp"
 #include <fmt/format.h>
 #include <string>
