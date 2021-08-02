@@ -23,7 +23,8 @@ Position Blinky::target(const GameState & gameState) const {
   if (isInPen())
     return penDoorPosition();
 
-  return state == State::Chase ? gridPositionToPosition(gameState.pacMan.positionInGrid()) : scatterTarget();
+  const auto pacManPosition = gridPositionToPosition(gameState.pacMan.positionInGrid());
+  return state == State::Chase ? pacManPosition : scatterTarget();
 }
 
 Position Blinky::initialPosition() const {

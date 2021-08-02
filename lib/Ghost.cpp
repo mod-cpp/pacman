@@ -199,14 +199,14 @@ void Ghost::updateAnimation(std::chrono::milliseconds time_delta) {
  *  Ghosts alternate between the scatter and chase states at
  *  specific intervals
  */
-Ghost::State Ghost::defaultStateAtDuration(std::chrono::seconds s) {
+Ghost::State Ghost::defaultStateAtDuration(std::chrono::seconds seconds) {
   // This array denotes the duration of each state, alternating between scatter and chase
   std::array changes = { /*scatter*/ 7, 20, 7, 20, 5, 20, 5 };
   // To know the current state we first compute the cumulative time using std::partial_sum
   // This gives us {7, 27, 34, 54, 59, 79, 84}
   std::partial_sum(std::begin(changes), std::end(changes), std::begin(changes));
-  // Then we look for the first value in the array greater than the time spend in chase/scatter states
-  auto it = std::upper_bound(std::begin(changes), std::end(changes), s.count());
+  // Then we look for the first value in the array greater than the time spent in chase/scatter states
+  auto it = std::upper_bound(std::begin(changes), std::end(changes), seconds.count());
   // We get the position of that iterator in the array
   auto count = std::distance(std::begin(changes), it);
   // Because the first positition is scatter, all the even positions will be scatter

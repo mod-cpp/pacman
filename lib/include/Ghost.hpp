@@ -41,7 +41,7 @@ private:
   void updateDirection(const GameState & gameState);
 
 protected:
-  State defaultStateAtDuration(std::chrono::seconds s);
+  State defaultStateAtDuration(std::chrono::seconds seconds);
 
   virtual double speed(const GameState & gameState) const = 0;
   virtual Position target(const GameState & gameState) const = 0;

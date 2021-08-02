@@ -26,10 +26,10 @@ Position Clyde::target(const GameState & gameState) const {
   // Clyde always target its scatter target, unless pacman is further than 8 tiles away
   auto targetPosition = scatterTarget();
 
-  const auto & pacmanPosition = gameState.pacMan.positionInGrid();
-  auto distanceFomPacMan = std::hypot(pos.x - pacmanPosition.x, pos.y - pacmanPosition.y);
+  const auto pacManPosition = gameState.pacMan.positionInGrid();
+  auto distanceFomPacMan = std::hypot(pos.x - pacManPosition.x, pos.y - pacManPosition.y);
   if (state == State::Chase && distanceFomPacMan > 8)
-    targetPosition = gridPositionToPosition(pacmanPosition);
+    targetPosition = gridPositionToPosition(pacManPosition);
 
   return targetPosition;
 }
