@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.17)
 
-set(VCPKG_CHAINLOAD_TOOLCHAIN_FILE "toolchain.cmake")
+set(VCPKG_CHAINLOAD_TOOLCHAIN_FILE "${CMAKE_CURRENT_SOURCE_DIR}/toolchain.cmake")
 
 find_package(Git QUIET)
 if (GIT_FOUND AND EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/.git")
