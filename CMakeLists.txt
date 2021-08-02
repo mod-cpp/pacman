@@ -1,5 +1,7 @@
 cmake_minimum_required(VERSION 3.17)
 
+set(VCPKG_CHAINLOAD_TOOLCHAIN_FILE "${CMAKE_CURRENT_SOURCE_DIR}/cmake/toolchain.cmake")
+
 find_package(Git QUIET)
 if (GIT_FOUND AND EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/.git")
     # Update submodules as needed
@@ -25,8 +27,6 @@ set(CMAKE_TOOLCHAIN_FILE ${CMAKE_CURRENT_SOURCE_DIR}/vcpkg/scripts/buildsystems/
 
 enable_language(CXX)
 project(pacman)
-
-include(cmake/toolchain.cmake)
 
 set(CMAKE_CXX_STANDARD 20)
 

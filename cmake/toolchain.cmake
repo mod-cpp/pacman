@@ -1,12 +1,12 @@
 #compile with warnings
-if(MSVC)
+if(WIN32)
     add_compile_options(/W4 /WX)
 else()
     add_compile_options(-Wall -Wextra -pedantic -Werror)
 endif()
 
 #enable asan in debug
-if(MSVC)
+if(WIN32)
     add_compile_options("$<$<CONFIG:DEBUG>:-fsanitize=address>")
 else()
     add_compile_options("$<$<CONFIG:DEBUG>:-fsanitize=address>")
@@ -14,7 +14,7 @@ else()
 endif()
 
 #enable ubsan in debug
-if(NOT MSVC)
+if(NOT WIN32)
     add_compile_options("$<$<CONFIG:DEBUG>:-fsanitize=undefined>"
                         "$<$<CONFIG:DEBUG>:-fno-omit-frame-pointer>")
     add_link_options("$<$<CONFIG:DEBUG>:-fsanitize=undefined>")
