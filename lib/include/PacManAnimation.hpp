@@ -11,8 +11,8 @@ namespace pacman {
 
 class PacManAnimation {
 public:
-  [[nodiscard]] GridPosition animationFrame(Direction direction) const;
-  [[nodiscard]] GridPosition deathAnimationFrame() const;
+  GridPosition animationFrame(Direction direction) const;
+  GridPosition deathAnimationFrame() const;
 
   void updateAnimationPosition(std::chrono::milliseconds time_delta, bool dead);
   void pause();

@@ -9,11 +9,11 @@ class SuperPellets {
 public:
   explicit SuperPellets();
 
-  [[nodiscard]] GridPosition currentSprite() const {
+  GridPosition currentSprite() const {
     return sprite;
   }
 
-  [[nodiscard]] std::vector<GridPosition> currentPositions() const {
+  std::vector<GridPosition> currentPositions() const {
     return positions;
   }
 

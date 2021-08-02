@@ -23,7 +23,7 @@ GridPosition PacManAnimation::animationFrame(Direction direction) const {
   }
 }
 
-[[nodiscard]] GridPosition PacManAnimation::deathAnimationFrame() const {
+GridPosition PacManAnimation::deathAnimationFrame() const {
   return GridPosition{ animation_position, 1 };
 }
 

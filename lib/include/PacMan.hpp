@@ -13,17 +13,17 @@ class InputState;
 
 class PacMan {
 public:
-  [[nodiscard]] GridPosition currentSprite() const;
+  GridPosition currentSprite() const;
 
-  [[nodiscard]] Position position() const;
+  Position position() const;
 
-  [[nodiscard]] GridPosition positionInGrid() const;
+  GridPosition positionInGrid() const;
 
   void update(std::chrono::milliseconds time_delta, Direction input_direction);
 
   void die();
   void reset();
-  [[nodiscard]] bool hasDirection() const {
+  bool hasDirection() const {
     return direction != Direction::NONE;
   }
 

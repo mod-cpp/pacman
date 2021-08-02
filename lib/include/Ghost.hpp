@@ -22,17 +22,17 @@ public:
   explicit Ghost(Atlas::Ghost spriteSet);
   virtual ~Ghost() = default;
 
-  [[nodiscard]] GridPosition currentSprite() const;
+  GridPosition currentSprite() const;
 
-  [[nodiscard]] Position position() const;
+  Position position() const;
 
-  [[nodiscard]] GridPosition positionInGrid() const;
+  GridPosition positionInGrid() const;
 
   void update(std::chrono::milliseconds time_delta, const GameState & gameState);
   void frighten();
   void die();
-  [[nodiscard]] bool isFrightened() const;
-  [[nodiscard]] bool isEyes() const;
+  bool isFrightened() const;
+  bool isEyes() const;
   void reset();
 
 private:
@@ -56,7 +56,7 @@ protected:
   std::chrono::milliseconds timeChase = {};
   Position pos;
   GridPosition last_grid_position = { 0, 0 };
-  [[nodiscard]] bool isInPen() const;
+  bool isInPen() const;
 };
 
 } // namespace pacman

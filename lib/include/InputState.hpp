@@ -10,7 +10,7 @@ public:
   bool left = false;
   bool right = false;
 
-  [[nodiscard]] Direction direction() const {
+  Direction direction() const {
     if (left)
       return Direction::LEFT;
     else if (right)
