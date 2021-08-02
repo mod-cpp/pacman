@@ -8,7 +8,7 @@ Inky::Inky()
   pos = initialPosition();
 }
 
-double Inky::speed(const GameState & gameState) const {
+double Inky::speed(const GameState &) const {
   if (state == State::Eyes)
     return 2;
   if (state == State::Frightened)

@@ -8,7 +8,7 @@ Clyde::Clyde()
   pos = initialPosition();
 }
 
-double Clyde::speed(const GameState & gameState) const {
+double Clyde::speed(const GameState &) const {
   if (state == State::Eyes)
     return 2;
   if (state == State::Frightened)

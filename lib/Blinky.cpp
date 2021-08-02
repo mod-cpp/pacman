@@ -8,7 +8,7 @@ Blinky::Blinky()
   pos = initialPosition();
 }
 
-double Blinky::speed(const GameState & gameState) const {
+double Blinky::speed(const GameState &) const {
   if (state == State::Eyes)
     return 2;
   if (state == State::Frightened)
