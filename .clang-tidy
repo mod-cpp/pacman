@@ -1,0 +1,1 @@
+Checks:              'modernize-*,-modernize-use-nodiscard,-modernize-use-trailing-return-type,cppcoreguidelines-*,bugprone-*,-cppcoreguidelines-non-private-member-variables-in-classes'
