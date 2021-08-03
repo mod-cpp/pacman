@@ -1,29 +1,25 @@
 cmake_minimum_required(VERSION 3.17)
 
-set(VCPKG_CHAINLOAD_TOOLCHAIN_FILE "${CMAKE_CURRENT_SOURCE_DIR}/cmake/toolchain.cmake")
+include(FetchContent)
+FetchContent_Declare(
+    vcpkg
+    GIT_REPOSITORY https://github.com/microsoft/vcpkg
+    GIT_TAG 1257354a3ab0bebd8abe95281ca561537853578c
+)
 
-find_package(Git QUIET)
-if (GIT_FOUND AND EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/.git")
-    # Update submodules as needed
-    option(GIT_SUBMODULE "Check submodules during build" ON)
-    if (GIT_SUBMODULE)
-        message(STATUS "Submodule update")
-        execute_process(COMMAND ${GIT_EXECUTABLE} submodule update --init --recursive
-                WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-                RESULT_VARIABLE GIT_SUBMOD_RESULT)
-        if (NOT GIT_SUBMOD_RESULT EQUAL "0")
-            message(FATAL_ERROR "git submodule update --init failed with ${GIT_SUBMOD_RESULT}, please checkout submodules")
-        endif ()
-    endif ()
-endif ()
+if(NOT DEFINED CMAKE_TOOLCHAIN_FILE)
+    FetchContent_GetProperties(vcpkg
+        POPULATED vcpkg_POPULATED
+        SOURCE_DIR vcpkg_SOURCE_DIR)
+    if(NOT vcpkg_POPULATED)
+        FetchContent_Populate(vcpkg)
+    endif()
 
-if (NOT EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/vcpkg/LICENSE.txt")
-    message(FATAL_ERROR "The submodules were not downloaded! GIT_SUBMODULE was turned off or failed. Please update submodules and try again.")
-endif ()
-
-#This needs to be set before project()
-set(CMAKE_TOOLCHAIN_FILE ${CMAKE_CURRENT_SOURCE_DIR}/vcpkg/scripts/buildsystems/vcpkg.cmake
-        CACHE STRING "Vcpkg toolchain file")
+    set(CMAKE_TOOLCHAIN_FILE
+        "${vcpkg_SOURCE_DIR}/scripts/buildsystems/vcpkg.cmake")
+    set(VCPKG_CHAINLOAD_TOOLCHAIN_FILE
+        "${CMAKE_CURRENT_SOURCE_DIR}/cmake/toolchain.cmake")
+endif()
 
 enable_language(CXX)
 project(pacman)
