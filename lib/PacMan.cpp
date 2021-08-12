@@ -59,7 +59,7 @@ void PacMan::updateMazePosition(std::chrono::milliseconds time_delta) {
   const double position_delta = 0.004 * time_delta.count();
   const auto pacman_size = 1;
 
-  auto moveToPosition = [&](Position point, Direction move_direction) {
+  auto moveToPosition = [position_delta](Position point, Direction move_direction) {
     switch (move_direction) {
       case Direction::LEFT:
         return GridPosition{ std::size_t(point.x - position_delta), std::size_t(point.y) };
@@ -75,7 +75,7 @@ void PacMan::updateMazePosition(std::chrono::milliseconds time_delta) {
     }
   };
 
-  auto canGo = [&](Direction move_direction) {
+  auto canGo = [&moveToPosition, this](Direction move_direction) {
     return isWalkableForPacMan(moveToPosition(pos, move_direction));
   };
 
