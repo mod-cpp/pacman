@@ -41,7 +41,7 @@ void Ghost::reset() {
   timeChase = {};
 }
 
-[[nodiscard]] GridPosition Ghost::currentSprite() const {
+ GridPosition Ghost::currentSprite() const {
   switch (state) {
     default:
       return Atlas::ghostSprite(spriteSet, direction, (animationIndex % 2) == 0);
