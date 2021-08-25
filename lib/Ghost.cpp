@@ -145,15 +145,17 @@ void Ghost::updateDirection(const GameState & gameState) {
   struct Move {
     Direction direction;
     Position position;
-    double distance = std::numeric_limits<double>::infinity();
+    double distance_to_target = std::numeric_limits<double>::infinity();
   };
 
   const Position current_position = { double(current_grid_position.x), double(current_grid_position.y) };
   const auto [x, y] = current_position;
-  std::array<Move, 4> possible_moves = { { Move{ Direction::UP, { x, y - 1 } },
-                                           Move{ Direction::LEFT, { x - 1, y } },
-                                           Move{ Direction::DOWN, { x, y + 1 } },
-                                           Move{ Direction::RIGHT, { x + 1, y } } } };
+  std::array<Move, 4> possible_moves = {
+    Move{ Direction::UP, { x, y - 1 } },
+    Move{ Direction::LEFT, { x - 1, y } },
+    Move{ Direction::DOWN, { x, y + 1 } },
+    Move{ Direction::RIGHT, { x + 1, y } }
+  };
 
   const Position target_position = target(gameState);
 
@@ -175,11 +177,11 @@ void Ghost::updateDirection(const GameState & gameState) {
     if (!can_walk)
       continue;
 
-    move.distance = std::hypot(move.position.x - target_position.x, move.position.y - target_position.y);
+    move.distance_to_target = std::hypot(move.position.x - target_position.x, move.position.y - target_position.y);
   }
 
   const auto optimal_move = std::min_element(possible_moves.begin(), possible_moves.end(), [](const auto & a, const auto & b) {
-    return a.distance < b.distance;
+    return a.distance_to_target < b.distance_to_target;
   });
 
   auto move = *optimal_move;
