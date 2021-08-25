@@ -129,8 +129,6 @@ void Game::processEvents(InputState & inputState) {
     return;
   }
 
-  inputState.down = inputState.up = inputState.left = inputState.right = false;
-
   inputState.down = sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Down);
   inputState.up = sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Up);
   inputState.left = sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Left);
