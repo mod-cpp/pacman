@@ -3,8 +3,8 @@
 ## Make Speedy
 
 1) Make a new ghost class for Speedy
-2) Pic the right sprite
-3) Pic the right scatter target
+2) Pick the right sprite
+3) Pick the right scatter target
 
 Advanced:
 
