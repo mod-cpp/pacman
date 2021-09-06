@@ -1,8 +1,8 @@
 #pragma once
 
-#include "Canvas.hpp"
 #include "GameState.hpp"
 #include "InputState.hpp"
+#include "Canvas.hpp"
 
 namespace pacman {
 

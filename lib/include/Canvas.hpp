@@ -1,11 +1,16 @@
 #pragma once
 
+#include <SFML/Graphics.hpp>
+
 #include "GameState.hpp"
 #include "Position.hpp"
 #include "Score.hpp"
 #include <optional>
 
 namespace pacman {
+
+using Rect = sf::Rect<int>;
+using Sprite = sf::Sprite;
 
 class Canvas {
 public:
