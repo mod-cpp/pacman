@@ -31,11 +31,13 @@ constexpr bool operator!=(const GridPosition & a, const GridPosition & b) {
   return !(a == b);
 }
 
-constexpr bool operator==(const Position & a, const Position & b) {
-  return a.x == b.x && a.y == b.y;
+inline bool operator==(const Position & a, const Position & b) {
+  // This is ok as a test unless x and y become very large.
+  constexpr double epsilon = std::numeric_limits<double>::epsilon();
+  return std::abs(a.x - b.x) <= epsilon && std::abs(a.y - b.y) <= epsilon;
 }
 
-constexpr bool operator!=(const Position & a, const Position & b) {
+inline bool operator!=(const Position & a, const Position & b) {
   return !(a == b);
 }
 
