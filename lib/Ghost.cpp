@@ -184,7 +184,7 @@ void Ghost::updateDirection(const GameState & gameState) {
     return a.distance_to_target < b.distance_to_target;
   });
 
-  auto move = *optimal_move;
+  const auto& move = *optimal_move;
   direction = move.direction;
   last_grid_position = current_grid_position;
 }

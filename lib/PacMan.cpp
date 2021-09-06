@@ -18,6 +18,7 @@ GridPosition PacMan::positionInGrid() const {
 void PacMan::die() {
   if (dead)
     return;
+
   dead = true;
 }
 
@@ -33,8 +34,10 @@ void PacMan::update(std::chrono::milliseconds time_delta, Direction input_direct
     updateAnimationPosition(time_delta, false);
     return;
   }
+
   if (input_direction != Direction::NONE)
     desired_direction = input_direction;
+
   const auto old = pos;
   updateMazePosition(time_delta);
   const bool paused = pos == old;
@@ -50,7 +53,6 @@ void PacMan::updateAnimationPosition(std::chrono::milliseconds time_delta, bool 
 }
 
 void PacMan::updateMazePosition(std::chrono::milliseconds time_delta) {
-
   if (isPortal(positionInGrid(), direction)) {
     pos = gridPositionToPosition(teleport(positionInGrid()));
     return;
