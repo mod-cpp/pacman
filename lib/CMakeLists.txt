@@ -5,7 +5,7 @@ if (${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
     find_package(OpenGL REQUIRED COMPONENTS OpenGL GLX)
 endif ()
 
-file(GLOB_RECURSE sources CONFIGURE_DEPENDS "*.cpp")
+file(GLOB_RECURSE sources CONFIGURE_DEPENDS "*.cpp" "*.hpp")
 
 add_library(libpacman ${sources})
 
