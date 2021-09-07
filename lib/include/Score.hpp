@@ -1,8 +1,10 @@
 #pragma once
 namespace pacman {
 
+constexpr int DEFAULT_LIVES = 3;
+
 struct Score {
-  int lives = 0;
+  int lives = DEFAULT_LIVES;
   int points = 0;
   int eatenPellets = 0;
 };

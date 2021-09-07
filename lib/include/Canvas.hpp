@@ -4,7 +4,6 @@
 
 #include "GameState.hpp"
 #include "Position.hpp"
-#include "Score.hpp"
 #include <optional>
 
 namespace pacman {
@@ -15,7 +14,7 @@ using Sprite = sf::Sprite;
 class Canvas {
 public:
   Canvas();
-  void update(const GameState & gameState, const Score & score);
+  void update(const GameState & gameState);
   std::optional<sf::Event> pollEvent();
 
 private:
