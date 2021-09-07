@@ -52,3 +52,26 @@ TEST(GhostTest, Frighten) {
   pacman::Pinky pinky;
   ghostFrightenHelper(pinky);
 }
+
+template<typename T>
+static void ghostDeadHelper(T & ghost) {
+  EXPECT_FALSE(ghost.isEyes());
+  ghost.die();
+  EXPECT_TRUE(ghost.isEyes());
+  ghost.reset();
+  EXPECT_FALSE(ghost.isEyes());
+}
+
+TEST(GhostTest, Dead) {
+  pacman::Blinky blinky;
+  ghostDeadHelper(blinky);
+
+  pacman::Clyde clyde;
+  ghostDeadHelper(clyde);
+
+  pacman::Inky inky;
+  ghostDeadHelper(inky);
+
+  pacman::Pinky pinky;
+  ghostDeadHelper(pinky);
+}
