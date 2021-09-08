@@ -81,31 +81,34 @@ void PacMan::updateMazePosition(std::chrono::milliseconds time_delta) {
     return isWalkableForPacMan(moveToPosition(pos, move_direction));
   };
 
-  if (canGo(desired_direction)) {
+  if (desired_direction != direction && canGo(desired_direction)) {
     direction = desired_direction;
   }
 
-  if (canGo(direction)) {
-    switch (direction) {
-      case Direction::NONE:
-        break;
-      case Direction::LEFT:
-        pos.x -= position_delta;
-        pos.y = std::floor(pos.y);
-        break;
-      case Direction::RIGHT:
-        pos.x += position_delta;
-        pos.y = std::floor(pos.y);
-        break;
-      case Direction::UP:
-        pos.x = std::floor(pos.x);
-        pos.y -= position_delta;
-        break;
-      case Direction::DOWN:
-        pos.x = std::floor(pos.x);
-        pos.y += position_delta;
-        break;
-    }
+  if (!canGo(direction)) {
+    return;
+  }
+
+  switch (direction) {
+    case Direction::LEFT:
+      pos.x -= position_delta;
+      pos.y = std::floor(pos.y);
+      break;
+    case Direction::RIGHT:
+      pos.x += position_delta;
+      pos.y = std::floor(pos.y);
+      break;
+    case Direction::UP:
+      pos.x = std::floor(pos.x);
+      pos.y -= position_delta;
+      break;
+    case Direction::DOWN:
+      pos.x = std::floor(pos.x);
+      pos.y += position_delta;
+      break;
+    case Direction::NONE:
+    default:
+      break;
   }
 }
 

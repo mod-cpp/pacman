@@ -11,8 +11,8 @@ void Game::run() {
   auto current_time = std::chrono::system_clock::now();
 
   while (true) {
-    auto newTime = std::chrono::system_clock::now();
-    auto frameTime = std::chrono::duration_cast<std::chrono::milliseconds>(newTime - current_time);
+    const auto newTime = std::chrono::system_clock::now();
+    const auto frameTime = std::chrono::duration_cast<std::chrono::milliseconds>(newTime - current_time);
 
     current_time = newTime;
     accumulator += frameTime;
@@ -31,7 +31,7 @@ void Game::run() {
 }
 
 void Game::processEvents(InputState & inputState) {
-  auto event = canvas.pollEvent();
+  const auto event = canvas.pollEvent();
   if (event && event.value().type == sf::Event::Closed) {
     inputState.close = true;
     return;
