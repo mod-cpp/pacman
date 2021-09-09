@@ -18,8 +18,7 @@ std::vector<GridPosition> initialPelletPositions();
 
 std::vector<GridPosition> initialSuperPelletPositions();
 
-inline Position penDoorPosition() {
-  return { 13, 11 }; }
-  inline Position initialPacManPosition() { return { 13.5, 23 }; }
+inline Position penDoorPosition() { return { 13, 11 }; }
+inline Position initialPacManPosition() { return { 13.5, 23 }; }
 
-  } // namespace pacman
+} // namespace pacman

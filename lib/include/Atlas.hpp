@@ -47,8 +47,8 @@ constexpr GridPosition eyeSprite(Direction direction) {
 
 constexpr GridPosition ghostSprite(Ghost ghost, Direction direction, bool alternative) {
   assert(ghost >= Ghost::blinky && ghost <= Ghost::clyde && "Invalid Ghost");
-  auto y = static_cast<size_t>(ghost);
-  size_t x = 0;
+  auto y = static_cast<int64_t>(ghost);
+  int64_t x = 0;
   switch (direction) {
     case Direction::RIGHT:
       x = 0;

@@ -32,15 +32,13 @@ void PacManAnimation::updateAnimationPosition(std::chrono::milliseconds time_del
     return;
 
   animation_position_delta += (0.02) * double(time_delta.count());
-
-  animation_position = int(animation_position + animation_position_delta);
+  animation_position = int64_t(animation_position + animation_position_delta);
 
   if (!dead)
       animation_position = animation_position % 4;
 
   if(animation_position_delta > 1)
       animation_position_delta = animation_position_delta - 1;
-
 }
 
 void PacManAnimation::pause() {

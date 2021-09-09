@@ -10,13 +10,13 @@ struct Position {
 };
 
 struct GridPosition {
-  size_t x;
-  size_t y;
-  constexpr GridPosition(size_t x, size_t y) : x(x), y(y) {}
+  int64_t x;
+  int64_t y;
+  constexpr GridPosition(int64_t x, int64_t y) : x(x), y(y) {}
 };
 
 inline GridPosition positionToGridPosition(Position pos) {
-  return { size_t(std::round(pos.x)), size_t(std::round(pos.y)) };
+  return { int64_t(std::round(pos.x)), int64_t(std::round(pos.y)) };
 }
 
 inline Position gridPositionToPosition(GridPosition pos) {

@@ -95,6 +95,9 @@ void Ghost::updatePosition(std::chrono::milliseconds time_delta, const GameState
 
   double position_delta = (0.004 * time_delta.count()) * speed(gameState);
 
+  const auto old_position = pos;
+  const GridPosition old_grid_position = positionToGridPosition(old_position);
+
   switch (direction) {
     case Direction::NONE:
       break;
@@ -118,6 +121,10 @@ void Ghost::updatePosition(std::chrono::milliseconds time_delta, const GameState
 
   if (isPortal(positionInGrid(), direction)) {
     pos = gridPositionToPosition(teleport(positionInGrid()));
+  }
+  else if (!isWalkableForGhost(positionInGrid(), old_grid_position, isEyes())) {
+    pos = old_position;
+    direction = oppositeDirection(direction);
   }
 }
 
@@ -160,7 +167,6 @@ void Ghost::updateDirection(const GameState & gameState) {
   const Position target_position = target(gameState);
 
   for (auto & move : possible_moves) {
-
     if (isPortal(current_grid_position, move.direction))
       move.position = gridPositionToPosition(teleport(current_grid_position));
 
@@ -172,7 +178,7 @@ void Ghost::updateDirection(const GameState & gameState) {
     if (opposite_direction)
       continue;
 
-    const GridPosition grid_position = { size_t(move.position.x), size_t(move.position.y) };
+    const GridPosition grid_position = { int64_t(move.position.x), int64_t(move.position.y) };
     const bool can_walk = isWalkableForGhost(grid_position, current_grid_position, isEyes());
     if (!can_walk)
       continue;
@@ -184,7 +190,7 @@ void Ghost::updateDirection(const GameState & gameState) {
     return a.distance_to_target < b.distance_to_target;
   });
 
-  const auto& move = *optimal_move;
+  const auto & move = *optimal_move;
   direction = move.direction;
   last_grid_position = current_grid_position;
 }

@@ -53,8 +53,8 @@ Position Inky::target(const GameState & gameState) const {
 
   // And selects a point on the line crossing blinky and this position that is at twice that distance
   // away from blinky
-  targetPosition.x += size_t((targetPosition.x - blinkyPosition.x) / distanceBetweenBlinkyAndTarget) * 2;
-  targetPosition.y += size_t((targetPosition.y - blinkyPosition.y) / distanceBetweenBlinkyAndTarget) * 2;
+  targetPosition.x += int64_t((targetPosition.x - blinkyPosition.x) / distanceBetweenBlinkyAndTarget) * 2;
+  targetPosition.y += int64_t((targetPosition.y - blinkyPosition.y) / distanceBetweenBlinkyAndTarget) * 2;
 
   return gridPositionToPosition(targetPosition);
 }
