@@ -2,6 +2,7 @@
 
 #include <cmath>
 #include <cassert>
+#include <limits>
 
 namespace pacman {
 
