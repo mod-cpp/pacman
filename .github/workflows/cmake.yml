@@ -33,6 +33,17 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
+    - name: Create vcpkg build folder
+      run: mkdir -p ${{runner.workspace}}/build/_deps
+
+    - name: Cache vcpkg
+      uses: actions/cache@v2
+      env:
+        cache-name: vcpkg-modules
+      with:
+        path: ${{runner.workspace}}/build/_deps
+        key: ${{ runner.os }}-${{ matrix.configurations.cmake-build-type }}-${{ hashFiles('vcpkg.json') }}
+
     - name: Fix Path on Ubuntu
       if: matrix.configurations.os == 'ubuntu-20.04' || matrix.configurations.os == 'ubuntu-18.04'
       run: echo "/home/runner/.local/bin" >> $GITHUB_PATH
