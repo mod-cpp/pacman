@@ -28,11 +28,17 @@ jobs:
           ${{runner.workspace}}/build/_deps
         key: clang-tidy-${{ runner.os }}-${{ hashFiles('vcpkg.json') }}
 
-    - name: Configure CMake
-      run: cmake -B ${{github.workspace}}/build -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
+    - name: Fix Path
+      run: echo "/home/runner/.local/bin" >> $GITHUB_PATH
+
+    - name: Install Linux dependencies
+      run: sudo apt-get update && sudo apt-get install -y libx11-dev libxrandr-dev libxi-dev libgl1-mesa-dev libudev-dev make ninja-build cmake
 
     - name: Install clang-tidy
       run: sudo apt-get install clang-tidy
+
+    - name: Configure CMake
+      run: cmake -B ${{github.workspace}}/build -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
 
     - name: Run clang-tidy
       working-directory: ${{runner.workspace}}/build
