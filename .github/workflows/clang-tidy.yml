@@ -13,6 +13,21 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
+    - name: Create vcpkg build folder
+      run: |
+        mkdir -p ${{runner.workspace}}/build/vcpkg_installed
+        mkdir -p ${{runner.workspace}}/build/_deps
+
+    - name: Cache vcpkg
+      uses: actions/cache@v2
+      env:
+        cache-name: vcpkg-modules
+      with:
+        path: |
+          ${{runner.workspace}}/build/vcpkg_installed
+          ${{runner.workspace}}/build/_deps
+        key: clang-tidy-${{ runner.os }}-${{ hashFiles('vcpkg.json') }}
+
     - name: Configure CMake
       run: cmake -B ${{github.workspace}}/build -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
 
