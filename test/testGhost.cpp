@@ -5,7 +5,7 @@
 #include <gtest/gtest.h>
 
 template<typename T>
-static void ghostInitHelper(const T& ghost, const double x, const double y) {
+static void ghostInitHelper(const T& ghost, double x, double y) {
   const pacman::Position pos{ x, y };
   EXPECT_EQ(ghost.position(), pos);
 
