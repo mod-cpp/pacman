@@ -15,8 +15,8 @@ jobs:
 
     - name: Create vcpkg build folder
       run: |
-        mkdir -p ${{runner.workspace}}/build/vcpkg_installed
-        mkdir -p ${{runner.workspace}}/build/_deps
+        mkdir -p build/vcpkg_installed
+        mkdir -p build/_deps
 
     - name: Cache vcpkg
       uses: actions/cache@v2
@@ -24,8 +24,8 @@ jobs:
         cache-name: vcpkg-modules
       with:
         path: |
-          ${{runner.workspace}}/build/vcpkg_installed
-          ${{runner.workspace}}/build/_deps
+          build/vcpkg_installed
+          build/_deps
         key: clang-tidy-${{ runner.os }}-${{ hashFiles('vcpkg.json') }}
 
     - name: Fix Path
@@ -38,9 +38,9 @@ jobs:
       run: sudo apt-get install clang-tidy
 
     - name: Configure CMake
-      working-directory: ${{runner.workspace}}/build
+      working-directory: build
       run: cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON ..
 
     - name: Run clang-tidy
-      working-directory: ${{runner.workspace}}/build
+      working-directory: build
       run: run-clang-tidy
