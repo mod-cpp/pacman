@@ -42,7 +42,7 @@ protected:
   Atlas::Ghost spriteSet;
   Direction direction = Direction::NONE;
   double timeForAnimation = 0;
-  int animationIndex = 0;
+  std::size_t animationIndex = 0;
   State state = State::Chase;
   std::chrono::milliseconds timeFrighten = {};
   std::chrono::milliseconds timeChase = {};

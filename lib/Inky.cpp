@@ -49,12 +49,12 @@ Position Inky::target(const GameState & gameState) const {
 
   // Then it calculates the distance between Blinky and this position
   const auto & blinkyPosition = gameState.blinky.positionInGrid();
-  auto distanceBetweenBlinkyAndTarget = std::hypot(blinkyPosition.x - targetPosition.x, blinkyPosition.y - targetPosition.y);
+  double distanceBetweenBlinkyAndTarget = std::hypot(blinkyPosition.x - targetPosition.x, blinkyPosition.y - targetPosition.y);
 
   // And selects a point on the line crossing blinky and this position that is at twice that distance
   // away from blinky
-  targetPosition.x += size_t((targetPosition.x - blinkyPosition.x) / distanceBetweenBlinkyAndTarget) * 2;
-  targetPosition.y += size_t((targetPosition.y - blinkyPosition.y) / distanceBetweenBlinkyAndTarget) * 2;
+  targetPosition.x += std::size_t((double(targetPosition.x) - double(blinkyPosition.x)) / distanceBetweenBlinkyAndTarget) * 2;
+  targetPosition.y += std::size_t((double(targetPosition.y) - double(blinkyPosition.y)) / distanceBetweenBlinkyAndTarget) * 2;
 
   return gridPositionToPosition(targetPosition);
 }

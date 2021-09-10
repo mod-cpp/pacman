@@ -7,7 +7,7 @@
 namespace pacman {
 
 Canvas::Canvas()
-  : window(sf::VideoMode((viewDimensions().width / 2), (viewDimensions().height / 2)),
+  : window(sf::VideoMode(std::uint32_t(viewDimensions().width / 2), std::uint32_t(viewDimensions().height / 2)),
            "Pacman",
            sf::Style::Titlebar | sf::Style::Close),
     view(sf::FloatRect(0, 0, float(viewDimensions().width), float(viewDimensions().height))) {
@@ -124,8 +124,8 @@ void Canvas::renderLives(int lives) {
   const size_t y = TARGET_MAZE_HEIGHT;
 
   Sprite pacmanSprite = getSprite(liveSprite);
-  for (int i = 0; i < lives - 1; i++) {
-    auto life_position = i * SPRITE_WIDTH * 1.5f;
+  for (auto i = 0; i < lives - 1; i++) {
+    auto life_position = float(i) * SPRITE_WIDTH * 1.5f;
     sf::Vector2f pos{ x + life_position, y };
     pacmanSprite.setPosition(pos.x, pos.y);
     window.draw(pacmanSprite);

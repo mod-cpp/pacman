@@ -94,7 +94,7 @@ bool Ghost::isInPen() const {
 void Ghost::updatePosition(std::chrono::milliseconds time_delta, const GameState & gameState) {
   updateDirection(gameState);
 
-  double position_delta = (0.004 * time_delta.count()) * speed(gameState);
+  double position_delta = (0.004 * double(time_delta.count())) * speed(gameState);
 
   const auto old_position = pos;
   const GridPosition old_grid_position = positionToGridPosition(old_position);
@@ -197,7 +197,7 @@ void Ghost::updateDirection(const GameState & gameState) {
 }
 
 void Ghost::updateAnimation(std::chrono::milliseconds time_delta) {
-  timeForAnimation += time_delta.count();
+  timeForAnimation += double(time_delta.count());
   if (timeForAnimation >= 250) {
     timeForAnimation = 0;
     animationIndex = (animationIndex + 1) % 4;

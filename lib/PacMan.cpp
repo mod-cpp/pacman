@@ -58,7 +58,7 @@ void PacMan::updateMazePosition(std::chrono::milliseconds time_delta) {
     return;
   }
 
-  const double position_delta = 0.004 * time_delta.count();
+  const double position_delta = 0.004 * double(time_delta.count());
   const auto pacman_size = 1;
 
   auto moveToPosition = [position_delta, pacman_size](Position point, Direction move_direction) {
