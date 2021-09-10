@@ -71,11 +71,11 @@ constexpr GridPosition ghostSprite(Ghost ghost, Direction direction, bool altern
   return { x, y };
 }
 
-constexpr GridPosition initialFrightened(int animationIndex) {
+constexpr GridPosition initialFrightened(std::size_t animationIndex) {
   return (animationIndex % 2) == 0 ? Atlas::ghost_blue_frightened2 : Atlas::ghost_blue_frightened;
 }
 
-constexpr GridPosition endingFrightened(int animationIndex) {
+constexpr GridPosition endingFrightened(std::size_t animationIndex) {
   std::array<GridPosition, 4> positions = { Atlas::ghost_blue_frightened,
                                             Atlas::ghost_blue_frightened2,
                                             Atlas::ghost_white_frightened,
