@@ -43,7 +43,7 @@ Position Pinky::target(const GameState & gameState) const {
       targetPosition.y += 4;
       break;
     case Direction::NONE:
-      assert(false && "Pacman should be moving!");
+      assert(("Pacman should be moving", false));
       break;
   }
   return gridPositionToPosition(targetPosition);
