@@ -2,6 +2,7 @@
 #include <array>
 #include <cmath>
 #include <numeric>
+#include <algorithm>
 
 namespace pacman {
 
