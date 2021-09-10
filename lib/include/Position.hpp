@@ -1,6 +1,7 @@
 #pragma once
 
 #include <cmath>
+#include <cassert>
 
 namespace pacman {
 
@@ -10,13 +11,14 @@ struct Position {
 };
 
 struct GridPosition {
-  int64_t x;
-  int64_t y;
-  constexpr GridPosition(int64_t x, int64_t y) : x(x), y(y) {}
+  size_t x;
+  size_t y;
+  constexpr GridPosition(size_t x, size_t y) : x(x), y(y) {}
 };
 
 inline GridPosition positionToGridPosition(Position pos) {
-  return { int64_t(std::round(pos.x)), int64_t(std::round(pos.y)) };
+  assert(pos.x >= 0 && pos.y >= 0 && "Position should have positive values");
+  return { size_t(std::round(pos.x)), size_t(std::round(pos.y)) };
 }
 
 inline Position gridPositionToPosition(GridPosition pos) {
