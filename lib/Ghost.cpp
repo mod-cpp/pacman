@@ -222,8 +222,8 @@ Ghost::State Ghost::defaultStateAtDuration(std::chrono::seconds seconds) {
   // We get the position of that iterator in the array
   auto count = std::distance(std::begin(changes), it);
 
-  // Because the first positition is scatter, all the even positions will be scatter
-  // all the odd positions will be chase
+  // Because the first position is scatter, all the even positions will be "scatter"
+  // all the odd positions will be "chase"
   return count % 2 == 0 ? State::Scatter : State::Chase;
 }
 
