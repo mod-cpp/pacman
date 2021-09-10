@@ -151,7 +151,7 @@ void Ghost::updateDirection(const GameState & gameState) {
     return;
 
   struct Move {
-    Direction direction;
+    Direction direction = Direction::NONE;
     Position position;
     double distance_to_target = std::numeric_limits<double>::infinity();
   };
