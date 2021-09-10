@@ -9,7 +9,7 @@ It is not a C++ file and is not part of this course!
 namespace pacman {
 
 double scaling_factor_for_window(sf::WindowHandle handle) {
-    return [ static_cast<id>(handle backingScaleFactor)];
+    return [ reinterpret_cast<id>(handle) backingScaleFactor];
 }
 
 }
