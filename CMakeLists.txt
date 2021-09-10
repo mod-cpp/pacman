@@ -21,8 +21,7 @@ if(NOT DEFINED CMAKE_TOOLCHAIN_FILE)
         "${CMAKE_CURRENT_SOURCE_DIR}/cmake/toolchain.cmake")
 endif()
 
-enable_language(CXX)
-project(pacman)
+project(pacman LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
