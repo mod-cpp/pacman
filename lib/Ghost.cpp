@@ -75,7 +75,7 @@ void Ghost::update(std::chrono::milliseconds time_delta, const GameState & gameS
 
   if (state == State::Scatter || state == State::Chase) {
     timeChase += time_delta;
-    auto newState = defaultStateAtDuration(std::chrono::duration_cast<std::chrono::seconds>(timeChase));
+    const auto newState = defaultStateAtDuration(std::chrono::duration_cast<std::chrono::seconds>(timeChase));
     if (newState != state) {
       direction = oppositeDirection(direction);
       state = newState;
@@ -94,6 +94,9 @@ void Ghost::updatePosition(std::chrono::milliseconds time_delta, const GameState
   updateDirection(gameState);
 
   double position_delta = (0.004 * time_delta.count()) * speed(gameState);
+
+  const auto old_position = pos;
+  const GridPosition old_grid_position = positionToGridPosition(old_position);
 
   switch (direction) {
     case Direction::NONE:
@@ -118,6 +121,10 @@ void Ghost::updatePosition(std::chrono::milliseconds time_delta, const GameState
 
   if (isPortal(positionInGrid(), direction)) {
     pos = gridPositionToPosition(teleport(positionInGrid()));
+  }
+  else if (!isWalkableForGhost(positionInGrid(), old_grid_position, isEyes())) {
+    pos = old_position;
+    direction = oppositeDirection(direction);
   }
 }
 
@@ -160,7 +167,6 @@ void Ghost::updateDirection(const GameState & gameState) {
   const Position target_position = target(gameState);
 
   for (auto & move : possible_moves) {
-
     if (isPortal(current_grid_position, move.direction))
       move.position = gridPositionToPosition(teleport(current_grid_position));
 
@@ -172,7 +178,7 @@ void Ghost::updateDirection(const GameState & gameState) {
     if (opposite_direction)
       continue;
 
-    const GridPosition grid_position = { size_t(move.position.x), size_t(move.position.y) };
+    const GridPosition grid_position = { int64_t(move.position.x), int64_t(move.position.y) };
     const bool can_walk = isWalkableForGhost(grid_position, current_grid_position, isEyes());
     if (!can_walk)
       continue;
@@ -184,7 +190,7 @@ void Ghost::updateDirection(const GameState & gameState) {
     return a.distance_to_target < b.distance_to_target;
   });
 
-  auto move = *optimal_move;
+  const auto & move = *optimal_move;
   direction = move.direction;
   last_grid_position = current_grid_position;
 }
@@ -204,13 +210,17 @@ void Ghost::updateAnimation(std::chrono::milliseconds time_delta) {
 Ghost::State Ghost::defaultStateAtDuration(std::chrono::seconds seconds) {
   // This array denotes the duration of each state, alternating between scatter and chase
   std::array changes = { /*scatter*/ 7, 20, 7, 20, 5, 20, 5 };
+
   // To know the current state we first compute the cumulative time using std::partial_sum
   // This gives us {7, 27, 34, 54, 59, 79, 84}
   std::partial_sum(std::begin(changes), std::end(changes), std::begin(changes));
+
   // Then we look for the first value in the array greater than the time spent in chase/scatter states
   auto it = std::upper_bound(std::begin(changes), std::end(changes), seconds.count());
+
   // We get the position of that iterator in the array
   auto count = std::distance(std::begin(changes), it);
+
   // Because the first positition is scatter, all the even positions will be scatter
   // all the odd positions will be chase
   return count % 2 == 0 ? State::Scatter : State::Chase;

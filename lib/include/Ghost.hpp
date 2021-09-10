@@ -23,9 +23,7 @@ public:
   virtual ~Ghost() = default;
 
   GridPosition currentSprite() const;
-
   Position position() const;
-
   GridPosition positionInGrid() const;
 
   void update(std::chrono::milliseconds time_delta, const GameState & gameState);
@@ -41,12 +39,6 @@ private:
   void updateDirection(const GameState & gameState);
 
 protected:
-  State defaultStateAtDuration(std::chrono::seconds seconds);
-
-  virtual double speed(const GameState & gameState) const = 0;
-  virtual Position target(const GameState & gameState) const = 0;
-  virtual Position initialPosition() const = 0;
-
   Atlas::Ghost spriteSet;
   Direction direction = Direction::NONE;
   double timeForAnimation = 0;
@@ -56,6 +48,13 @@ protected:
   std::chrono::milliseconds timeChase = {};
   Position pos;
   GridPosition last_grid_position = { 0, 0 };
+
+  State defaultStateAtDuration(std::chrono::seconds seconds);
+
+  virtual double speed(const GameState & gameState) const = 0;
+  virtual Position target(const GameState & gameState) const = 0;
+  virtual Position initialPosition() const = 0;
+
   bool isInPen() const;
 };
 

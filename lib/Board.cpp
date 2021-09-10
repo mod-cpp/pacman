@@ -54,7 +54,7 @@ constexpr std::array<std::array<int, COLUMNS>, ROWS> board = {{
 // clang-format on
 
 static Cell cellAtPosition(GridPosition point) {
-  if (point.x >= COLUMNS || point.y >= ROWS)
+  if (point.x < 0 || point.x >= COLUMNS || point.y < 0 || point.y >= ROWS)
     return Cell::wall;
   return Cell(board[point.y][point.x]);
 }
@@ -64,10 +64,10 @@ bool isWalkableForPacMan(GridPosition point) {
 }
 
 bool isWalkableForGhost(GridPosition point, GridPosition origin, bool isEyes) {
-  Cell cell = cellAtPosition(point);
+  const Cell cell = cellAtPosition(point);
   if (cell == Cell::wall)
     return false;
-  return isEyes || (isInPen(origin) || !isInPen(point));
+  return isEyes || isInPen(origin) || !isInPen(point);
 }
 
 bool isInPen(GridPosition point) {

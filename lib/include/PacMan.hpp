@@ -8,15 +8,10 @@
 
 namespace pacman {
 
-class Board;
-class InputState;
-
 class PacMan {
 public:
   GridPosition currentSprite() const;
-
   Position position() const;
-
   GridPosition positionInGrid() const;
 
   void update(std::chrono::milliseconds time_delta, Direction input_direction);

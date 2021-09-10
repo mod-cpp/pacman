@@ -29,7 +29,7 @@ Canvas::Canvas()
   game_font = loadFont("retro_font.ttf");
 }
 
-void Canvas::update(const GameState & gameState, const Score & score) {
+void Canvas::update(const GameState & gameState) {
   clear();
 
   renderMaze();
@@ -41,8 +41,8 @@ void Canvas::update(const GameState & gameState, const Score & score) {
   renderGhost(gameState.inky);
   renderGhost(gameState.clyde);
 
-  renderScore(score.points);
-  renderLives(score.lives);
+  renderScore(gameState.score.points);
+  renderLives(gameState.score.lives);
 
   renderPacMan(gameState.pacMan);
 

@@ -18,7 +18,7 @@ public:
   void pause();
 
 private:
-  size_t animation_position = 0;
+  int64_t animation_position = 0;
   double animation_position_delta = 0.0;
 };
 

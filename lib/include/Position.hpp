@@ -1,6 +1,5 @@
 #pragma once
 
-#include <SFML/Graphics.hpp>
 #include <cmath>
 
 namespace pacman {
@@ -11,17 +10,13 @@ struct Position {
 };
 
 struct GridPosition {
-  size_t x;
-  size_t y;
-  constexpr GridPosition(size_t x, size_t y) : x(x), y(y) {}
+  int64_t x;
+  int64_t y;
+  constexpr GridPosition(int64_t x, int64_t y) : x(x), y(y) {}
 };
 
-using Rect = sf::Rect<int>;
-
-using Sprite = sf::Sprite;
-
 inline GridPosition positionToGridPosition(Position pos) {
-  return { size_t(std::round(pos.x)), size_t(std::round(pos.y)) };
+  return { int64_t(std::round(pos.x)), int64_t(std::round(pos.y)) };
 }
 
 inline Position gridPositionToPosition(GridPosition pos) {
@@ -36,14 +31,14 @@ constexpr bool operator!=(const GridPosition & a, const GridPosition & b) {
   return !(a == b);
 }
 
-constexpr bool operator==(const Position & a, const Position & b) {
-  return a.x == b.x && a.y == b.y;
+inline bool operator==(const Position & a, const Position & b) {
+  // This is ok as a test unless x and y become very large.
+  constexpr double epsilon = std::numeric_limits<double>::epsilon();
+  return std::abs(a.x - b.x) <= epsilon && std::abs(a.y - b.y) <= epsilon;
 }
 
-constexpr bool operator!=(const Position & a, const Position & b) {
+inline bool operator!=(const Position & a, const Position & b) {
   return !(a == b);
 }
-
-
 
 } // namespace pacman
