@@ -5,7 +5,7 @@
 #include <gtest/gtest.h>
 
 template<typename T>
-static void ghostInitHelper(const T& ghost, double x, double y) {
+static void ghostInitHelper(const T & ghost, double x, double y) {
   const pacman::Position pos{ x, y };
   EXPECT_EQ(ghost.position(), pos);
 
@@ -25,13 +25,13 @@ TEST(GhostTest, Init) {
 
   pacman::Inky inky;
   ghostInitHelper(inky, 13.5, 14);
-  
+
   pacman::Pinky pinky;
   ghostInitHelper(pinky, 11.5, 14);
 }
 
 template<typename T>
-static void ghostFrightenHelper(T& ghost) {
+static void ghostFrightenHelper(T & ghost) {
   EXPECT_FALSE(ghost.isFrightened());
   ghost.frighten();
   EXPECT_TRUE(ghost.isFrightened());

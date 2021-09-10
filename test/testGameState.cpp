@@ -1,6 +1,6 @@
 #include "GameState.hpp"
-#include <gtest/gtest.h>
 #include <fmt/format.h>
+#include <gtest/gtest.h>
 
 TEST(GameStateTest, Fuzz) {
   pacman::GameState gameState;
