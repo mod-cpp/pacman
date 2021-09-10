@@ -178,7 +178,7 @@ void Ghost::updateDirection(const GameState & gameState) {
     if (opposite_direction)
       continue;
 
-    const GridPosition grid_position = { int64_t(move.position.x), int64_t(move.position.y) };
+    const GridPosition grid_position = { size_t(move.position.x), size_t(move.position.y) };
     const bool can_walk = isWalkableForGhost(grid_position, current_grid_position, isEyes());
     if (!can_walk)
       continue;

@@ -64,13 +64,13 @@ void PacMan::updateMazePosition(std::chrono::milliseconds time_delta) {
   auto moveToPosition = [position_delta](Position point, Direction move_direction) {
     switch (move_direction) {
       case Direction::LEFT:
-        return GridPosition{ int64_t(point.x - position_delta), int64_t(point.y) };
+        return GridPosition{ size_t(point.x - position_delta), size_t(point.y) };
       case Direction::RIGHT:
-        return GridPosition{ int64_t(point.x + pacman_size), int64_t(point.y) };
+        return GridPosition{ size_t(point.x + pacman_size), size_t(point.y) };
       case Direction::UP:
-        return GridPosition{ int64_t(point.x), int64_t(point.y - position_delta) };
+        return GridPosition{ size_t(point.x), size_t(point.y - position_delta) };
       case Direction::DOWN:
-        return GridPosition{ int64_t(point.x), int64_t(point.y + pacman_size) };
+        return GridPosition{ size_t(point.x), size_t(point.y + pacman_size) };
       case Direction::NONE:
       default:
         return positionToGridPosition(point);
