@@ -38,7 +38,8 @@ jobs:
       run: sudo apt-get install clang-tidy
 
     - name: Configure CMake
-      run: cmake -B ${{github.workspace}}/build -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
+      working-directory: ${{runner.workspace}}/build
+      run: cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON ..
 
     - name: Run clang-tidy
       working-directory: ${{runner.workspace}}/build
