@@ -24,7 +24,8 @@ endif()
 enable_language(CXX)
 project(pacman)
 
-set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 add_subdirectory(scaling-lib)
 add_subdirectory(lib)
