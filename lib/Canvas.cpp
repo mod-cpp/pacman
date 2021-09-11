@@ -20,8 +20,8 @@ Canvas::Canvas()
   // Then project it on a scaled window - on some mac we get the
   // scaling factor of the window to adjust the resolution
   const auto scale = scaling_factor_for_window(window.getSystemHandle());
-  const auto width = (viewDimensions().width / 2) * scale;
-  const auto height = (viewDimensions().height / 2) * scale;
+  const auto width = (viewDimensions().width / 2.0) * scale;
+  const auto height = (viewDimensions().height / 2.2) * scale;
   window.setSize(sf::Vector2u(unsigned(width), unsigned(height)));
 
   maze_texture = loadTexture("maze.png");
