@@ -1,8 +1,11 @@
 #include "GameState.hpp"
 #include <fmt/format.h>
-#include <gtest/gtest.h>
+#include <catch2/catch.hpp>
 
-TEST(GameStateTest, Fuzz) {
+// TODO: Fuzzing
+
+/*
+TEST_CASE("GameStateTest") {
   pacman::GameState gameState;
   //fmt::print("{}\n", gameState.pellets.currentPositions().size());
 
@@ -24,3 +27,4 @@ TEST(GameStateTest, Fuzz) {
   //fmt::print("{}\n", pacManDeathCount);
   //fmt::print("{}\n", gameState.pellets.currentPositions().size());
 }
+*/

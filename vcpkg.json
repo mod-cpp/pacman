@@ -5,6 +5,6 @@
     "dependencies": [
         "sfml",
         "fmt",
-        "gtest"
+        "catch2"
     ]
 }
