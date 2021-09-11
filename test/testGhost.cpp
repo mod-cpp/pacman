@@ -2,21 +2,22 @@
 #include "Clyde.hpp"
 #include "Inky.hpp"
 #include "Pinky.hpp"
-#include <gtest/gtest.h>
+#include <catch2/catch.hpp>
+
 
 template<typename T>
 static void ghostInitHelper(const T & ghost, double x, double y) {
   const pacman::Position pos{ x, y };
-  EXPECT_EQ(ghost.position(), pos);
+  REQUIRE(ghost.position() == pos);
 
   const pacman::GridPosition gridPos = pacman::positionToGridPosition(pos);
-  EXPECT_EQ(ghost.positionInGrid(), gridPos);
+  REQUIRE(ghost.positionInGrid() == gridPos);
 
-  EXPECT_FALSE(ghost.isEyes());
-  EXPECT_FALSE(ghost.isFrightened());
+  REQUIRE_FALSE(ghost.isEyes());
+  REQUIRE_FALSE(ghost.isFrightened());
 }
 
-TEST(GhostTest, Init) {
+TEST_CASE("Ghosts start in the correct position", "[ghosts]") {
   pacman::Blinky blinky;
   ghostInitHelper(blinky, 13.5, 11);
 
@@ -32,14 +33,14 @@ TEST(GhostTest, Init) {
 
 template<typename T>
 static void ghostFrightenHelper(T & ghost) {
-  EXPECT_FALSE(ghost.isFrightened());
+  REQUIRE_FALSE(ghost.isFrightened());
   ghost.frighten();
-  EXPECT_TRUE(ghost.isFrightened());
+  REQUIRE(ghost.isFrightened());
   ghost.reset();
-  EXPECT_FALSE(ghost.isFrightened());
+  REQUIRE_FALSE(ghost.isFrightened());
 }
 
-TEST(GhostTest, Frighten) {
+TEST_CASE("Ghosts are frighten", "[ghosts]") {
   pacman::Blinky blinky;
   ghostFrightenHelper(blinky);
 
@@ -55,14 +56,14 @@ TEST(GhostTest, Frighten) {
 
 template<typename T>
 static void ghostDeadHelper(T & ghost) {
-  EXPECT_FALSE(ghost.isEyes());
+  REQUIRE_FALSE(ghost.isEyes());
   ghost.die();
-  EXPECT_TRUE(ghost.isEyes());
+  REQUIRE(ghost.isEyes());
   ghost.reset();
-  EXPECT_FALSE(ghost.isEyes());
+  REQUIRE_FALSE(ghost.isEyes());
 }
 
-TEST(GhostTest, Dead) {
+TEST_CASE("Ghosts can die", "[ghosts]") {
   pacman::Blinky blinky;
   ghostDeadHelper(blinky);
 

@@ -1,8 +1,8 @@
 #include "PacMan.hpp"
-#include <gtest/gtest.h>
+#include <catch2/catch.hpp>
 
-TEST(PacManTest, InitialPosition) {
+TEST_CASE("Pacman has the correct initial position") {
   pacman::PacMan pacMan;
-  EXPECT_EQ(pacMan.position().x, 13.5);
-  EXPECT_EQ(pacMan.position().y, 23);
+  REQUIRE(pacMan.position().x == 13.5);
+  REQUIRE(pacMan.position().y == 23);
 }
