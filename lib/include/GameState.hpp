@@ -9,6 +9,7 @@
 #include "Pinky.hpp"
 #include "Score.hpp"
 #include "SuperPellets.hpp"
+#include "Fruits.hpp"
 #include "InputState.hpp"
 
 namespace pacman {
@@ -25,6 +26,7 @@ struct GameState {
   InputState inputState;
   Pellets pellets;
   SuperPellets superPellets;
+  Fruits fruit;
 
   Score score;
   std::chrono::milliseconds timeSinceDeath{};
@@ -32,6 +34,7 @@ struct GameState {
   void checkCollision(Ghost & ghost);
   void handleDeathAnimation(std::chrono::milliseconds delta);
   void eatPellets();
+  void eatFruit();
   void killPacMan();
   bool isPacManDying() const;
 };

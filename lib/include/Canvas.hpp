@@ -37,11 +37,12 @@ private:
   void renderGhost(const Ghost & ghost);
   void renderPellets(const Pellets & pellets);
   void renderSuperPellets(const SuperPellets & superPellets);
-  void renderSprite(Sprite sprite, Position pos);
+  void renderFruits(const Fruits& fruit, int eatenFruits);
 
   void renderScore(int score);
   void renderLives(int lives);
 
+  void renderSprite(Sprite sprite, Position pos);
   static Rect viewDimensions();
   static sf::Texture loadTexture(std::string_view path);
   static sf::Font loadFont(std::string_view path);
