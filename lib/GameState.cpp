@@ -21,6 +21,7 @@ void GameState::step(std::chrono::milliseconds delta) {
   pinky.update(delta, *this); // ghosts know what they want, which is usually pacman's location
   inky.update(delta, *this);
   clyde.update(delta, *this);
+  fruit.update(delta, *this);
 
   checkCollision(blinky);
   checkCollision(pinky);
@@ -28,12 +29,14 @@ void GameState::step(std::chrono::milliseconds delta) {
   checkCollision(clyde);
 
   eatPellets();
+  eatFruit();
 }
 
 void GameState::checkCollision(Ghost & ghost) {
   if (isPacManDying() || ghost.isEyes())
     return;
 
+  // TODO: hitboxes based collision
   if (ghost.positionInGrid() != pacMan.positionInGrid())
     return;
 
@@ -74,6 +77,17 @@ void GameState::eatPellets() {
     inky.frighten();
     clyde.frighten();
   }
+}
+
+void GameState::eatFruit() {
+    const auto pos = pacMan.positionInGrid();
+    const auto fruitpos = positionToGridPosition(fruit.position());
+
+    // TODO: hitboxes based collision
+    if(fruit.isVisible() && pos == fruitpos) {
+        score.points += fruit.eat();
+        score.eatenFruits++;
+    }
 }
 
 void GameState::killPacMan() {
