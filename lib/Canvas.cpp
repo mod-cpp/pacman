@@ -101,21 +101,21 @@ void Canvas::renderPacMan(const PacMan & pac_man) {
   renderSprite(pacmanSprite, pos);
 }
 
-void Canvas::renderFruits(const Fruits& fruit, int eatenFruits) {
-    Sprite sprite = getSprite(fruit.currentSprite());
-    if(fruit.isVisible()) {
-        const auto & pos = fruit.position();
-        renderSprite(sprite, pos);
-    }
-    const size_t x = (LEFT_MARGIN + TARGET_MAZE_WIDTH + LEFT_MARGIN);
-    const size_t y = (TARGET_MAZE_HEIGHT / 3.0) * 2;
+void Canvas::renderFruits(const Fruits & fruit, int eatenFruits) {
+  Sprite sprite = getSprite(fruit.currentSprite());
+  if (fruit.isVisible()) {
+    const auto & pos = fruit.position();
+    renderSprite(sprite, pos);
+  }
+  const size_t x = static_cast<size_t>(LEFT_MARGIN + TARGET_MAZE_WIDTH + LEFT_MARGIN);
+  const size_t y = static_cast<size_t>((TARGET_MAZE_HEIGHT / 3.0) * 2);
 
-    for (auto i = 0; i < eatenFruits + 1; i++) {
-      auto sprite_position = float(i) * SPRITE_WIDTH * 1.5f;
-      sf::Vector2f pos{ x + sprite_position, y };
-      sprite.setPosition(pos.x, pos.y);
-      window.draw(sprite);
-    }
+  for (auto i = 0; i < eatenFruits + 1; i++) {
+    auto sprite_position = float(i) * SPRITE_WIDTH * 1.5f;
+    sf::Vector2f pos{ x + sprite_position, y };
+    sprite.setPosition(pos.x, pos.y);
+    window.draw(sprite);
+  }
 }
 
 void Canvas::renderGhost(const Ghost & ghost) {
