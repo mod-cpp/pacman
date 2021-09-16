@@ -6,14 +6,14 @@ const std::size_t ROWS = 31;
 const std::size_t COLUMNS = 28;
 
 enum class Cell {
-    wall = 0,
-    pellet = 1,
-    // nothing = 2,
-    // missing 3,
-    power_pellet = 4,
-    pen = 5,
-    left_portal = 6,
-    right_portal = 7
+  wall = 0,
+  pellet = 1,
+  // nothing = 2,
+  // missing 3,
+  power_pellet = 4,
+  pen = 5,
+  left_portal = 6,
+  right_portal = 7
 };
 
 // clang-format off
@@ -122,6 +122,62 @@ std::vector<GridPosition> initialSuperPelletPositions() {
     }
   }
   return positions;
+}
+
+// AI
+
+bool isIntersection(GridPosition point) {
+  if (!isWalkableForPacMan(point) || cellAtPosition(point) == Cell::left_portal || cellAtPosition(point) == Cell::right_portal) {
+    return false;
+  }
+
+  const GridPosition right{ point.x + 1, point.y };
+  const bool rightWalkable = isWalkableForPacMan(right);
+
+  const GridPosition left{ point.x - 1, point.y };
+  const bool leftWalkable = isWalkableForPacMan(left);
+
+  const GridPosition top{ point.x, point.y - 1 };
+  const bool topWalkable = isWalkableForPacMan(top);
+
+  const GridPosition bottom{ point.x, point.y + 1 };
+  const bool bottomWalkable = isWalkableForPacMan(bottom);
+
+  return (topWalkable && rightWalkable) || (rightWalkable && bottomWalkable) || (bottomWalkable && leftWalkable) || (leftWalkable && topWalkable);
+}
+
+bool isWalkableStraightLine(GridPosition pointA, GridPosition pointB) {
+  // Points with no shared x,y have no straight line between them
+  if (pointA.x != pointB.x && pointA.y != pointB.y) {
+    return false;
+  }
+
+  // this is std::all_of
+  if (pointA.x == pointB.x) {
+    const size_t startY = (pointA.y > pointB.y ? pointB.y : pointA.y);
+    const size_t endY = (pointA.y > pointB.y ? pointA.y : pointB.y);
+    for (size_t y = startY; y <= endY; y++) {
+      const GridPosition test{ pointA.x, y };
+      if (!isWalkableForPacMan(test)) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  if (pointA.y == pointB.y) {
+    const size_t startX = (pointA.x > pointB.x ? pointB.x : pointA.x);
+    const size_t endX = (pointA.x > pointB.x ? pointA.x : pointB.x);
+    for (size_t x = startX; x <= endX; x++) {
+      const GridPosition test{ x, pointA.y };
+      if (!isWalkableForPacMan(test)) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  return false;
 }
 
 } // namespace pacman

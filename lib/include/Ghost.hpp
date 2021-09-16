@@ -25,6 +25,7 @@ public:
   GridPosition currentSprite() const;
   Position position() const;
   GridPosition positionInGrid() const;
+  Direction direction() const;
 
   void update(std::chrono::milliseconds time_delta, const GameState & gameState);
   void frighten();
@@ -40,7 +41,7 @@ private:
 
 protected:
   Atlas::Ghost spriteSet;
-  Direction direction = Direction::NONE;
+  Direction dir = Direction::NONE;
   double timeForAnimation = 0;
   std::size_t animationIndex = 0;
   State state = State::Chase;
