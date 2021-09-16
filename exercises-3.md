@@ -19,3 +19,6 @@ Blinky always chases PacMan so the only thing you should need is where PacMan is
 # Exercise: ?
 
 Extra
+
+# TODO Changes
+Pinky as main exercise and Clyde as Extra.
