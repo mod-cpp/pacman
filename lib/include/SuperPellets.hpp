@@ -17,6 +17,7 @@ public:
     return positions;
   }
 
+  bool isPellet(GridPosition p) const;
   bool eatPelletAtPosition(GridPosition p);
 
 private:

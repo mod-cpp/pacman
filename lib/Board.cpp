@@ -79,6 +79,36 @@ bool isPortal(GridPosition point, Direction direction) {
          (cellAtPosition(point) == Cell::right_portal && direction == Direction::RIGHT);
 }
 
+GridPosition iterateGridPosition(GridPosition point, Direction direction) {
+  switch (direction) {
+    case Direction::LEFT: {
+      if (point.x != 0) {
+        point.x -= 1;
+      }
+      break;
+    }
+    case Direction::RIGHT: {
+      point.x += 1;
+      break;
+    }
+    case Direction::UP: {
+      if (point.y != 0) {
+        point.y -= 1;
+      }
+      break;
+    }
+    case Direction::DOWN: {
+      point.y += 1;
+      break;
+    }
+    case Direction::NONE:
+    default:
+      break;
+  }
+
+  return point;
+}
+
 GridPosition teleport(GridPosition point) {
   size_t right = COLUMNS - 1;
   size_t left = 0;
