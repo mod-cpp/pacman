@@ -21,9 +21,8 @@
         {
             "name": "x64-windows",
             "description": "Sets x64 arch, compilers, build type",
-            "inherits": [
-                "base"
-            ],
+            "generator": "Ninja",
+            "inherits": "base",
             "architecture": {
                 "value": "x64",
                 "strategy": "external"
@@ -55,9 +54,6 @@
                         "Linux"
                     ]
                 }
-            },
-            "warnings": {
-                "dev": true
             }
         },
         {
@@ -75,9 +71,23 @@
                         "Linux"
                     ]
                 }
+            }
+        },
+        {
+            "name": "osx",
+            "generator": "Ninja",
+            "description": "Compile on osx",
+            "inherits": "base",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Debug",
+                "CMAKE_CXX_COMPILER": "clang++"
             },
-            "warnings": {
-                "dev": true
+            "vendor": {
+                "microsoft.com/VisualStudioSettings/CMake/1.0": {
+                    "hostOS": [
+                        "macOS"
+                    ]
+                }
             }
         }
     ],
@@ -90,7 +100,7 @@
             "inheritConfigureEnvironment": true
         },
         {
-            "name": "windows-clean-build",
+            "name": "windows-build",
             "description": "Clean before build (--clean-first)",
             "configurePreset": "x64-windows",
             "inherits": "core-build"
@@ -103,6 +113,11 @@
         {
             "name": "linux-clang-build",
             "configurePreset": "linux-clang",
+            "inherits": "core-build"
+        },
+        {
+            "name": "osx-build",
+            "configurePreset": "osx",
             "inherits": "core-build"
         }
     ],
@@ -121,14 +136,26 @@
             "description": "Run tests on linux (GCC)",
             "configurePreset": "linux-gcc",
             "displayName": "linux-test",
-            "inherits": ["core-tests"]
+            "inherits": [
+                "core-tests"
+            ]
         },
         {
             "name": "linux-test-clang",
             "description": "Run tests on linux (Clang)",
             "configurePreset": "linux-clang",
             "displayName": "linux-test",
-            "inherits": ["core-tests"]
+            "inherits": [
+                "core-tests"
+            ]
+        },
+        {
+            "name": "OSX test",
+            "description": "Run tests on Mac",
+            "configurePreset": "osx",
+            "inherits": [
+                "core-tests"
+            ]
         }
     ]
 }
