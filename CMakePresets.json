@@ -1,0 +1,134 @@
+{
+    "version": 2,
+    "cmakeMinimumRequired": {
+        "major": 3,
+        "minor": 19,
+        "patch": 0
+    },
+    "configurePresets": [
+        {
+            "name": "base",
+            "description": "Sets generator, build and install directory, vcpkg",
+            "hidden": true,
+            "binaryDir": "${sourceDir}/build/${presetName}",
+            "cacheVariables": {
+                "CMAKE_INSTALL_PREFIX": "${sourceDir}/build/install/${presetName}"
+            },
+            "environment": {
+                "VCPKG_FEATURE_FLAGS": "manifests,versions,binarycaching,registries"
+            }
+        },
+        {
+            "name": "x64-windows",
+            "description": "Sets x64 arch, compilers, build type",
+            "inherits": [
+                "base"
+            ],
+            "architecture": {
+                "value": "x64",
+                "strategy": "external"
+            },
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Debug",
+                "CMAKE_CXX_COMPILER": "cl"
+            },
+            "vendor": {
+                "microsoft.com/VisualStudioSettings/CMake/1.0": {
+                    "hostOS": [
+                        "Windows"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "linux-gcc",
+            "description": "Compile On linux with GCC",
+            "inherits": "base",
+            "generator": "Ninja",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Debug",
+                "CMAKE_CXX_COMPILER": "g++"
+            },
+            "vendor": {
+                "microsoft.com/VisualStudioSettings/CMake/1.0": {
+                    "hostOS": [
+                        "Linux"
+                    ]
+                }
+            },
+            "warnings": {
+                "dev": true
+            }
+        },
+        {
+            "name": "linux-clang",
+            "description": "Compile On linux with GCC",
+            "inherits": "base",
+            "generator": "Ninja",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Debug",
+                "CMAKE_CXX_COMPILER": "clang++"
+            },
+            "vendor": {
+                "microsoft.com/VisualStudioSettings/CMake/1.0": {
+                    "hostOS": [
+                        "Linux"
+                    ]
+                }
+            },
+            "warnings": {
+                "dev": true
+            }
+        }
+    ],
+    "buildPresets": [
+        {
+            "name": "core-build",
+            "description": "Inherits environment from base configurePreset",
+            "configurePreset": "base",
+            "hidden": true,
+            "inheritConfigureEnvironment": true
+        },
+        {
+            "name": "windows-clean-build",
+            "description": "Clean before build (--clean-first)",
+            "configurePreset": "x64-windows",
+            "inherits": "core-build"
+        },
+        {
+            "name": "linux-gcc-build",
+            "configurePreset": "linux-gcc",
+            "inherits": "core-build"
+        },
+        {
+            "name": "linux-clang-build",
+            "configurePreset": "linux-clang",
+            "inherits": "core-build"
+        }
+    ],
+    "testPresets": [
+        {
+            "name": "core-tests",
+            "description": "Enable output on failure",
+            "configurePreset": "base",
+            "hidden": false,
+            "output": {
+                "outputOnFailure": true
+            }
+        },
+        {
+            "name": "linux-test-gcc",
+            "description": "Run tests on linux (GCC)",
+            "configurePreset": "linux-gcc",
+            "displayName": "linux-test",
+            "inherits": ["core-tests"]
+        },
+        {
+            "name": "linux-test-clang",
+            "description": "Run tests on linux (Clang)",
+            "configurePreset": "linux-clang",
+            "displayName": "linux-test",
+            "inherits": ["core-tests"]
+        }
+    ]
+}
