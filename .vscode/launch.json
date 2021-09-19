@@ -15,7 +15,7 @@
                     "value": "$PATH:${command:cmake.launchTargetDirectory}"
                 }
             ],
-            "externalConsole": false,
+            "console": "internalConsole",
             "MIMode": "gdb",
             "setupCommands": [
                 {
