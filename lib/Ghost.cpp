@@ -189,7 +189,7 @@ void Ghost::updateDirection(const GameState & gameState) {
     if (!can_walk)
       continue;
 
-    move.distance_to_target = std::hypot(move.position.x - target_position.x, move.position.y - target_position.y);
+    move.distance_to_target = positionDistance(move.position, target_position);
   }
 
   const auto optimal_move = std::min_element(possible_moves.begin(), possible_moves.end(), [](const auto & a, const auto & b) {

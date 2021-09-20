@@ -5,10 +5,10 @@
 
 namespace pacman {
 Direction PacManAI::suggestedDirection() const {
-  return direction;
+  return dir;
 }
 
-void PacManAI::update(const PacMan pacMan, const Pellets & pellets, const SuperPellets & superPellets, const Blinky & blinky, const Clyde & clyde, const Inky & inky, const Pinky & pinky) {
+void PacManAI::update(const PacMan & pacMan, const Pellets & pellets, const SuperPellets & superPellets) {
   const GridPosition pacManGridPos = pacMan.positionInGrid();
   const GridPosition currentGridPos = positionToGridPosition(pos);
   if (currentGridPos == pacManGridPos) {
@@ -21,78 +21,60 @@ void PacManAI::update(const PacMan pacMan, const Pellets & pellets, const SuperP
     return;
   }
 
-  struct GridMove {
+  auto pelletPositions = pellets.currentPositions();
+  if (pelletPositions.empty()) {
+    return;
+  }
+  auto pelletSort = [&pacManGridPos](GridPosition pelletA, GridPosition pelletB) {
+    double distanceA = positionDistance(pacManGridPos, pelletA);
+    double distanceB = positionDistance(pacManGridPos, pelletB);
+    return distanceA < distanceB;
+  };
+  std::sort(pelletPositions.begin(), pelletPositions.end(), pelletSort);
+
+  const auto & target = pelletPositions[0];
+  const Position targetPos{ double(target.x), double(target.y) };
+
+  struct Move {
     Direction direction = Direction::NONE;
-    GridPosition position;
-    bool hasGhost = false;
-    size_t pelletCount = 0;
+    Position position;
+    double distanceToTarget = std::numeric_limits<double>::infinity();
   };
 
-  std::array<GridMove, 4> possibleMoves = {
-    GridMove{ Direction::UP, { pacManGridPos.x, pacManGridPos.y - 1 } },
-    GridMove{ Direction::LEFT, { pacManGridPos.x - 1, pacManGridPos.y } },
-    GridMove{ Direction::DOWN, { pacManGridPos.x, pacManGridPos.y + 1 } },
-    GridMove{ Direction::RIGHT, { pacManGridPos.x + 1, pacManGridPos.y } }
-  };
-
-  auto isGhostDangerous = [](const auto ghost, GridPosition pos) {
-    return !ghost.isFrightened() && ghost.positionInGrid() == pos;
+  const Position currentPosition = { double(pacManGridPos.x), double(pacManGridPos.y) };
+  const auto [x, y] = currentPosition;
+  std::array<Move, 4> possibleMoves = {
+    Move{ Direction::UP, { x, y - 1 } },
+    Move{ Direction::LEFT, { x - 1, y } },
+    Move{ Direction::DOWN, { x, y + 1 } },
+    Move{ Direction::RIGHT, { x + 1, y } }
   };
 
   for (auto & move : possibleMoves) {
-    if (!isWalkableForPacMan(move.position)) {
-      move.direction = Direction::NONE;
+    const bool invalidPosition = (move.position.x < 0 || move.position.y < 0);
+    if (invalidPosition) {
       continue;
     }
 
-    GridPosition posTest = move.position;
-    while (isWalkableForPacMan(posTest)) {
-      if (pellets.isPellet(posTest) || superPellets.isPellet(posTest)) {
-        move.pelletCount++;
-      }
-
-      if (isGhostDangerous(blinky, posTest) || isGhostDangerous(clyde, posTest) || isGhostDangerous(inky, posTest) || isGhostDangerous(pinky, posTest)) {
-        move.hasGhost = true;
-      }
-
-      const GridPosition oldPosTest = posTest;
-      posTest = iterateGridPosition(posTest, move.direction);
-      if (posTest == oldPosTest) {
-        break;
-      }
-    }
-  }
-
-  auto sortCondition = [&pacMan](const GridMove & moveA, const GridMove & moveB) {
-    if (moveA.pelletCount == moveB.pelletCount) {
-      return (moveA.direction == pacMan.currentDirection() ? true : false);
-    }
-    return moveA.pelletCount > moveB.pelletCount;
-  };
-
-  std::sort(possibleMoves.begin(), possibleMoves.end(), sortCondition);
-
-  for (const auto & move : possibleMoves) {
-    fmt::print("{}, {}, {}\n", move.pelletCount, move.hasGhost, move.direction);
-  }
-  fmt::print("\n");
-
-  for (const auto & move : possibleMoves) {
-    if (move.direction != Direction::NONE && !move.hasGhost) {
-      direction = move.direction;
-      break;
-    }
-  }
-
-  // Then out of all of the movable directions, pick one and exit the loop
-  /* for (const auto & move : possibleMoves) {
-    if (move.direction == Direction::NONE || move.hasGhost) {
+    const bool isOpposite = (move.direction == oppositeDirection(dir));
+    if (isOpposite) {
       continue;
     }
-    if (pellets.isPellet(move.position) || superPellets.isPellet(move.position)) {
-      direction = move.direction;
-      break;
+
+    const GridPosition gridMove = { size_t(move.position.x), size_t(move.position.y) };
+    const bool canWalk = isWalkableForPacMan(gridMove);
+    if (!canWalk) {
+      continue;
     }
-  }*/
+
+    move.distanceToTarget = positionDistance(move.position, targetPos);
+  }
+
+  const auto optimalMove = std::min_element(possibleMoves.begin(), possibleMoves.end(), [](const auto & a, const auto & b) {
+    return a.distanceToTarget < b.distanceToTarget;
+  });
+
+  const auto & move = *optimalMove;
+  dir = move.direction;
 }
 } // namespace pacman

@@ -14,12 +14,12 @@ namespace pacman {
 
 class PacManAI {
 public:
-  void update(const PacMan pacMan, const Pellets & pellets, const SuperPellets & superPellets, const Blinky & blinky, const Clyde & clyde, const Inky & inky, const Pinky & pinky);
+  void update(const PacMan & pacMan, const Pellets & pellets, const SuperPellets & superPellets);
   Direction suggestedDirection() const;
 
 private:
   Position pos;
-  Direction direction = Direction::RIGHT;
+  Direction dir = Direction::RIGHT;
 };
 
 } // namespace pacman
