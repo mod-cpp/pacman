@@ -23,3 +23,9 @@ waage: Maybe the "isIntersection" for the AI. Create an array of GridPosition an
 
 # Iterators and algorithms
 waage: Do we add iterators to the Position or GridPosition classes? How about for the Board, so you can iterate through rows/columns?
+
+# Lambdas and Function Templates
+?
+
+# Algorithmic Thinking
+?
