@@ -4,9 +4,8 @@
 #include "Pinky.hpp"
 #include <catch2/catch.hpp>
 
-
 template<typename T>
-static void ghostInitHelper(const T & ghost, double x, double y) {
+static void ghostInitTest(const T & ghost, double x, double y) {
   const pacman::Position pos{ x, y };
   REQUIRE(ghost.position() == pos);
 
@@ -19,20 +18,20 @@ static void ghostInitHelper(const T & ghost, double x, double y) {
 
 TEST_CASE("Ghosts start in the correct position", "[ghosts]") {
   pacman::Blinky blinky;
-  ghostInitHelper(blinky, 13.5, 11);
+  ghostInitTest(blinky, 13.5, 11);
 
   pacman::Clyde clyde;
-  ghostInitHelper(clyde, 15.5, 14);
+  ghostInitTest(clyde, 15.5, 14);
 
   pacman::Inky inky;
-  ghostInitHelper(inky, 13.5, 14);
+  ghostInitTest(inky, 13.5, 14);
 
   pacman::Pinky pinky;
-  ghostInitHelper(pinky, 11.5, 14);
+  ghostInitTest(pinky, 11.5, 14);
 }
 
 template<typename T>
-static void ghostFrightenHelper(T & ghost) {
+static void ghostFrightenTest(T & ghost) {
   REQUIRE_FALSE(ghost.isFrightened());
   ghost.frighten();
   REQUIRE(ghost.isFrightened());
@@ -42,20 +41,20 @@ static void ghostFrightenHelper(T & ghost) {
 
 TEST_CASE("Ghosts are frighten", "[ghosts]") {
   pacman::Blinky blinky;
-  ghostFrightenHelper(blinky);
+  ghostFrightenTest(blinky);
 
   pacman::Clyde clyde;
-  ghostFrightenHelper(clyde);
+  ghostFrightenTest(clyde);
 
   pacman::Inky inky;
-  ghostFrightenHelper(inky);
+  ghostFrightenTest(inky);
 
   pacman::Pinky pinky;
-  ghostFrightenHelper(pinky);
+  ghostFrightenTest(pinky);
 }
 
 template<typename T>
-static void ghostDeadHelper(T & ghost) {
+static void ghostDeadTest(T & ghost) {
   REQUIRE_FALSE(ghost.isEyes());
   ghost.die();
   REQUIRE(ghost.isEyes());
@@ -65,14 +64,14 @@ static void ghostDeadHelper(T & ghost) {
 
 TEST_CASE("Ghosts can die", "[ghosts]") {
   pacman::Blinky blinky;
-  ghostDeadHelper(blinky);
+  ghostDeadTest(blinky);
 
   pacman::Clyde clyde;
-  ghostDeadHelper(clyde);
+  ghostDeadTest(clyde);
 
   pacman::Inky inky;
-  ghostDeadHelper(inky);
+  ghostDeadTest(inky);
 
   pacman::Pinky pinky;
-  ghostDeadHelper(pinky);
+  ghostDeadTest(pinky);
 }
