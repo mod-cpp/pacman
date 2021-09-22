@@ -2,15 +2,16 @@
 
 #include "Blinky.hpp"
 #include "Clyde.hpp"
+#include "Fruits.hpp"
 #include "Ghost.hpp"
 #include "Inky.hpp"
+#include "InputState.hpp"
 #include "PacMan.hpp"
+#include "PacManAI.hpp"
 #include "Pellets.hpp"
 #include "Pinky.hpp"
 #include "Score.hpp"
 #include "SuperPellets.hpp"
-#include "Fruits.hpp"
-#include "InputState.hpp"
 
 namespace pacman {
 
@@ -23,6 +24,7 @@ struct GameState {
   Clyde clyde;
 
   PacMan pacMan;
+  PacManAI pacManAI;
   InputState inputState;
   Pellets pellets;
   SuperPellets superPellets;

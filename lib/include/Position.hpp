@@ -1,7 +1,7 @@
 #pragma once
 
-#include <cmath>
 #include <cassert>
+#include <cmath>
 #include <limits>
 
 namespace pacman {
@@ -14,7 +14,9 @@ struct Position {
 struct GridPosition {
   size_t x;
   size_t y;
-  constexpr GridPosition(size_t x, size_t y) : x(x), y(y) {}
+  constexpr GridPosition(size_t x, size_t y)
+    : x(x),
+      y(y) {}
 };
 
 inline GridPosition positionToGridPosition(Position pos) {
@@ -32,6 +34,13 @@ constexpr bool operator==(const GridPosition & a, const GridPosition & b) {
 
 constexpr bool operator!=(const GridPosition & a, const GridPosition & b) {
   return !(a == b);
+}
+
+template<typename T>
+inline double positionDistance(const T & a, const T & b) {
+  const double first = double(a.x) - double(b.x);
+  const double second = double(a.y) - double(b.y);
+  return std::sqrt((first * first) + (second * second));
 }
 
 inline bool operator==(const Position & a, const Position & b) {

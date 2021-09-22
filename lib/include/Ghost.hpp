@@ -25,6 +25,7 @@ public:
   GridPosition currentSprite() const;
   Position position() const;
   GridPosition positionInGrid() const;
+  Direction currentDirection() const;
 
   void update(std::chrono::milliseconds time_delta, const GameState & gameState);
   void frighten();

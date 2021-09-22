@@ -1,8 +1,8 @@
 #include "Ghost.hpp"
+#include <algorithm>
 #include <array>
 #include <cmath>
 #include <numeric>
-#include <algorithm>
 
 namespace pacman {
 
@@ -13,6 +13,7 @@ Ghost::Ghost(Atlas::Ghost spriteSet)
 void Ghost::frighten() {
   if (state > State::Scatter)
     return;
+
   direction = oppositeDirection(direction);
   state = State::Frightened;
   timeFrighten = {};
@@ -29,6 +30,7 @@ bool Ghost::isEyes() const {
 void Ghost::die() {
   if (state == State::Eyes)
     return;
+
   direction = oppositeDirection(direction);
   state = State::Eyes;
   timeFrighten = {};
@@ -42,7 +44,7 @@ void Ghost::reset() {
   timeChase = {};
 }
 
- GridPosition Ghost::currentSprite() const {
+GridPosition Ghost::currentSprite() const {
   switch (state) {
     default:
       return Atlas::ghostSprite(spriteSet, direction, (animationIndex % 2) == 0);
@@ -62,6 +64,10 @@ Position Ghost::position() const {
 
 GridPosition Ghost::positionInGrid() const {
   return positionToGridPosition(pos);
+}
+
+Direction Ghost::currentDirection() const {
+  return direction;
 }
 
 void Ghost::update(std::chrono::milliseconds time_delta, const GameState & gameState) {
@@ -122,8 +128,7 @@ void Ghost::updatePosition(std::chrono::milliseconds time_delta, const GameState
 
   if (isPortal(positionInGrid(), direction)) {
     pos = gridPositionToPosition(teleport(positionInGrid()));
-  }
-  else if (!isWalkableForGhost(positionInGrid(), old_grid_position, isEyes())) {
+  } else if (!isWalkableForGhost(positionInGrid(), old_grid_position, isEyes())) {
     pos = old_position;
     direction = oppositeDirection(direction);
   }

@@ -6,14 +6,14 @@ const std::size_t ROWS = 31;
 const std::size_t COLUMNS = 28;
 
 enum class Cell {
-    wall = 0,
-    pellet = 1,
-    // nothing = 2,
-    // missing 3,
-    power_pellet = 4,
-    pen = 5,
-    left_portal = 6,
-    right_portal = 7
+  wall = 0,
+  pellet = 1,
+  // nothing = 2,
+  // missing 3,
+  power_pellet = 4,
+  pen = 5,
+  left_portal = 6,
+  right_portal = 7
 };
 
 // clang-format off
@@ -122,6 +122,28 @@ std::vector<GridPosition> initialSuperPelletPositions() {
     }
   }
   return positions;
+}
+
+// AI
+
+bool isIntersection(GridPosition point) {
+  if (!isWalkableForPacMan(point) || cellAtPosition(point) == Cell::left_portal || cellAtPosition(point) == Cell::right_portal) {
+    return false;
+  }
+
+  const GridPosition right{ point.x + 1, point.y };
+  const bool rightWalkable = isWalkableForPacMan(right);
+
+  const GridPosition left{ point.x - 1, point.y };
+  const bool leftWalkable = isWalkableForPacMan(left);
+
+  const GridPosition top{ point.x, point.y - 1 };
+  const bool topWalkable = isWalkableForPacMan(top);
+
+  const GridPosition bottom{ point.x, point.y + 1 };
+  const bool bottomWalkable = isWalkableForPacMan(bottom);
+
+  return (topWalkable && rightWalkable) || (rightWalkable && bottomWalkable) || (bottomWalkable && leftWalkable) || (leftWalkable && topWalkable);
 }
 
 } // namespace pacman

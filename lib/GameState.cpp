@@ -7,7 +7,8 @@ constexpr int NORMAL_PELLET_POINTS = 10;
 constexpr int POWER_PELLET_POINTS = 50;
 
 void GameState::step(std::chrono::milliseconds delta) {
-  pacMan.update(delta, inputState.direction());
+  pacManAI.update(pacMan, pellets);
+  pacMan.update(delta, pacManAI.suggestedDirection());
 
   if (isPacManDying()) {
     handleDeathAnimation(delta);
@@ -18,7 +19,7 @@ void GameState::step(std::chrono::milliseconds delta) {
     return;
 
   blinky.update(delta, *this); // waage: urgh, I wanna remove this
-  pinky.update(delta, *this); // ghosts know what they want, which is usually pacman's location
+  pinky.update(delta, *this);  // ghosts know what they want, which is usually pacman's location
   inky.update(delta, *this);
   clyde.update(delta, *this);
   fruit.update(delta, *this);
@@ -80,14 +81,14 @@ void GameState::eatPellets() {
 }
 
 void GameState::eatFruit() {
-    const auto pos = pacMan.positionInGrid();
-    const auto fruitpos = positionToGridPosition(fruit.position());
+  const auto pos = pacMan.positionInGrid();
+  const auto fruitpos = positionToGridPosition(fruit.position());
 
-    // TODO: hitboxes based collision
-    if(fruit.isVisible() && pos == fruitpos) {
-        score.points += fruit.eat();
-        score.eatenFruits++;
-    }
+  // TODO: hitboxes based collision
+  if (fruit.isVisible() && pos == fruitpos) {
+    score.points += fruit.eat();
+    score.eatenFruits++;
+  }
 }
 
 void GameState::killPacMan() {
@@ -100,4 +101,4 @@ bool GameState::isPacManDying() const {
   return timeSinceDeath.count() != 0;
 }
 
-}
+} // namespace pacman

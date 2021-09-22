@@ -28,10 +28,10 @@ Position Clyde::target(const GameState & gameState) const {
   if (state == State::Scatter)
     return targetPosition;
 
-  const auto pacManPosition = gameState.pacMan.positionInGrid();
-  auto distanceFomPacMan = std::hypot(pos.x - double(pacManPosition.x), pos.y - double(pacManPosition.y));
+  const auto pacManPosition = gameState.pacMan.position();
+  const auto distanceFomPacMan = std::hypot(pos.x - double(pacManPosition.x), pos.y - double(pacManPosition.y));
   if (distanceFomPacMan > 8)
-    targetPosition = gridPositionToPosition(pacManPosition);
+    targetPosition = pacManPosition;
 
   return targetPosition;
 }
@@ -44,4 +44,4 @@ Position Clyde::scatterTarget() const {
   return { 0, 30 };
 }
 
-}
+} // namespace pacman
