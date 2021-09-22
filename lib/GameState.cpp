@@ -7,7 +7,7 @@ constexpr int NORMAL_PELLET_POINTS = 10;
 constexpr int POWER_PELLET_POINTS = 50;
 
 void GameState::step(std::chrono::milliseconds delta) {
-  pacManAI.update(pacMan, pellets, superPellets);
+  pacManAI.update(pacMan, pellets);
   pacMan.update(delta, pacManAI.suggestedDirection());
 
   if (isPacManDying()) {

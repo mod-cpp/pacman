@@ -14,7 +14,7 @@ namespace pacman {
 
 class PacManAI {
 public:
-  void update(const PacMan & pacMan, const Pellets & pellets, const SuperPellets & superPellets);
+  void update(const PacMan & pacMan, const Pellets & pellets);
   Direction suggestedDirection() const;
 
 private:

@@ -8,7 +8,7 @@ Direction PacManAI::suggestedDirection() const {
   return dir;
 }
 
-void PacManAI::update(const PacMan & pacMan, const Pellets & pellets, const SuperPellets & superPellets) {
+void PacManAI::update(const PacMan & pacMan, const Pellets & pellets) {
   const GridPosition pacManGridPos = pacMan.positionInGrid();
   const GridPosition currentGridPos = positionToGridPosition(pos);
   if (currentGridPos == pacManGridPos) {
