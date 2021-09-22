@@ -79,36 +79,6 @@ bool isPortal(GridPosition point, Direction direction) {
          (cellAtPosition(point) == Cell::right_portal && direction == Direction::RIGHT);
 }
 
-GridPosition iterateGridPosition(GridPosition point, Direction direction) {
-  switch (direction) {
-    case Direction::LEFT: {
-      if (point.x != 0) {
-        point.x -= 1;
-      }
-      break;
-    }
-    case Direction::RIGHT: {
-      point.x += 1;
-      break;
-    }
-    case Direction::UP: {
-      if (point.y != 0) {
-        point.y -= 1;
-      }
-      break;
-    }
-    case Direction::DOWN: {
-      point.y += 1;
-      break;
-    }
-    case Direction::NONE:
-    default:
-      break;
-  }
-
-  return point;
-}
-
 GridPosition teleport(GridPosition point) {
   size_t right = COLUMNS - 1;
   size_t left = 0;
@@ -174,40 +144,6 @@ bool isIntersection(GridPosition point) {
   const bool bottomWalkable = isWalkableForPacMan(bottom);
 
   return (topWalkable && rightWalkable) || (rightWalkable && bottomWalkable) || (bottomWalkable && leftWalkable) || (leftWalkable && topWalkable);
-}
-
-bool isWalkableStraightLine(GridPosition pointA, GridPosition pointB) {
-  // Points with no shared x,y have no straight line between them
-  if (pointA.x != pointB.x && pointA.y != pointB.y) {
-    return false;
-  }
-
-  // this is std::all_of
-  if (pointA.x == pointB.x) {
-    const size_t startY = (pointA.y > pointB.y ? pointB.y : pointA.y);
-    const size_t endY = (pointA.y > pointB.y ? pointA.y : pointB.y);
-    for (size_t y = startY; y <= endY; y++) {
-      const GridPosition test{ pointA.x, y };
-      if (!isWalkableForPacMan(test)) {
-        return false;
-      }
-    }
-    return true;
-  }
-
-  if (pointA.y == pointB.y) {
-    const size_t startX = (pointA.x > pointB.x ? pointB.x : pointA.x);
-    const size_t endX = (pointA.x > pointB.x ? pointA.x : pointB.x);
-    for (size_t x = startX; x <= endX; x++) {
-      const GridPosition test{ x, pointA.y };
-      if (!isWalkableForPacMan(test)) {
-        return false;
-      }
-    }
-    return true;
-  }
-
-  return false;
 }
 
 } // namespace pacman

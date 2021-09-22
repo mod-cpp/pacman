@@ -19,7 +19,7 @@ public:
 
 private:
   Position pos;
-  Direction dir = Direction::RIGHT;
+  Direction direction = Direction::RIGHT;
 };
 
 } // namespace pacman

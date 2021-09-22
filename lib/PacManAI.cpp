@@ -5,7 +5,7 @@
 
 namespace pacman {
 Direction PacManAI::suggestedDirection() const {
-  return dir;
+  return direction;
 }
 
 void PacManAI::update(const PacMan & pacMan, const Pellets & pellets) {
@@ -56,7 +56,7 @@ void PacManAI::update(const PacMan & pacMan, const Pellets & pellets) {
       continue;
     }
 
-    const bool isOpposite = (move.direction == oppositeDirection(dir));
+    const bool isOpposite = (move.direction == oppositeDirection(direction));
     if (isOpposite) {
       continue;
     }
@@ -75,6 +75,6 @@ void PacManAI::update(const PacMan & pacMan, const Pellets & pellets) {
   });
 
   const auto & move = *optimalMove;
-  dir = move.direction;
+  direction = move.direction;
 }
 } // namespace pacman

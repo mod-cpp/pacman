@@ -14,7 +14,7 @@ void Ghost::frighten() {
   if (state > State::Scatter)
     return;
 
-  dir = oppositeDirection(dir);
+  direction = oppositeDirection(direction);
   state = State::Frightened;
   timeFrighten = {};
 }
@@ -31,7 +31,7 @@ void Ghost::die() {
   if (state == State::Eyes)
     return;
 
-  dir = oppositeDirection(dir);
+  direction = oppositeDirection(direction);
   state = State::Eyes;
   timeFrighten = {};
   timeChase = {};
@@ -47,9 +47,9 @@ void Ghost::reset() {
 GridPosition Ghost::currentSprite() const {
   switch (state) {
     default:
-      return Atlas::ghostSprite(spriteSet, dir, (animationIndex % 2) == 0);
+      return Atlas::ghostSprite(spriteSet, direction, (animationIndex % 2) == 0);
     case State::Eyes:
-      return Atlas::eyeSprite(dir);
+      return Atlas::eyeSprite(direction);
     case State::Frightened:
       if (timeFrighten.count() < 3500)
         return Atlas::initialFrightened(animationIndex);
@@ -66,8 +66,8 @@ GridPosition Ghost::positionInGrid() const {
   return positionToGridPosition(pos);
 }
 
-Direction Ghost::direction() const {
-  return dir;
+Direction Ghost::currentDirection() const {
+  return direction;
 }
 
 void Ghost::update(std::chrono::milliseconds time_delta, const GameState & gameState) {
@@ -84,7 +84,7 @@ void Ghost::update(std::chrono::milliseconds time_delta, const GameState & gameS
     timeChase += time_delta;
     const auto newState = defaultStateAtDuration(std::chrono::duration_cast<std::chrono::seconds>(timeChase));
     if (newState != state) {
-      dir = oppositeDirection(dir);
+      direction = oppositeDirection(direction);
       state = newState;
     }
   }
@@ -105,7 +105,7 @@ void Ghost::updatePosition(std::chrono::milliseconds time_delta, const GameState
   const auto old_position = pos;
   const GridPosition old_grid_position = positionToGridPosition(old_position);
 
-  switch (dir) {
+  switch (direction) {
     case Direction::NONE:
       break;
     case Direction::LEFT:
@@ -126,11 +126,11 @@ void Ghost::updatePosition(std::chrono::milliseconds time_delta, const GameState
       break;
   }
 
-  if (isPortal(positionInGrid(), dir)) {
+  if (isPortal(positionInGrid(), direction)) {
     pos = gridPositionToPosition(teleport(positionInGrid()));
   } else if (!isWalkableForGhost(positionInGrid(), old_grid_position, isEyes())) {
     pos = old_position;
-    dir = oppositeDirection(dir);
+    direction = oppositeDirection(direction);
   }
 }
 
@@ -180,7 +180,7 @@ void Ghost::updateDirection(const GameState & gameState) {
     if (invalid_position)
       continue;
 
-    const bool opposite_direction = (move.direction == oppositeDirection(dir));
+    const bool opposite_direction = (move.direction == oppositeDirection(direction));
     if (opposite_direction)
       continue;
 
@@ -189,7 +189,7 @@ void Ghost::updateDirection(const GameState & gameState) {
     if (!can_walk)
       continue;
 
-    move.distance_to_target = positionDistance(move.position, target_position);
+    move.distance_to_target = std::hypot(move.position.x - target_position.x, move.position.y - target_position.y);
   }
 
   const auto optimal_move = std::min_element(possible_moves.begin(), possible_moves.end(), [](const auto & a, const auto & b) {
@@ -197,7 +197,7 @@ void Ghost::updateDirection(const GameState & gameState) {
   });
 
   const auto & move = *optimal_move;
-  dir = move.direction;
+  direction = move.direction;
   last_grid_position = current_grid_position;
 }
 

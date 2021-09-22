@@ -29,7 +29,7 @@ Position Clyde::target(const GameState & gameState) const {
     return targetPosition;
 
   const auto pacManPosition = gameState.pacMan.position();
-  auto distanceFomPacMan = positionDistance(pos, pacManPosition);
+  const auto distanceFomPacMan = std::hypot(pos.x - double(pacManPosition.x), pos.y - double(pacManPosition.y));
   if (distanceFomPacMan > 8)
     targetPosition = pacManPosition;
 
