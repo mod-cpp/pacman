@@ -70,7 +70,7 @@ Direction Ghost::currentDirection() const {
   return direction;
 }
 
-void Ghost::update(std::chrono::milliseconds time_delta, const GameState & gameState) {
+void Ghost::update(std::chrono::milliseconds time_delta) {
   if (state == State::Eyes && isInPen())
     state = State::Scatter;
 
@@ -90,17 +90,17 @@ void Ghost::update(std::chrono::milliseconds time_delta, const GameState & gameS
   }
 
   updateAnimation(time_delta);
-  updatePosition(time_delta, gameState);
+  updatePosition(time_delta);
 }
 
 bool Ghost::isInPen() const {
   return pacman::isInPen(positionInGrid());
 }
 
-void Ghost::updatePosition(std::chrono::milliseconds time_delta, const GameState & gameState) {
-  updateDirection(gameState);
+void Ghost::updatePosition(std::chrono::milliseconds time_delta) {
+  updateDirection();
 
-  double position_delta = (0.004 * double(time_delta.count())) * speed(gameState);
+  double position_delta = (0.004 * double(time_delta.count())) * speed();
 
   const auto old_position = pos;
   const GridPosition old_grid_position = positionToGridPosition(old_position);
@@ -150,7 +150,7 @@ void Ghost::updatePosition(std::chrono::milliseconds time_delta, const GameState
  *  In the scatter state, each ghost tries to reach an unreachable position outside of the map.
  *  This makes ghosts run in circle around the island at each of the 4 map corner.
  */
-void Ghost::updateDirection(const GameState & gameState) {
+void Ghost::updateDirection() {
   const auto current_grid_position = positionInGrid();
   if (current_grid_position == last_grid_position)
     return;
@@ -170,8 +170,6 @@ void Ghost::updateDirection(const GameState & gameState) {
     Move{ Direction::RIGHT, { x + 1, y } }
   };
 
-  const Position target_position = target(gameState);
-
   for (auto & move : possible_moves) {
     if (isPortal(current_grid_position, move.direction))
       move.position = gridPositionToPosition(teleport(current_grid_position));
@@ -189,7 +187,7 @@ void Ghost::updateDirection(const GameState & gameState) {
     if (!can_walk)
       continue;
 
-    move.distance_to_target = std::hypot(move.position.x - target_position.x, move.position.y - target_position.y);
+    move.distance_to_target = std::hypot(move.position.x - target.x, move.position.y - target.y);
   }
 
   const auto optimal_move = std::min_element(possible_moves.begin(), possible_moves.end(), [](const auto & a, const auto & b) {

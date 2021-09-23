@@ -8,7 +8,7 @@ Inky::Inky()
   pos = initialPosition();
 }
 
-double Inky::speed(const GameState &) const {
+double Inky::speed() const {
   if (state == State::Eyes)
     return 2;
   if (state == State::Frightened)
@@ -16,19 +16,25 @@ double Inky::speed(const GameState &) const {
   return 0.75;
 }
 
-Position Inky::target(const GameState & gameState) const {
-  if (state == State::Eyes)
-    return initialPosition();
+void Inky::setTarget(GridPosition pacManPos, Direction pacManDir, GridPosition blinkyPos) {
+  if (state == State::Eyes) {
+    target = initialPosition();
+    return;
+  }
 
-  if (isInPen())
-    return penDoorPosition();
+  if (isInPen()) {
+    target = penDoorPosition();
+    return;
+  }
 
-  if (state == State::Scatter)
-    return scatterTarget();
+  if (state == State::Scatter) {
+    target = scatterTarget();
+    return;
+  }
 
   // Inky first selects a position 2 cell away from pacman in his direction.
-  GridPosition targetPosition = gameState.pacMan.positionInGrid();
-  switch (gameState.pacMan.currentDirection()) {
+  GridPosition targetPosition = pacManPos;
+  switch (pacManDir) {
     case Direction::LEFT:
       targetPosition.x -= 2;
       break;
@@ -48,15 +54,14 @@ Position Inky::target(const GameState & gameState) const {
   }
 
   // Then it calculates the distance between Blinky and this position
-  const auto & blinkyPosition = gameState.blinky.positionInGrid();
-  const double distanceBetweenBlinkyAndTarget = std::hypot(blinkyPosition.x - targetPosition.x, blinkyPosition.y - targetPosition.y);
+  const double distanceBetweenBlinkyAndTarget = std::hypot(blinkyPos.x - targetPosition.x, blinkyPos.y - targetPosition.y);
 
-  // And selects a point on the line crossing blinky and this position that is at twice that distance
-  // away from blinky
-  targetPosition.x += std::size_t((double(targetPosition.x) - double(blinkyPosition.x)) / distanceBetweenBlinkyAndTarget) * 2;
-  targetPosition.y += std::size_t((double(targetPosition.y) - double(blinkyPosition.y)) / distanceBetweenBlinkyAndTarget) * 2;
+  // And selects a point on the line crossing blinky and
+  // this position that is at twice that distance away from blinky
+  targetPosition.x += std::size_t((double(targetPosition.x) - double(blinkyPos.x)) / distanceBetweenBlinkyAndTarget) * 2;
+  targetPosition.y += std::size_t((double(targetPosition.y) - double(blinkyPos.y)) / distanceBetweenBlinkyAndTarget) * 2;
 
-  return gridPositionToPosition(targetPosition);
+  target = gridPositionToPosition(targetPosition);
 }
 
 Position Inky::initialPosition() const {

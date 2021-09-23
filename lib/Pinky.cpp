@@ -8,7 +8,7 @@ Pinky::Pinky()
   pos = initialPosition();
 }
 
-double Pinky::speed(const GameState &) const {
+double Pinky::speed() const {
   if (state == State::Eyes)
     return 2;
   if (state == State::Frightened)
@@ -16,19 +16,25 @@ double Pinky::speed(const GameState &) const {
   return 0.75;
 }
 
-Position Pinky::target(const GameState & gameState) const {
-  if (state == State::Eyes)
-    return initialPosition();
+void Pinky::setTarget(GridPosition pacManPos, Direction pacManDir) {
+  if (state == State::Eyes) {
+    target = initialPosition();
+    return;
+  }
 
-  if (isInPen())
-    return penDoorPosition();
+  if (isInPen()) {
+    target = penDoorPosition();
+    return;
+  }
 
-  if (state == State::Scatter)
-    return scatterTarget();
+  if (state == State::Scatter) {
+    target = scatterTarget();
+    return;
+  }
 
   // Inky first selects a position 2 cell away from pacman in his direction.
-  GridPosition targetPosition = gameState.pacMan.positionInGrid();
-  switch (gameState.pacMan.currentDirection()) {
+  GridPosition targetPosition = pacManPos;
+  switch (pacManDir) {
     case Direction::LEFT:
       targetPosition.x -= 4;
       break;
@@ -46,7 +52,8 @@ Position Pinky::target(const GameState & gameState) const {
       assert(false && "Pacman should be moving");
       break;
   }
-  return gridPositionToPosition(targetPosition);
+
+  target = gridPositionToPosition(targetPosition);
 }
 
 Position Pinky::initialPosition() const {
@@ -57,4 +64,4 @@ Position Pinky::scatterTarget() const {
   return { 3, -2 };
 }
 
-}
+} // namespace pacman

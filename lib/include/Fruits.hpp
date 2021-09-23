@@ -8,7 +8,7 @@ struct GameState;
 
 class Fruits {
 public:
-  void update(std::chrono::milliseconds time_delta, const GameState & gameState);
+  void update(std::chrono::milliseconds time_delta, int eatenPellets);
 
   GridPosition currentSprite() const;
   Position position() const;

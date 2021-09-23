@@ -7,10 +7,10 @@ namespace pacman {
 class Pinky final : public Ghost {
 public:
   explicit Pinky();
+  void setTarget(GridPosition pacManPos, Direction pacManDir);
 
 protected:
-  double speed(const GameState & gameState) const override;
-  Position target(const GameState & gameState) const override;
+  double speed() const override;
   Position initialPosition() const override;
 
 private:

@@ -7,10 +7,10 @@ namespace pacman {
 class Blinky final : public Ghost {
 public:
   Blinky();
+  void setTarget(Position pacManPos);
 
 protected:
-  double speed(const GameState & gameState) const override;
-  Position target(const GameState & gameState) const override;
+  double speed() const override;
   Position initialPosition() const override;
 
 private:

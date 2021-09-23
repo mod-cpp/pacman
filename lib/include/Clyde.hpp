@@ -7,10 +7,10 @@ namespace pacman {
 class Clyde final : public Ghost {
 public:
   explicit Clyde();
+  void setTarget(Position pacManPos);
 
 protected:
-  double speed(const GameState & gameState) const override;
-  Position target(const GameState & gameState) const override;
+  double speed() const override;
   Position initialPosition() const override;
 
 private:

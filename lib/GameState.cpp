@@ -18,11 +18,16 @@ void GameState::step(std::chrono::milliseconds delta) {
   if (!pacMan.hasDirection())
     return;
 
-  blinky.update(delta, *this); // waage: urgh, I wanna remove this
-  pinky.update(delta, *this);  // ghosts know what they want, which is usually pacman's location
-  inky.update(delta, *this);
-  clyde.update(delta, *this);
-  fruit.update(delta, *this);
+  blinky.setTarget(pacMan.position());
+  blinky.update(delta);
+  pinky.setTarget(pacMan.positionInGrid(), pacMan.currentDirection());
+  pinky.update(delta);
+  inky.setTarget(pacMan.positionInGrid(), pacMan.currentDirection(), blinky.positionInGrid());
+  inky.update(delta);
+  clyde.setTarget(pacMan.position());
+  clyde.update(delta);
+
+  fruit.update(delta, score.eatenPellets);
 
   checkCollision(blinky);
   checkCollision(pinky);

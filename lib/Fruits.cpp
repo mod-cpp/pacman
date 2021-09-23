@@ -3,14 +3,14 @@
 
 namespace pacman {
 
-void Fruits::update(std::chrono::milliseconds time_delta, const GameState & gameState) {
+void Fruits::update(std::chrono::milliseconds time_delta, int eatenPellets) {
   if (visible) {
     time_visible += time_delta;
   }
 
   if (time_visible > std::chrono::seconds(9)) {
     hide();
-  } else if ((index == 0 && gameState.score.eatenPellets >= 70) || (index == 1 && gameState.score.eatenPellets >= 170)) {
+  } else if ((index == 0 && eatenPellets >= 70) || (index == 1 && eatenPellets >= 170)) {
     // We show the fruit twice, once at 70 pellets and once at 170
     visible = true;
   }

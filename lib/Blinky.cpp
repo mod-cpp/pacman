@@ -8,7 +8,7 @@ Blinky::Blinky()
   pos = initialPosition();
 }
 
-double Blinky::speed(const GameState &) const {
+double Blinky::speed() const {
   if (state == State::Eyes)
     return 2;
   if (state == State::Frightened)
@@ -16,15 +16,18 @@ double Blinky::speed(const GameState &) const {
   return 0.75;
 }
 
-Position Blinky::target(const GameState & gameState) const {
-  if (state == State::Eyes)
-    return initialPosition();
+void Blinky::setTarget(Position pacManPos) {
+  if (state == State::Eyes) {
+    target = initialPosition();
+    return;
+  }
 
-  if (isInPen())
-    return penDoorPosition();
+  if (isInPen()) {
+    target = penDoorPosition();
+    return;
+  }
 
-  const auto pacManPosition = gridPositionToPosition(gameState.pacMan.positionInGrid());
-  return state == State::Chase ? pacManPosition : scatterTarget();
+  target = state == State::Chase ? pacManPos : scatterTarget();
 }
 
 Position Blinky::initialPosition() const {
@@ -35,4 +38,4 @@ Position Blinky::scatterTarget() const {
   return { 25, -3 };
 }
 
-}
+} // namespace pacman

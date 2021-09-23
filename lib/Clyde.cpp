@@ -8,7 +8,7 @@ Clyde::Clyde()
   pos = initialPosition();
 }
 
-double Clyde::speed(const GameState &) const {
+double Clyde::speed() const {
   if (state == State::Eyes)
     return 2;
   if (state == State::Frightened)
@@ -16,24 +16,27 @@ double Clyde::speed(const GameState &) const {
   return 0.75;
 }
 
-Position Clyde::target(const GameState & gameState) const {
-  if (state == State::Eyes)
-    return initialPosition();
+void Clyde::setTarget(Position pacManPos) {
+  if (state == State::Eyes) {
+    target = initialPosition();
+    return;
+  }
 
-  if (isInPen())
-    return penDoorPosition();
+  if (isInPen()) {
+    target = penDoorPosition();
+    return;
+  }
 
   // Clyde always target its scatter target, unless pacman is further than 8 tiles away
-  auto targetPosition = scatterTarget();
-  if (state == State::Scatter)
-    return targetPosition;
+  target = scatterTarget();
+  if (state == State::Scatter) {
+    return;
+  }
 
-  const auto pacManPosition = gameState.pacMan.position();
-  const auto distanceFomPacMan = std::hypot(pos.x - double(pacManPosition.x), pos.y - double(pacManPosition.y));
-  if (distanceFomPacMan > 8)
-    targetPosition = pacManPosition;
-
-  return targetPosition;
+  const auto distanceFomPacMan = std::hypot(pos.x - pacManPos.x, pos.y - pacManPos.y);
+  if (distanceFomPacMan > 8) {
+    target = pacManPos;
+  }
 }
 
 Position Clyde::initialPosition() const {

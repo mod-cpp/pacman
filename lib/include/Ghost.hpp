@@ -27,7 +27,7 @@ public:
   GridPosition positionInGrid() const;
   Direction currentDirection() const;
 
-  void update(std::chrono::milliseconds time_delta, const GameState & gameState);
+  void update(std::chrono::milliseconds time_delta);
   void frighten();
   void die();
   bool isFrightened() const;
@@ -36,8 +36,8 @@ public:
 
 private:
   void updateAnimation(std::chrono::milliseconds time_delta);
-  void updatePosition(std::chrono::milliseconds time_delta, const GameState & gameState);
-  void updateDirection(const GameState & gameState);
+  void updatePosition(std::chrono::milliseconds time_delta);
+  void updateDirection();
 
 protected:
   Atlas::Ghost spriteSet;
@@ -48,12 +48,12 @@ protected:
   std::chrono::milliseconds timeFrighten = {};
   std::chrono::milliseconds timeChase = {};
   Position pos;
+  Position target;
   GridPosition last_grid_position = { 0, 0 };
 
   State defaultStateAtDuration(std::chrono::seconds seconds);
 
-  virtual double speed(const GameState & gameState) const = 0;
-  virtual Position target(const GameState & gameState) const = 0;
+  virtual double speed() const = 0;
   virtual Position initialPosition() const = 0;
 
   bool isInPen() const;
