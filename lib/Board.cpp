@@ -60,7 +60,7 @@ static Cell cellAtPosition(GridPosition point) {
 }
 
 bool isWalkableForPacMan(GridPosition point) {
-  return cellAtPosition(point) != Cell::wall;
+  return cellAtPosition(point) != Cell::wall && cellAtPosition(point) != Cell::pen;
 }
 
 bool isWalkableForGhost(GridPosition point, GridPosition origin, bool isEyes) {
@@ -77,6 +77,26 @@ bool isInPen(GridPosition point) {
 bool isPortal(GridPosition point, Direction direction) {
   return (cellAtPosition(point) == Cell::left_portal && direction == Direction::LEFT) ||
          (cellAtPosition(point) == Cell::right_portal && direction == Direction::RIGHT);
+}
+
+bool isIntersection(GridPosition point) {
+  if (!isWalkableForPacMan(point) || cellAtPosition(point) == Cell::left_portal || cellAtPosition(point) == Cell::right_portal) {
+    return false;
+  }
+
+  const GridPosition right{ point.x + 1, point.y };
+  const bool rightWalkable = isWalkableForPacMan(right);
+
+  const GridPosition left{ point.x - 1, point.y };
+  const bool leftWalkable = isWalkableForPacMan(left);
+
+  const GridPosition top{ point.x, point.y - 1 };
+  const bool topWalkable = isWalkableForPacMan(top);
+
+  const GridPosition bottom{ point.x, point.y + 1 };
+  const bool bottomWalkable = isWalkableForPacMan(bottom);
+
+  return (topWalkable && rightWalkable) || (rightWalkable && bottomWalkable) || (bottomWalkable && leftWalkable) || (leftWalkable && topWalkable);
 }
 
 GridPosition teleport(GridPosition point) {
@@ -122,28 +142,6 @@ std::vector<GridPosition> initialSuperPelletPositions() {
     }
   }
   return positions;
-}
-
-// AI
-
-bool isIntersection(GridPosition point) {
-  if (!isWalkableForPacMan(point) || cellAtPosition(point) == Cell::left_portal || cellAtPosition(point) == Cell::right_portal) {
-    return false;
-  }
-
-  const GridPosition right{ point.x + 1, point.y };
-  const bool rightWalkable = isWalkableForPacMan(right);
-
-  const GridPosition left{ point.x - 1, point.y };
-  const bool leftWalkable = isWalkableForPacMan(left);
-
-  const GridPosition top{ point.x, point.y - 1 };
-  const bool topWalkable = isWalkableForPacMan(top);
-
-  const GridPosition bottom{ point.x, point.y + 1 };
-  const bool bottomWalkable = isWalkableForPacMan(bottom);
-
-  return (topWalkable && rightWalkable) || (rightWalkable && bottomWalkable) || (bottomWalkable && leftWalkable) || (leftWalkable && topWalkable);
 }
 
 } // namespace pacman
