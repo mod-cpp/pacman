@@ -34,14 +34,10 @@ Lets add a simple helper function.
 
 You might notice that `isWalkableForPacMan` and `isWalkableForGhost` both call `cellAtPosition` with a `GridPosition` variable and check if it is a wall.
 
-Create a function called `isWall` below `cellAtPosition` that returns true if the `GridPosition` variable sent in is a wall.
+1. Create a function called `isWall` below `cellAtPosition` that returns true if the `GridPosition` variable sent in is a wall. Remember to also create the same function signature in the `Board.hpp` file so this helper function can be used elsewhere in the project if needed.
 
-Remember to also create the same function signature in the `Board.hpp` file so this helper function can be used elsewhere in the project if needed.
+2. Replace the checks within `isWalkableForPacMan` and `isWalkableForGhost` with your new function.
 
-Then replace the checks within `isWalkableForPacMan` and `isWalkableForGhost` with your new function.
+3. Add a new unit test `TEST_CASE` for your function. Since you already added `isWall` to the `Board.hpp` file it should be accessible within the `testBoard.cpp` file. Check for a couple of cases, similarly to the `isWalkableForPacMan` test. Remember since the unit tests are not inside of the `pacman` namespace, we need to append `pacman::` to the function calls.
 
-After changing the functions, add a new `TEST_CASE` for your function. Since you already added `isWall` to the `Board.hpp` file it should be accessible within the `testBoard.cpp` file.
-
-Check for a couple of cases, similarly to the `isWalkableForPacMan` test. Remember since the unit tests are not inside of the `pacman` namespace, we need to append `pacman::` to function calls.
-
-Compile the project and run the unit tests. They should all be passing and if they are not then check which unit test is failing and figure out what was causing the issue. If all goes well you can run the game.
+4. Compile the project and run the unit tests. They should all be passing and if they are not then check which unit test is failing and figure out what was causing the issue. If all goes well you can run the game.
