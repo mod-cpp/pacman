@@ -14,11 +14,11 @@ Below the board are the helper functions. Some of them are static (only visible 
 
 ```cpp
 // Board.hpp
-bool isInPen(GridPosition point);
+bool isWalkableForPacMan(GridPosition point);
 
 // Board.cpp
-bool isInPen(GridPosition point) {
-  return cellAtPosition(point) == Cell::pen;
+bool isWalkableForPacMan(GridPosition point) {
+  return cellAtPosition(point) != Cell::wall && cellAtPosition(point) != Cell::pen;
 }
 ```
 
