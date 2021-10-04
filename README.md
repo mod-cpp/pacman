@@ -26,8 +26,13 @@ brew install cmake ninja
 
 ### All Platforms:
 
+#### Clone the project
 ```bash
 git clone https://github.com/mod-cpp/pacman.git
-cd pacman
-code .
+```
+
+#### Open the project in VSCode
+
+```bash
+
 ```
