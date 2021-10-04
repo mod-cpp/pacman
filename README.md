@@ -1,48 +1,22 @@
-# Mod(C++) - Pac-Man Exercise
+# Mod(C++) Fundamentals
 
-## Make Speedy
+## All Platform:
+* Follow the instructions to install VSCode from https://code.visualstudio.com/
 
-1) Make a new ghost class for Speedy
-2) Pick the right sprite
-3) Pick the right scatter target
+## Ubuntu 20.04 or newer
+* Install the build tools
+```bash
+sudo apt-get install ninja-build pkg-config curl zip unzip tar cmake build-essential libx11-dev libxrandr-dev libxi-dev libudev-dev libgl1-mesa-dev
+```
 
-Advanced:
+## Windows:
+* Follow the instructions to install cmake (3.21) from https://cmake.org/download/
+* Install Visual Studio https://visualstudio.microsoft.com/
+  You might have to reboot your computer once that's done.
 
-4) Try to chase PacMan
-
-Hints: (links)
-
-## Implement eating of pellets
-
-1) Make a Pellets class (look at SuperPellets)
-2) Implement eating of pellets
-
-Advanced:
-
-3) Try to keep score
-
-Hints: (links)
-
-## Add cherries
-
-1) Implement cherries (look at SuperPellets)
-2) Change the ghost speed and look
-
-Hints: (link)
-
-## Add Levels
-
-## Add kill screen
-
-## Add win
-
-## Add high score (std::filesystem)
-
-### Ghosts characters and algorithms
-These will probably become relevant
-* https://en.wikipedia.org/wiki/Ghosts_(Pac-Man)
-* [Video: Pac-Man Ghost AI Explained](https://youtu.be/ataGotQ7ir8)
-* https://gameinternals.com/understanding-pac-man-ghost-behavior
-* https://www.gamasutra.com/view/feature/3938/the_pacman_dossier.php?print=1
-* https://www.slideshare.net/grimlockt/pac-man-6561257
-* http://donhodges.com/pacman_pinky_explanation.htm
+## Mac
+Install clang by typing `xcode-select --install` in a terminal and following the instructions
+Install cmake using brew:
+```bash
+brew install cmake ninja
+```
