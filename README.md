@@ -16,7 +16,7 @@ sudo apt-get install ninja-build pkg-config curl zip unzip tar cmake build-essen
 
 ## Mac
 Install clang by typing `xcode-select --install` in a terminal and following the instructions
-Install cmake using brew:
+* Install the build tools
 ```bash
 brew install cmake ninja
 ```
