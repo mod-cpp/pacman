@@ -3,6 +3,7 @@
         "ms-vscode.cpptools",
         "ms-vscode.cmake-tools",
         "xaver.clang-format",
-        "notskm.clang-tidy"
+        "notskm.clang-tidy",
+        "piotrkosek.vscode-gtest-test-adapter-with-code-lens"
     ]
 }
