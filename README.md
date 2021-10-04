@@ -21,18 +21,14 @@ sudo apt-get install ninja-build pkg-config curl zip unzip tar cmake build-essen
 ```bash
 brew install cmake ninja
 ```
+* Follow the instructions for [Launching VSCode from the command line](https://code.visualstudio.com/docs/setup/mac#_launching-from-the-command-line)
 
 ## Configure and build project
 
 ### All Platforms:
 
-#### Clone the project
 ```bash
 git clone https://github.com/mod-cpp/pacman.git
-```
-
-#### Open the project in VSCode
-
-```bash
-
+cd pacman
+code .
 ```
