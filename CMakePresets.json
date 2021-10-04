@@ -138,7 +138,7 @@
         {
             "name": "windows-tests",
             "description": "Run tests on windows",
-            "configurePreset": "x64-window",
+            "configurePreset": "x64-windows",
             "inherits": [
                 "core-tests"
             ]
