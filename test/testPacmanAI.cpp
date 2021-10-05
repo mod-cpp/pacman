@@ -2,7 +2,7 @@
 #include <PacManAI.hpp>
 #include <limits>
 
-TEST_CASE("find pellet closest to pacman", "[AI]") {
+TEST_CASE("Find pellet closest to pacman", "[AI]") {
     using namespace pacman;
     PacManAI AI;
     using TestData = std::tuple<GridPosition, std::vector<GridPosition>, GridPosition>;
@@ -30,7 +30,7 @@ TEST_CASE("Is valid move", "[AI]") {
     CHECK(AI.isValidMove(std::get<0>(data)) == std::get<1>(data));
 }
 
-TEST_CASE("is optimal direction", "[AI]") {
+TEST_CASE("Is optimal direction", "[AI]") {
     using namespace pacman;
     using TestData = std::tuple<std::array<PacManAI::Move, 4>, Direction>;
     auto makeMove = [](double distance, Direction d) {
