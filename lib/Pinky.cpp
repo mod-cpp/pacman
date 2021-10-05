@@ -1,5 +1,4 @@
 #include "Pinky.hpp"
-#include "GameState.hpp"
 
 namespace pacman {
 

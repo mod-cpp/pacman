@@ -1,5 +1,4 @@
 #include "Inky.hpp"
-#include "GameState.hpp"
 
 namespace pacman {
 

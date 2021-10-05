@@ -1,5 +1,4 @@
 #include "Blinky.hpp"
-#include "GameState.hpp"
 
 namespace pacman {
 
