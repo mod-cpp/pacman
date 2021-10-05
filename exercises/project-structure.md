@@ -50,3 +50,13 @@ from the player (or a bot).
 Because updates of game state and drawing the game on screen are completely separate, we can create game state within
 unit tests and give it arbitrary delta time and call whatever functions we want to simulate the game being played. Most
 unit tests only focus on one single class but some (like `testFruits`) use the `GameState` class.
+
+## Ghosts characters and algorithms
+
+These will probably become relevant
+* https://en.wikipedia.org/wiki/Ghosts_(Pac-Man)
+* [Video: Pac-Man Ghost AI Explained](https://youtu.be/ataGotQ7ir8)
+* https://gameinternals.com/understanding-pac-man-ghost-behavior
+* https://www.gamasutra.com/view/feature/3938/the_pacman_dossier.php?print=1
+* https://www.slideshare.net/grimlockt/pac-man-6561257
+* http://donhodges.com/pacman_pinky_explanation.htm

@@ -1,5 +1,3 @@
-## Exercises
-
 # Exercise: Increased Ghost Speed
 
 Currently the ghosts move at a fixed rate. But in the original game, the ghosts would move slightly faster and faster as
@@ -13,11 +11,3 @@ You could increase the speed after each time the ghost is eaten for example, or 
 after N seconds.
 
 Also ask yourself, how would you test this?
-
-# Exercise: ?
-
-Extra
-
-# TODO Changes
-
-Pinky as main exercise and Clyde as Extra.
