@@ -9,6 +9,7 @@ public:
   bool down = false;
   bool left = false;
   bool right = false;
+  bool enableAI = false;
 
   Direction direction() const {
     if (left)

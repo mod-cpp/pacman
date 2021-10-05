@@ -37,6 +37,10 @@ void Game::processEvents(InputState & inputState) {
     return;
   }
 
+  if (event && event.value().type == sf::Event::KeyPressed && event.value().key.code == sf::Keyboard::A) {
+    inputState.enableAI = !inputState.enableAI;
+  }
+
   inputState.down = sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Down);
   inputState.up = sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Up);
   inputState.left = sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Left);
