@@ -31,5 +31,5 @@ TEST_CASE("Is valid move", "[AI]") {
 
 TEST_CASE("is optimal direction", "[AI]") {
     using namespace pacman;
-    using TestData = std::tuple<std::array<PacManAI::Move, 4>, std::size_t>;
+    //using TestData = std::tuple<std::array<PacManAI::Move, 4>, std::size_t>;
 }
