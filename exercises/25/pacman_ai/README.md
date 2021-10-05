@@ -19,7 +19,11 @@ You only need to worry about the grid itself and any ghosts on the North/South/E
 1. Implement [PacManAI::pelletClosestToPacman](../../../lib/PacManAI.cpp) and test your implementation with the test
    in [testPacmanAI.cpp](../../../test/testPacmanAI.cpp) called _"Find pellet closest to pacman"_
 
-*Hint*:
+The function should return the position of the pellet that is "closest" to PacMan. One implementation could be
+to sort the vector of pellets by the distance they have to PacMan, and then return the first one.
+
+*Hint 1*: use the `positionDistance` function to find the distance to PacMan
+*Hint 2*: use the [std::sort](https://en.cppreference.com/w/cpp/algorithm/sort) function to sort the vector
 
 ```cpp
 GridPosition PacManAI::pelletClosestToPacman(GridPosition pacmanGridPosition,
