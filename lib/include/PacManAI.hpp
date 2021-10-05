@@ -22,7 +22,7 @@ public:
   void update(const PacMan & pacMan, const Pellets & pellets);
   Direction suggestedDirection() const;
   GridPosition pelletClosestToPacman(GridPosition pacmanGridPosition,
-                                     const Pellets & pellets);
+                                     std::vector<GridPosition> & pellets);
   bool isValidMove(const Move & move);
   Direction optimalDirection(const std::array<Move, 4> & moves);
   void reset();

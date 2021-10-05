@@ -15,15 +15,15 @@ Direction PacManAI::suggestedDirection() const {
 }
 
 GridPosition PacManAI::pelletClosestToPacman(GridPosition pacmanGridPosition,
-                                             const Pellets & pellets) {
-  auto pelletPositions = pellets.allPellets();
+                                             std::vector<GridPosition> & pellets) {
+
   auto pelletSort = [&pacmanGridPosition](GridPosition pelletA, GridPosition pelletB) {
     double distanceA = positionDistance(pacmanGridPosition, pelletA);
     double distanceB = positionDistance(pacmanGridPosition, pelletB);
     return distanceA < distanceB;
   };
-  std::sort(pelletPositions.begin(), pelletPositions.end(), pelletSort);
-  return pelletPositions[0];
+  std::sort(pellets.begin(), pellets.end(), pelletSort);
+  return pellets[0];
 }
 
 bool PacManAI::isValidMove(const Move & move) {
@@ -56,12 +56,12 @@ void PacManAI::update(const PacMan & pacMan, const Pellets & pellets) {
     return;
   }
 
-  const auto & pelletPositions = pellets.allPellets();
+  auto pelletPositions = pellets.allPellets();
   if (pelletPositions.empty()) {
     return;
   }
 
-  const GridPosition targetPos = pelletClosestToPacman(pacManGridPos, pellets);
+  const GridPosition targetPos = pelletClosestToPacman(pacManGridPos, pelletPositions);
 
   const GridPosition currentPosition = pacMan.positionInGrid();
   const auto [x, y] = currentPosition;
