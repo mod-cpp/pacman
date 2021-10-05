@@ -1,5 +1,6 @@
 #include <catch2/catch.hpp>
 #include <PacManAI.hpp>
+#include <limits>
 
 TEST_CASE("find pellet closest to pacman", "[AI]") {
     using namespace pacman;
@@ -31,5 +32,39 @@ TEST_CASE("Is valid move", "[AI]") {
 
 TEST_CASE("is optimal direction", "[AI]") {
     using namespace pacman;
-    //using TestData = std::tuple<std::array<PacManAI::Move, 4>, std::size_t>;
+    using TestData = std::tuple<std::array<PacManAI::Move, 4>, Direction>;
+    auto makeMove = [](double distance, Direction d) {
+        return PacManAI::Move{d, {0, 0}, distance};
+    };
+    const auto infinity = std::numeric_limits<double>::infinity();
+
+    auto data = GENERATE_REF(
+        TestData{{makeMove(1, Direction::LEFT),
+                  makeMove(1, Direction::RIGHT),
+                  makeMove(1, Direction::UP),
+                  makeMove(1, Direction::DOWN)},
+                  Direction::LEFT},
+        TestData{{makeMove(3, Direction::LEFT),
+                  makeMove(2, Direction::RIGHT),
+                  makeMove(2, Direction::UP),
+                  makeMove(3, Direction::DOWN)},
+                  Direction::RIGHT},
+        TestData{{makeMove(3, Direction::LEFT),
+                  makeMove(2, Direction::RIGHT),
+                  makeMove(1, Direction::UP),
+                  makeMove(3, Direction::DOWN)},
+                  Direction::UP},
+        TestData{{makeMove(infinity, Direction::LEFT),
+                  makeMove(infinity, Direction::RIGHT),
+                  makeMove(infinity, Direction::UP),
+                  makeMove(infinity, Direction::DOWN)},
+                  Direction::LEFT},
+        TestData{{makeMove(infinity, Direction::LEFT),
+                  makeMove(42, Direction::RIGHT),
+                  makeMove(infinity, Direction::UP),
+                  makeMove(infinity, Direction::DOWN)},
+                  Direction::RIGHT});
+
+        PacManAI AI;
+        CHECK(AI.optimalDirection(std::get<0>(data)) == std::get<1>(data));
 }
