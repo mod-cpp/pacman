@@ -1,4 +1,4 @@
-[< Back](../exercises.md)
+[< Back](../README.md)
 
 # Exercise: Add Clyde as a Ghost
 

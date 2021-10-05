@@ -1,1 +1,1 @@
-[< Back](../exercises.md)
+[< Back](../README.md)

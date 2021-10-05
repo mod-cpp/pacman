@@ -1,4 +1,4 @@
-[< Back](../exercises.md)
+[< Back](../README.md)
 
 # Exercise: Add files to the build
 
