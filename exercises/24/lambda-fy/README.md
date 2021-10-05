@@ -1,5 +1,5 @@
 [< Back](../README.md)
 
-# Exercise: Lambdas
+# Exercise: Refactor into Local Lambda
 
 Find a small function and turn it into a lambda.

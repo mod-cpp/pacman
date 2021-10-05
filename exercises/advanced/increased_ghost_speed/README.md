@@ -1,3 +1,5 @@
+[< Back](../README.md)
+
 # Exercise: Increased Ghost Speed
 
 Currently the ghosts move at a fixed rate. But in the original game, the ghosts would move slightly faster and faster as

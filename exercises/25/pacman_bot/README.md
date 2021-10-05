@@ -1,3 +1,5 @@
+[< Back](../README.md)
+
 # Exercise: PacMan Bot
 
 PacMan can be controlled with the keyboard, but those inputs can be automated. The only thing that needs to change is

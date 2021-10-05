@@ -1,6 +1,6 @@
 [< Back](../README.md)
 
-# Exercise: Use algorithms
+# Exercise: Use algorithms (Pellets)
 
 Use algorithms in Pellet and SuperPellet
 
