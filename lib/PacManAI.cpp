@@ -14,38 +14,24 @@ Direction PacManAI::suggestedDirection() const {
   return direction;
 }
 
+// This function is not yet implemented.
+// You will implement it as part of module 25.
 GridPosition PacManAI::pelletClosestToPacman(GridPosition pacmanGridPosition,
                                              std::vector<GridPosition> & pellets) {
 
-  auto pelletSort = [&pacmanGridPosition](GridPosition pelletA, GridPosition pelletB) {
-    double distanceA = positionDistance(pacmanGridPosition, pelletA);
-    double distanceB = positionDistance(pacmanGridPosition, pelletB);
-    return distanceA < distanceB;
-  };
-  std::sort(pellets.begin(), pellets.end(), pelletSort);
-  return pellets[0];
+    return {0, 0};
 }
 
+// This function is not yet implemented.
+// You will implement it as part of module 25.
 bool PacManAI::isValidMove(const Move & move) {
-  const bool isOpposite = (move.direction == oppositeDirection(direction));
-  if (isOpposite) {
     return false;
-  }
-
-  const bool canWalk = isWalkableForPacMan(move.position);
-  if (!canWalk) {
-    return false;
-  }
-  return true;
 }
 
+// This function is not yet implemented.
+// You will implement it as part of module 25.
 Direction PacManAI::optimalDirection(const std::array<Move, 4> & moves) {
-  const auto optimalMove = std::min_element(moves.begin(), moves.end(), [](const auto & a, const auto & b) {
-    return a.distanceToTarget < b.distanceToTarget;
-  });
-
-  const auto & move = *optimalMove;
-  return move.direction;
+  return Direction::NONE;
 }
 
 void PacManAI::update(const PacMan & pacMan, const Pellets & pellets) {
