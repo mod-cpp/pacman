@@ -1,4 +1,4 @@
-# Iterators and algorithms
+# Exercise: Use algorithms
 
 Use algorithms in Pellet and SuperPellet
 

@@ -1,4 +1,4 @@
-# Compilation, Linking and Assets
+# Exercise: Add files to the build
 
 In this exercise we will add a couple of files to the project.
 

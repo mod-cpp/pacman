@@ -1,4 +1,4 @@
-# 150. Unit tests
+# Exercise: Create and run a unit test
 
 ## Board Unit Tests
 

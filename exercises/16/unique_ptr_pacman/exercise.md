@@ -1,4 +1,4 @@
-# Memory and RAII
+# Exercise: std::unique_ptr<PacMan>
 
 (corentin: maybe something about } that destroys things)
 We are going to play with using std::unique_ptr as we discussed in the slides. Since we will be reverting these changes

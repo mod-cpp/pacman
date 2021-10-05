@@ -1,3 +1,3 @@
-# Hitbox collision
+# Exercise: Hitbox collision
 
 AABB
