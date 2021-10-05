@@ -2,7 +2,7 @@
 
 In this exercise we will write some helper functions for the game board.
 
-The file [`Board.cpp`](../../lib/Board.cpp) defines functions to manipulate the game Board, for example finding where
+The file [`Board.cpp`](../../../lib/Board.cpp) defines functions to manipulate the game Board, for example finding where
 the walls and the portals are.
 
 ## Board.cpp
