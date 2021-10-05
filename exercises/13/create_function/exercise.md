@@ -1,3 +1,5 @@
+[< Back](../exercises.md)
+
 # Exercise: Create an isWall function
 
 In this exercise we will write some helper functions for the game board.

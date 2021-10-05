@@ -1,3 +1,5 @@
+[< Back](../exercises.md)
+
 # Exercise: std::unique_ptr<PacMan>
 
 (corentin: maybe something about } that destroys things)

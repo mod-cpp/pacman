@@ -1,3 +1,5 @@
+[< Back](../exercises.md)
+
 # Exercise: Use algorithms
 
 Use algorithms in Pellet and SuperPellet

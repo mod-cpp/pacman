@@ -1,3 +1,5 @@
+[< Back](../exercises.md)
+
 # Exercise: Refactor out GhostState from GameState
 
 In this exercise we will create a class that abstracts away common functionality.

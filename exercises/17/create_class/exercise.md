@@ -1,3 +1,5 @@
+[< Back](../exercises.md)
+
 # Exercise: Simple class
 
 4. Create an empty class named `Clyde` within the `.hpp` file. Look at other ghost `.hpp` files and see how they define

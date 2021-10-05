@@ -1,3 +1,5 @@
+[< Back](../exercises.md)
+
 # Exercise: Create isIntersection function
 
 waage: Maybe the "isIntersection" for the AI. Create an array of GridPosition and array of bool and loop through to

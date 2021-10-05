@@ -1,3 +1,5 @@
+[< Back](../exercises.md)
+
 # Exercise: Add Clyde as a Ghost
 
 We have three ghosts within the project. Blinky, Inky and Pinky. But Clyde is missing. Implement Clyde and their

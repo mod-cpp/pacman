@@ -1,3 +1,5 @@
+[< Back](../exercises.md)
+
 # Exercise: PacMan AI
 
 The exercise above is fixed based on the layout of the board and is hard to make generic.
