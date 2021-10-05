@@ -22,10 +22,10 @@ This is because the current configuration and list of files are defined in the C
 
 One of the Pac-Man ghosts is missing. We will fully implement this ghost later but for now lets add the `.cpp` and `.hpp` files to the project.
 
-1. Create `Blinky.hpp` and `Blinky.cpp` files within the `lib` folder.
+1. Create `Clyde.hpp` and `Clyde.cpp` files within the `lib` folder.
 
 2. Run CMake again and see your IDE update to include this new file. You can try compiling again and see what happens.
 
-3. Include the `Blinky.hpp` file within the `Blinky.cpp` file.
+3. Include the `Clyde.hpp` file within the `Clyde.cpp` file.
 
-4. Create an empty class named `Blinky` within the `.hpp` file. Look at other ghost `.hpp` files and see how they define the class. It does not need to inherit from the `Ghost` base class and it does not need any functions. But if you have extra time, try to inherit from the Ghost class and see what happens when you try to compile.
+4. Create an empty class named `Clyde` within the `.hpp` file. Look at other ghost `.hpp` files and see how they define the class. It does not need to inherit from the `Ghost` base class and it does not need any functions. But if you have extra time, try to inherit from the Ghost class and see what happens when you try to compile.
