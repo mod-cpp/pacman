@@ -7,7 +7,7 @@ In this exercise we will write some helper functions for the game board.
 The file [`Board.cpp`](../../../lib/Board.cpp) defines functions to manipulate the game Board, for example finding where
 the walls and the portals are.
 
-## Board.cpp
+## Background: Board.cpp
 
 The Board itself is represented in memory as a 2 dimensional array. A cell in this grid can be for example walkable, a
 wall, a pellet, a super pellet or a portal.

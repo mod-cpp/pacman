@@ -2,7 +2,7 @@
 
 # Exercise: Create and run a unit test
 
-## Board Unit Tests
+## Background: Board Unit Tests
 
 The game board is covered by unit tests. They are located in the `testBoard.cpp` file within the `test` directory. They
 don't check every single tile on the board, but they do assume that the board shape is not changed significantly. If you

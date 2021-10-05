@@ -4,7 +4,7 @@
 
 In this exercise we will add a couple of files to the project.
 
-## CMake
+## Background: CMake
 
 As described in the slides, the project is defined by several CMake files. The ones we are interested
 is [`CMakeLists.txt`](../../../CMakeLists.txt) in the root project folder and

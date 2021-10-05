@@ -4,7 +4,7 @@
 
 In this exercise we will create a class that abstracts away common functionality.
 
-## Visibility
+## Background: Visibility
 
 The main difference between `class` and `struct` is the default visibility. All members of a struct are publicly
 accessible by default. A class on the other hand is private by default, so some sort of `public:` access is needed to
@@ -12,7 +12,7 @@ give users access to things like constructors and functions.
 
 Everything can be made private in a C++ class, even constructors.
 
-## Default behavior
+## Background: Default behavior
 
 If possible, we want to rely on the default behavior of the member variables of a class. This simplifies the design of
 your class and reduces the things you need to worry about.
@@ -39,7 +39,7 @@ When someone wants to create an instance of `GridPosition`, they need to give th
 could set them to 0, but they still need to be given. Trying to create an instance of `GridPosition` with no values
 given will not compile.
 
-## Game State
+## Background: Game State
 
 `GameState` is a class that holds the instances of all the game objects (ghosts, pacman, pellets, etc). Roughly every 16
 milliseconds the `step()` function inside of `GameState` will be called.
