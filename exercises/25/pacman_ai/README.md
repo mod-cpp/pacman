@@ -6,9 +6,8 @@ Let's implement a naive AI for PacMan.
 
 ## Background: PacMan Moves
 
-At each intersection, check if there is a ghost directly inline with that path.
-If the path is free of ghosts, you are allowed to turn there. And if PacMan is moving in a direction, and a ghost enters
-his path, then pacman will reverse.
+At each intersection, check if there is a ghost directly inline with that path. If the path is free of ghosts, you are
+allowed to turn there. And if PacMan is moving in a direction, and a ghost enters his path, then pacman will reverse.
 
 For example if pacman is at an intersection and can go either right or up, and there is a ghost in the path going right,
 then pacman will go up. Then while pacman is going up, a ghost enters that path, pacman will go back.
@@ -17,9 +16,36 @@ You only need to worry about the grid itself and any ghosts on the North/South/E
 
 ## Exercise
 
-1. Implement `PacManAI::pelletClosestToPacman` and test your implementation with the test
+1. Implement [PacManAI::pelletClosestToPacman](../../../lib/PacManAI.cpp) and test your implementation with the test
    in [testPacmanAI.cpp](../../../test/testPacmanAI.cpp) called _"Find pellet closest to pacman"_
-2. Implement `PacManAI::isValidMove` and test your implementation with the test
+
+*Hint*:
+
+```cpp
+GridPosition PacManAI::pelletClosestToPacman(GridPosition pacmanGridPosition,
+                                             std::vector<GridPosition> & pellets) {
+  return {0, 0};
+}
+```
+
+2. Implement [PacManAI::isValidMove](../../../lib/PacManAI.cpp) and test your implementation with the test
    in [testPacmanAI.cpp](../../../test/testPacmanAI.cpp) called _"Is valid move"_
-3. Implement `PacManAI::optimalDirection` and test your implementation with the test
+
+*Hint*:
+
+```cpp
+bool PacManAI::isValidMove(const Move & move) {
+  return false;
+}
+```
+
+3. Implement [PacManAI::optimalDirection](../../../lib/PacManAI.cpp) and test your implementation with the test
    in [testPacmanAI.cpp](../../../test/testPacmanAI.cpp) called _"Is optimal direction"_
+
+*Hint*:
+
+```cpp
+Direction PacManAI::optimalDirection(const std::array<Move, 4> & moves) {
+  return Direction::NONE;
+}
+```
