@@ -8,7 +8,10 @@ constexpr int POWER_PELLET_POINTS = 50;
 
 void GameState::step(std::chrono::milliseconds delta) {
   pacManAI.update(pacMan, pellets);
-  pacMan.update(delta, inputState.direction());
+  pacMan.update(delta,
+                pacManAI.suggestedDirection()
+                //inputState.direction()
+  );
 
   if (isPacManDying()) {
     handleDeathAnimation(delta);
@@ -59,6 +62,7 @@ void GameState::handleDeathAnimation(std::chrono::milliseconds delta) {
     pinky.reset();
     inky.reset();
     pacMan.reset();
+    pacManAI.reset();
     timeSinceDeath = std::chrono::milliseconds(0);
   }
 }

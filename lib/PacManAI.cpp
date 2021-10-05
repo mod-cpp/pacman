@@ -4,44 +4,66 @@
 #include <fmt/format.h>
 
 namespace pacman {
+
+void PacManAI::reset() {
+  pos = {};
+  direction = Direction::RIGHT;
+}
+
 Direction PacManAI::suggestedDirection() const {
   return direction;
+}
+
+GridPosition PacManAI::pelletClosestToPacman(GridPosition pacmanGridPosition,
+                                             const Pellets & pellets) {
+  auto pelletPositions = pellets.allPellets();
+  auto pelletSort = [&pacmanGridPosition](GridPosition pelletA, GridPosition pelletB) {
+    double distanceA = positionDistance(pacmanGridPosition, pelletA);
+    double distanceB = positionDistance(pacmanGridPosition, pelletB);
+    return distanceA < distanceB;
+  };
+  std::sort(pelletPositions.begin(), pelletPositions.end(), pelletSort);
+  return pelletPositions[0];
+}
+
+bool PacManAI::isValidMove(const Move & move) {
+  const bool isOpposite = (move.direction == oppositeDirection(direction));
+  if (isOpposite) {
+    return false;
+  }
+
+  const bool canWalk = isWalkableForPacMan(move.position);
+  if (!canWalk) {
+    return false;
+  }
+  return true;
+}
+
+Direction PacManAI::optimalDirection(const std::array<Move, 4> & moves) {
+  const auto optimalMove = std::min_element(moves.begin(), moves.end(), [](const auto & a, const auto & b) {
+    return a.distanceToTarget < b.distanceToTarget;
+  });
+
+  const auto & move = *optimalMove;
+  return move.direction;
 }
 
 void PacManAI::update(const PacMan & pacMan, const Pellets & pellets) {
   const GridPosition pacManGridPos = pacMan.positionInGrid();
   const GridPosition currentGridPos = positionToGridPosition(pos);
-  if (currentGridPos == pacManGridPos) {
+
+  if (!isIntersection(pacManGridPos) || currentGridPos == pacManGridPos) {
     return;
   }
 
-  pos = gridPositionToPosition(pacManGridPos);
-
-  if (!isIntersection(pacManGridPos)) {
-    return;
-  }
-
-  auto pelletPositions = pellets.currentPositions();
+  const auto & pelletPositions = pellets.allPellets();
   if (pelletPositions.empty()) {
     return;
   }
-  auto pelletSort = [&pacManGridPos](GridPosition pelletA, GridPosition pelletB) {
-    double distanceA = positionDistance(pacManGridPos, pelletA);
-    double distanceB = positionDistance(pacManGridPos, pelletB);
-    return distanceA < distanceB;
-  };
-  std::sort(pelletPositions.begin(), pelletPositions.end(), pelletSort);
 
-  const auto & target = pelletPositions[0];
-  const Position targetPos{ double(target.x), double(target.y) };
+  const GridPosition targetPos = pelletClosestToPacman(pacManGridPos, pellets);
 
-  struct Move {
-    Direction direction = Direction::NONE;
-    Position position;
-    double distanceToTarget = std::numeric_limits<double>::infinity();
-  };
-
-  const Position currentPosition = { double(pacManGridPos.x), double(pacManGridPos.y) };
+  const GridPosition currentPosition = pacMan.positionInGrid();
   const auto [x, y] = currentPosition;
   std::array<Move, 4> possibleMoves = {
     Move{ Direction::UP, { x, y - 1 } },
@@ -51,30 +73,10 @@ void PacManAI::update(const PacMan & pacMan, const Pellets & pellets) {
   };
 
   for (auto & move : possibleMoves) {
-    const bool invalidPosition = (move.position.x < 0 || move.position.y < 0);
-    if (invalidPosition) {
+    if (!isValidMove(move))
       continue;
-    }
-
-    const bool isOpposite = (move.direction == oppositeDirection(direction));
-    if (isOpposite) {
-      continue;
-    }
-
-    const GridPosition gridMove = { size_t(move.position.x), size_t(move.position.y) };
-    const bool canWalk = isWalkableForPacMan(gridMove);
-    if (!canWalk) {
-      continue;
-    }
-
     move.distanceToTarget = positionDistance(move.position, targetPos);
   }
-
-  const auto optimalMove = std::min_element(possibleMoves.begin(), possibleMoves.end(), [](const auto & a, const auto & b) {
-    return a.distanceToTarget < b.distanceToTarget;
-  });
-
-  const auto & move = *optimalMove;
-  direction = move.direction;
+  direction = optimalDirection(possibleMoves);
 }
 } // namespace pacman

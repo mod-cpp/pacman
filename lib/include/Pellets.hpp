@@ -13,7 +13,7 @@ public:
     return sprite;
   };
 
-  std::vector<GridPosition> currentPositions() const {
+  std::vector<GridPosition> allPellets() const {
     return positions;
   }
 

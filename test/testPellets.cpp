@@ -4,7 +4,7 @@
 
 template<typename T>
 static void pelletInitTest(const T & pellets, size_t size, size_t spriteX, size_t spriteY) {
-  REQUIRE(pellets.currentPositions().size() == size);
+  REQUIRE(pellets.allPellets().size() == size);
   REQUIRE(pellets.currentSprite().x == spriteX);
   REQUIRE(pellets.currentSprite().y == spriteY);
 }
@@ -19,13 +19,13 @@ TEST_CASE("Pellet initialization", "[pellets]") {
 
 template<typename T>
 static void pelletEatingTest(T & pellets, size_t countBefore, size_t countAfter, size_t x, size_t y) {
-  REQUIRE(pellets.currentPositions().size() == countBefore);
+  REQUIRE(pellets.allPellets().size() == countBefore);
   if (countBefore != countAfter) {
     REQUIRE(pellets.eatPelletAtPosition(pacman::GridPosition{ x, y }));
   } else {
     REQUIRE_FALSE(pellets.eatPelletAtPosition(pacman::GridPosition{ x, y }));
   }
-  REQUIRE(pellets.currentPositions().size() == countAfter);
+  REQUIRE(pellets.allPellets().size() == countAfter);
 }
 
 TEST_CASE("Eating pellets", "[pellets]") {

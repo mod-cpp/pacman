@@ -80,7 +80,7 @@ void Canvas::renderMaze() {
 
 void Canvas::renderPellets(const Pellets & pellets) {
   Sprite pellet = getSprite(pellets.currentSprite());
-  std::vector<GridPosition> pelletPositions = pellets.currentPositions();
+  std::vector<GridPosition> pelletPositions = pellets.allPellets();
   for (const auto & pos : pelletPositions) {
     renderSprite(pellet, gridPositionToPosition(pos));
   }
@@ -88,7 +88,7 @@ void Canvas::renderPellets(const Pellets & pellets) {
 
 void Canvas::renderSuperPellets(const SuperPellets & superPellets) {
   Sprite pellet = getSprite(superPellets.currentSprite());
-  std::vector<GridPosition> superPelletPositions = superPellets.currentPositions();
+  std::vector<GridPosition> superPelletPositions = superPellets.allPellets();
   for (const auto & pos : superPelletPositions) {
     renderSprite(pellet, gridPositionToPosition(pos));
   }

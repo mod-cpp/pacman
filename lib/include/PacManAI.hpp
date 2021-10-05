@@ -13,8 +13,19 @@ namespace pacman {
 
 class PacManAI {
 public:
+  struct Move {
+    Direction direction = Direction::NONE;
+    GridPosition position;
+    double distanceToTarget = std::numeric_limits<double>::infinity();
+  };
+
   void update(const PacMan & pacMan, const Pellets & pellets);
   Direction suggestedDirection() const;
+  GridPosition pelletClosestToPacman(GridPosition pacmanGridPosition,
+                                     const Pellets & pellets);
+  bool isValidMove(const Move & move);
+  Direction optimalDirection(const std::array<Move, 4> & moves);
+  void reset();
 
 private:
   Position pos;
