@@ -5,15 +5,15 @@ In this exercise we will create a class that abstracts away common functionality
 ## Visibility
 
 The main difference between `class` and `struct` is the default visibility. All members of a struct are publicly
-accessible by default, so no accessors are needed if that is the intended behavior. A class on the other hand is private
-by default, so some sort of `public:` access is needed to give users access to things like constructors and functions.
+accessible by default. A class on the other hand is private by default, so some sort of `public:` access is needed to
+give users access to things like constructors and functions.
 
 Everything can be made private in a C++ class, even constructors.
 
 ## Default behavior
 
-If possible, we want to rely on the default behavior of the member variables of a class. This simplifies the
-construction of your class and reduces the things you need to worry about.
+If possible, we want to rely on the default behavior of the member variables of a class. This simplifies the design of
+your class and reduces the things you need to worry about.
 
 ```cpp
 struct Position {
@@ -34,8 +34,8 @@ When someone creates an instance of `Position` the x and y variables are always 
 create the class.
 
 When someone wants to create an instance of `GridPosition`, they need to give the constructor the x and y values. You
-could set them to 0 but they still need to be given. Trying to create an instance of `GridPosition` with no values given
-will not compile.
+could set them to 0, but they still need to be given. Trying to create an instance of `GridPosition` with no values
+given will not compile.
 
 ## Game State
 
