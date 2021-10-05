@@ -2,7 +2,7 @@
 #include <PacManAI.hpp>
 #include <limits>
 
-TEST_CASE("Find pellet closest to pacman", "[AI]") {
+TEST_CASE("Find pellet closest to PacMan", "[AI]") {
     using namespace pacman;
     PacManAI AI;
     using TestData = std::tuple<GridPosition, std::vector<GridPosition>, GridPosition>;
