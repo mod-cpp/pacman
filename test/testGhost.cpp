@@ -1,5 +1,4 @@
 #include "Blinky.hpp"
-#include "Clyde.hpp"
 #include "Inky.hpp"
 #include "Pinky.hpp"
 #include <catch2/catch.hpp>
@@ -19,9 +18,6 @@ static void ghostInitTest(const T & ghost, double x, double y) {
 TEST_CASE("Ghosts start in the correct position", "[ghosts]") {
   pacman::Blinky blinky;
   ghostInitTest(blinky, 13.5, 11);
-
-  pacman::Clyde clyde;
-  ghostInitTest(clyde, 15.5, 14);
 
   pacman::Inky inky;
   ghostInitTest(inky, 13.5, 14);
@@ -43,9 +39,6 @@ TEST_CASE("Ghosts are frighten", "[ghosts]") {
   pacman::Blinky blinky;
   ghostFrightenTest(blinky);
 
-  pacman::Clyde clyde;
-  ghostFrightenTest(clyde);
-
   pacman::Inky inky;
   ghostFrightenTest(inky);
 
@@ -65,9 +58,6 @@ static void ghostDeadTest(T & ghost) {
 TEST_CASE("Ghosts can die", "[ghosts]") {
   pacman::Blinky blinky;
   ghostDeadTest(blinky);
-
-  pacman::Clyde clyde;
-  ghostDeadTest(clyde);
 
   pacman::Inky inky;
   ghostDeadTest(inky);

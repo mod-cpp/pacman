@@ -1,5 +1,4 @@
 #include "Clyde.hpp"
-#include "GameState.hpp"
 
 namespace pacman {
 

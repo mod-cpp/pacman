@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Blinky.hpp"
-#include "Clyde.hpp"
 #include "Fruits.hpp"
 #include "Ghost.hpp"
 #include "Inky.hpp"
@@ -21,7 +20,6 @@ struct GameState {
   Blinky blinky;
   Pinky pinky;
   Inky inky;
-  Clyde clyde;
 
   PacMan pacMan;
   PacManAI pacManAI;

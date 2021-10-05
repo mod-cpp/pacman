@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Blinky.hpp"
-#include "Clyde.hpp"
 #include "Direction.hpp"
 #include "Inky.hpp"
 #include "PacMan.hpp"

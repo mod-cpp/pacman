@@ -39,7 +39,6 @@ void Canvas::update(const GameState & gameState) {
   renderGhost(gameState.blinky);
   renderGhost(gameState.pinky);
   renderGhost(gameState.inky);
-  renderGhost(gameState.clyde);
 
   renderScore(gameState.score.points);
   renderLives(gameState.score.lives);
