@@ -1,4 +1,4 @@
-# Exercise: Hello Godbolt
+# Exercise: Hello std::cout on Godbolt
 
 ## Background: Godbolt
 
