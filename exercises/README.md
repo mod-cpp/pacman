@@ -4,8 +4,8 @@
 
 * [Module 11: Introduction](11/README.md)
 * [Module 12: Hello World](12/README.md)
-* [Module 13: Functions and Parameter Passing](13/README.md)
-* [Module 14: Game](14/README.md)
+* [Module 13: Game](13/README.md)
+* [Module 14: Functions and Parameter Passing](14/README.md)
 * [Module 15: Compilation, Linking and Assets](15/README.md)
 * [Module 16: Memory and RAII](16/README.md)
 * [Module 17: Classes and Structs](17/README.md)
