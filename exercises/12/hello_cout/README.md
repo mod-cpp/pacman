@@ -1,7 +1,12 @@
-# Exercise: Hello std::cout on Godbolt
+# Exercise: Hello std::cout on Godbolt.org
 
-## Background: Godbolt
+## Background: Compiler Explorer
+
+Compiler Explorer is a website where you can experiment with many different C++ compilers. You can compile short C++
+programs, run them and inspect their assembly.
+
+Today, we will use it to compile and run a Hello World program.
 
 ## Exercise
 
-1. Play with Hello World on [Godbolt](https://godbolt.org/z/bceh7693T)
+1. Play with Hello World on [Compiler Explorer](https://godbolt.org/z/bceh7693T).
