@@ -23,3 +23,14 @@
 ## Advanced
 
 * [Advanced](advanced/README.md)
+
+## Ghosts characters and algorithms
+
+These will probably become relevant
+* https://en.wikipedia.org/wiki/Ghosts_(Pac-Man)
+* [Video: Pac-Man Ghost AI Explained](https://youtu.be/ataGotQ7ir8)
+* https://gameinternals.com/understanding-pac-man-ghost-behavior
+* https://www.gamasutra.com/view/feature/3938/the_pacman_dossier.php?print=1
+* https://www.slideshare.net/grimlockt/pac-man-6561257
+* http://donhodges.com/pacman_pinky_explanation.htm
+* 
