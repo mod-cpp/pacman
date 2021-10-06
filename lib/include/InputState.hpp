@@ -14,14 +14,13 @@ public:
   Direction direction() const {
     if (left)
       return Direction::LEFT;
-    else if (right)
+    if (right)
       return Direction::RIGHT;
-    else if (up)
+    if (up)
       return Direction::UP;
-    else if (down)
+    if (down)
       return Direction::DOWN;
-    else
-      return Direction::NONE;
+    return Direction::NONE;
   }
 };
 
