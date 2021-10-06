@@ -16,21 +16,21 @@ Direction PacManAI::suggestedDirection() const {
 
 // This function is not yet implemented.
 // You will implement it as part of module 25.
-GridPosition PacManAI::pelletClosestToPacman(GridPosition pacmanGridPosition,
-                                             std::vector<GridPosition> & pellets) {
+GridPosition PacManAI::pelletClosestToPacman(GridPosition,
+                                             std::vector<GridPosition> &) {
 
     return {0, 0};
 }
 
 // This function is not yet implemented.
 // You will implement it as part of module 25.
-bool PacManAI::isValidMove(const Move & move) {
+bool PacManAI::isValidMove(const Move &) {
     return false;
 }
 
 // This function is not yet implemented.
 // You will implement it as part of module 25.
-Direction PacManAI::optimalDirection(const std::array<Move, 4> & moves) {
+Direction PacManAI::optimalDirection(const std::array<Move, 4> &) {
   return Direction::NONE;
 }
 
