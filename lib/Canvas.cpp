@@ -29,7 +29,7 @@ Canvas::Canvas()
   game_font = loadFont("retro_font.ttf");
 }
 
-void Canvas::update(const GameState & gameState) {
+void Canvas::render(const GameState & gameState) {
   clear();
 
   renderMaze();

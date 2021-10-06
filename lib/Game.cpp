@@ -26,7 +26,7 @@ void Game::run() {
       accumulator -= delta_time;
     }
 
-    canvas.update(gameState);
+    canvas.render(gameState);
   }
 }
 

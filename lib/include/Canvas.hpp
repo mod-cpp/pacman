@@ -14,7 +14,7 @@ using Sprite = sf::Sprite;
 class Canvas {
 public:
   Canvas();
-  void update(const GameState & gameState);
+  void render(const GameState & gameState);
   std::optional<sf::Event> pollEvent();
 
 private:
