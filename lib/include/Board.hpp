@@ -9,7 +9,7 @@
 namespace pacman {
 
 bool isWalkableForPacMan(GridPosition point);
-bool isWalkableForGhost(GridPosition point, GridPosition origin, bool isEyes);
+bool isWalkableForGhost(GridPosition target_position, GridPosition current_position, bool isEyes);
 bool isInPen(GridPosition point);
 bool isPortal(GridPosition point, Direction direction);
 bool isIntersection(GridPosition point);
