@@ -6,7 +6,7 @@ namespace pacman {
 
 class Inky final : public Ghost {
 public:
-  explicit Inky();
+  Inky();
   void setTarget(GridPosition pacManPos, Direction pacManDir, GridPosition blinkyPos);
 
 protected:

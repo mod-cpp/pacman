@@ -6,7 +6,7 @@ namespace pacman {
 
 class Pinky final : public Ghost {
 public:
-  explicit Pinky();
+  Pinky();
   void setTarget(GridPosition pacManPos, Direction pacManDir);
 
 protected:
