@@ -190,7 +190,7 @@ sf::Texture Canvas::loadTexture(std::string_view path) {
 
 sf::Font Canvas::loadFont(std::string_view path) {
   sf::Font font;
-  if (!font.loadFromFile("retro_font.ttf")) {
+  if (!font.loadFromFile(std::string{ path })) {
     exitFailure(fmt::format("Failed to load font {}", path));
   }
   return font;
