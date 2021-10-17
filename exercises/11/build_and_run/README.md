@@ -47,7 +47,7 @@ cd pacman
 code .
 ```
 
-### Linux, BSD, or Mac, not using VS Code
+### Commandline based build (Not used in this training) Linux, BSD, or Mac
 
 ```bash
 git clone https://github.com/mod-cpp/pacman.git
