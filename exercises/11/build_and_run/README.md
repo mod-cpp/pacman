@@ -15,6 +15,13 @@
 sudo apt-get install ninja-build pkg-config curl zip unzip tar cmake build-essential libx11-dev libxrandr-dev libxi-dev libudev-dev libgl1-mesa-dev
 ```
 
+### FreeBSD 12 or newer
+
+* Install the build tools
+```bash
+sudo pkg install catch cmake libfmt ninja sfml
+```
+
 ### Windows:
 
 * Follow the instructions to install cmake (3.21) from https://cmake.org/download/
@@ -32,10 +39,19 @@ brew install cmake ninja
 
 ## Configure and build project
 
-### All Platforms
+### All Platforms, using VS Code
 
 ```bash
 git clone https://github.com/mod-cpp/pacman.git
 cd pacman
 code .
+```
+
+### Linux, BSD, or Mac, not using VS Code
+
+```bash
+git clone https://github.com/mod-cpp/pacman.git
+cd pacman
+cmake .
+make
 ```
