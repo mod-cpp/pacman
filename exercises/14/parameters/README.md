@@ -5,7 +5,7 @@
 In this exercise we will look together at what happens when we change a reference
 parameter to a value or a const reference.
 
-Let's look at this function
+Let's look at this function in [`Game.cpp`](../../../lib/Game.cpp)
 
 ```cpp
 void Game::processEvents(InputState & inputState) {
@@ -27,6 +27,8 @@ void Game::processEvents(InputState & inputState) {
 
 
 ## Exercise
+
+You can follow along locally:
 
 1. Make `inputState` a value. What happens when you compile the code? Can you explain why?
 
