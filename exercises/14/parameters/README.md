@@ -1,6 +1,6 @@
 [< Back](../README.md)
 
-# Exercise: Pay with parameter passing
+# Exercise: Play with parameter passing
 
 In this exercise we will look together at what happens when we change a reference
 parameter to a value or a const reference.
