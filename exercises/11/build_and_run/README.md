@@ -15,6 +15,13 @@
 sudo apt-get install ninja-build pkg-config curl zip unzip tar cmake build-essential libx11-dev libxrandr-dev libxi-dev libudev-dev libgl1-mesa-dev
 ```
 
+### Fedora 33 or newer
+
+* Install the build tools
+```bash
+sudo dnf install ninja-build SFML-devel libXi-devel libX11-devel libXrandr-devel mesa-libGL-devel systemd-devel
+```
+
 ### FreeBSD 12 or newer
 
 * Install the build tools
