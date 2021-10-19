@@ -1,13 +1,9 @@
 [< Back](../README.md)
 
-# Exercise: Create isIntersection function
+# Exercise: 
 
-## Background:
+## Exercise: Create isIntersection function
 
-waage: Maybe the "isIntersection" for the AI. Create an array of GridPosition and array of bool and loop through to
-check "isWalkableForPacMan" and then return the different kinds of intersections (top/right, right/bottom, bottom/left,
-left/top)
-
-## Exercise
-
-1.
+1. In Board.cpp create an isIntersection function that returns a bool and takes a GridPosition as a parameter
+2. Create an array of GridPositions around the parameter pos and array of bool and then loop through the postitions and check "isWalkableForPacMan" and store the results in the array of bools.
+3. Return true if there are at least three different walkable paths
