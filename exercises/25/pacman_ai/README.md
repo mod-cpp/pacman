@@ -101,3 +101,7 @@ Use the [std::sort](https://en.cppreference.com/w/cpp/algorithm/sort) function t
 and return true if the first parameter is closer from PacMan than the second.
 
 </details>
+
+## Advanced
+
+For people who want to create a fancier IA, if you want to introduce some randomness, you can look at this SFML function https://www.sfml-dev.org/tutorials/1.6/system-random.php - you will need to include #include <SFML/Randomizer.hpp>
