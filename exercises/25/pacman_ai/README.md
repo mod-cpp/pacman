@@ -104,4 +104,4 @@ and return true if the first parameter is closer from PacMan than the second.
 
 ## Advanced
 
-For people who want to create a fancier IA, if you want to introduce some randomness, you can look at this SFML function https://www.sfml-dev.org/tutorials/1.6/system-random.php - you will need to include #include <SFML/Randomizer.hpp>
+For people who want to create a fancier AI, if you want to introduce some randomness, you can look at this SFML function https://www.sfml-dev.org/tutorials/1.6/system-random.php - you will need to include #include <SFML/Randomizer.hpp>
