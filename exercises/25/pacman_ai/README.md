@@ -58,7 +58,7 @@ and return true if the first parameter is closer from PacMan than the second.
 Implement [PacManAI::isValidMove](../../../lib/PacManAI.cpp) and test your implementation with the test
 in [testPacmanAI.cpp](../../../test/testPacmanAI.cpp) called _"Is valid move"_
 
-To run the tests through CMake change the last line in test/CMakeLists.txt to:
+To run the tests through CMake change the last line in [test/CMakeLists.txt](../../../test/CMakeLists.txt) to:
 
 ```
 add_test(NAME pacman_tests COMMAND pacman_tests)
