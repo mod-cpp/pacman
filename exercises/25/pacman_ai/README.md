@@ -83,6 +83,7 @@ Direction PacManAI::optimalDirection(const std::array<Move, 4> & moves) {
 
 <details>
    <summary>Hint</summary>
+  
   You can use [std::min_element](https://en.cppreference.com/w/cpp/algorithm/min_element) to find the closest pellet
   
 </details>
