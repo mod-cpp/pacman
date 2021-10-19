@@ -16,7 +16,56 @@ You only need to worry about the grid itself and any ghosts on the North/South/E
 
 ## Exercise
 
-### Part 1
+### isValidMove
+
+Implement [PacManAI::isValidMove](../../../lib/PacManAI.cpp) and test your implementation with the test
+in [testPacmanAI.cpp](../../../test/testPacmanAI.cpp) called _"Is valid move"_
+
+To run the tests through CMake change the last line in [test/CMakeLists.txt](../../../test/CMakeLists.txt) to:
+
+```
+add_test(NAME pacman_tests COMMAND pacman_tests)
+```
+
+```cpp
+bool PacManAI::isValidMove(const Move & move) {
+  return false;
+}
+```
+
+<details>
+   <summary>Hint 1</summary>
+  
+Use [isWalkableForPacMan](../../../lib/Board.cpp) to make sure PacMan is not walking in ways that are not legal
+  
+</details>
+
+<details>
+   <summary>Hint 2</summary>
+  
+Use [oppositeDirection](../../../lib/include/Direction.hpp) to make sure PacMan doesn't get stuck toggeling back and forth
+  
+</details>
+
+### optimalDirection
+
+Implement [PacManAI::optimalDirection](../../../lib/PacManAI.cpp) and test your implementation with the test
+in [testPacmanAI.cpp](../../../test/testPacmanAI.cpp) called _"Is optimal direction"_
+
+```cpp
+Direction PacManAI::optimalDirection(const std::array<Move, 4> & moves) {
+  return Direction::NONE;
+}
+```
+
+<details>
+   <summary>Hint</summary>
+  
+  You can use [std::min_element](https://en.cppreference.com/w/cpp/algorithm/min_element) to find the closest pellet
+  
+</details>
+
+### pelletClosestToPacman
 
 Implement [PacManAI::pelletClosestToPacman](../../../lib/PacManAI.cpp) and test your implementation with the test
 in [testPacmanAI.cpp](../../../test/testPacmanAI.cpp) called _"Find pellet closest to PacMan"_
@@ -52,54 +101,3 @@ Use the [std::sort](https://en.cppreference.com/w/cpp/algorithm/sort) function t
 and return true if the first parameter is closer from PacMan than the second.
 
 </details>
-
-### Part 2
-
-Implement [PacManAI::isValidMove](../../../lib/PacManAI.cpp) and test your implementation with the test
-in [testPacmanAI.cpp](../../../test/testPacmanAI.cpp) called _"Is valid move"_
-
-To run the tests through CMake change the last line in [test/CMakeLists.txt](../../../test/CMakeLists.txt) to:
-
-```
-add_test(NAME pacman_tests COMMAND pacman_tests)
-```
-
-```cpp
-bool PacManAI::isValidMove(const Move & move) {
-  return false;
-}
-```
-
-<details>
-   <summary>Hint 1</summary>
-  
-Use [isWalkableForPacMan](../../../lib/Board.cpp) to make sure PacMan is not walking in ways that are not legal
-  
-</details>
-
-<details>
-   <summary>Hint 2</summary>
-  
-Use [oppositeDirection](../../../lib/include/Direction.hpp) to make sure PacMan doesn't get stuck toggeling back and forth
-  
-</details>
-
-### Part 3
-
-Implement [PacManAI::optimalDirection](../../../lib/PacManAI.cpp) and test your implementation with the test
-in [testPacmanAI.cpp](../../../test/testPacmanAI.cpp) called _"Is optimal direction"_
-
-```cpp
-Direction PacManAI::optimalDirection(const std::array<Move, 4> & moves) {
-  return Direction::NONE;
-}
-```
-
-<details>
-   <summary>Hint</summary>
-  
-  You can use [std::min_element](https://en.cppreference.com/w/cpp/algorithm/min_element) to find the closest pellet
-  
-</details>
-
-
