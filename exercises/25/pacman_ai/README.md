@@ -66,7 +66,8 @@ bool PacManAI::isValidMove(const Move & move) {
 
 <details>
    <summary>Hint</summary>
-
+Use isWalkableForPacMan to make sure PacMan is not walking in ways that are not legal
+  
 </details>
 
 ### Part 3
