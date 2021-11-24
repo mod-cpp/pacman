@@ -1,7 +1,7 @@
 #include <catch2/catch.hpp>
 #include <PacManAI.hpp>
 #include <limits>
-
+/*
 TEST_CASE("Find pellet closest to PacMan", "[AI]") {
     using namespace pacman;
     PacManAI AI;
@@ -68,3 +68,4 @@ TEST_CASE("Is optimal direction", "[AI]") {
         PacManAI AI;
         CHECK(AI.optimalDirection(std::get<0>(data)) == std::get<1>(data));
 }
+*/
