@@ -16,7 +16,7 @@ You only need to worry about the grid itself and any ghosts on the North/South/E
 
 ## Exercise
 
-### isValidMove
+### 210. Exercise - isValidMove
 
 Implement [PacManAI::isValidMove](../../../lib/PacManAI.cpp) and test your implementation with the test
 in [testPacmanAI.cpp](../../../test/testPacmanAI.cpp) called _"Is valid move"_
