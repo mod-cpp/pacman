@@ -21,12 +21,6 @@ You only need to worry about the grid itself and any ghosts on the North/South/E
 Implement [PacManAI::isValidMove](../../../lib/PacManAI.cpp) and test your implementation with the test
 in [testPacmanAI.cpp](../../../test/testPacmanAI.cpp) called _"Is valid move"_
 
-To run the tests through CMake change the last line in [test/CMakeLists.txt](../../../test/CMakeLists.txt) to:
-
-```
-add_test(NAME pacman_tests COMMAND pacman_tests)
-```
-
 ```cpp
 bool PacManAI::isValidMove(const Move & move) {
   return false;
