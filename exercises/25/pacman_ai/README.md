@@ -43,7 +43,7 @@ Use [oppositeDirection](../../../lib/include/Direction.hpp) to make sure PacMan 
   
 </details>
 
-### optimalDirection
+### 211. Exercise - optimalDirection
 
 Implement [PacManAI::optimalDirection](../../../lib/PacManAI.cpp) and test your implementation with the test
 in [testPacmanAI.cpp](../../../test/testPacmanAI.cpp) called _"Is optimal direction"_
