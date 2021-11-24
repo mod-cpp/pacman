@@ -61,7 +61,7 @@ Direction PacManAI::optimalDirection(const std::array<Move, 4> & moves) {
   
 </details>
 
-### 220. Exercise - pelletClosestToPacman
+### 221. Exercise - pelletClosestToPacman
 
 Implement [PacManAI::pelletClosestToPacman](../../../lib/PacManAI.cpp) and test your implementation with the test
 in [testPacmanAI.cpp](../../../test/testPacmanAI.cpp) called _"Find pellet closest to PacMan"_
