@@ -1,6 +1,6 @@
 [< Back](../README.md)
 
-## 220. Exercise - use reserve
+## 220. Exercise - use reserve in `initialPelletPositions` (`Board.cpp`)
 
 To avoid having to resize the vector too many times, we can preemptively reserve space for elements.
 At a glance, we can estimate that there are pellets on a third of the grid.
