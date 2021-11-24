@@ -102,6 +102,10 @@ and return true if the first parameter is closer from PacMan than the second.
 
 Rewrite optimalDirection to use algorithims.
 
+### 241. Exercise - Use Lambdas and Algorithms for pelletClosestToPacman
+
+Rewrite pelletClosestToPacman using lambdas and algorithms
+
 ## Advanced
 
 For people who want to create a fancier AI, if you want to introduce some randomness, you can look at this SFML function https://www.sfml-dev.org/tutorials/1.6/system-random.php - you will need to include #include <SFML/Randomizer.hpp>
