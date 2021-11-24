@@ -112,14 +112,6 @@ GridPosition teleport(GridPosition point) {
 std::vector<GridPosition> initialPelletPositions() {
   std::vector<GridPosition> positions;
 
-  // Exercise: To avoid having to resize the vector too many times, we can
-  // presemptively reserve space for elements.
-  // At a glance, we can estimate that there are pellets on a third of the grid.
-  // This is not accurate so we might either reserve too much or too little memory,
-  // but this is will still be faster than not calling reserve at all!
-  // This will be very noticeable on both very large vectors (10 thousands of elements),
-  // Or small vectors in functions called very frequently.
-
   for (std::size_t row = 0; row < ROWS; row++) {
     for (std::size_t column = 0; column < COLUMNS; column++) {
       if (board[row][column] == int(Cell::pellet))
