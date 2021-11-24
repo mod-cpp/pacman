@@ -100,7 +100,7 @@ and return true if the first parameter is closer from PacMan than the second.
 
 ### 240. Exercise - Algorithm for optimalDirection
 
-Rewrite optimalDirection to use algorithims.
+Rewrite optimalDirection to use algorithms.
 
 ### 241. Exercise - Use Lambdas and Algorithms for pelletClosestToPacman
 
