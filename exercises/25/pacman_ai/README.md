@@ -98,6 +98,10 @@ and return true if the first parameter is closer from PacMan than the second.
 
 </details>
 
+### 240. Exercise - Algorithm for optimalDirection
+
+Rewrite optimalDirection to use algorithims.
+
 ## Advanced
 
 For people who want to create a fancier AI, if you want to introduce some randomness, you can look at this SFML function https://www.sfml-dev.org/tutorials/1.6/system-random.php - you will need to include #include <SFML/Randomizer.hpp>
