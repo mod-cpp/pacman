@@ -8,6 +8,10 @@ Use algorithms in Pellet and SuperPellet
 
 Turn algorithm into raw loop, make students use algorithms.
 
-## Exercise
+### 230. Exercise - Use algorithms (Pellets)
+
+1.
+
+### 231. Exercise - Use algorithms (Pellets)
 
 1.
