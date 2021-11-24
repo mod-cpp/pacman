@@ -1,8 +1,10 @@
 #include <catch2/catch.hpp>
 #include <PacManAI.hpp>
 #include <limits>
-/*
-TEST_CASE("Find pellet closest to PacMan", "[AI]") {
+
+// To enable the tests below remove the [.] from the tags on the test
+
+TEST_CASE("Find pellet closest to PacMan", "[.][AI]") {
     using namespace pacman;
     PacManAI AI;
     using TestData = std::tuple<GridPosition, std::vector<GridPosition>, GridPosition>;
@@ -17,7 +19,7 @@ TEST_CASE("Find pellet closest to PacMan", "[AI]") {
     CHECK(AI.pelletClosestToPacman(std::get<0>(data), std::get<1>(data)) == std::get<2>(data));
 }
 
-TEST_CASE("Is valid move", "[AI]") {
+TEST_CASE("Is valid move", "[.][AI]") {
     using namespace pacman;
     using TestData = std::tuple<PacManAI::Move, bool>;
     auto data = GENERATE(
@@ -30,7 +32,7 @@ TEST_CASE("Is valid move", "[AI]") {
     CHECK(AI.isValidMove(std::get<0>(data)) == std::get<1>(data));
 }
 
-TEST_CASE("Is optimal direction", "[AI]") {
+TEST_CASE("Is optimal direction", "[.][AI]") {
     using namespace pacman;
     using TestData = std::tuple<std::array<PacManAI::Move, 4>, Direction>;
     auto makeMove = [](double distance, Direction d) {
@@ -68,4 +70,3 @@ TEST_CASE("Is optimal direction", "[AI]") {
         PacManAI AI;
         CHECK(AI.optimalDirection(std::get<0>(data)) == std::get<1>(data));
 }
-*/
