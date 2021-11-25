@@ -1,11 +1,16 @@
 GridPosition PacManAI::pelletClosestToPacman(GridPosition pacmanGridPosition,
                                              std::vector<GridPosition> & pellets) {
-  auto pelletSort = [&pacmanGridPosition](GridPosition pelletA, GridPosition pelletB) {
-    double distanceA = positionDistance(pacmanGridPosition, pelletA);
-    double distanceB = positionDistance(pacmanGridPosition, pelletB);
-    return distanceA < distanceB;
-  };
-  std::sort(pellets.begin(), pellets.end(), pelletSort);
+  GridPosition closestPellet = { 0, 0 };
+  double closestDistance = std::numeric_limits<double>::infinity();
 
-  return pellets[0];
+  for (const auto & pellet : pellets) {
+    const double distance = positionDistance(pacmanGridPosition, pellet);
+    if (distance < closestDistance) {
+      closestDistance = distance;
+      closestPellet = pellet;
+    }
+  }
+
+  return closestPellet;
 }
+
