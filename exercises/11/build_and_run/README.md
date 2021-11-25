@@ -32,7 +32,7 @@ sudo pkg install catch cmake libfmt ninja sfml
 
 ### Windows:
 
-* Follow the instructions to install cmake (3.21) from https://cmake.org/download/
+* Follow the instructions to install cmake (3.22) from https://cmake.org/download/
 * Install Visual Studio 2022 https://visualstudio.microsoft.com/
 * Reboot your computer once that's done.
 * If you have issues with using VSCode, start it from the "Developer Command Prompt for VS 2022"
