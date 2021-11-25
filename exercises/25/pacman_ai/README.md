@@ -1,6 +1,6 @@
 [< Back](../README.md)
 
-# Exercise: PacMan AI
+# 251. Exercise - Smarter PacMan AI
 
 We've implemented a naive AI for PacMan, but maybe we can improve it?
 
