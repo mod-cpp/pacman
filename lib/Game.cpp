@@ -41,29 +41,18 @@ void Game::processEvents(InputState & inputState) {
       event.value().type != sf::Event::KeyReleased))
     return;
 
-  const auto key = event.value().key.code;
-  bool pressed = event.value().type == sf::Event::KeyPressed;
+  auto isKeyPressed = [&](sf::Keyboard::Key k) {
+      bool pressed = event.value().type == sf::Event::KeyPressed;
+      return k == event.value().key.code && pressed;
+  };
 
-  switch (key) {
-    case sf::Keyboard::A:
-      if(pressed)
-          inputState.enableAI = !inputState.enableAI;
-      return;
-    case sf::Keyboard::Key::Down:
-      inputState.down = pressed;
-      return;
-    case sf::Keyboard::Key::Up:
-      inputState.up = pressed;
-      return;
-    case sf::Keyboard::Key::Left:
-      inputState.left = pressed;
-      return;
-    case sf::Keyboard::Key::Right:
-      inputState.right = pressed;
-      return;
-    default:
-      break;
-  }
+  if(isKeyPressed(sf::Keyboard::Key::A))
+      inputState.enableAI = !inputState.enableAI;
+
+  inputState.down  = isKeyPressed(sf::Keyboard::Key::Down);
+  inputState.up    = isKeyPressed(sf::Keyboard::Key::Up);
+  inputState.left  = isKeyPressed(sf::Keyboard::Key::Left);
+  inputState.right = isKeyPressed(sf::Keyboard::Key::Right);
 }
 
 } // namespace pacman
