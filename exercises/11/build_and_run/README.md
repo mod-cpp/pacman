@@ -63,8 +63,8 @@ code .
 ```bash
 git clone https://github.com/mod-cpp/pacman.git
 cd pacman
-cmake .
-make
+cmake -B build
+cmake --build build
 ```
 
 ### Using CLion
