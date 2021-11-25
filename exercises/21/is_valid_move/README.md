@@ -10,7 +10,7 @@ then PacMan will go up. Then while PacMan is going up, a ghost enters that path,
 
 You only need to worry about the grid itself and any ghosts on the North/South/East/West axis of PacMan.
 
-### 210. Exercise - isValidMove
+### 210. Exercise - Implement `PacManAI::isValidMove`
 
 As a warmup exercise, implement [PacManAI::isValidMove](../../../lib/PacManAI.cpp) and test your implementation with the test
 in [testPacmanAI.cpp](../../../test/testPacmanAI.cpp) called _"Is valid move"_
