@@ -1,3 +1,4 @@
 [< Back](../README.md)
 
-* [Exercise: Create isIntersection function](is_intersection/README.md)
+* [Exercise - isValidMove](is_valid_move/README.md)
+* [Exercise - optimalDirection](optimal_direction/README.md)
