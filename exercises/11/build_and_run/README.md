@@ -70,4 +70,9 @@ ctest --test-dir build -C Debug
 
 ### Using CLion
 
-* When opening the project in CLion use the CMake preset for your platform
+* When opening the project in CLion use the CMake preset for your platform - see popup in the lower right hand corner
+* Unselect the "Debug" profile
+* Select for example the preset profile called "windows-build" if you are on Windows
+* Enable it by checking the checkbox "Enable profile"
+* Click "Apply" and "OK"
+* (If CLion created a `cmake-build-debug` folder you can safely delete it, we will be using the `build` directory)
