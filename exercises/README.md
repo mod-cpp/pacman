@@ -18,7 +18,6 @@
 * [Module 24: Lambdas and Function Templates](24/README.md)
 * [Module 25: Algorithmic Thinking](25/README.md)
 * [Module 26: Sanitizers](26/README.md)
-* [Module 27: Conclusion](27/README.md)
 
 ## Advanced
 
@@ -33,4 +32,3 @@ These will probably become relevant
 * https://www.gamasutra.com/view/feature/3938/the_pacman_dossier.php?print=1
 * https://www.slideshare.net/grimlockt/pac-man-6561257
 * http://donhodges.com/pacman_pinky_explanation.htm
-* 
