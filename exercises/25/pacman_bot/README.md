@@ -11,7 +11,3 @@ Start by giving InputState random values on each update and then program in a fi
 Right for 3 seconds, then down, right, up, right". This should pickup the first super pellet.
 
 In this exercise, the input code in processEvents is not needed.
-
-## Exercise
-
-1.
