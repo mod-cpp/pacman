@@ -58,7 +58,7 @@ code .
 
 * You will get a popup in the lower right hand corner asking "Do you want to install the recommended extensions for C++?" - click Install
 
-### Commandline based build (Not used in this training) Linux, BSD, or Mac
+### Commandline based build (Not used in this training)
 
 ```bash
 git clone https://github.com/mod-cpp/pacman.git
