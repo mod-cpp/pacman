@@ -32,13 +32,17 @@ void Game::run() {
 
 void Game::processEvents(InputState & inputState) {
   const auto event = canvas.pollEvent();
-  if (event && event.value().type == sf::Event::Closed) {
+
+  if (!event)
+    return;
+
+  if (event.value().type == sf::Event::Closed) {
     inputState.close = true;
     return;
   }
 
-  if (!event || !(event.value().type == sf::Event::KeyPressed ||
-                  event.value().type == sf::Event::KeyReleased))
+  if (!(event.value().type == sf::Event::KeyPressed ||
+        event.value().type == sf::Event::KeyReleased))
     return;
 
   auto isKeyPressed = [&](sf::Keyboard::Key k) {
