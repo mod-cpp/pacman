@@ -7,6 +7,7 @@
 ### All Platforms
 
 * Follow the instructions to install VSCode from https://code.visualstudio.com/
+* If you already have it installed, make sure it is up to date
 
 ### Ubuntu 20.04 or newer
 
