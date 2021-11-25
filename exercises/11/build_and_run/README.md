@@ -63,3 +63,7 @@ cd pacman
 cmake .
 make
 ```
+
+### Using CLion
+
+* When opening the project in CLion use the CMake preset for your platform
