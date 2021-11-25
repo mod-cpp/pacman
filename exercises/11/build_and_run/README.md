@@ -65,6 +65,7 @@ git clone https://github.com/mod-cpp/pacman.git
 cd pacman
 cmake -B build
 cmake --build build
+ctest --test-dir build -C Debug
 ```
 
 ### Using CLion
