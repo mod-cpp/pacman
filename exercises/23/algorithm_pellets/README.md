@@ -2,16 +2,44 @@
 
 # Exercise: Use algorithms (Pellets)
 
-Use algorithms in Pellet and SuperPellet
+Practice using algorithms instead of raw for loops.
 
-## Background: Pellet
+### 230. Exercise - Use algorithms instead of a raw for loop in `Pellets::isPellet`
 
-Turn algorithm into raw loop, make students use algorithms.
+```cpp
+bool Pellets::isPellet(GridPosition p) const {
+  for(const GridPosition & position : positions) {
+      if(position == p)
+          return true;
+  }
+  return false;
+}
+```
 
-### 230. Exercise - Use algorithms (Pellets)
+<details>
+   <summary>Hint 1</summary>
 
-1.
+Look into [std::all_of, std::any_of, std::none_of](https://en.cppreference.com/w/cpp/algorithm/all_any_none_of).
 
-### 231. Exercise - Use algorithms (Pellets)
+</details>
 
-1.
+### 231. Exercise - Use algorithms instead of a raw for loop in `Pellets::eatPelletAtPosition`
+
+```cpp
+bool Pellets::eatPelletAtPosition(GridPosition p) {
+    for(auto it = positions.begin(); it != positions.end(); ++it) {
+        if(*it == p) {
+            positions.erase(it);
+            return true;
+        }
+    }
+    return false;
+}
+```
+
+<details>
+   <summary>Hint 1</summary>
+
+Look at the slides.
+
+</details>
