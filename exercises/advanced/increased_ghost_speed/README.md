@@ -15,7 +15,3 @@ You could increase the speed after each time the ghost is eaten for example, or 
 after N seconds.
 
 Also ask yourself, how would you test this?
-
-## Exercise
-
-1.

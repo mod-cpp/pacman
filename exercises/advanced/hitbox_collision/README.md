@@ -2,8 +2,4 @@
 
 # Exercise: Hitbox collision
 
-## Background: AABB
-
-## Exercise
-
-1.
+## Background: AAB

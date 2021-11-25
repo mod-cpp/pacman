@@ -9,7 +9,3 @@ eats the last pellet or super pellet.
 
 The ghosts and pacman should go back to their original position and all of the pellets should respawn. This can go on
 forever, but you can look at the next exercise for more information.
-
-## Exercise
-
-1.

@@ -10,7 +10,3 @@ the teleporting system so that two teleport doors are linked with each other.
 For example so you can enter a teleport from somewhere on the bottom row and exit from somewhere on the right column.
 
 You do not need to allow for many teleports like this, only 2 doors.
-
-## Exercise
-
-1.
