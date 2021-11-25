@@ -37,21 +37,21 @@ void Game::processEvents(InputState & inputState) {
     return;
   }
 
-  if (!event || !(event.value().type != sf::Event::KeyPressed ||
-      event.value().type != sf::Event::KeyReleased))
+  if (!event || !(event.value().type == sf::Event::KeyPressed ||
+                  event.value().type == sf::Event::KeyReleased))
     return;
 
   auto isKeyPressed = [&](sf::Keyboard::Key k) {
-      bool pressed = event.value().type == sf::Event::KeyPressed;
-      return k == event.value().key.code && pressed;
+    bool pressed = event.value().type == sf::Event::KeyPressed;
+    return k == event.value().key.code && pressed;
   };
 
-  if(isKeyPressed(sf::Keyboard::Key::A))
-      inputState.enableAI = !inputState.enableAI;
+  if (isKeyPressed(sf::Keyboard::Key::A))
+    inputState.enableAI = !inputState.enableAI;
 
-  inputState.down  = isKeyPressed(sf::Keyboard::Key::Down);
-  inputState.up    = isKeyPressed(sf::Keyboard::Key::Up);
-  inputState.left  = isKeyPressed(sf::Keyboard::Key::Left);
+  inputState.down = isKeyPressed(sf::Keyboard::Key::Down);
+  inputState.up = isKeyPressed(sf::Keyboard::Key::Up);
+  inputState.left = isKeyPressed(sf::Keyboard::Key::Left);
   inputState.right = isKeyPressed(sf::Keyboard::Key::Right);
 }
 
