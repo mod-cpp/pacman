@@ -15,6 +15,8 @@ You only need to worry about the grid itself and any ghosts on the North/South/E
 As a warmup exercise, implement [PacManAI::isValidMove](../../../lib/PacManAI.cpp) and test your implementation with the test
 in [testPacmanAI.cpp](../../../test/testPacmanAI.cpp) called _"Is valid move"_
 
+Note: `isValidMove` will be called 4 times in a loop. If the target cell is not walkable the distance is set to infinity.
+
 Note: Going backwards is not allowed, otherwise you'll go back and forwards between 2 pellets while playing the game.
 
 Note: The test is disabled, to enable the test remove the [!shouldfail] from the tags on the test
