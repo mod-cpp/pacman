@@ -58,9 +58,9 @@ own class.
 2. Create a class called `GhostState` within the `.hpp` file.
 
 3. Move all of the ghosts from the `GameState` class into the `GhostState` class. Then create a member variable
-   within `GameState` that is of type `GhostState`.
+   within `GameState` that is of type `GhostState`. You do not need to move the `checkColision` function.
 
 4. Move all of the ghost functionality from `GameState` into the `GhostState` class. Create functions for this behavior
-   and call those functions from their respective locations within `GameState` (update, checkCollision, reset, frighten)
+   and call those functions from their respective locations within `GameState` (update, reset, frighten). You will also need to update the `Canvas` class.
 
 5. Compile and run the game, check if everything is working correctly.
