@@ -5,8 +5,7 @@
 Implement [PacManAI::pelletClosestToPacman](../../../lib/PacManAI.cpp) and test your implementation with the test
 in [testPacmanAI.cpp](../../../test/testPacmanAI.cpp) called _"Find pellet closest to PacMan"_
 
-The function should return the position of the pellet that is "closest" to PacMan. One implementation could be to sort
-the vector of pellets by the distance they have to PacMan, and then return the first one.
+The function should return the position of the pellet that is "closest" to PacMan.
 
 ```cpp
 GridPosition PacManAI::pelletClosestToPacman(GridPosition pacmanGridPosition,

@@ -2,7 +2,8 @@
 
 ### 241. Exercise - Use Lambdas and Algorithms for `PacManAI::pelletClosestToPacman`
 
-Rewrite pelletClosestToPacman using lambdas and algorithms
+Rewrite pelletClosestToPacman using lambdas and algorithms. One implementation could be to sort
+the vector of pellets by the distance they have to PacMan, and then return the first one.
 
 ```cpp
 GridPosition PacManAI::pelletClosestToPacman(GridPosition pacmanGridPosition,
