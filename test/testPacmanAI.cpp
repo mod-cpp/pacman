@@ -36,7 +36,7 @@ TEST_CASE("Is optimal direction", "[!shouldfail][AI]") {
     using namespace pacman;
     using TestData = std::tuple<std::array<PacManAI::Move, 4>, Direction>;
     auto makeMove = [](double distance, Direction d) {
-        return PacManAI::Move{d, {0, 0}, distance};
+        return PacManAI::Move{d, {13, 22}, distance};
     };
     const auto infinity = std::numeric_limits<double>::infinity();
 
