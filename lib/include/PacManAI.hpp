@@ -28,7 +28,7 @@ public:
   void reset();
 
 private:
-  Position pos;
+  Position pos = initialPacManPosition();
   Direction direction = Direction::RIGHT;
 };
 
