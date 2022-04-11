@@ -24,33 +24,26 @@ jobs:
             config-preset: linux-clang
             build-preset: linux-clang-build
             test-preset: linux-clang-test
-            cmake_env:
-              CC: clang-12
-              CXX: clang++-12
           - name: Ubuntu 20.04
             os: ubuntu-20.04
             config-preset: linux-gcc
             build-preset: linux-gcc-build
             test-preset: linux-gcc-test
-            cmake_env: {}
           - name: Windows 2022
             os: windows-2022
             config-preset: x64-windows
             build-preset: x64-windows-build
             test-preset: x64-windows-test
-            cmake_env: {}
           - name: Windows 2022
             os: windows-2022
             config-preset: x86-windows
             build-preset: x86-windows-build
             test-preset: x86-windows-test
-            cmake_env: {}
           - name: MacOS 11
             os: macos-11
             config-preset: osx
             build-preset: osx-build
             test-preset: osx-test
-            cmake_env: {}
         cmake-build-type: [Debug, Release]
 
     steps:
@@ -83,12 +76,10 @@ jobs:
     - name: Configure CMake
       shell: bash
       run: cmake --preset ${{ matrix.configurations.config-preset }} -DCMAKE_BUILD_TYPE=${{ matrix.cmake-build-type }}
-      env: ${{ matrix.configurations.cmake_env }}
 
     - name: Build
       shell: bash
       run: cmake --build --preset ${{ matrix.configurations.build-preset }} --config ${{ matrix.cmake-build-type }}
-      env: ${{ matrix.configurations.cmake_env }}
 
     - name: Test
       shell: bash
