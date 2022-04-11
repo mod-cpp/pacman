@@ -3,7 +3,6 @@ name: CMake
 env:
   VCPKG_BINARY_SOURCES: 'clear;nuget,GitHub,readwrite'
 
-
 on:
   push:
     branches: [ main ]
@@ -14,69 +13,83 @@ on:
 
 jobs:
   build:
-    name: "${{ matrix.configurations.name }} | ${{ matrix.cmake-build-type }}"
+    name: "${{ matrix.configurations.name }} | ${{ matrix.configurations.config-preset }} | ${{ matrix.cmake-build-type }}"
     runs-on: ${{ matrix.configurations.os }}
     strategy:
       fail-fast: false
       matrix:
         configurations:
-          - name: Ubuntu 18.04
-            os: ubuntu-18.04
           - name: Ubuntu 20.04
             os: ubuntu-20.04
-          - name: Windows 2019
-            os: windows-2019
-          - name: MacOS 10.15
-            os: macos-10.15
+            config-preset: linux-clang
+            build-preset: linux-clang-build
+            test-preset: linux-clang-test
+            cmake_env:
+              CC: clang-12
+              CXX: clang++-12
+          - name: Ubuntu 20.04
+            os: ubuntu-20.04
+            config-preset: linux-gcc
+            build-preset: linux-gcc-build
+            test-preset: linux-gcc-test
+            cmake_env: {}
+          - name: Windows 2022
+            os: windows-2022
+            config-preset: x64-windows
+            build-preset: x64-windows-build
+            test-preset: x64-windows-test
+            cmake_env: {}
+          - name: Windows 2022
+            os: windows-2022
+            config-preset: x86-windows
+            build-preset: x86-windows-build
+            test-preset: x86-windows-test
+            cmake_env: {}
+          - name: MacOS 11
+            os: macos-11
+            config-preset: osx
+            build-preset: osx-build
+            test-preset: osx-test
+            cmake_env: {}
         cmake-build-type: [Debug, Release]
 
     steps:
     - uses: actions/checkout@v2
+    - uses: turtlesec-no/get-ninja@1.0.0
 
     - name: Create vcpkg build folder
+      env:
+        vcpkg_project_root: ${{runner.workspace}}/pacman/build/${{ matrix.configurations.config-preset }}
       run: |
-        mkdir -p ${{runner.workspace}}/build/vcpkg_installed
-        mkdir -p ${{runner.workspace}}/build/_deps
+        mkdir -p ${{ env.vcpkg_project_root }}/vcpkg_installed
+        mkdir -p ${{ env.vcpkg_project_root }}/_deps
 
     - name: Cache vcpkg
       uses: actions/cache@v2
       env:
+        vcpkg_project_root: ${{runner.workspace}}/pacman/build/${{ matrix.configurations.config-preset }}
         cache-name: vcpkg-modules
       with:
         path: |
-          ${{runner.workspace}}/build/vcpkg_installed
-          ${{runner.workspace}}/build/_deps
-        key: ${{ matrix.configurations.os }}-${{ matrix.cmake-build-type }}-${{ hashFiles('vcpkg.json') }}-${{ hashFiles('cmake/vcpkg.cmake') }}
-
-    - name: Fix Path on Ubuntu
-      if: matrix.configurations.os == 'ubuntu-20.04' || matrix.configurations.os == 'ubuntu-18.04'
-      run: echo "/home/runner/.local/bin" >> $GITHUB_PATH
+          /home/runner/.cache/vcpkg
+          ${{ env.vcpkg_project_root }}/vcpkg_installed
+          ${{ env.vcpkg_project_root }}/_deps
+        key: ${{ matrix.configurations.os }}-${{ matrix.configurations.config-preset }}-${{ matrix.cmake-build-type }}-${{ hashFiles('vcpkg.json') }}-${{ hashFiles('cmake/vcpkg.cmake') }}
 
     - name: Install Linux dependencies
-      if: matrix.configurations.os == 'ubuntu-20.04' || matrix.configurations.os == 'ubuntu-18.04'
-      run: sudo apt-get update && sudo apt-get install -y libx11-dev libxrandr-dev libxi-dev libgl1-mesa-dev libudev-dev make ninja-build cmake
-
-    - name: Create Build Environment
-      # Some projects don't allow in-source building, so create a separate build directory
-      # We'll use this as our working directory for all subsequent commands
-      run: cmake -E make_directory ${{runner.workspace}}/build
+      if: matrix.configurations.os == 'ubuntu-20.04'
+      run: sudo apt-get update && sudo apt-get install -y libx11-dev libxrandr-dev libxi-dev libgl1-mesa-dev libudev-dev clang-12 make ninja-build cmake
 
     - name: Configure CMake
-      working-directory: ${{runner.workspace}}/build
-      # Use a bash shell so we can use the same syntax for environment variable
-      # access regardless of the host operating system
       shell: bash
-      run: cmake $GITHUB_WORKSPACE -DCMAKE_BUILD_TYPE=${{ matrix.cmake-build-type }}
+      run: cmake --preset ${{ matrix.configurations.config-preset }} -DCMAKE_BUILD_TYPE=${{ matrix.cmake-build-type }}
+      env: ${{ matrix.configurations.cmake_env }}
 
     - name: Build
-      working-directory: ${{runner.workspace}}/build
       shell: bash
-      # Execute the build.  You can specify a specific target with "--target <NAME>"
-      run: cmake --build . --config ${{ matrix.cmake-build-type }}
+      run: cmake --build --preset ${{ matrix.configurations.build-preset }} --config ${{ matrix.cmake-build-type }}
+      env: ${{ matrix.configurations.cmake_env }}
 
     - name: Test
-      working-directory: ${{runner.workspace}}/build
       shell: bash
-      # Execute tests defined by the CMake configuration.
-      # See https://cmake.org/cmake/help/latest/manual/ctest.1.html for more detail
-      run: ctest -C ${{ matrix.cmake-build-type }}
+      run: ctest --preset ${{ matrix.configurations.test-preset }} -C ${{ matrix.cmake-build-type }} -VV
