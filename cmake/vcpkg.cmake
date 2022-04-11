@@ -2,7 +2,7 @@ include(FetchContent)
 FetchContent_Declare(
         vcpkg
         GIT_REPOSITORY https://github.com/microsoft/vcpkg
-        GIT_TAG 8e4cfac84bf6fbb081123b02f8c65bad8418b25e
+        GIT_TAG af2287382b1991dbdcb7e5112d236f3323b9dd7a # 2022.03.10
 )
 
 if(NOT DEFINED CMAKE_TOOLCHAIN_FILE)
@@ -12,7 +12,6 @@ if(NOT DEFINED CMAKE_TOOLCHAIN_FILE)
     if(NOT vcpkg_POPULATED)
         FetchContent_Populate(vcpkg)
     endif()
-
 endif()
 
 set(CMAKE_TOOLCHAIN_FILE "${vcpkg_SOURCE_DIR}/scripts/buildsystems/vcpkg.cmake")
