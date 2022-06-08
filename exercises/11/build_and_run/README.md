@@ -2,42 +2,49 @@
 
 # Exercise: Set up development environment
 
-## Install tools
+### Install tools
 
-### All Platforms
+#### All Platforms
 
 * Follow the instructions to install VSCode from https://code.visualstudio.com/
-* If you already have it installed, make sure it is up to date
+* If you already have it installed, make sure it is up-to-date
 
-### Ubuntu 20.04 or newer
+#### Ubuntu 20.04 or newer
 
 * Install the build tools
 ```bash
-sudo apt-get install ninja-build pkg-config curl zip unzip tar cmake build-essential libx11-dev libxrandr-dev libxi-dev libudev-dev libgl1-mesa-dev
+sudo apt-get install ninja-build pkg-config curl zip unzip tar cmake build-essential libx11-dev libxrandr-dev libxi-dev libudev-dev libgl1-mesa-dev clang-12 g++-10
 ```
 
-### Fedora 33 or newer
+#### Fedora 33 or newer
 
 * Install the build tools
 ```bash
 sudo dnf install ninja-build SFML-devel libXi-devel libX11-devel libXrandr-devel mesa-libGL-devel systemd-devel
 ```
 
-### FreeBSD 12 or newer
+#### Arch Linux
+
+If there are opengl driver errors, try running in software mode
+
+#### FreeBSD 12 or newer
 
 * Install the build tools
 ```bash
 sudo pkg install catch cmake libfmt ninja sfml
 ```
 
-### Windows:
+**After installing the build tools, you may have to reboot your IDE and/or your Linux
+session if you encounter any errors such as Ninja not being found by VScode**.
+
+#### Windows:
 
 * Follow the instructions to install cmake (3.22) from https://cmake.org/download/
 * Install Visual Studio 2022 https://visualstudio.microsoft.com/
 * Reboot your computer once that's done.
 * If you have issues with using VSCode, start it from the "Developer Command Prompt for VS 2022"
 
-### Mac
+#### Mac
 
 * Install clang by typing `xcode-select --install` in a terminal and following the instructions
 * Install the build tools
@@ -46,9 +53,9 @@ brew install cmake ninja
 ```
 * Follow the instructions for [Launching VSCode from the command line](https://code.visualstudio.com/docs/setup/mac#_launching-from-the-command-line)
 
-## Configure and build project
+### Configure and build project
 
-### All Platforms, using VS Code
+#### All Platforms, using VS Code
 
 ```bash
 git clone https://github.com/mod-cpp/pacman.git
@@ -58,7 +65,7 @@ code .
 
 * You will get a popup in the lower right hand corner asking "Do you want to install the recommended extensions for C++?" - click Install
 
-### Commandline based build (Not used in this training)
+#### Commandline based build (Not used in this training)
 
 ```bash
 git clone https://github.com/mod-cpp/pacman.git
@@ -68,7 +75,7 @@ cmake --build build
 ctest --test-dir build -C Debug
 ```
 
-### Using CLion
+#### Using CLion
 
 * When opening the project in CLion use the CMake preset for your platform - see popup in the lower right hand corner
 * Unselect the "Debug" profile
