@@ -2,7 +2,7 @@
 
 # Install Visual Studio Community 2022
 winget install -e --id Microsoft.VisualStudio.2022.Community
-#winget install Microsoft.VisualStudio.2022.BuildTools
+winget install Microsoft.VisualStudio.2022.BuildTools
 # otherwise: Visual Studio Installer - Modify - Desktop development with C++
 
 # Install or update Scoop
