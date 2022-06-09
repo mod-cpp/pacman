@@ -4,6 +4,7 @@
 winget install -e --id Microsoft.VisualStudio.2022.Community
 
 # Install or update Scoop
+Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
 $ScoopMissing = $false
 try {scoop --version} catch {$ScoopMissing = $true}
 if ($ScoopMissing) {
