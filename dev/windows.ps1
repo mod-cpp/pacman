@@ -9,13 +9,13 @@ $ScoopMissing = $false
 try {scoop --version} catch {$ScoopMissing = $true}
 if ($ScoopMissing) {
     Invoke-Expression (New-Object System.Net.WebClient).DownloadString('https://get.scoop.sh')
-} else {
-    scoop update
 }
+
+scoop update
 
 # Add Scoop buckets (Git is required for buckets)
 scoop install git
-scoop bucket add extras
+scoop bucket add extras main
 
 # Install PacMan dependencies
 scoop install vscode ninja cmake
