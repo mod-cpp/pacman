@@ -71,7 +71,7 @@ jobs:
 
     - name: Install Linux dependencies
       if: matrix.configurations.os == 'ubuntu-20.04'
-      run: ./dev/ubuntu.sh
+      run: bash ./dev/ubuntu.sh
 
     - name: Configure CMake
       shell: bash
