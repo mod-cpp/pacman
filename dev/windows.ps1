@@ -1,3 +1,5 @@
+#  iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/mod-cpp/pacman/main/dev/windows.ps1'))
+
 # Install Visual Studio Community 2022
 winget install -e --id Microsoft.VisualStudio.2022.Community
 
