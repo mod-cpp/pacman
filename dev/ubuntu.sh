@@ -19,7 +19,7 @@ sudo apt install -y \
 build-essential \
 clang-12 \
 cmake \
-g++-10
+g++-10 \
 git \
 libgl1-mesa-dev \
 libudev-dev \
