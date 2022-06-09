@@ -15,7 +15,8 @@ scoop update
 
 # Add Scoop buckets (Git is required for buckets)
 scoop install git
-scoop bucket add extras main
+scoop bucket add main
+scoop bucket add extras
 
 # Install PacMan dependencies
 scoop install vscode ninja cmake
