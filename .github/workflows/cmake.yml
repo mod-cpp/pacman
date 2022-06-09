@@ -71,7 +71,7 @@ jobs:
 
     - name: Install Linux dependencies
       if: matrix.configurations.os == 'ubuntu-20.04'
-      run: sudo apt-get update && sudo apt-get install -y libx11-dev libxrandr-dev libxi-dev libgl1-mesa-dev libudev-dev clang-12 make ninja-build cmake
+      run: ./dev/ubuntu.sh
 
     - name: Configure CMake
       shell: bash
