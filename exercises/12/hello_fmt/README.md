@@ -14,3 +14,4 @@ In C++23 we might get `std::print`.
 ## Exercise
 
 1. Play with Hello World on [Godbolt](https://godbolt.org/z/8oxsGG8WM)
+2. You can save the file on Godbolt locally by pressing ctrl+S when you are on the web page
