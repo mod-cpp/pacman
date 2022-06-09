@@ -13,8 +13,9 @@ if ($ScoopMissing) {
     scoop update
 }
 
-# Add Scoop buckets
+# Add Scoop buckets (Git is required for buckets)
+scoop install git
 scoop bucket add extras
 
 # Install PacMan dependencies
-scoop install vscode git ninja cmake
+scoop install vscode ninja cmake
