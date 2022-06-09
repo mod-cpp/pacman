@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-#  bash <(curl -s )
+#  bash <(curl -s https://raw.githubusercontent.com/mod-cpp/pacman/main/dev/ubuntu.sh)
 
 sudo apt update
 sudo apt upgrade
