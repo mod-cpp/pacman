@@ -11,11 +11,8 @@ if ($ChocoMissing) {
 
 choco install -y git
 
-$env:ChocolateyInstall = Convert-Path "$((Get-Command choco).Path)\..\.."
-Import-Module "$env:ChocolateyInstall\helpers\chocolateyProfile.psm1"
-
 choco install -y visualstudio2022community
-Update-SessionEnvironment
+#Update-SessionEnvironment
 choco install -y visualstudio2022-workload-nativedesktop
 
 choco install -y cmake.install --installargs 'ADD_CMAKE_TO_PATH=System'
