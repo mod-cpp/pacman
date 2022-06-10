@@ -12,6 +12,7 @@ if ($ChocoMissing) {
 choco install -y git
 
 choco install -y visualstudio2022community
+Update-SessionEnvironment
 choco install -y visualstudio2022-workload-nativedesktop
 
 choco install -y cmake.install --installargs 'ADD_CMAKE_TO_PATH=System'
