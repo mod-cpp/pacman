@@ -11,6 +11,9 @@ if ($ChocoMissing) {
 
 choco install -y git
 
+$env:ChocolateyInstall = Convert-Path "$((Get-Command choco).Path)\..\.."
+Import-Module "$env:ChocolateyInstall\helpers\chocolateyProfile.psm1"
+
 choco install -y visualstudio2022community
 Update-SessionEnvironment
 choco install -y visualstudio2022-workload-nativedesktop
