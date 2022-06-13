@@ -5,7 +5,6 @@
 
 ## Day 2
 
-* [Module 24: Lambdas and Function Templates](24/README.md)
 * [Module 25: Algorithmic Thinking](25/README.md)
 * [Module 26: Sanitizers](26/README.md)
 
