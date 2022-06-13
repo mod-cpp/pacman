@@ -2,15 +2,16 @@
 
 # 15. Compilation, Linking and Assets
 
-* [Exercise ](#exercise-NUMBER)
+* [Exercise ](#exercise-150)
+* [Exercise ](#exercise-151)
 
-## Exercise NUMBER
+## Exercise 150
 
 ```cpp
 
 ```
 
-## [Exercise NUMBER][1]
+## [Exercise 151][1]
 ### Description
 
 <details>

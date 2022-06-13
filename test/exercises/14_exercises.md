@@ -2,15 +2,16 @@
 
 # 14. Functions and Parameter Passing
 
-* [Exercise ](#exercise-NUMBER)
+* [Exercise ](#exercise-140)
+* [Exercise ](#exercise-141)
 
-## Exercise NUMBER
+## Exercise 140
 
 ```cpp
 
 ```
 
-## [Exercise NUMBER][1]
+## [Exercise 141][1]
 ### Description
 
 <details>

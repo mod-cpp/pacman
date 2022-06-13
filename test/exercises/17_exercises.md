@@ -2,15 +2,16 @@
 
 # 17. Memory and RAII
 
-* [Exercise ](#exercise-NUMBER)
+* [Exercise ](#exercise-170)
+* [Exercise ](#exercise-171)
 
-## Exercise NUMBER
+## Exercise 170
 
 ```cpp
 
 ```
 
-## [Exercise NUMBER][1]
+## [Exercise 171][1]
 ### Description
 
 <details>

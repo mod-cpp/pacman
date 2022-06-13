@@ -2,15 +2,16 @@
 
 # 12. Hello World
 
-* [Exercise ](#exercise-NUMBER)
+* [Exercise ](#exercise-120)
+* [Exercise ](#exercise-121)
 
-## Exercise NUMBER
+## Exercise 120
 
 ```cpp
 
 ```
 
-## [Exercise NUMBER][1]
+## [Exercise 121][1]
 ### Description
 
 <details>

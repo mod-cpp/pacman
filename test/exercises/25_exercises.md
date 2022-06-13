@@ -2,15 +2,16 @@
 
 # 25. Algorithmic Thinking
 
-* [Exercise ](#exercise-NUMBER)
+* [Exercise ](#exercise-250)
+* [Exercise ](#exercise-251)
 
-## Exercise NUMBER
+## Exercise 250
 
 ```cpp
 
 ```
 
-## [Exercise NUMBER][1]
+## [Exercise 251][1]
 ### Description
 
 <details>

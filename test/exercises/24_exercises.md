@@ -2,15 +2,16 @@
 
 # 24. Lambdas and Function Templates
 
-* [Exercise ](#exercise-NUMBER)
+* [Exercise ](#exercise-240)
+* [Exercise ](#exercise-241)
 
-## Exercise NUMBER
+## Exercise 240
 
 ```cpp
 
 ```
 
-## [Exercise NUMBER][1]
+## [Exercise 241][1]
 ### Description
 
 <details>

@@ -2,15 +2,16 @@
 
 # 16. Classes and Structs
 
-* [Exercise ](#exercise-NUMBER)
+* [Exercise ](#exercise-160)
+* [Exercise ](#exercise-161)
 
-## Exercise NUMBER
+## Exercise 160
 
 ```cpp
 
 ```
 
-## [Exercise NUMBER][1]
+## [Exercise 161][1]
 ### Description
 
 <details>

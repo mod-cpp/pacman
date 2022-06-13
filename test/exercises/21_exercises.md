@@ -2,15 +2,16 @@
 
 # 21. std::array and ranged for
 
-* [Exercise ](#exercise-NUMBER)
+* [Exercise ](#exercise-210)
+* [Exercise ](#exercise-211)
 
-## Exercise NUMBER
+## Exercise 210
 
 ```cpp
 
 ```
 
-## [Exercise NUMBER][1]
+## [Exercise 211][1]
 ### Description
 
 <details>

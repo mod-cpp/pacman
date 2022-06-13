@@ -2,15 +2,16 @@
 
 # 26. Tools
 
-* [Exercise ](#exercise-NUMBER)
+* [Exercise ](#exercise-260)
+* [Exercise ](#exercise-261)
 
-## Exercise NUMBER
+## Exercise 260
 
 ```cpp
 
 ```
 
-## [Exercise NUMBER][1]
+## [Exercise 261][1]
 ### Description
 
 <details>

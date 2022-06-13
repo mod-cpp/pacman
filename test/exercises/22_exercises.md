@@ -2,15 +2,16 @@
 
 # 22. std::vector
 
-* [Exercise ](#exercise-NUMBER)
+* [Exercise ](#exercise-220)
+* [Exercise ](#exercise-221)
 
-## Exercise NUMBER
+## Exercise 220
 
 ```cpp
 
 ```
 
-## [Exercise NUMBER][1]
+## [Exercise 221][1]
 ### Description
 
 <details>

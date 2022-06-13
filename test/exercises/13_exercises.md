@@ -2,15 +2,16 @@
 
 # 13. Game
 
-* [Exercise ](#exercise-NUMBER)
+* [Exercise ](#exercise-130)
+* [Exercise ](#exercise-131)
 
-## Exercise NUMBER
+## Exercise 130
 
 ```cpp
 
 ```
 
-## [Exercise NUMBER][1]
+## [Exercise 131][1]
 ### Description
 
 <details>

@@ -2,15 +2,16 @@
 
 # 23. Iterators and Algorithms
 
-* [Exercise ](#exercise-NUMBER)
+* [Exercise ](#exercise-230)
+* [Exercise ](#exercise-231)
 
-## Exercise NUMBER
+## Exercise 230
 
 ```cpp
 
 ```
 
-## [Exercise NUMBER][1]
+## [Exercise 231][1]
 ### Description
 
 <details>

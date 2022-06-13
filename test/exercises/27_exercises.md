@@ -2,15 +2,16 @@
 
 # 27. Conclusion
 
-* [Exercise ](#exercise-NUMBER)
+* [Exercise ](#exercise-270)
+* [Exercise ](#exercise-271)
 
-## Exercise NUMBER
+## Exercise 270
 
 ```cpp
 
 ```
 
-## [Exercise NUMBER][1]
+## [Exercise 271][1]
 ### Description
 
 <details>
