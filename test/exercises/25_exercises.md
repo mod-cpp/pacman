@@ -21,4 +21,4 @@
 ```
 </details>
 
-[1]: NUMBER_exercises.cpp
+[1]: 25_exercises.cpp
