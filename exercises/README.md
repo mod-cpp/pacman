@@ -2,7 +2,6 @@
 
 ## Day 1
 
-* [Module 12: Hello World](12/README.md)
 * [Module 13: Game](13/README.md)
 * [Module 14: Functions and Parameter Passing](14/README.md)
 * [Module 15: Compilation, Linking and Assets](15/README.md)
