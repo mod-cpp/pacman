@@ -5,7 +5,6 @@
 
 ## Day 2
 
-* [Module 26: Sanitizers](26/README.md)
 
 ## Advanced
 
