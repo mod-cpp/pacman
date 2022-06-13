@@ -5,7 +5,6 @@
 
 ## Day 2
 
-* [Module 22: std::vector](22/README.md)
 * [Module 23: Iterators and algorithms](23/README.md)
 * [Module 24: Lambdas and Function Templates](24/README.md)
 * [Module 25: Algorithmic Thinking](25/README.md)
