@@ -1,4 +1,3 @@
-enable_testing()
 find_package(Catch2 REQUIRED)
 
 file(GLOB unit_tests_sources CONFIGURE_DEPENDS "unit_tests/*.cpp")
