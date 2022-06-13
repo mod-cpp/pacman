@@ -6,3 +6,4 @@ winget install -e --id Kitware.CMake
 winget install -e --id Microsoft.VisualStudioCode
 
 Write-Host -Foreground yellow "Winget does not have ninja at this time"
+Write-Host -Foreground green "PacMan development environment install done"
