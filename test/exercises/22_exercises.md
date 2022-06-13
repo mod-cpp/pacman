@@ -5,6 +5,7 @@
 * [Exercise 220](#exercise-220)
 * [Exercise 221](#exercise-221)
 * [Exercise 222](#exercise-222)
+* [Exercise 223](#exercise-223)
 
 ## Exercise 220
 ### Use reserve in `initialPelletPositions` (`Board.cpp`)
@@ -95,7 +96,12 @@ GridPosition PacManAI::pelletClosestToPacman(GridPosition pacmanGridPosition,
 ```
 </details>
 
-## [Exercise 222][1]
+## Exercise 222
+### Try out your AI
+
+* Press 'a' on the keyboard
+
+## [Exercise 223][1]
 ### Description
 
 <details>
