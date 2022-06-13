@@ -1,6 +1,6 @@
 [< Back](README.md)
 
-# MODULE
+# 22.
 
 * [Exercise ](#exercise-NUMBER)
 
