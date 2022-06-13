@@ -2,8 +2,8 @@
 
 # 15. Compilation, Linking and Assets
 
-* [Exercise ](#exercise-150)
-* [Exercise ](#exercise-151)
+* [Exercise 150](#exercise-150)
+* [Exercise 151](#exercise-151)
 
 ## Exercise 150
 

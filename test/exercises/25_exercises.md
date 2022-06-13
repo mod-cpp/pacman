@@ -2,8 +2,8 @@
 
 # 25. Algorithmic Thinking
 
-* [Exercise ](#exercise-250)
-* [Exercise ](#exercise-251)
+* [Exercise 250](#exercise-250)
+* [Exercise 251](#exercise-251)
 
 ## Exercise 250
 

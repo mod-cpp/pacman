@@ -2,8 +2,8 @@
 
 # 26. Tools
 
-* [Exercise ](#exercise-260)
-* [Exercise ](#exercise-261)
+* [Exercise 260](#exercise-260)
+* [Exercise 261](#exercise-261)
 
 ## Exercise 260
 

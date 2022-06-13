@@ -2,8 +2,8 @@
 
 # 16. Classes and Structs
 
-* [Exercise ](#exercise-160)
-* [Exercise ](#exercise-161)
+* [Exercise 160](#exercise-160)
+* [Exercise 161](#exercise-161)
 
 ## Exercise 160
 

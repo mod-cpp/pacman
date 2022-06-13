@@ -2,8 +2,8 @@
 
 # 24. Lambdas and Function Templates
 
-* [Exercise ](#exercise-240)
-* [Exercise ](#exercise-241)
+* [Exercise 240](#exercise-240)
+* [Exercise 241](#exercise-241)
 
 ## Exercise 240
 

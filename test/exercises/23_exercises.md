@@ -2,8 +2,8 @@
 
 # 23. Iterators and Algorithms
 
-* [Exercise ](#exercise-230)
-* [Exercise ](#exercise-231)
+* [Exercise 230](#exercise-230)
+* [Exercise 231](#exercise-231)
 
 ## Exercise 230
 

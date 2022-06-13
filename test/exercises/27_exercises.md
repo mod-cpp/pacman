@@ -2,8 +2,8 @@
 
 # 27. Conclusion
 
-* [Exercise ](#exercise-270)
-* [Exercise ](#exercise-271)
+* [Exercise 270](#exercise-270)
+* [Exercise 271](#exercise-271)
 
 ## Exercise 270
 

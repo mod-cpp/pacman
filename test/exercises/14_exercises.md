@@ -2,8 +2,8 @@
 
 # 14. Functions and Parameter Passing
 
-* [Exercise ](#exercise-140)
-* [Exercise ](#exercise-141)
+* [Exercise 140](#exercise-140)
+* [Exercise 141](#exercise-141)
 
 ## Exercise 140
 

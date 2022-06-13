@@ -2,8 +2,8 @@
 
 # 17. Memory and RAII
 
-* [Exercise ](#exercise-170)
-* [Exercise ](#exercise-171)
+* [Exercise 170](#exercise-170)
+* [Exercise 171](#exercise-171)
 
 ## Exercise 170
 
