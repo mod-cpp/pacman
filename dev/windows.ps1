@@ -9,6 +9,9 @@ if ($ChocoMissing) {
     iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
 }
 
+choco feature enable --name=allowGlobalConfirmation
+choco upgrade all
+
 choco install -y git
 
 choco install -y visualstudio2022community
