@@ -2,7 +2,6 @@
 
 ## Day 1
 
-* [Module 16: Classes and Structs](16/README.md)
 * [Module 17: Memory and RAII](17/README.md)
 
 ## Day 2
