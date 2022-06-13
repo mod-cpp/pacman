@@ -6,7 +6,7 @@
 namespace exercises_13 {
 
 // HINT: To enable a test remove [.] from the tags on the test
-TEST_CASE("Exercise 130 : ", "[.][13]") {
+TEST_CASE("Exercise 131 : ", "[.][13]") {
   REQUIRE(true == false);
 }
 
