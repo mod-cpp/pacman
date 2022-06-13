@@ -24,7 +24,7 @@
 
 ## Extra
 
-* [Exercise-X1 : ](X1_exercises.md)
+* [Exercise-X1 : Make Fruits](X1_exercises.md)
 * [Exercise-X2 : ](X2_exercises.md)
 * [Exercise-X3 : ](X3_exercises.md)
 * [Exercise-X4 : ](X4_exercises.md)
