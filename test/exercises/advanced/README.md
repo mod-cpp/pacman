@@ -1,4 +1,4 @@
-[< Back](../../../exercises/README.md)
+[< Back](../README.md)
 
 * [Exercise: Blue Pellet](blue_pellet/README.md)
 * [Exercise: Game Over](game_over/README.md)
