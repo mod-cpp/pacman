@@ -4,5 +4,5 @@
 # Mod(C++) Fundamentals
 
 * [Course Description and Booking](https://turtlesec.no/blog/mod-cpp-foundation/)
-* [Build and run](exercises/11/build_and_run/README.md)
+* [Build and run](test/exercises/11_exercises.md)
 * [Exercises](test/exercises/README.md)
