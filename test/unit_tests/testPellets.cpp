@@ -1,6 +1,6 @@
 #include "Pellets.hpp"
 #include "SuperPellets.hpp"
-#include <catch2/catch.hpp>
+#include "catch2/catch.hpp"
 
 template<typename T>
 static void pelletInitTest(const T & pellets, size_t size, size_t spriteX, size_t spriteY) {

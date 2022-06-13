@@ -3,7 +3,7 @@
 ### 221. Exercise - Implement `PacManAI::pelletClosestToPacman`
 
 Implement [PacManAI::pelletClosestToPacman](../../../lib/PacManAI.cpp) and test your implementation with the test
-in [testPacmanAI.cpp](../../../test/testPacmanAI.cpp) called _"Find pellet closest to PacMan"_
+in [testPacmanAI.cpp](../../../test/unit_tests/testPacmanAI.cpp) called _"Find pellet closest to PacMan"_
 
 The function should return the position of the pellet that is "closest" to PacMan.
 

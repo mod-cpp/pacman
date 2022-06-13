@@ -1,6 +1,6 @@
 #include "Fruits.hpp"
 #include "GameState.hpp"
-#include <catch2/catch.hpp>
+#include "catch2/catch.hpp"
 
 TEST_CASE("Fruit default initialization", "[fruits]") {
   pacman::Fruits fruit;

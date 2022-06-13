@@ -1,7 +1,7 @@
 #include "Blinky.hpp"
 #include "Inky.hpp"
 #include "Pinky.hpp"
-#include <catch2/catch.hpp>
+#include "catch2/catch.hpp"
 
 template<typename T>
 static void ghostInitTest(const T & ghost, double x, double y) {

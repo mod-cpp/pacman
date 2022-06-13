@@ -13,7 +13,7 @@ You only need to worry about the grid itself and any ghosts on the North/South/E
 ### 210. Exercise - Implement `PacManAI::isValidMove`
 
 As a warmup exercise, implement [PacManAI::isValidMove](../../../lib/PacManAI.cpp) and test your implementation with the test
-in [testPacmanAI.cpp](../../../test/testPacmanAI.cpp) called _"Is valid move"_
+in [testPacmanAI.cpp](../../../test/unit_tests/testPacmanAI.cpp) called _"Is valid move"_
 
 Note: `isValidMove` will be called 4 times in a loop. If the target cell is not walkable the distance is set to infinity.
 

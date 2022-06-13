@@ -13,7 +13,7 @@ You only need to worry about the grid itself and any ghosts on the North/South/E
 ### 211. Exercise - Implement `PacManAI::optimalDirection`
 
 Implement [PacManAI::optimalDirection](../../../lib/PacManAI.cpp) and test your implementation with the test
-in [testPacmanAI.cpp](../../../test/testPacmanAI.cpp) called _"Is optimal direction"_
+in [testPacmanAI.cpp](../../../test/unit_tests/testPacmanAI.cpp) called _"Is optimal direction"_
 
 ```cpp
 Direction PacManAI::optimalDirection(const std::array<Move, 4> & moves) {

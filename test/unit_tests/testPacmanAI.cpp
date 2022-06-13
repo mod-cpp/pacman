@@ -1,5 +1,5 @@
-#include <catch2/catch.hpp>
-#include <PacManAI.hpp>
+#include "catch2/catch.hpp"
+#include "PacManAI.hpp"
 #include <limits>
 
 // To enable the tests below remove the [!shouldfail] from the tags on the test

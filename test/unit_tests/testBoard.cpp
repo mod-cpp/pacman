@@ -1,5 +1,5 @@
 #include "Board.hpp"
-#include <catch2/catch.hpp>
+#include "catch2/catch.hpp"
 
 // These tests assume a static game board.
 
