@@ -1,6 +1,6 @@
 [< Back](README.md)
 
-# 13.
+# 13. Game
 
 * [Exercise ](#exercise-NUMBER)
 

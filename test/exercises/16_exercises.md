@@ -1,6 +1,6 @@
 [< Back](README.md)
 
-# 16.
+# 16. Classes and Structs
 
 * [Exercise ](#exercise-NUMBER)
 

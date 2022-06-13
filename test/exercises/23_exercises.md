@@ -1,6 +1,6 @@
 [< Back](README.md)
 
-# 23.
+# 23. Iterators and Algorithms
 
 * [Exercise ](#exercise-NUMBER)
 

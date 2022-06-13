@@ -1,6 +1,6 @@
 [< Back](README.md)
 
-# 22.
+# 22. std::vector
 
 * [Exercise ](#exercise-NUMBER)
 

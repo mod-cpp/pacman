@@ -1,6 +1,6 @@
 [< Back](README.md)
 
-# 24.
+# 24. Lambdas and Function Templates
 
 * [Exercise ](#exercise-NUMBER)
 

@@ -1,6 +1,6 @@
 [< Back](README.md)
 
-# 21.
+# 21. std::array and ranged for
 
 * [Exercise ](#exercise-NUMBER)
 

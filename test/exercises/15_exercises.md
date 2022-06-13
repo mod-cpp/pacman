@@ -1,6 +1,6 @@
 [< Back](README.md)
 
-# 15.
+# 15. Compilation, Linking and Assets
 
 * [Exercise ](#exercise-NUMBER)
 

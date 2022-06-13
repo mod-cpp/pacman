@@ -1,6 +1,6 @@
 [< Back](README.md)
 
-# 17.
+# 17. Memory and RAII
 
 * [Exercise ](#exercise-NUMBER)
 

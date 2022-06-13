@@ -1,6 +1,6 @@
 [< Back](README.md)
 
-# 12.
+# 12. Hello World
 
 * [Exercise ](#exercise-NUMBER)
 

@@ -1,6 +1,6 @@
 [< Back](README.md)
 
-# 14.
+# 14. Functions and Parameter Passing
 
 * [Exercise ](#exercise-NUMBER)
 

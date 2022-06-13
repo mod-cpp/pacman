@@ -1,6 +1,6 @@
 [< Back](README.md)
 
-# 25.
+# 25. Algorithmic Thinking
 
 * [Exercise ](#exercise-NUMBER)
 

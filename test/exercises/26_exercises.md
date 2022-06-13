@@ -1,6 +1,6 @@
 [< Back](README.md)
 
-# 26.
+# 26. Tools
 
 * [Exercise ](#exercise-NUMBER)
 
