@@ -37,6 +37,7 @@
 ## Ghosts characters and algorithms
 
 These will probably become relevant
+
 * [Ghosts (Pac-Man), Wikipedia][1]
 * [Pac-Man Ghost AI Explained, Retro Game Mechanics Explained][2]
 * [Understanding Pac-Man Ghost Behavior, GameInternals][3]

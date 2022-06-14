@@ -7,6 +7,7 @@
 * [Exercise 242](#exercise-242)
 
 ## Exercise 240
+
 ### Use Algorithms for `PacManAI::optimalDirection`
 
 Rewrite optimalDirection to use algorithms.
@@ -36,13 +37,16 @@ Direction PacManAI::optimalDirection(const std::array<Move, 4> & moves) {
   return optimalMove->direction;
 }
 ```
+
 </details>
 
 ## Exercise 241
+
 ### Use Lambdas and Algorithms for `PacManAI::pelletClosestToPacman`
 
-Rewrite pelletClosestToPacman using lambdas and algorithms. One implementation could be to sort
-the vector of pellets by the distance they have to PacMan, and then return the first one.
+Rewrite pelletClosestToPacman using lambdas and algorithms. One implementation could
+be to sort the vector of pellets by the distance they have to PacMan, and then return
+the first one.
 
 ```cpp
 GridPosition PacManAI::pelletClosestToPacman(GridPosition pacmanGridPosition,
@@ -61,8 +65,9 @@ Use the [std::sort][3] function to sort the vector.
 <details>
    <summary>Hint 2</summary>
 
-[std::sort][3] third parameter should be a lambda taking 2 `GridPosition` as parameter,
-and return true if the first parameter is closer from PacMan than the second.
+[std::sort][3] third parameter should be a lambda taking 2 `GridPosition` as
+parameter, and return true if the first parameter is closer from PacMan than the
+second.
 
 </details>
 
@@ -82,9 +87,11 @@ GridPosition PacManAI::pelletClosestToPacman(GridPosition pacmanGridPosition,
   return pellets[0];
 }
 ```
+
 </details>
 
 ## [Exercise 242][1]
+
 ### Description
 
 <details>
@@ -93,6 +100,7 @@ GridPosition PacManAI::pelletClosestToPacman(GridPosition pacmanGridPosition,
 ```cpp
 
 ```
+
 </details>
 
 [1]: 24_exercises.cpp

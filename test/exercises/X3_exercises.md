@@ -11,6 +11,7 @@
 ```
 
 ## [Exercise NUMBER][1]
+
 ### Description
 
 <details>
@@ -19,6 +20,7 @@
 ```cpp
 
 ```
+
 </details>
 
 [1]: NUMBER_exercises.cpp

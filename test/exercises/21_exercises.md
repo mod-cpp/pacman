@@ -7,6 +7,7 @@
 * [Exercise 212](#exercise-212)
 
 ## Exercise 210
+
 ### Implement PacManAI::isValidMove
 
 #### Background: PacMan Moves
@@ -75,9 +76,11 @@ bool PacManAI::isValidMove(const Move & move) {
   return true;
 }
 ```
+
 </details>
 
 ## Exercise 211
+
 ### Implement PacManAI::optimalDirection
 
 #### Background: PacMan Moves
@@ -122,9 +125,11 @@ Direction PacManAI::optimalDirection(const std::array<Move, 4> & moves) {
 }
 
 ```
+
 </details>
 
 ## [Exercise 212][1]
+
 ### Description
 
 <details>
@@ -133,6 +138,7 @@ Direction PacManAI::optimalDirection(const std::array<Move, 4> & moves) {
 ```cpp
 
 ```
+
 </details>
 
 [1]: 21_exercises.cpp

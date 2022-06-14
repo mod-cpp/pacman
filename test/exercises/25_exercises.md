@@ -7,6 +7,7 @@
 * [Exercise 252](#exercise-252)
 
 ## Exercise 250
+
 ### PacMan AI
 
 We've implemented a naive AI for PacMan, but maybe we can improve it?
@@ -32,6 +33,7 @@ function https://www.sfml-dev.org/tutorials/1.6/system-random.php - you will nee
 include `#include <SFML/Randomizer.hpp>`
 
 ## Exercise 251
+
 ### PacMan Bot
 
 #### Background: Keyboard Input
@@ -48,6 +50,7 @@ This should pickup the first super pellet.
 In this exercise, the input code in processEvents is not needed.
 
 ## [Exercise 252][1]
+
 ### Description
 
 <details>
@@ -56,6 +59,7 @@ In this exercise, the input code in processEvents is not needed.
 ```cpp
 
 ```
+
 </details>
 
 [1]: 25_exercises.cpp

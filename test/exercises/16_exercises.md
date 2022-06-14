@@ -7,6 +7,7 @@
 * [Exercise 162](#exercise-161)
 
 ## Exercise 160
+
 ### Simple class
 
 1. Create an empty class named `Clyde` within the `.hpp` file.
@@ -17,6 +18,7 @@
    <summary>Solution</summary>
 
 Clyde.hpp
+
 ```cpp
 #pragma once
 
@@ -33,6 +35,7 @@ class Clyde {
 ```
 
 Clyde.cpp
+
 ```cpp
 #include "Clyde.hpp"
 
@@ -40,9 +43,11 @@ namespace pacman {
 
 } // namespace pacman
 ```
+
 </details>
 
 ## Exercise 161
+
 ### Add Clyde as a Ghost
 
 #### Background: Clyde
@@ -60,8 +65,10 @@ ghosts.
 1. Clyde should inherit from Ghost
 2. Make simple implementations of the functions to make it compile
 3. Clyde should start at Position { x = 15.5, y = 14 }
-4. Clydes sprite is the orange one. Where are the graphics for Clyde in the assets file and how can we make sure the ghost will be correctly rendered?
-5. Modify `Canvas` to  make sure Clyde is rendered. Otherwise it will not appear on screen.
+4. Clydes sprite is the orange one. Where are the graphics for Clyde in the assets
+   file and how can we make sure the ghost will be correctly rendered?
+5. Modify `Canvas` to make sure Clyde is rendered. Otherwise it will not appear on
+   screen.
 6. Clydes scatter target is { x = 0, y = 30 }
 7. Clyde always targets its scatter target, unless PacMan is further than 8 tiles away
 
@@ -69,6 +76,7 @@ ghosts.
    <summary>Solution</summary>
 
 Clyde.hpp
+
 ```cpp
 #pragma once
 
@@ -93,6 +101,7 @@ private:
 ```
 
 Clyde.cpp
+
 ```cpp
 #include "Clyde.hpp"
 
@@ -144,9 +153,11 @@ Position Clyde::scatterTarget() const {
 
 } // namespace pacman
 ```
+
 </details>
 
 ## [Exercise 162][1]
+
 ### Description
 
 <details>
@@ -155,6 +166,7 @@ Position Clyde::scatterTarget() const {
 ```cpp
 
 ```
+
 </details>
 
 [1]: 16_exercises.cpp

@@ -12,6 +12,7 @@
 ```
 
 ## [Exercise 271][1]
+
 ### Description
 
 <details>
@@ -20,6 +21,7 @@
 ```cpp
 
 ```
+
 </details>
 
 [1]: 27_exercises.cpp

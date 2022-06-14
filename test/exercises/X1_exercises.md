@@ -5,6 +5,7 @@
 * [Exercise X1](#exercise-X1)
 
 ## Exercise X1
+
 ### Make Fruits
 
 There are lots of different "fruits" in PacMan, look at the Cherry class and try to

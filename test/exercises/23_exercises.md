@@ -7,6 +7,7 @@
 * [Exercise 232](#exercise-232)
 
 ## Exercise 230
+
 ### Use algorithms to implement `Pellets::isPellet`
 
 Practice using algorithms instead of raw for loops.
@@ -43,9 +44,11 @@ bool Pellets::isPellet(GridPosition p) const {
   return std::any_of(positions.begin(), positions.end(), match);
 }
 ```
+
 </details>
 
 ## Exercise 231
+
 ### Use algorithms to implement `Pellets::eatPelletAtPosition`
 
 Practice using algorithms instead of raw for loops.
@@ -83,10 +86,11 @@ bool Pellets::eatPelletAtPosition(GridPosition p) {
   return true;
 }
 ```
+
 </details>
 
-
 ## [Exercise 232][1]
+
 ### Description
 
 <details>
@@ -95,6 +99,7 @@ bool Pellets::eatPelletAtPosition(GridPosition p) {
 ```cpp
 
 ```
+
 </details>
 
 [1]: 23_exercises.cpp

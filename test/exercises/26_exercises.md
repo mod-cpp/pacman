@@ -8,6 +8,7 @@
 * [Exercise 263](#exercise-263)
 
 ## Exercise 260
+
 ### UndefinedBehaviorSanitizer (UBSan)
 
 Experiment on [Compiler Explorer][2].
@@ -25,6 +26,7 @@ int main () {
 ```
 
 ## Exercise 261
+
 ### AddressSanitizer (ASan)
 
 Experiment on [Compiler Explorer][3].
@@ -39,6 +41,7 @@ int main() {
 ```
 
 ## Exercise 262
+
 ### MemorySanitizer (MSan)
 
 Experiment on [Compiler Explorer][4].
@@ -51,6 +54,7 @@ int main() {
 ```
 
 ## [Exercise 263][1]
+
 ### Description
 
 <details>
@@ -59,6 +63,7 @@ int main() {
 ```cpp
 
 ```
+
 </details>
 
 [1]: 26_exercises.cpp

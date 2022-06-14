@@ -7,6 +7,7 @@
 * [Exercise 112](#exercise-112)
 
 ## Exercise 110
+
 ### Set up development environment
 
 ### Install tools
@@ -19,6 +20,7 @@
 #### Ubuntu 20.04 or newer
 
 * Install the build tools
+
 ```bash
 sudo apt-get install ninja-build pkg-config curl zip unzip tar cmake build-essential libx11-dev libxrandr-dev libxi-dev libudev-dev libgl1-mesa-dev clang-12 g++-10
 ```
@@ -26,6 +28,7 @@ sudo apt-get install ninja-build pkg-config curl zip unzip tar cmake build-essen
 #### Fedora 33 or newer
 
 * Install the build tools
+
 ```bash
 sudo dnf install ninja-build SFML-devel libXi-devel libX11-devel libXrandr-devel mesa-libGL-devel systemd-devel
 ```
@@ -37,6 +40,7 @@ If there are opengl driver errors, try running in software mode
 #### FreeBSD 12 or newer
 
 * Install the build tools
+
 ```bash
 sudo pkg install catch cmake libfmt ninja sfml
 ```
@@ -49,15 +53,19 @@ session if you encounter any errors such as Ninja not being found by VScode**.
 * Follow the instructions to install cmake (3.22) from https://cmake.org/download/
 * Install Visual Studio 2022 https://visualstudio.microsoft.com/
 * Reboot your computer once that's done.
-* If you have issues with using VSCode, start it from the "Developer Command Prompt for VS 2022"
+* If you have issues with using VSCode, start it from the "Developer Command Prompt
+  for VS 2022"
 
 #### Mac
 
-* Install clang by typing `xcode-select --install` in a terminal and following the instructions
+* Install clang by typing `xcode-select --install` in a terminal and following the
+  instructions
 * Install the build tools
+
 ```bash
 brew install cmake ninja
 ```
+
 * Follow the instructions for [Launching VSCode from the command line][4]
 
 ### Configure and build project
@@ -70,7 +78,8 @@ cd pacman
 code .
 ```
 
-* You will get a popup in the lower right hand corner asking "Do you want to install the recommended extensions for C++?" - click Install
+* You will get a popup in the lower right hand corner asking "Do you want to install
+  the recommended extensions for C++?" - click Install
 
 #### Commandline based build (Not used in this training)
 
@@ -84,14 +93,17 @@ ctest --test-dir build -C Debug
 
 #### Using CLion
 
-* When opening the project in CLion use the CMake preset for your platform - see popup in the lower right hand corner
+* When opening the project in CLion use the CMake preset for your platform - see popup
+  in the lower right-hand corner
 * Unselect the "Debug" profile
 * Select for example the preset profile called "windows-build" if you are on Windows
 * Enable it by checking the checkbox "Enable profile"
 * Click "Apply" and "OK"
-* (If CLion created a `cmake-build-debug` folder you can safely delete it, we will be using the `build` directory)
+* (If CLion created a `cmake-build-debug` folder you can safely delete it, we will be
+  using the `build` directory)
 
 ## [Exercise 111][1]
+
 ### Enable a test and make it green
 
 * Catch2 : [Special Tags][3]
@@ -104,9 +116,11 @@ TEST_CASE("Exercise 111 : Enable a test and make it green", "[11]") {
   REQUIRE(true == true);
 }
 ```
+
 </details>
 
 ## [Exercise 112][1]
+
 ### Make both asserts run (distinguish between REQUIRE and CHECK in Catch2)
 
 * Catch2 : [Assertion Macros][2]
@@ -120,6 +134,7 @@ TEST_CASE("Exercise 112 : Make both asserts run (distinguish between REQUIRE and
   CHECK(true == true);
 }
 ```
+
 </details>
 
 [1]: 11_exercises.cpp

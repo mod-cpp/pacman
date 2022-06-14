@@ -8,6 +8,7 @@
 * [Exercise 223](#exercise-223)
 
 ## Exercise 220
+
 ### Use reserve in `initialPelletPositions` (`Board.cpp`)
 
 To avoid having to resize the vector too many times, we can preemptively reserve space
@@ -31,6 +32,7 @@ std::vector<GridPosition> initialPelletPositions() {
 }
 
 ```
+
 <details>
    <summary>Solution</summary>
 
@@ -50,9 +52,11 @@ std::vector<GridPosition> initialPelletPositions() {
 }
 
 ```
+
 </details>
 
 ## Exercise 221
+
 ### Implement `PacManAI::pelletClosestToPacman`
 
 Implement [PacManAI::pelletClosestToPacman][2] and test your implementation with the
@@ -94,14 +98,17 @@ GridPosition PacManAI::pelletClosestToPacman(GridPosition pacmanGridPosition,
   return closestPellet;
 }
 ```
+
 </details>
 
 ## Exercise 222
+
 ### Try out your AI
 
 * Press 'a' on the keyboard
 
 ## [Exercise 223][1]
+
 ### Description
 
 <details>
@@ -110,6 +117,7 @@ GridPosition PacManAI::pelletClosestToPacman(GridPosition pacmanGridPosition,
 ```cpp
 
 ```
+
 </details>
 
 [1]: 22_exercises.cpp
