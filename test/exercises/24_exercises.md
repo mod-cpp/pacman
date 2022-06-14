@@ -20,7 +20,7 @@ Direction PacManAI::optimalDirection(const std::array<Move, 4> & moves) {
 <details>
    <summary>Hint 1</summary>
 
-You can use [std::min_element](https://en.cppreference.com/w/cpp/algorithm/min_element) to find the closest pellet
+You can use [std::min_element][2] to find the closest pellet
 
 </details>
 
@@ -54,14 +54,14 @@ GridPosition PacManAI::pelletClosestToPacman(GridPosition pacmanGridPosition,
 <details>
    <summary>Hint 1</summary>
 
-Use the [std::sort](https://en.cppreference.com/w/cpp/algorithm/sort) function to sort the vector.
+Use the [std::sort][3] function to sort the vector.
 
 </details>
 
 <details>
    <summary>Hint 2</summary>
 
-[std::sort](https://en.cppreference.com/w/cpp/algorithm/sort) third parameter should be a lambda taking 2 `GridPosition` as parameter,
+[std::sort][3] third parameter should be a lambda taking 2 `GridPosition` as parameter,
 and return true if the first parameter is closer from PacMan than the second.
 
 </details>
@@ -96,3 +96,5 @@ GridPosition PacManAI::pelletClosestToPacman(GridPosition pacmanGridPosition,
 </details>
 
 [1]: 24_exercises.cpp
+[2]: https://en.cppreference.com/w/cpp/algorithm/min_element
+[3]: https://en.cppreference.com/w/cpp/algorithm/sort

@@ -28,7 +28,7 @@ bool Pellets::isPellet(GridPosition p) const {
 <details>
    <summary>Hint 1</summary>
 
-Look into [std::all_of, std::any_of, std::none_of](https://en.cppreference.com/w/cpp/algorithm/all_any_none_of).
+Look into [std::all_of, std::any_of, std::none_of][2].
 
 </details>
 
@@ -67,7 +67,7 @@ bool Pellets::eatPelletAtPosition(GridPosition p) {
 <details>
    <summary>Hint 1</summary>
 
-Look into [std::find, std::find_if, std::find_if_not](https://en.cppreference.com/w/cpp/algorithm/find).
+Look into [std::find, std::find_if, std::find_if_not][3].
 
 </details>
 
@@ -98,3 +98,5 @@ bool Pellets::eatPelletAtPosition(GridPosition p) {
 </details>
 
 [1]: 23_exercises.cpp
+[2]: https://en.cppreference.com/w/cpp/algorithm/all_any_none_of
+[3]: https://en.cppreference.com/w/cpp/algorithm/find

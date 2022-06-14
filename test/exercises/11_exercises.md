@@ -58,7 +58,7 @@ session if you encounter any errors such as Ninja not being found by VScode**.
 ```bash
 brew install cmake ninja
 ```
-* Follow the instructions for [Launching VSCode from the command line](https://code.visualstudio.com/docs/setup/mac#_launching-from-the-command-line)
+* Follow the instructions for [Launching VSCode from the command line][4]
 
 ### Configure and build project
 
@@ -125,3 +125,4 @@ TEST_CASE("Exercise 112 : Make both asserts run (distinguish between REQUIRE and
 [1]: 11_exercises.cpp
 [2]: https://github.com/catchorg/Catch2/blob/v2.x/docs/assertions.md
 [3]: https://github.com/catchorg/Catch2/blob/v2.x/docs/test-cases-and-sections.md#special-tags
+[4]: https://code.visualstudio.com/docs/setup/mac#_launching-from-the-command-line

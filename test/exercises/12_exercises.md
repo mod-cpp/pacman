@@ -29,9 +29,9 @@ int main() {
 ### Hello {fmt} on Godbolt
 
 "{fmt} is an open-source formatting library providing a fast and safe alternative to C stdio and C++ iostreams."
-[From the {fmt} GitHub page](https://github.com/fmtlib/fmt)
+[From the {fmt} GitHub page][4]
 
-In C++20 we are getting parts of this functionality in [std::format](https://en.cppreference.com/w/cpp/utility/format).
+In C++20 we are getting parts of this functionality in [std::format][5].
 
 In C++23 we might get `std::print`.
 
@@ -60,3 +60,5 @@ int main () {
 [1]: 12_exercises.cpp
 [2]: https://godbolt.org/z/bceh7693T
 [3]: https://godbolt.org/z/8oxsGG8WM
+[4]: https://github.com/fmtlib/fmt
+[5]: https://en.cppreference.com/w/cpp/utility/format
