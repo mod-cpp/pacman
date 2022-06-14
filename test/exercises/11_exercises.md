@@ -188,6 +188,13 @@ VS 2022"
 
 * Catch2 : [Special Tags][3]
 
+```cpp
+// HINT: To enable a test remove [.] from the tags on the test
+TEST_CASE("Exercise 111 : Enable the test and make it green", "[.][11]") {
+REQUIRE(true == false);
+}
+```
+
 <details>
    <summary>Solution</summary>
 
@@ -204,6 +211,14 @@ TEST_CASE("Exercise 111 : Enable a test and make it green", "[11]") {
 ### Make both asserts run (distinguish between REQUIRE and CHECK in Catch2)
 
 * Catch2 : [Assertion Macros][2]
+
+```cpp
+// HINT: https://github.com/catchorg/Catch2/blob/v2.x/docs/assertions.md
+TEST_CASE("Exercise 112 : Make both asserts run (distinguish between REQUIRE and CHECK in Catch2)", "[.][11]") {
+  REQUIRE(true == false);
+  CHECK(false == true);
+}
+```
 
 <details>
    <summary>Solution</summary>
