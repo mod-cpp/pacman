@@ -10,6 +10,39 @@
 
 ### Set up development environment
 
+### Quick install
+
+<details>
+   <summary>Windows: <b>Chocolatey</b></summary>
+
+PowerShell run as Admin
+
+```bash
+iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/mod-cpp/pacman/main/dev/windows.ps1'))
+```
+
+</details>
+<details>
+   <summary>Windows: <b>WinGet</b></summary>
+
+PowerShell run as Admin, Ninja has to be installed seperately
+
+```bash
+iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/mod-cpp/pacman/main/dev/windows_winget.ps1'))
+```
+
+</details>
+<details>
+   <summary>Ubuntu: <b>apt</b></summary>
+
+```bash
+bash <(curl -s https://raw.githubusercontent.com/mod-cpp/pacman/main/dev/ubuntu.sh)
+```
+
+</details>
+
+### Manual install
+
 ### Install tools
 
 #### All Platforms
