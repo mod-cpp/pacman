@@ -2,9 +2,9 @@
 
 # 11. Introduction
 
-* [Exercise 110](#exercise-110)
-* [Exercise 111](#exercise-111)
-* [Exercise 112](#exercise-112)
+* [Exercise 110: Set up development environment](#exercise-110)
+* [Exercise 111: Enable a test and make it green](#exercise-111)
+* [Exercise 112: Make both asserts run](#exercise-112)
 
 ## Exercise 110
 
@@ -15,7 +15,7 @@
 * [Build](#build)
 * [Troubleshoot](#troubleshoot)
 
-### Quick install
+#### Quick install
 
 <details>
    <summary>Windows: <b>Chocolatey</b></summary>
@@ -46,7 +46,7 @@ bash <(curl -s https://raw.githubusercontent.com/mod-cpp/pacman/main/dev/ubuntu.
 
 </details>
 
-### Manual install
+#### Manual install
 
 <details>
    <summary>Windows</summary>
@@ -114,7 +114,7 @@ sudo pkg install vscode
 
 </details>
 
-### Build
+#### Build
 
 <details>
    <summary>VS Code</summary>
@@ -157,7 +157,7 @@ ctest --test-dir build -C Debug
 
 </details>
 
-### Troubleshoot
+#### Troubleshoot
 
 <details>
    <summary>All</summary>
