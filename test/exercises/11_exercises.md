@@ -116,7 +116,8 @@ sudo pkg install vscode
 
 ### Build
 
-#### All Platforms, using VS Code
+<details>
+   <summary>VS Code</summary>
 
 ```bash
 git clone https://github.com/mod-cpp/pacman.git
@@ -127,7 +128,10 @@ code .
 * You will get a popup in the lower right hand corner asking "Do you want to install
   the recommended extensions for C++?" - click Install
 
-#### Commandline based build (Not used in this training)
+</details>
+
+<details>
+   <summary>Commandline</summary>
 
 ```bash
 git clone https://github.com/mod-cpp/pacman.git
@@ -137,7 +141,10 @@ cmake --build build
 ctest --test-dir build -C Debug
 ```
 
-#### Using CLion
+</details>
+
+<details>
+   <summary>CLion</summary>
 
 * When opening the project in CLion use the CMake preset for your platform - see popup
   in the lower right-hand corner
@@ -148,19 +155,32 @@ ctest --test-dir build -C Debug
 * (If CLion created a `cmake-build-debug` folder you can safely delete it, we will be
   using the `build` directory)
 
+</details>
+
 ### Troubleshoot
 
-**After installing the build tools, you may have to reboot your IDE and/or your Linux
-session if you encounter any errors such as Ninja not being found by VSCode**.
+<details>
+   <summary>All</summary>
 
-#### Arch Linux
+After installing the build tools, you may have to reboot your IDE and/or your Linux
+session if you encounter any errors such as Ninja not being found by VSCode.
+
+</details>
+
+<details>
+   <summary>Arch Linux</summary>
 
 If there are opengl driver errors, try running in software mode
 
-#### Windows
+</details>
+
+<details>
+   <summary>Windows</summary>
 
 If you have issues with using VSCode, start it from the "Developer Command Prompt for
 VS 2022"
+
+</details>
 
 ## [Exercise 111][1]
 
