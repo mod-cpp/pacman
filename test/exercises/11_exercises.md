@@ -12,7 +12,8 @@
 
 * [Quick install](#quick-install)
 * [Manual install](#manual-install)
-* [Exercise 112](#build)
+* [Build](#build)
+* [Troubleshoot](#troubleshoot)
 
 ### Quick install
 
@@ -147,7 +148,7 @@ ctest --test-dir build -C Debug
 * (If CLion created a `cmake-build-debug` folder you can safely delete it, we will be
   using the `build` directory)
 
-### Troubleshooting
+### Troubleshoot
 
 **After installing the build tools, you may have to reboot your IDE and/or your Linux
 session if you encounter any errors such as Ninja not being found by VSCode**.
