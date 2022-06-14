@@ -10,6 +10,10 @@
 
 ### Set up development environment
 
+* [Quick install](#quick-install)
+* [Manual install](#manual-install)
+* [Exercise 112](#build)
+
 ### Quick install
 
 <details>
@@ -109,9 +113,7 @@ sudo pkg install vscode
 
 </details>
 
-
-
-### Configure and build project
+### Build
 
 #### All Platforms, using VS Code
 
