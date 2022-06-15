@@ -80,11 +80,13 @@ brew install cmake ninja
    <summary>Ubuntu 20.04 or newer</summary>
 
 ```bash
-sudo apt install build-essential clang-12 cmake curl g++-10 git libgl1-mesa-dev libudev-dev libx11-dev libxi-dev libxrandr-dev ninja-build pkg-config tar unzip zip      
+sudo apt install build-essential clang-12 cmake curl g++-10 git libgl1-mesa-dev libudev-dev libx11-dev libxi-dev libxrandr-dev ninja-build pkg-config tar unzip zip
 ```
 
-* [Install VS Code][5]
-* https://code.visualstudio.com/docs/setup/linux#_debian-and-ubuntu-based-distributions
+#### Install Visual Studio Code
+
+You can either download the package for VS Code from the [official website][5] or by [adding the vscode repository][6] to your distribution's package manager.
+
 
 </details>
 
@@ -95,8 +97,9 @@ sudo apt install build-essential clang-12 cmake curl g++-10 git libgl1-mesa-dev 
 sudo dnf install ninja-build SFML-devel libXi-devel libX11-devel libXrandr-devel mesa-libGL-devel systemd-devel
 ```
 
-* [Install VS Code][5]
-* https://code.visualstudio.com/docs/setup/linux#_rhel-fedora-and-centos-based-distributions
+#### Install Visual Studio Code
+
+You can either download the package for VS Code from the [official website][5] or by [adding the vscode repository][6] to your distribution's package manager.
 
 </details>
 
@@ -238,3 +241,4 @@ TEST_CASE("Exercise 112 : Make both asserts run (distinguish between REQUIRE and
 [3]: https://github.com/catchorg/Catch2/blob/v2.x/docs/test-cases-and-sections.md#special-tags
 [4]: https://code.visualstudio.com/docs/setup/mac#_launching-from-the-command-line
 [5]: https://code.visualstudio.com/download
+[6]: https://code.visualstudio.com/docs/setup/linux#_debian-and-ubuntu-based-distributions
