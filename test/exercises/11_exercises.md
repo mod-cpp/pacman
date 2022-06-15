@@ -129,8 +129,19 @@ cd pacman
 code .
 ```
 
+* A dialog will appear saying "Do you trust the authors of the files in this folder?",
+  select "Yes, I trust the authors".
+* (Windows Defender dialog for VSCode: "Allow access")
 * You will get a popup in the lower right hand corner asking "Do you want to install
-  the recommended extensions for C++?" - click Install
+  the recommended extensions for C++?" - click Install.
+* Click on "No Configure Preset Selected" on the bottom status bar
+* In the dropdown that appears select either x64-windows (64 bit) or x86-windows (32
+  bit).
+* Click on "Build" on the bottom status bar.
+* Click on flask icon on the left vertical bar to open the test panel
+* Click on the run button on top of the panel to run the tests
+* Click on the play button on the bottom status bar
+* Select "pacman" in the dropdown
 
 </details>
 
