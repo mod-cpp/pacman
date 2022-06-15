@@ -85,7 +85,8 @@ sudo apt install build-essential clang-12 cmake curl g++-10 git libgl1-mesa-dev 
 
 #### Install Visual Studio Code
 
-You can either download the package for VS Code from the [official website][5] or by [adding the vscode repository][6] to your distribution's package manager.
+You can either download the package for VS Code from the [official website][5] or
+by [adding the vscode repository][6] to your distribution's package manager.
 
 
 </details>
@@ -99,7 +100,8 @@ sudo dnf install ninja-build SFML-devel libXi-devel libX11-devel libXrandr-devel
 
 #### Install Visual Studio Code
 
-You can either download the package for VS Code from the [official website][5] or by [adding the vscode repository][7] to your distribution's package manager.
+You can either download the package for VS Code from the [official website][5] or
+by [adding the vscode repository][7] to your distribution's package manager.
 
 </details>
 
