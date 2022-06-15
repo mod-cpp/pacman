@@ -27,7 +27,8 @@
                 ]
             },
             "osx": {
-                "MIMode": "lldb"
+                "MIMode": "lldb",
+                "type": "lldb"
             },
             "windows": {
                 "type": "cppvsdbg"
