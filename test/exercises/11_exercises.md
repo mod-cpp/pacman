@@ -30,7 +30,7 @@ iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercon
 <details>
    <summary>Windows: <b>WinGet</b></summary>
 
-PowerShell run as Admin, Ninja has to be installed seperately
+PowerShell run as Admin
 
 ```bash
 iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/mod-cpp/pacman/main/dev/windows_winget.ps1'))
