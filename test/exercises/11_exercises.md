@@ -147,14 +147,12 @@ code .
   bit).
   * `linux-gcc` on Linux
   * `macos` on MacOS
-* Click on "Build" on the bottom status bar.
+* Build by clicking on "Build" button on the bottom status bar.
 * Wait until build is finished, it might take a while the first time because it is
   downloading and building the dependencies as well.
-* While it is building the "Build" button will say "Stop x", wait until it says "
-  Build" again.
 * Click on flask icon on the left vertical bar to open the test panel
-* Click on the run button on top of the panel to run the tests
-* Click on the play button on the bottom status bar
+* Run the tests by clicking on the run button on top of the test panel
+* Run the game by clicking on the play button on the bottom status bar
 * Select `pacman` in the dropdown
 * To debug, click on the play button with a bug on it on the left vertical bar to open
   the debug panel
