@@ -71,6 +71,7 @@ bash <(curl -s https://raw.githubusercontent.com/mod-cpp/pacman/main/dev/ubuntu.
 brew install cmake ninja
 ```
 
+* Install VS Code: https://code.visualstudio.com/#alt-downloads
 * Follow the instructions for [Launching VSCode from the command line][4]
 
 </details>
