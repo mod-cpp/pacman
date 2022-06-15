@@ -3,7 +3,6 @@
     "configurations": [
         {
             "name": "Debug",
-            "type": "cppdbg",
             "request": "launch",
             "program": "${command:cmake.launchTargetPath}",
             "args": [],
@@ -16,14 +15,30 @@
                 }
             ],
             "console": "internalConsole",
-            "MIMode": "gdb",
-            "setupCommands": [
-                {
-                    "description": "Enable pretty-printing for gdb",
-                    "text": "-enable-pretty-printing",
-                    "ignoreFailures": true
-                }
-            ]
+            "linux" : {
+                "type": "cppdbg",
+                "MIMode": "gdb",
+                "setupCommands": [
+                    {
+                        "description": "Enable pretty-printing for gdb",
+                        "text": "-enable-pretty-printing",
+                        "ignoreFailures": true
+                    }
+                ]
+            },
+            "osx": {
+                "type": "cppdbg",
+                "MIMode": "lldb",
+            },
+            "windows": {
+                "type": "cppvsdbg",
+                "logging": {
+                    "engineLogging": true,
+                    "trace": true,
+                    "traceResponse": true
+                },
+                "externalConsole": true
+            }
         }
     ]
 }
