@@ -133,7 +133,6 @@ code .
 
 * A dialog will appear saying "Do you trust the authors of the files in this folder?",
   select "Yes, I trust the authors".
-* (Windows Defender dialog for VSCode: "Allow access")
 * You will get a popup in the lower right hand corner asking "Do you want to install
   the recommended extensions for C++?" - click Install.
 * Click on "No Configure Preset Selected" on the bottom status bar
@@ -148,6 +147,9 @@ code .
 * Click on the run button on top of the panel to run the tests
 * Click on the play button on the bottom status bar
 * Select "pacman" in the dropdown
+* To debug, click on the play button with a bug on it on the left vertical bar to open
+  the debug panel
+* Then click the play button on the top of the panel to run in the debugger.
 
 </details>
 
@@ -198,8 +200,9 @@ If there are opengl driver errors, try running in software mode
 <details>
    <summary>Windows</summary>
 
-If you have issues with using VSCode, start it from the "Developer Command Prompt for
-VS 2022"
+* If you have issues with using VSCode, start it from the "Developer Command Prompt
+  for VS 2022"
+* (Windows Defender dialog for VSCode: "Allow access")
 
 </details>
 
