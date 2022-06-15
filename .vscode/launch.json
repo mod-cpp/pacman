@@ -3,6 +3,7 @@
     "configurations": [
         {
             "name": "Debug",
+            "type": "cppdbg",
             "request": "launch",
             "program": "${command:cmake.launchTargetPath}",
             "args": [],
@@ -16,7 +17,6 @@
             ],
             "console": "internalConsole",
             "linux" : {
-                "type": "cppdbg",
                 "MIMode": "gdb",
                 "setupCommands": [
                     {
@@ -27,17 +27,10 @@
                 ]
             },
             "osx": {
-                "type": "cppdbg",
-                "MIMode": "lldb",
+                "MIMode": "lldb"
             },
             "windows": {
-                "type": "cppvsdbg",
-                "logging": {
-                    "engineLogging": true,
-                    "trace": true,
-                    "traceResponse": true
-                },
-                "externalConsole": true
+                "type": "cppvsdbg"
             }
         }
     ]
