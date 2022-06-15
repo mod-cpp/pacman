@@ -140,6 +140,10 @@ code .
 * In the dropdown that appears select either x64-windows (64 bit) or x86-windows (32
   bit).
 * Click on "Build" on the bottom status bar.
+* Wait until build is finished, it might take a while the first time because it is
+  downloading and building the dependencies as well.
+* While it is building the "Build" button will say "Stop x", wait until it says "
+  Build" again.
 * Click on flask icon on the left vertical bar to open the test panel
 * Click on the run button on top of the panel to run the tests
 * Click on the play button on the bottom status bar
