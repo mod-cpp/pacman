@@ -56,7 +56,7 @@ bash <(curl -s https://raw.githubusercontent.com/mod-cpp/pacman/main/dev/ubuntu.
 * Click "Modify" in the Visual Studio Installer and select "Desktop development with
   C++"
 * Reboot your computer once that's done.
-* Install VS Code: https://code.visualstudio.com/#alt-downloads
+* [Install VS Code][5]
 
 </details>
 
@@ -71,7 +71,7 @@ bash <(curl -s https://raw.githubusercontent.com/mod-cpp/pacman/main/dev/ubuntu.
 brew install cmake ninja
 ```
 
-* Install VS Code: https://code.visualstudio.com/#alt-downloads
+* [Install VS Code][5]
 * Follow the instructions for [Launching VSCode from the command line][4]
 
 </details>
@@ -83,7 +83,7 @@ brew install cmake ninja
 sudo apt install build-essential clang-12 cmake curl g++-10 git libgl1-mesa-dev libudev-dev libx11-dev libxi-dev libxrandr-dev ninja-build pkg-config tar unzip zip      
 ```
 
-* Install VS Code: https://code.visualstudio.com/#alt-downloads
+* [Install VS Code][5]
 * https://code.visualstudio.com/docs/setup/linux#_debian-and-ubuntu-based-distributions
 
 </details>
@@ -95,7 +95,7 @@ sudo apt install build-essential clang-12 cmake curl g++-10 git libgl1-mesa-dev 
 sudo dnf install ninja-build SFML-devel libXi-devel libX11-devel libXrandr-devel mesa-libGL-devel systemd-devel
 ```
 
-* Install VS Code: https://code.visualstudio.com/#alt-downloads
+* [Install VS Code][5]
 * https://code.visualstudio.com/docs/setup/linux#_rhel-fedora-and-centos-based-distributions
 
 </details>
@@ -237,3 +237,4 @@ TEST_CASE("Exercise 112 : Make both asserts run (distinguish between REQUIRE and
 [2]: https://github.com/catchorg/Catch2/blob/v2.x/docs/assertions.md
 [3]: https://github.com/catchorg/Catch2/blob/v2.x/docs/test-cases-and-sections.md#special-tags
 [4]: https://code.visualstudio.com/docs/setup/mac#_launching-from-the-command-line
+[5]: https://code.visualstudio.com/download
