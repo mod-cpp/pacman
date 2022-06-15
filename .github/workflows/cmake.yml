@@ -41,9 +41,9 @@ jobs:
             test-preset: x86-windows-test
           - name: MacOS 11
             os: macos-11
-            config-preset: osx
-            build-preset: osx-build
-            test-preset: osx-test
+            config-preset: macos
+            build-preset: macos-build
+            test-preset: macos-test
         cmake-build-type: [Debug, Release]
 
     steps:

@@ -140,7 +140,7 @@ code .
    * either `x64-windows` (64 bit) or `x86-windows` (32
   bit).
   * `linux-gcc` on Linux
-  * `osx` on MacOS
+  * `macos` on MacOS
 * Click on "Build" on the bottom status bar.
 * Wait until build is finished, it might take a while the first time because it is
   downloading and building the dependencies as well.

@@ -104,7 +104,7 @@
             }
         },
         {
-            "name": "osx",
+            "name": "macos",
             "generator": "Ninja",
             "description": "Compile on macOS",
             "inherits": "base",
@@ -152,8 +152,8 @@
             "inherits": "core-build"
         },
         {
-            "name": "osx-build",
-            "configurePreset": "osx",
+            "name": "macos-build",
+            "configurePreset": "macos",
             "inherits": "core-build"
         }
     ],
@@ -202,9 +202,9 @@
             ]
         },
         {
-            "name": "osx-test",
+            "name": "macos-test",
             "description": "Run tests on macOS",
-            "configurePreset": "osx",
+            "configurePreset": "macos",
             "inherits": [
                 "core-tests"
             ]
