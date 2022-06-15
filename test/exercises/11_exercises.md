@@ -65,6 +65,12 @@ bash <(curl -s https://raw.githubusercontent.com/mod-cpp/pacman/main/dev/ubuntu.
 
 * Install clang by typing `xcode-select --install` in a terminal and following the
   instructions
+* Install brew if you haven't already
+
+```bash
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```
+
 * Install the build tools
 
 ```bash
