@@ -136,8 +136,11 @@ code .
 * You will get a popup in the lower right hand corner asking "Do you want to install
   the recommended extensions for C++?" - click Install.
 * Click on "No Configure Preset Selected" on the bottom status bar
-* In the dropdown that appears select either x64-windows (64 bit) or x86-windows (32
+* In the dropdown that appears select
+   * either `x64-windows` (64 bit) or `x86-windows` (32
   bit).
+  * `linux-gcc` on Linux
+  * `osx` on MacOS
 * Click on "Build" on the bottom status bar.
 * Wait until build is finished, it might take a while the first time because it is
   downloading and building the dependencies as well.
@@ -146,7 +149,7 @@ code .
 * Click on flask icon on the left vertical bar to open the test panel
 * Click on the run button on top of the panel to run the tests
 * Click on the play button on the bottom status bar
-* Select "pacman" in the dropdown
+* Select `pacman` in the dropdown
 * To debug, click on the play button with a bug on it on the left vertical bar to open
   the debug panel
 * Then click the play button on the top of the panel to run in the debugger.
