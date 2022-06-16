@@ -117,6 +117,35 @@ Think of them like functions that are called when testing.
    are not then check which unit test is failing and figure out what was causing the
    issue. If all goes well you can run the game.
 
+
+<details>
+   <summary>Solution</summary>
+
+* Add `isWall` to `Board.hpp`
+
+```cpp
+bool isWall(GridPosition point);
+bool isWalkableForPacMan(GridPosition point);
+bool isWalkableForGhost(GridPosition target_position, GridPosition current_position, bool isEyes);
+bool isInPen(GridPosition point);
+bool isPortal(GridPosition point, Direction direction);
+bool isIntersection(GridPosition point);
+```
+
+* Add a test for `isWall` to `testBoard.cpp`
+
+```cpp
+TEST_CASE("Is wall", "[board]") {
+  REQUIRE(pacman::isWall(pacman::GridPosition{ 0, 0 }));
+  REQUIRE(pacman::isWall(pacman::GridPosition{ 1, 0 }));
+  REQUIRE(pacman::isWall(pacman::GridPosition{ 0, 1 }));
+  REQUIRE_FALSE(pacman::isWall(pacman::GridPosition{ 11, 13 })); // pen
+  REQUIRE_FALSE(pacman::isWall(pacman::GridPosition{ 1, 1 })); // pellet
+  REQUIRE_FALSE(pacman::isWall(pacman::GridPosition{ 1, 2 })); // pen
+}
+```
+
+
 ## [Exercise 152][1]
 
 ### Description
