@@ -112,7 +112,7 @@ TEST_CASE("Exercise 123 : std::string append", "[12]") {
 
 ### Function call
 
-* [C++ functions][9]
+* Make a function above the test that returns the string "Hello World"
 
 ```cpp
 TEST_CASE("Exercise 124 : Function call", "[.][12]") {
@@ -143,4 +143,3 @@ TEST_CASE("Exercise 124 : Function call", "[12]") {
 [6]: https://en.cppreference.com/w/cpp/header/string
 [7]: https://en.cppreference.com/w/cpp/string/basic_string/operator%2B
 [8]: https://en.cppreference.com/w/cpp/string/basic_string/append
-[9]: https://en.cppreference.com/w/cpp/language/functions
