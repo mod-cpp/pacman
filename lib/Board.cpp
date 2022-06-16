@@ -59,13 +59,16 @@ static Cell cellAtPosition(GridPosition point) {
   return Cell(board[point.y][point.x]);
 }
 
+bool isWall(GridPosition point) {
+   return cellAtPosition(point) == Cell::wall;
+}
+
 bool isWalkableForPacMan(GridPosition point) {
-  return cellAtPosition(point) != Cell::wall && cellAtPosition(point) != Cell::pen;
+  return !isWall(point) && cellAtPosition(point) != Cell::pen;
 }
 
 bool isWalkableForGhost(GridPosition target_position, GridPosition current_position, bool isEyes) {
-  const Cell cell = cellAtPosition(target_position);
-  if (cell == Cell::wall)
+  if (isWall(target_position))
     return false;
   return isEyes || isInPen(current_position) || !isInPen(target_position);
 }
