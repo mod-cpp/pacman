@@ -68,22 +68,8 @@ Clyde.cpp
 
 Board.hpp
 ```cpp
-
-#pragma once
-
-#include "Blinky.hpp"
+// Include the header in Board.hpp
 #include "Clyde.hpp"
-#include "Fruits.hpp"
-#include "Ghost.hpp"
-#include "Inky.hpp"
-#include "InputState.hpp"
-#include "PacMan.hpp"
-#include "PacManAI.hpp"
-#include "Pellets.hpp"
-#include "Pinky.hpp"
-#include "Score.hpp"
-#include "SuperPellets.hpp"
-
 ```
 
 </details>
@@ -124,12 +110,8 @@ Think of them like functions that are called when testing.
 * Add `isWall` to `Board.hpp`
 
 ```cpp
+// Add the function declaration to the Board header file inside of namespace pacman
 bool isWall(GridPosition point);
-bool isWalkableForPacMan(GridPosition point);
-bool isWalkableForGhost(GridPosition target_position, GridPosition current_position, bool isEyes);
-bool isInPen(GridPosition point);
-bool isPortal(GridPosition point, Direction direction);
-bool isIntersection(GridPosition point);
 ```
 
 * Add a test for `isWall` to `testBoard.cpp`
