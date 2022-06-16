@@ -72,7 +72,11 @@ TEST_CASE("Exercise 122 : String concatenation", "[.][12]") {
    <summary>Solution</summary>
 
 ```cpp
-
+TEST_CASE("Exercise 122 : String concatenation", "[12]") {
+  std::string hello = "Hello ";
+  std::string world = "World";
+  REQUIRE(hello + world == "Hello World");
+}
 ```
 
 </details>
@@ -95,7 +99,11 @@ TEST_CASE("Exercise 123 : std::string append", "[.][12]") {
    <summary>Solution</summary>
 
 ```cpp
-
+TEST_CASE("Exercise 123 : std::string append", "[12]") {
+  std::string hello_world = "Hello ";
+  hello_world.append("World");
+  REQUIRE(hello_world == "Hello World");
+}
 ```
 
 </details>
@@ -117,7 +125,12 @@ TEST_CASE("Exercise 124 : Function call", "[.][12]") {
    <summary>Solution</summary>
 
 ```cpp
+std::string hello() { return "Hello World"; }
 
+TEST_CASE("Exercise 124 : Function call", "[12]") {
+  std::string hello_world = hello();
+  REQUIRE(hello_world == "Hello World");
+}
 ```
 
 </details>
