@@ -10,7 +10,6 @@
 * [14. Functions and Parameter Passing](14_exercises.md)
 * [15. Compilation, Linking and Assets](15_exercises.md)
 * [16. Classes and Structs](16_exercises.md)
-* [17. Memory and RAII](17_exercises.md)
 
 ## Day 2
 
@@ -20,7 +19,6 @@
 * [24. Lambdas and Function Templates](24_exercises.md)
 * [25. Algorithmic Thinking](25_exercises.md)
 * [26. Tools](26_exercises.md)
-* [27. Conclusion](27_exercises.md)
 
 ## Extra
 
