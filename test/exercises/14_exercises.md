@@ -96,6 +96,26 @@ function (call it `isWall`) to avoid repeating ourselves?
 
 3. Check to see that the game still works as expected.
 
+<details>
+   <summary>Solution</summary>
+```cpp
+bool isWall(GridPosition point) {
+   return cellAtPosition(point) == Cell::wall;
+}
+
+bool isWalkableForPacMan(GridPosition point) {
+  return !isWall(point) && cellAtPosition(point) != Cell::pen;
+}
+
+bool isWalkableForGhost(GridPosition target_position,
+                        GridPosition current_position, bool isEyes) {
+  if (isWall(target_position))
+    return false;
+  return isEyes || isInPen(current_position) || !isInPen(target_position);
+}
+```
+</details>
+
 ## [Exercise 142][1]
 
 ### Description
