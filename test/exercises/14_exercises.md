@@ -98,6 +98,7 @@ function (call it `isWall`) to avoid repeating ourselves?
 
 <details>
    <summary>Solution</summary>
+
 ```cpp
 bool isWall(GridPosition point) {
    return cellAtPosition(point) == Cell::wall;
