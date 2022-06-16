@@ -72,10 +72,25 @@ focus on one single class but some (like `testFruits`) use the `GameState` class
 
 1. Familiarize yourself with the codebase by trying to find the files that contain the
    code mentioned in the slides
+2. In which file is the logic for the ghost behavior implemented?
+3. What informations are tracked as part of the score?
+
+<details>
+   <summary>Solution</summary>
+
+2. The behavior of the ghosts is mostly implemented in Ghost.cpp,
+   but each of the ghost has its own file that implements its personality.
+
+3. The score keeps track of the number of lives, pellets and fruits,
+   as well as the number of points earned by the player.
+
+</details>
 
 ## [Exercise 131][1]
 
 ### Description
+
+
 
 <details>
    <summary>Solution</summary>
