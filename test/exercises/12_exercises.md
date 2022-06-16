@@ -58,7 +58,7 @@ int main () {
 ### String concatenation
 
 * [\<string\> header][6]
-* [std::operator+(std::basic_string)][7]
+* [std::string::operator+(std::string)][7]
 
 ```cpp
 TEST_CASE("Exercise 122 : String concatenation", "[.][12]") {
