@@ -15,20 +15,20 @@ Direction PacManAI::suggestedDirection() const {
 }
 
 // This function is not yet implemented.
-// You will implement it as part of module 25.
+// You will implement it as part of module 24.
 GridPosition PacManAI::pelletClosestToPacman(GridPosition pacmanGridPosition  [[maybe_unused]],
                                              std::vector<GridPosition> & pellets [[maybe_unused]]) {
   return { 0, 0 };
 }
 
 // This function is not yet implemented.
-// You will implement it as part of module 25.
+// You will implement it as part of module 24.
 bool PacManAI::isValidMove(const Move & move [[maybe_unused]]) {
   return false;
 }
 
 // This function is not yet implemented.
-// You will implement it as part of module 25.
+// You will implement it as part of module 24.
 Direction PacManAI::optimalDirection(const std::array<Move, 4> & moves [[maybe_unused]]) {
   return Direction::NONE;
 }
