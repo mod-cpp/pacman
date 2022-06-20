@@ -78,7 +78,7 @@ ghosts.
 <details>
    <summary>Hint Canvas.cpp and GameState.hpp</summary>
 
-Add a line to ´Canvas::render´ to make sure that Clyde is rendered. This requires a
+Add a line to `Canvas::render` to make sure that Clyde is rendered. This requires a
 change to [GameState.hpp](../../lib/include/GameState.hpp) also.
 
 </details>
