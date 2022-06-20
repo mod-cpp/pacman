@@ -57,6 +57,9 @@ int main () {
 
 ### String concatenation
 
+Set the values of the std::string variables `hello` and `world` to the appropriate
+strings to make the test pass.
+
 * [\<string\> header][6]
 * [std::string::operator+(std::string)][7]
 
@@ -85,7 +88,7 @@ TEST_CASE("Exercise 122 : String concatenation", "[12]") {
 
 ### std::string append
 
-* [std::string::append][8]
+Use [std::string::append][8] to append the string "World" to hello_world.
 
 ```cpp
 TEST_CASE("Exercise 123 : std::string append", "[.][12]") {
@@ -112,7 +115,7 @@ TEST_CASE("Exercise 123 : std::string append", "[12]") {
 
 ### Function call
 
-* Make a function above the test that returns the string "Hello World"
+Make a function above the test that returns the string "Hello World"
 
 ```cpp
 TEST_CASE("Exercise 124 : Function call", "[.][12]") {
