@@ -74,6 +74,14 @@ ghosts.
 7. Clyde always targets its scatter target, unless PacMan is further than 8 tiles away
 
 <details>
+   <summary>Hint 1</summary>
+
+Add a line to ´Canvas::render´ to make sure that Clyde is rendered. This requires a
+change to [GameState.hpp](../../lib/include/GameState.hpp) also.
+
+</details>
+
+<details>
    <summary>Solution</summary>
 
 [Clyde.hpp](../../lib/include/Clyde.hpp)
@@ -153,6 +161,20 @@ Position Clyde::scatterTarget() const {
 }
 
 } // namespace pacman
+```
+
+[GameState.hpp](../../lib/include/GameState.hpp)
+
+```cpp
+  // Create a Clyde object in GameState together with the other ghosts
+  Clyde clyde;
+```
+
+[Canvas.cpp](../../lib/Canvas.cpp)
+
+```cpp
+  // Call renderGhost with clyde
+  renderGhost(gameState.clyde);
 ```
 
 </details>
