@@ -4,7 +4,6 @@
 
 * [Exercise 160](#exercise-160)
 * [Exercise 161](#exercise-161)
-* [Exercise 162](#exercise-161)
 
 ## Exercise 160
 
@@ -156,17 +155,3 @@ Position Clyde::scatterTarget() const {
 
 </details>
 
-## [Exercise 162][1]
-
-### Description
-
-<details>
-   <summary>Solution</summary>
-
-```cpp
-
-```
-
-</details>
-
-[1]: 16_exercises.cpp
