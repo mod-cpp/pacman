@@ -4,7 +4,6 @@
 
 * [Exercise 230](#exercise-230)
 * [Exercise 231](#exercise-231)
-* [Exercise 232](#exercise-232)
 
 ## Exercise 230
 
@@ -29,7 +28,7 @@ bool Pellets::isPellet(GridPosition p) const {
 <details>
    <summary>Hint 1</summary>
 
-Look into [std::all_of, std::any_of, std::none_of][2].
+Look into [std::all_of, std::any_of, std::none_of][1].
 
 </details>
 
@@ -70,7 +69,7 @@ bool Pellets::eatPelletAtPosition(GridPosition p) {
 <details>
    <summary>Hint 1</summary>
 
-Look into [std::find, std::find_if, std::find_if_not][3].
+Look into [std::find, std::find_if, std::find_if_not][2].
 
 </details>
 
@@ -89,19 +88,5 @@ bool Pellets::eatPelletAtPosition(GridPosition p) {
 
 </details>
 
-## [Exercise 232][1]
-
-### Description
-
-<details>
-   <summary>Solution</summary>
-
-```cpp
-
-```
-
-</details>
-
-[1]: 23_exercises.cpp
-[2]: https://en.cppreference.com/w/cpp/algorithm/all_any_none_of
-[3]: https://en.cppreference.com/w/cpp/algorithm/find
+[1]: https://en.cppreference.com/w/cpp/algorithm/all_any_none_of
+[2]: https://en.cppreference.com/w/cpp/algorithm/find
