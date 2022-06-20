@@ -77,14 +77,14 @@ whether a cell is a wall.
 
 ```cpp
 bool isWalkableForPacMan(GridPosition point) {
- return cellAtPosition(point) != Cell::wall && cellAtPosition(point) != Cell::pen;
+  return cellAtPosition(point) != Cell::wall && cellAtPosition(point) != Cell::pen;
 }
 
-bool isWalkableForGhost(GridPosition point, GridPosition origin, bool isEyes) {
- const Cell cell = cellAtPosition(point);
- if (cell == Cell::wall)
-   return false;
- return isEyes || isInPen(origin) || !isInPen(point);
+bool isWalkableForGhost(GridPosition target_position, GridPosition current_position, bool isEyes) {
+  const Cell cell = cellAtPosition(target_position);
+  if (cell == Cell::wall)
+    return false;
+  return isEyes || isInPen(current_position) || !isInPen(target_position);
 }
 ```
 
