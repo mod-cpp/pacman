@@ -4,7 +4,6 @@
 
 * [Exercise 250](#exercise-250)
 * [Exercise 251](#exercise-251)
-* [Exercise 252](#exercise-252)
 
 ## Exercise 250
 
@@ -292,18 +291,3 @@ set of movement. For example "Go Right for 3 seconds, then down, right, up, righ
 This should pickup the first super pellet.
 
 In this exercise, the input code in processEvents is not needed.
-
-## [Exercise 252][1]
-
-### Description
-
-<details>
-   <summary>Solution</summary>
-
-```cpp
-
-```
-
-</details>
-
-[1]: 25_exercises.cpp
