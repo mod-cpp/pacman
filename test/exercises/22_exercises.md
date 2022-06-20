@@ -5,7 +5,6 @@
 * [Exercise 220](#exercise-220)
 * [Exercise 221](#exercise-221)
 * [Exercise 222](#exercise-222)
-* [Exercise 223](#exercise-223)
 
 ## Exercise 220
 
@@ -59,8 +58,8 @@ std::vector<GridPosition> initialPelletPositions() {
 
 ### Implement `PacManAI::pelletClosestToPacman`
 
-Implement [PacManAI::pelletClosestToPacman][2] and test your implementation with the
-test in [testPacmanAI.cpp][3] called _"Find pellet closest to PacMan"_
+Implement [PacManAI::pelletClosestToPacman][1] and test your implementation with the
+test in [testPacmanAI.cpp][2] called _"Find pellet closest to PacMan"_
 
 The function should return the position of the pellet that is "closest" to PacMan.
 
@@ -107,19 +106,5 @@ GridPosition PacManAI::pelletClosestToPacman(GridPosition pacmanGridPosition,
 
 * Press 'a' on the keyboard
 
-## [Exercise 223][1]
-
-### Description
-
-<details>
-   <summary>Solution</summary>
-
-```cpp
-
-```
-
-</details>
-
-[1]: 22_exercises.cpp
-[2]: ../../lib/PacManAI.cpp
-[3]: ../../test/unit_tests/testPacmanAI.cpp
+[1]: ../../lib/PacManAI.cpp
+[2]: ../../test/unit_tests/testPacmanAI.cpp
