@@ -92,7 +92,8 @@ Think of them like functions that are called when testing.
 #### Exercise
 
 1. Add a new unit test `TEST_CASE` for `isWall`. To test `isWall` we need to add it
-   the `Board.hpp` file because it should be accessible within the `testBoard.cpp`
+   the `Board.hpp` file because it should be accessible within
+   the [`testBoard.cpp`](../unit_tests/testBoard.cpp)
    file. Check for a couple of cases, similarly to the
    `isWalkableForPacMan` test. Remember since the unit tests are not inside of
    the `pacman` namespace, we need to append
@@ -125,6 +126,7 @@ TEST_CASE("Is wall", "[board]") {
   REQUIRE_FALSE(pacman::isWall(pacman::GridPosition{ 1, 2 })); // pen
 }
 ```
+</details>
 
 [1]: ../../CMakeLists.txt
 [2]: ../../lib/CMakeLists.txt
