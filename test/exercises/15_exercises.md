@@ -14,8 +14,8 @@ In this exercise we will add a couple of files to the project.
 #### Background: CMake
 
 As described in the slides, the project is defined by several CMake files. The ones we
-are interested is [`CMakeLists.txt`][1] in the root project folder and
-the [`CMakeLists.txt`][2] file in the `lib` folder.
+are interested is [CMakeLists.txt][1] in the root project folder and
+the [CMakeLists.txt][2] file in the `lib` folder.
 
 You can see that the root CMake file is adding the `lib` subdirectory, this means that
 it is looking for a `CMakeLists.txt` file within that folder.
@@ -80,7 +80,7 @@ and `.hpp` files to the project.
 #### Background: Board Unit Tests
 
 The game board is covered by unit tests. They are located in
-the [`testBoard.cpp`](../unit_tests/testBoard.cpp) file within the `test/unit_tests`
+the [testBoard.cpp](../unit_tests/testBoard.cpp) file within the `test/unit_tests`
 directory. They don't check every single tile on the board, but they do assume that
 the board shape is not changed significantly. If you change the board layout you might
 have to change some unit tests to match.
@@ -93,8 +93,8 @@ Think of them like functions that are called when testing.
 #### Exercise
 
 1. Add a new unit test `TEST_CASE` for `isWall`. To test `isWall` we need to add it
-   the [`Board.hpp`](../../lib/include/Board.hpp) file because it should be accessible
-   within the [`testBoard.cpp`](../unit_tests/testBoard.cpp)
+   the [Board.hpp](../../lib/include/Board.hpp) file because it should be accessible
+   within the [testBoard.cpp](../unit_tests/testBoard.cpp)
    file. Check for a couple of cases, similarly to the
    `isWalkableForPacMan` test. Remember since the unit tests are not inside
    the `pacman` namespace, we need to append

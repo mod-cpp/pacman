@@ -68,7 +68,7 @@ ghosts.
 3. Clyde should start at Position { x = 15.5, y = 14 }
 4. Clyde's sprite is the orange one. Where are the graphics for Clyde in the assets
    file and how can we make sure the ghost will be correctly rendered?
-5. Modify [`Canvas`](../../lib/Canvas.cpp) to make sure Clyde is rendered. Otherwise,
+5. Modify [Canvas](../../lib/Canvas.cpp) to make sure Clyde is rendered. Otherwise,
    it will not appear on screen.
 6. Clyde's scatter target is { x = 0, y = 30 }
 7. Clyde always targets its scatter target, unless PacMan is further than 8 tiles away
