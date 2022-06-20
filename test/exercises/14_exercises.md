@@ -16,19 +16,32 @@ Let's look at this function in [`Game.cpp`][1]
 
 ```cpp
 void Game::processEvents(InputState & inputState) {
+  const auto event = canvas.pollEvent();
 
+  if (!event)
+    return;
 
- auto event = canvas.pollEvent();
- if (event && event.value().type == sf::Event::Closed) {
-   inputState.close = true;
-   return;
- }
+  if (event.value().type == sf::Event::Closed) {
+    inputState.close = true;
+    return;
+  }
 
+  if (!(event.value().type == sf::Event::KeyPressed ||
+        event.value().type == sf::Event::KeyReleased))
+    return;
 
- inputState.down  = sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Down);
- inputState.up    = sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Up);
- inputState.left  = sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Left);
- inputState.right = sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Right);
+  auto isKeyPressed = [&](sf::Keyboard::Key k) {
+    bool pressed = event.value().type == sf::Event::KeyPressed;
+    return k == event.value().key.code && pressed;
+  };
+
+  if (isKeyPressed(sf::Keyboard::Key::A))
+    inputState.enableAI = !inputState.enableAI;
+
+  inputState.down = isKeyPressed(sf::Keyboard::Key::Down);
+  inputState.up = isKeyPressed(sf::Keyboard::Key::Up);
+  inputState.left = isKeyPressed(sf::Keyboard::Key::Left);
+  inputState.right = isKeyPressed(sf::Keyboard::Key::Right);
 }
 ```
 
