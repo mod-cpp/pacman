@@ -187,6 +187,9 @@ ctest --test-dir build -C Debug
 * If you need to get back to this dialog, open Settings and go to: Build, Execution, Deployment > CMake 
 * On the bottom of the CLion window you will see a tab called CMake
 * To reload CMake fully, click on it and click on the cog wheel and select "Reset Cache and Reload Project"
+* To run pacman press the green play button at the top right of the window
+* To run in debug press the bug button to its right
+* To run the tests click on the dropdown to its left and select "All CTest" and then either the run or the debug button.
 
 </details>
 
