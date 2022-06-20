@@ -12,7 +12,7 @@
 In this exercise we will look together at what happens when we change a reference
 parameter to a value or a const reference.
 
-Let's look at this function in [`Game.cpp`][2]
+Let's look at this function in [`Game.cpp`][1]
 
 ```cpp
 void Game::processEvents(InputState & inputState) {
@@ -49,7 +49,7 @@ You can follow along locally:
 
 In this exercise we will write some helper functions for the game board.
 
-The file [`Board.cpp`][3] defines functions to manipulate the game Board, for example
+The file [`Board.cpp`][2] defines functions to manipulate the game Board, for example
 finding where the walls and the portals are.
 
 #### Background: Board.cpp
@@ -116,6 +116,5 @@ bool isWalkableForGhost(GridPosition target_position,
 ```
 </details>
 
-[1]: 14_exercises.cpp
-[2]: ../../lib/Game.cpp
-[3]: ../../lib/Board.cpp
+[1]: ../../lib/Game.cpp
+[2]: ../../lib/Board.cpp
