@@ -95,18 +95,3 @@ focus on one single class but some (like
    number of points earned by the player.
 
 </details>
-
-## [Exercise 131][1]
-
-### Description
-
-<details>
-   <summary>Solution</summary>
-
-```cpp
-
-```
-
-</details>
-
-[1]: 13_exercises.cpp
