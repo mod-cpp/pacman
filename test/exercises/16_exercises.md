@@ -77,7 +77,7 @@ ghosts.
    similar calls for Clyde.
 
 <details>
-   <summary>Hint 1</summary>
+   <summary>Hint Canvas.cpp and GameState.hpp</summary>
 
 Add a line to ´Canvas::render´ to make sure that Clyde is rendered. This requires a
 change to [GameState.hpp](../../lib/include/GameState.hpp) also.
@@ -85,7 +85,31 @@ change to [GameState.hpp](../../lib/include/GameState.hpp) also.
 </details>
 
 <details>
-   <summary>Solution</summary>
+   <summary>Solution: Canvas.cpp</summary>
+
+[Canvas.cpp](../../lib/Canvas.cpp)
+
+```cpp
+  // Call renderGhost with clyde
+  renderGhost(gameState.clyde);
+```
+
+</details>
+
+<details>
+   <summary>Solution: GameState.hpp</summary>
+
+[GameState.hpp](../../lib/include/GameState.hpp)
+
+```cpp
+  // Create a Clyde object in GameState together with the other ghosts
+  Clyde clyde;
+```
+
+</details>
+
+<details>
+   <summary>Solution: Clyde.hpp</summary>
 
 [Clyde.hpp](../../lib/include/Clyde.hpp)
 
@@ -111,6 +135,11 @@ private:
 
 } // namespace pacman
 ```
+
+</details>
+
+<details>
+   <summary>Solution: Clyde.cpp</summary>
 
 [Clyde.cpp](../../lib/Clyde.cpp)
 
@@ -166,12 +195,10 @@ Position Clyde::scatterTarget() const {
 } // namespace pacman
 ```
 
-[GameState.hpp](../../lib/include/GameState.hpp)
+</details>
 
-```cpp
-  // Create a Clyde object in GameState together with the other ghosts
-  Clyde clyde;
-```
+<details>
+   <summary>Solution: GameState.cpp</summary>
 
 [GameState.cpp](../../lib/GameState.cpp)
 
@@ -190,12 +217,4 @@ Position Clyde::scatterTarget() const {
   clyde.frighten();
 ```
 
-[Canvas.cpp](../../lib/Canvas.cpp)
-
-```cpp
-  // Call renderGhost with clyde
-  renderGhost(gameState.clyde);
-```
-
 </details>
-
