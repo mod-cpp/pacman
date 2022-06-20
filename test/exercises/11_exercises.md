@@ -176,14 +176,17 @@ ctest --test-dir build -C Debug
 <details>
    <summary>CLion</summary>
 
-* When opening the project in CLion use the CMake preset for your platform - see popup
-  in the lower right-hand corner
-* Unselect the "Debug" profile
-* Select for example the preset profile called "windows-build" if you are on Windows
-* Enable it by checking the checkbox "Enable profile"
-* Click "Apply" and "OK"
+* Clone project through "Get from VCS": https://github.com/mod-cpp/pacman.git
+* In the "Open Project Wizard" unselect "Enable profile" for the "Debug" profile
+* Select the profile(s) appropriate for your platform, example x64-windows-build for Windows 64 bit
+* Enable the profile by checking the checkbox "Enable profile"
+* Check the checkbox at the top of the dialog "Reload CMake project on editing CMakeLists.txt or other CMake configuration files"
+* Click "OK"
 * (If CLion created a `cmake-build-debug` folder you can safely delete it, we will be
   using the `build` directory)
+* If you need to get back to this dialog, open Settings and go to: Build, Execution, Deployment > CMake 
+* On the bottom of the CLion window you will see a tab called CMake
+* To reload CMake fully, click on it and click on the cog wheel and select "Reset Cache and Reload Project"
 
 </details>
 
