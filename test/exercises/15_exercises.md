@@ -53,21 +53,21 @@ and `.hpp` files to the project.
 <details>
    <summary>Solution</summary>
 
-Clyde.hpp
+[Clyde.hpp](../../lib/include/Clyde.hpp)
 
 ```cpp
 #pragma once
 ```
 
-Clyde.cpp
+[Clyde.cpp](../../lib/Clyde.cpp)
 
 ```cpp
 #include "Clyde.hpp"
 ```
 
-Board.hpp
+[GameState.hpp](../../lib/include/GameState.hpp)
 ```cpp
-// Include the header in Board.hpp
+// Include the header in GameState.hpp
 #include "Clyde.hpp"
 ```
 
