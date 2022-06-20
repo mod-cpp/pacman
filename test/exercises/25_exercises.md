@@ -79,9 +79,8 @@ The AI does not know the positions of the ghosts, you will have to expose this i
 <details>
 <summary>Possible approach: let PacMan go towards the closest pellet
 </summary>
-
 </details>
-<p>
+</p>
 
 <p>
 <details>
@@ -112,7 +111,6 @@ Direction PacManAI::choseNewDirectionForPacMan(const PacMan & pacMan) {
   return possibleMoves[index].direction;
 }
 ```
-</p>
 </details>
 
 <p>
@@ -234,12 +232,13 @@ Direction PacManAI::choseNewDirectionForPacMan(const PacMan & pacMan,
   return possibleMoves[index].direction;
 }
 ```
-
 </li>
+</ul>
+</details>
 
-<li>
+<p>
 <details>
-<summary></summary>
+<summary>Solution: Make PacMan go towards the closest Pellet</summary>
 
 Use `pelletClosestToPacman` to calculate a target for PacMan,
 then find then use `optimalMove` to decide a direction.
@@ -273,9 +272,6 @@ Direction PacManAI::choseNewDirectionForPacMan(const PacMan & pacMan,
   return optimalDirection(possibleMoves);
 }
 ```
-</details>
-
-</ul>
 </details>
 </p>
 
