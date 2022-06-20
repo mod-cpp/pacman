@@ -42,8 +42,9 @@ implement our AI.
 <details>
    <summary>Possible approach: Make PacMan move randomly</summary>
 
-The function `randomInt` in `PacManAI.cpp` returns a random integer between its two
-parameters. You can use this function to introduce some randomness.
+The function `randomInt` in [PacManAI.cpp](../../lib/PacManAI.cpp) returns a random
+integer between its two parameters. You can use this function to introduce some
+randomness.
 
 You can use this function to pick a direction at random. But not all directions are
 valid, make sure PacMan does not try to go in a wall or another inaccessible position.
@@ -56,13 +57,15 @@ valid, make sure PacMan does not try to go in a wall or another inaccessible pos
 Try to make PacMan flee the ghosts. The AI does not know the positions of the ghosts,
 you will have to expose this information.
 
-   <details>
-      <summary>Hint: Exposing the ghost's position</summary>
+</details>
+
+<details>
+   <summary>Hint: Exposing the ghost's position</summary>
 
 You will need to create a `std::vector<GhostPosition>`
 in `GameState.cpp` and pass it as parameter to
 `PacManAI::update()` then `PacManAI::choseNewDirectionForPacMan`.
-   </details>
+</details>
 
 <details>
       <summary>Hint: Finding the ghosts</summary>
@@ -71,8 +74,6 @@ Create a function that, for each of the possible directions, walks through each 
 starting from PacMan's position outwards, and return true if a ghost is found. Use
 that function to filter out the directions where PacMan will encounter a ghost, by
 modifying the random solution
-
-</details>
 
 </details>
 
