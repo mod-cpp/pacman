@@ -72,6 +72,9 @@ ghosts.
    it will not appear on screen.
 6. Clyde's scatter target is { x = 0, y = 30 }
 7. Clyde always targets its scatter target, unless PacMan is further than 8 tiles away
+8. Update [GameState.cpp](../../lib/GameState.cpp) with calls to the functions in
+   Clyde to make Clyde move. Hint: search for the other ghosts in the file and add
+   similar calls for Clyde.
 
 <details>
    <summary>Hint 1</summary>
@@ -168,6 +171,23 @@ Position Clyde::scatterTarget() const {
 ```cpp
   // Create a Clyde object in GameState together with the other ghosts
   Clyde clyde;
+```
+
+[GameState.cpp](../../lib/GameState.cpp)
+
+```cpp
+  // In GameState::step
+  clyde.setTarget(pacMan.position());
+  clyde.update(delta);
+
+  // In GameState::step
+  checkCollision(clyde);
+
+  // In GameState::handleDeathAnimation
+  clyde.reset();
+
+  // In GameState::eatPellets
+  clyde.frighten();
 ```
 
 [Canvas.cpp](../../lib/Canvas.cpp)
