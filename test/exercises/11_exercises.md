@@ -253,6 +253,8 @@ TEST_CASE("Exercise 111 : Enable a test and make it green", "[11]") {
 Enable the test and see you will only get one error. Look up REQUIRE and CHECK in
 Catch2 and change the code in [the test][1], so you get an error on both lines.
 
+Then fix both errors by making both sides of the == the same.
+
 * Catch2 : [Assertion Macros][2]
 
 ```cpp
