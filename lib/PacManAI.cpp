@@ -49,8 +49,7 @@ Direction PacManAI::choseNewDirectionForPacMan(const PacMan & pacMan [[maybe_unu
   return Direction::RIGHT;
 }
 
-void PacManAI::update(const PacMan & pacMan, const Pellets & pellets [[maybe_unused]],
-                      const std::vector<GridPosition> & ghostPositions [[maybe_unused]]) {
+void PacManAI::update(const PacMan & pacMan, const Pellets & pellets [[maybe_unused]]) {
 
   const GridPosition pacManGridPos = pacMan.positionInGrid();
   const GridPosition currentGridPos = positionToGridPosition(pos);
