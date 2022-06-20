@@ -28,7 +28,7 @@ North/South/East/West axis of PacMan.
 
 Implement an AI for pacman, trying to leverage standard algorithms. There are many
 ways to make PacMan move. Try to maximize the score of your AI, and the time it stays
-alive!
+alive.
 
 <details>
    <summary>Hint: Getting started</summary>
