@@ -79,10 +79,11 @@ and `.hpp` files to the project.
 
 #### Background: Board Unit Tests
 
-The game board is covered by unit tests. They are located in the `testBoard.cpp` file
-within the `test` directory. They don't check every single tile on the board, but they
-do assume that the board shape is not changed significantly. If you change the board
-layout you might have to change some unit tests to match.
+The game board is covered by unit tests. They are located in
+the [`testBoard.cpp`](../unit_tests/testBoard.cpp) file within the `test/unit_tests`
+directory. They don't check every single tile on the board, but they do assume that
+the board shape is not changed significantly. If you change the board layout you might
+have to change some unit tests to match.
 
 Unit tests are broken down into test cases, in this file it is focused on a test case
 per function. A `TEST_CASE` takes two arguments, a test name and a tag. The test name
@@ -92,10 +93,10 @@ Think of them like functions that are called when testing.
 #### Exercise
 
 1. Add a new unit test `TEST_CASE` for `isWall`. To test `isWall` we need to add it
-   the `Board.hpp` file because it should be accessible within
-   the [`testBoard.cpp`](../unit_tests/testBoard.cpp)
+   the [`Board.hpp`](../../lib/include/Board.hpp) file because it should be accessible
+   within the [`testBoard.cpp`](../unit_tests/testBoard.cpp)
    file. Check for a couple of cases, similarly to the
-   `isWalkableForPacMan` test. Remember since the unit tests are not inside of
+   `isWalkableForPacMan` test. Remember since the unit tests are not inside
    the `pacman` namespace, we need to append
    `pacman::` to the function calls.
 
