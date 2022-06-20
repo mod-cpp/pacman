@@ -9,7 +9,7 @@
 
 ### Use Algorithms for `PacManAI::optimalDirection`
 
-Rewrite optimalDirection to use algorithms.
+Rewrite optimalDirection in [PacManAI.cpp](../../lib/PacManAI.cpp) to use algorithms.
 
 ```cpp
 Direction PacManAI::optimalDirection(const std::array<Move, 4> & moves) {
@@ -43,9 +43,9 @@ Direction PacManAI::optimalDirection(const std::array<Move, 4> & moves) {
 
 ### Use Lambdas and Algorithms for `PacManAI::pelletClosestToPacman`
 
-Rewrite pelletClosestToPacman using lambdas and algorithms. One implementation could
-be to sort the vector of pellets by the distance they have to PacMan, and then return
-the first one.
+Rewrite pelletClosestToPacman in [PacManAI.cpp](../../lib/PacManAI.cpp) using lambdas
+and algorithms. One implementation could be to sort the vector of pellets by the
+distance they have to PacMan, and then return the first one.
 
 ```cpp
 GridPosition PacManAI::pelletClosestToPacman(GridPosition pacmanGridPosition,
