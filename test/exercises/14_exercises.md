@@ -49,12 +49,12 @@ void Game::processEvents(InputState & inputState) {
 
 You can follow along locally:
 
-1. Make `inputState` a value. What happens when you compile the code? Can you explain
-   why?
-
-2. Now make it a `const` reference. What happens? Can you explain why?
-
-3. Revert it back to a non-const reference an make sure the code compile.
+1. Make the parameter `inputState` a value (we need to change both the hpp and cpp
+   files). What happens when you compile the code? Can you explain why?
+2. Now make the parameter `inputState` a `const` reference. What happens? Can you
+   explain why?
+3. Revert the parameter `inputState` back to a non-const reference and make sure the
+   code compiles.
 
 ## Exercise 141
 
