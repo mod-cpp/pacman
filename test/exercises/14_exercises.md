@@ -113,15 +113,14 @@ function (call it `isWall`) to avoid repeating ourselves?
 
 ```cpp
 bool isWall(GridPosition point) {
-   return cellAtPosition(point) == Cell::wall;
+  return cellAtPosition(point) == Cell::wall;
 }
 
 bool isWalkableForPacMan(GridPosition point) {
   return !isWall(point) && cellAtPosition(point) != Cell::pen;
 }
 
-bool isWalkableForGhost(GridPosition target_position,
-                        GridPosition current_position, bool isEyes) {
+bool isWalkableForGhost(GridPosition target_position, GridPosition current_position, bool isEyes) {
   if (isWall(target_position))
     return false;
   return isEyes || isInPen(current_position) || !isInPen(target_position);
