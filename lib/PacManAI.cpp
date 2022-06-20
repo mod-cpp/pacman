@@ -1,19 +1,18 @@
 #include "PacManAI.hpp"
 
 #include "Board.hpp"
-#include <fmt/format.h>
 #include <random>
 
 namespace pacman {
 
-std::size_t randomInt(std::size_t min, std::size_t max) {
+[[maybe_unused]] std::size_t randomInt(std::size_t min, std::size_t max) {
   // construct a random device
   thread_local std::random_device device;
   //construct a mersenne twister pseudo generator engine, seeded with the device
-  thread_local std::mt19937 genenerator(device());
+  thread_local std::mt19937 generator(device());
   // create a distribution
   std::uniform_int_distribution<std::size_t> distribution(min, max);
-  return distribution(genenerator);
+  return distribution(generator);
 }
 
 void PacManAI::reset() {
@@ -39,11 +38,13 @@ bool PacManAI::isValidMove(const Move & move [[maybe_unused]]) {
 }
 
 // This function is not yet implemented.
-// You will implement it as part of module 24.
+// You will implement it as part of module 21. and 24.
 Direction PacManAI::optimalDirection(const std::array<Move, 4> & moves [[maybe_unused]]) {
   return Direction::NONE;
 }
 
+// This function is not yet implemented.
+// You will implement it as part of module 25.
 Direction PacManAI::choseNewDirectionForPacMan(const PacMan & pacMan [[maybe_unused]],
                                                const Pellets & pellets [[maybe_unused]]) {
   return Direction::RIGHT;
