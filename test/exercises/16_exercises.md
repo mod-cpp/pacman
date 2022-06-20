@@ -199,7 +199,7 @@ Position Clyde::scatterTarget() const {
 <details>
    <summary>Hint GameState.cpp</summary>
 
-Hint: search for the other ghosts in the file and add similar calls for Clyde.
+Search for the other ghosts in the file and add similar calls for Clyde.
 
 </details>
 
