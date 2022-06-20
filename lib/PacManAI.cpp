@@ -22,7 +22,7 @@ GridPosition PacManAI::pelletClosestToPacman(GridPosition pacmanGridPosition  [[
 }
 
 // This function is not yet implemented.
-// You will implement it as part of module 24.
+// You will implement it as part of module 21.
 bool PacManAI::isValidMove(const Move & move [[maybe_unused]]) {
   return false;
 }
