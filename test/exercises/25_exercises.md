@@ -17,7 +17,7 @@ At each intersection, check if there is a ghost directly inline with that path. 
 path is free of ghosts, you are allowed to turn there. And if PacMan is moving in a
 direction, and a ghost enters his path, then PacMan will reverse.
 
-For example if PacMan is at an intersection and can go either right or up, and there
+For example, if PacMan is at an intersection and can go either right or up, and there
 is a ghost in the path going right, then PacMan will go up. Then while PacMan is going
 up, a ghost enters that path, PacMan will go back.
 
@@ -26,7 +26,7 @@ North/South/East/West axis of PacMan.
 
 #### Exercise
 
-Implement an AI for pacman, trying to leverage standard algorithms. There are many
+Implement an AI for PacMan, trying to leverage standard algorithms. There are many
 ways to make PacMan move. Try to maximize the score of your AI, and the time it stays
 alive.
 
@@ -42,7 +42,7 @@ implement our AI.
 <details>
    <summary>Possible approach: Make PacMan move randomly</summary>
 
-The function `randomInt` in [PacManAI.cpp](../../lib/PacManAI.cpp) returns a random
+The function [randomInt](../../lib/PacManAI.cpp) returns a random
 integer between its two parameters. You can use this function to introduce some
 randomness.
 
@@ -54,8 +54,7 @@ valid, make sure PacMan does not try to go in a wall or another inaccessible pos
 <details>
    <summary>Possible approach: Make PacMan avoid the ghosts</summary>
 
-Try to make PacMan flee the ghosts. The AI does not know the positions of the ghosts,
-you will have to expose this information.
+Try to make PacMan flee the ghosts. The AI does not know the positions of the ghosts, you will have to expose this information.
 
 </details>
 
@@ -71,7 +70,7 @@ in `GameState.cpp` and pass it as parameter to
       <summary>Hint: Finding the ghosts</summary>
 
 Create a function that, for each of the possible directions, walks through each cell,
-starting from PacMan's position outwards, and return true if a ghost is found. Use
+starting from PacMan's position outwards, and returns true if a ghost is found. Use
 that function to filter out the directions where PacMan will encounter a ghost, by
 modifying the random solution
 
@@ -79,6 +78,9 @@ modifying the random solution
 
 <details>
 <summary>Possible approach: let PacMan go towards the closest pellet</summary>
+
+Try to combine `pelletClosestToPacMan`, `optimalDirection` and
+`positionDistance` to find the closest pellet from PacMan and then decide which of the possible valid move is closest from that direction.
 
 </details>
 
@@ -118,6 +120,7 @@ Direction PacManAI::choseNewDirectionForPacMan(const PacMan & pacMan) {
 
 <ul>
 <li>
+
 Create a vector of position in `GameState::step()`:
 
 ```cpp
@@ -145,6 +148,7 @@ void GameState::step(std::chrono::milliseconds delta) {
 </li>
 
 <li>
+
 Modify the signatures of `PacManAI::update` and `PacManAI::choseNewDirectionForPacMan`
 
 ```cpp
@@ -164,7 +168,7 @@ to `PacManAI::choseNewDirectionForPacMan`.
 
 <li>
 Create a function to check if a direction contains a ghost.
-This scans all positions outwards from a posible move's position until we encounter a wall.
+This scans all positions outwards from a possible move's position until we encounter a wall.
 
 ```cpp
 bool hasGhost(GridPosition p, Direction d,
@@ -195,7 +199,7 @@ bool hasGhost(GridPosition p, Direction d,
 <li>
 
 Modify `PacManAI::choseNewDirectionForPacMan` to filter out direction that cross the
-path of a ghost. There is a small pitfall: what happen if Pacman is circled by ghosts?
+path of a ghost. There is a small pitfall: what happens if PacMan is surrounded by ghosts?
 
 ```cpp
 Direction PacManAI::choseNewDirectionForPacMan(const PacMan & pacMan,
@@ -222,7 +226,7 @@ Direction PacManAI::choseNewDirectionForPacMan(const PacMan & pacMan,
       return hasGhost(m.position, m.direction, ghostPositions);
   });
 
-  // We need to handle the case where PacMan is circled by ghosts
+  // We need to handle the case where PacMan is surrounded by ghosts
   if(lasWithoutGhost != possibleMoves.begin())
     end = lasWithoutGhost;
 
@@ -242,7 +246,7 @@ Direction PacManAI::choseNewDirectionForPacMan(const PacMan & pacMan,
 <summary>Solution: Make PacMan go towards the closest Pellet</summary>
 
 Use `pelletClosestToPacman` to calculate a target for PacMan, then find then
-use `optimalMove` to decide a direction.
+use `optimalDirection` to decide a direction.
 
 ```cpp
 Direction PacManAI::choseNewDirectionForPacMan(const PacMan & pacMan,
@@ -287,8 +291,7 @@ only thing that needs to change is the value within the InputState class.
 
 #### Exercise
 
-Start by giving InputState random values on each update and then program in a fixed
-set of movement. For example "Go Right for 3 seconds, then down, right, up, right".
-This should pickup the first super pellet.
+Start by giving InputState random values on each update and then program in a fixed set of movements. For example "Go Right for 3 seconds, then down, right, up, right".
+This should pick up the first super pellet.
 
 In this exercise, the input code in processEvents is not needed.
