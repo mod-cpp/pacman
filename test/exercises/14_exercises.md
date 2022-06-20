@@ -4,7 +4,6 @@
 
 * [Exercise 140](#exercise-140)
 * [Exercise 141](#exercise-141)
-* [Exercise 142](#exercise-142)
 
 ## Exercise 140
 
@@ -115,19 +114,6 @@ bool isWalkableForGhost(GridPosition target_position,
   return isEyes || isInPen(current_position) || !isInPen(target_position);
 }
 ```
-</details>
-
-## [Exercise 142][1]
-
-### Description
-
-<details>
-   <summary>Solution</summary>
-
-```cpp
-
-```
-
 </details>
 
 [1]: 14_exercises.cpp
