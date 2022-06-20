@@ -15,8 +15,8 @@ class PacManAI {
 public:
   struct Move {
     Direction direction = Direction::NONE;
-    GridPosition position;
-    double distanceToTarget = std::numeric_limits<double>::infinity();
+    GridPosition position = {0, 0};
+    [[maybe_unused]] double distanceToTarget = std::numeric_limits<double>::infinity();
   };
 
   void update(const PacMan & pacMan, const Pellets & pellets);
