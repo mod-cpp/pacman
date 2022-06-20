@@ -28,6 +28,9 @@ public:
   void reset();
 
 private:
+  Direction choseNewDirectionForPacMan(const PacMan & pacMan,
+                                       const Pellets & pellets);
+
   Position pos = initialPacManPosition();
   Direction direction = Direction::RIGHT;
 };

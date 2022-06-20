@@ -2,8 +2,19 @@
 
 #include "Board.hpp"
 #include <fmt/format.h>
+#include <random>
 
 namespace pacman {
+
+std::size_t randomInt(std::size_t min, std::size_t max) {
+  // construct a random device
+  thread_local std::random_device device;
+  //construct a mersenne twister pseudo generator engine, seeded with the device
+  thread_local std::mt19937 genenerator(device());
+  // create a distribution
+  std::uniform_int_distribution<std::size_t> distribution(min, max);
+  return distribution(genenerator);
+}
 
 void PacManAI::reset() {
   pos = {};
@@ -18,7 +29,7 @@ Direction PacManAI::suggestedDirection() const {
 // You will implement it as part of module 24.
 GridPosition PacManAI::pelletClosestToPacman(GridPosition pacmanGridPosition  [[maybe_unused]],
                                              std::vector<GridPosition> & pellets [[maybe_unused]]) {
-  return { 0, 0 };
+  return {0, 0};
 }
 
 // This function is not yet implemented.
@@ -33,7 +44,14 @@ Direction PacManAI::optimalDirection(const std::array<Move, 4> & moves [[maybe_u
   return Direction::NONE;
 }
 
-void PacManAI::update(const PacMan & pacMan, const Pellets & pellets) {
+Direction PacManAI::choseNewDirectionForPacMan(const PacMan & pacMan [[maybe_unused]],
+                                               const Pellets & pellets [[maybe_unused]]) {
+  return Direction::RIGHT;
+}
+
+void PacManAI::update(const PacMan & pacMan, const Pellets & pellets [[maybe_unused]],
+                      const std::vector<GridPosition> & ghostPositions [[maybe_unused]]) {
+
   const GridPosition pacManGridPos = pacMan.positionInGrid();
   const GridPosition currentGridPos = positionToGridPosition(pos);
 
@@ -41,27 +59,7 @@ void PacManAI::update(const PacMan & pacMan, const Pellets & pellets) {
     return;
   }
 
-  auto pelletPositions = pellets.allPellets();
-  if (pelletPositions.empty()) {
-    return;
-  }
-
-  const GridPosition targetPos = pelletClosestToPacman(pacManGridPos, pelletPositions);
-
-  const GridPosition currentPosition = pacMan.positionInGrid();
-  const auto [x, y] = currentPosition;
-  std::array<Move, 4> possibleMoves = {
-    Move{ Direction::UP, { x, y - 1 } },
-    Move{ Direction::LEFT, { x - 1, y } },
-    Move{ Direction::DOWN, { x, y + 1 } },
-    Move{ Direction::RIGHT, { x + 1, y } }
-  };
-
-  for (auto & move : possibleMoves) {
-    if (!isValidMove(move))
-      continue;
-    move.distanceToTarget = positionDistance(move.position, targetPos);
-  }
-  direction = optimalDirection(possibleMoves);
+  direction = choseNewDirectionForPacMan(pacMan, pellets);
+  pos = pacMan.position();
 }
 } // namespace pacman
