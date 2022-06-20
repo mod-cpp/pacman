@@ -13,7 +13,8 @@ Practice using algorithms instead of raw for loops.
 
 #### Exercise
 
-Use algorithms instead of a raw for loop in `Pellets::isPellet`
+Use algorithms instead of a raw for loop
+in [`Pellets::isPellet`](../../lib/Pellets.cpp)
 
 ```cpp
 bool Pellets::isPellet(GridPosition p) const {
@@ -50,7 +51,8 @@ bool Pellets::isPellet(GridPosition p) const {
 
 ### Use algorithms to implement `Pellets::eatPelletAtPosition`
 
-Practice using algorithms instead of raw for loops.
+Practice using algorithms instead of raw for loops
+in [`Pellets::eatPelletAtPosition`](../../lib/Pellets.cpp)
 
 ### Exercise
 
