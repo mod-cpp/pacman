@@ -16,7 +16,7 @@ public:
   struct Move {
     Direction direction = Direction::NONE;
     GridPosition position = {0, 0};
-    [[maybe_unused]] double distanceToTarget = std::numeric_limits<double>::infinity();
+    double distanceToTarget = std::numeric_limits<double>::infinity();
   };
 
   void update(const PacMan & pacMan, const Pellets & pellets);
