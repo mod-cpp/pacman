@@ -4,7 +4,6 @@
 
 * [Exercise 210](#exercise-210)
 * [Exercise 211](#exercise-211)
-* [Exercise 212](#exercise-212)
 
 ## Exercise 210
 
@@ -25,8 +24,8 @@ North/South/East/West axis of PacMan.
 
 #### Exercise
 
-As a warmup exercise, implement [PacManAI::isValidMove][2] and test your
-implementation with the test in [testPacmanAI.cpp][3] called _"Is valid move"_
+As a warmup exercise, implement [PacManAI::isValidMove][1] and test your
+implementation with the test in [testPacmanAI.cpp][2] called _"Is valid move"_
 
 Note: `isValidMove` will be called 4 times in a loop. If the target cell is not
 walkable the distance is set to infinity.
@@ -46,7 +45,7 @@ bool PacManAI::isValidMove(const Move & move) {
 <details>
    <summary>Hint 1</summary>
 
-Use [isWalkableForPacMan][4] to make sure PacMan is not walking in ways that are not
+Use [isWalkableForPacMan][3] to make sure PacMan is not walking in ways that are not
 legal
 
 </details>
@@ -54,7 +53,7 @@ legal
 <details>
    <summary>Hint 2</summary>
 
-Use [oppositeDirection][5] to make sure PacMan doesn't get stuck toggeling back and
+Use [oppositeDirection][4] to make sure PacMan doesn't get stuck toggeling back and
 forth
 
 </details>
@@ -98,8 +97,8 @@ North/South/East/West axis of PacMan.
 
 #### Exercise
 
-Implement [PacManAI::optimalDirection][2] and test your implementation with the test
-in [testPacmanAI.cpp][3] called _"Is optimal direction"_
+Implement [PacManAI::optimalDirection][1] and test your implementation with the test
+in [testPacmanAI.cpp][2] called _"Is optimal direction"_
 
 ```cpp
 Direction PacManAI::optimalDirection(const std::array<Move, 4> & moves) {
@@ -128,21 +127,7 @@ Direction PacManAI::optimalDirection(const std::array<Move, 4> & moves) {
 
 </details>
 
-## [Exercise 212][1]
-
-### Description
-
-<details>
-   <summary>Solution</summary>
-
-```cpp
-
-```
-
-</details>
-
-[1]: 21_exercises.cpp
-[2]: ../../lib/PacManAI.cpp
-[3]: ../../test/unit_tests/testPacmanAI.cpp
-[4]: ../../lib/Board.cpp
-[5]: ../../lib/include/Direction.hpp
+[1]: ../../lib/PacManAI.cpp
+[2]: ../../test/unit_tests/testPacmanAI.cpp
+[3]: ../../lib/Board.cpp
+[4]: ../../lib/include/Direction.hpp
