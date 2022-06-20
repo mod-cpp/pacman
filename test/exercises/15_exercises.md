@@ -4,7 +4,6 @@
 
 * [Exercise 150](#exercise-150)
 * [Exercise 151](#exercise-151)
-* [Exercise 152](#exercise-152)
 
 ## Exercise 150
 
@@ -15,8 +14,8 @@ In this exercise we will add a couple of files to the project.
 #### Background: CMake
 
 As described in the slides, the project is defined by several CMake files. The ones we
-are interested is [`CMakeLists.txt`][2] in the root project folder and
-the [`CMakeLists.txt`][3] file in the `lib` folder.
+are interested is [`CMakeLists.txt`][1] in the root project folder and
+the [`CMakeLists.txt`][2] file in the `lib` folder.
 
 You can see that the root CMake file is adding the `lib` subdirectory, this means that
 it is looking for a `CMakeLists.txt` file within that folder.
@@ -49,7 +48,7 @@ and `.hpp` files to the project.
 3. Include the `Clyde.hpp` file within the `Clyde.cpp` file, and add `#pragma once`
    to `Clyde.hpp`.
 
-4. Include `Clyde.hpp` in [GameState.hpp][4] and rebuild
+4. Include `Clyde.hpp` in [GameState.hpp][3] and rebuild
 
 <details>
    <summary>Solution</summary>
@@ -127,21 +126,6 @@ TEST_CASE("Is wall", "[board]") {
 }
 ```
 
-
-## [Exercise 152][1]
-
-### Description
-
-<details>
-   <summary>Solution</summary>
-
-```cpp
-
-```
-
-</details>
-
-[1]: 15_exercises.cpp
-[2]: ../../CMakeLists.txt
-[3]: ../../lib/CMakeLists.txt
-[4]: ../../lib/include/GameState.hpp
+[1]: ../../CMakeLists.txt
+[2]: ../../lib/CMakeLists.txt
+[3]: ../../lib/include/GameState.hpp
