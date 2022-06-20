@@ -223,6 +223,9 @@ If there are opengl driver errors, try running in software mode
 
 ### Enable a test and make it green
 
+Make sure you can run tests, so enable the test in the [cpp file][1], and make sure it
+fails before you make it pass. Hint is in the comment over the test.
+
 * Catch2 : [Special Tags][3]
 
 ```cpp
