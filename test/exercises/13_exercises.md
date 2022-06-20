@@ -3,7 +3,6 @@
 # 13. Game
 
 * [Exercise 130](#exercise-130)
-* [Exercise 131](#exercise-131)
 
 ## Exercise 130
 
