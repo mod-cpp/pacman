@@ -250,6 +250,9 @@ TEST_CASE("Exercise 111 : Enable a test and make it green", "[11]") {
 
 ### Make both asserts run (distinguish between REQUIRE and CHECK in Catch2)
 
+Enable the test and see you will only get one error. Look up REQUIRE and CHECK in
+Catch2 and change the code in [the test][1], so you get an error on both lines.
+
 * Catch2 : [Assertion Macros][2]
 
 ```cpp
