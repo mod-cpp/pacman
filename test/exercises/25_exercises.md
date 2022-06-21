@@ -34,15 +34,17 @@ alive.
    <summary>Hint: Getting started</summary>
 
 The function [PacManAI::choseNewDirectionForPacMan](../../lib/PacManAI.cpp) returns
-the direction PacMan should take at an intersection. This may be a good place to
-implement our AI.
+the direction PacMan should take at an intersection. This may be a good place to implement our AI.
+
+[PacManAI::update](../../lib/PacManAI.cpp) ensures that the direction
+is only changed at an intersection, so you do not have to handle that yourself. But maybe you could change that behavior to be faster at escaping from the relentless ghosts.
 
 </details>
 
 <details>
    <summary>Possible approach: Make PacMan move randomly</summary>
 
-The function [randomInt](../../lib/PacManAI.cpp) returns a random
+The function [randomInt](../../lib/include/Random.hpp) returns a random
 integer between its two parameters. You can use this function to introduce some
 randomness.
 
@@ -55,7 +57,10 @@ valid, make sure PacMan does not try to go in a wall or another inaccessible pos
    <summary>Possible approach: Make PacMan avoid the ghosts</summary>
 
 Try to make PacMan flee the ghosts. The AI does not know the positions of the ghosts, you will have to expose this information.
-
+To do that you might have to modify several functions in
+[GameState](../../lib/include/GameState.cpp) and
+[PacManAI](../../lib/include/PacManAI.cpp). Don't forget to modify both the header and the source file.
+What type provided by the standard library can be used to store and pass around a collection of positions?
 </details>
 
 <details>
@@ -69,10 +74,7 @@ in `GameState.cpp` and pass it as parameter to
 <details>
       <summary>Hint: Finding the ghosts</summary>
 
-Create a function that, for each of the possible directions, walks through each cell,
-starting from PacMan's position outwards, and returns true if a ghost is found. Use
-that function to filter out the directions where PacMan will encounter a ghost, by
-modifying the random solution
+Create a function that, for each of the possible directions, walks through each cell, starting from PacMan's position outwards, and returns true if a ghost is found. Use that function to filter out the directions where PacMan will encounter a ghost, by modifying the random solution
 
 </details>
 
@@ -243,10 +245,9 @@ Direction PacManAI::choseNewDirectionForPacMan(const PacMan & pacMan,
 </details>
 
 <details>
-<summary>Solution: Make PacMan go towards the closest Pellet</summary>
+<summary>Solution: Make PacMan go towards the closest pellet</summary>
 
-Use `pelletClosestToPacman` to calculate a target for PacMan, then find then
-use `optimalDirection` to decide a direction.
+Use `pelletClosestToPacman` to calculate a target for PacMan, then find then use `optimalDirection` to decide a direction.
 
 ```cpp
 Direction PacManAI::choseNewDirectionForPacMan(const PacMan & pacMan,
@@ -280,18 +281,73 @@ Direction PacManAI::choseNewDirectionForPacMan(const PacMan & pacMan,
 
 </details>
 
+
+<br/>
+
+Try to combine different approaches. For example, PacMan could try to maximize eating pellets while fleeing ghosts at the same time. What is your best strategy?
+Explore [cppreference](https://en.cppreference.com/w/cpp/algorithm) to see what new algorithms you could use.
+
 ## Exercise 251
 
 ### PacMan Bot
 
 #### Background: Keyboard Input
 
-PacMan can be controlled with the keyboard, but those inputs can be automated. The
-only thing that needs to change is the value within the InputState class.
+PacMan can be controlled with the keyboard, but those inputs can be automated. The only thing that needs to change is the direction
+passed to `PacMan::update`.
 
 #### Exercise
 
-Start by giving InputState random values on each update and then program in a fixed set of movements. For example "Go Right for 3 seconds, then down, right, up, right".
-This should pick up the first super pellet.
+Modify `Gamestate::step` to pick a random direction on each
+update. PacMan will move very erratically.
+
+To select a random number, you can use the function [randomInt](../../lib/include/Random.hpp) which return a random integer between its two parameters.
 
 In this exercise, the input code in processEvents is not needed.
+
+<details>
+<summary>Solution: random movements</summary>
+
+```cpp
+
+void GameState::step(std::chrono::milliseconds delta) {
+  std::size_t index = randomInt(0, 4);
+  std::array<Direction, 4> directions{
+     Direction::RIGHT,
+     Direction::LEFT,
+     Direction::UP,
+     Direction::DOWN
+  };
+  Direction d = directions[index];
+
+  pacManAI.update(pacMan, pellets);
+  pacMan.update(delta, d);
+
+  if (isPacManDying()) {
+    handleDeathAnimation(delta);
+    return;
+  }
+
+  if (!pacMan.hasDirection())
+    return;
+
+  blinky.setTarget(pacMan.position());
+  blinky.update(delta);
+  pinky.setTarget(pacMan.positionInGrid(), pacMan.currentDirection());
+  pinky.update(delta);
+  inky.setTarget(pacMan.positionInGrid(), pacMan.currentDirection(), blinky.positionInGrid());
+  inky.update(delta);
+
+  fruit.update(delta, score.eatenPellets);
+
+  checkCollision(blinky);
+  checkCollision(pinky);
+  checkCollision(inky);
+
+  eatPellets();
+  eatFruit();
+}
+```
+</details>
+
+
