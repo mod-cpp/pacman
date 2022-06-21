@@ -163,12 +163,15 @@ code .
 <details>
    <summary>Commandline</summary>
 
+Example for Ubuntu using the preset `linux-gcc`, for other platforms use the
+appropriate preset, see [CMakePresets.json](../../CMakePresets.json).
+
 ```bash
 git clone https://github.com/mod-cpp/pacman.git
 cd pacman
-cmake -B build
-cmake --build build
-ctest --test-dir build -C Debug
+cmake --preset linux-gcc -DCMAKE_BUILD_TYPE=Debug # configure
+cmake --build --preset linux-gcc-build --config Debug # build
+ctest --preset linux-gcc-test -C Debug # run tests
 ```
 
 </details>
