@@ -124,7 +124,7 @@ TEST_CASE("Is wall", "[board]") {
   REQUIRE(pacman::isWall(pacman::GridPosition{ 0, 1 }));
   REQUIRE_FALSE(pacman::isWall(pacman::GridPosition{ 11, 13 })); // pen
   REQUIRE_FALSE(pacman::isWall(pacman::GridPosition{ 1, 1 })); // pellet
-  REQUIRE_FALSE(pacman::isWall(pacman::GridPosition{ 1, 2 })); // pen
+  REQUIRE_FALSE(pacman::isWall(pacman::GridPosition{ 1, 2 })); // pellet
 }
 ```
 </details>
