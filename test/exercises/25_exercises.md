@@ -131,7 +131,7 @@ void GameState::step(std::chrono::milliseconds delta) {
 
   pacManAI.update(pacMan, pellets, ghostPositions);
   pacMan.update(delta,
-                inputState.enableAI ? pacManAI.suggestedDirection() : inputState.direction());
+                inputState.enableAI ? pacManAI.direction() : inputState.direction());
 
   if (isPacManDying()) {
     handleDeathAnimation(delta);

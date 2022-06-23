@@ -63,7 +63,7 @@ forth
 
 ```cpp
 bool PacManAI::isValidMove(const Move & move) {
-  const bool isOpposite = (move.direction == oppositeDirection(direction));
+  const bool isOpposite = (move.direction == oppositeDirection(suggested_direction));
   if (isOpposite) {
     return false;
   }

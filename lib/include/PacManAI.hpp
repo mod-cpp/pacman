@@ -20,19 +20,21 @@ public:
   };
 
   void update(const PacMan & pacMan, const Pellets & pellets);
-  Direction suggestedDirection() const;
   GridPosition pelletClosestToPacman(GridPosition pacmanGridPosition,
                                      std::vector<GridPosition> & pellets);
   bool isValidMove(const Move & move);
   Direction optimalDirection(const std::array<Move, 4> & moves);
   void reset();
 
+  Position position() const { return pos; }
+  Direction direction() const { return suggested_direction; }
+
 private:
   Direction chooseNewDirectionForPacMan(const PacMan & pacMan,
                                        const Pellets & pellets);
 
   Position pos = initialPacManPosition();
-  Direction direction = Direction::RIGHT;
+  Direction suggested_direction = Direction::RIGHT;
 };
 
 } // namespace pacman

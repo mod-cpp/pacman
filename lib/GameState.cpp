@@ -8,7 +8,7 @@ constexpr int POWER_PELLET_POINTS = 50;
 
 void GameState::step(std::chrono::milliseconds delta) {
   pacManAI.update(pacMan, pellets);
-  pacMan.update(delta, inputState.enableAI ? pacManAI.suggestedDirection() : inputState.direction());
+  pacMan.update(delta, inputState.enableAI ? pacManAI.direction() : inputState.direction());
 
   if (isPacManDying()) {
     handleDeathAnimation(delta);

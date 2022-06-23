@@ -7,11 +7,7 @@ namespace pacman {
 
 void PacManAI::reset() {
   pos = {};
-  direction = Direction::RIGHT;
-}
-
-Direction PacManAI::suggestedDirection() const {
-  return direction;
+  suggested_direction = Direction::RIGHT;
 }
 
 // This function is not yet implemented.
@@ -72,7 +68,7 @@ void PacManAI::update(const PacMan & pacMan, const Pellets & pellets [[maybe_unu
     return;
   }
 
-  direction = chooseNewDirectionForPacMan(pacMan, pellets);
+  suggested_direction = chooseNewDirectionForPacMan(pacMan, pellets);
   pos = pacMan.position();
 }
 } // namespace pacman
