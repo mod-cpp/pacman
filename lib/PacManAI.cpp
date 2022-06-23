@@ -35,7 +35,7 @@ Direction PacManAI::optimalDirection(const std::array<Move, 4> & moves [[maybe_u
 
 // This function is not yet implemented.
 // You will implement it as part of module 25.
-Direction PacManAI::choseNewDirectionForPacMan(const PacMan & pacMan [[maybe_unused]],
+Direction PacManAI::chooseNewDirectionForPacMan(const PacMan & pacMan [[maybe_unused]],
                                                const Pellets & pellets [[maybe_unused]]) {
   return Direction::RIGHT;
 }
@@ -49,7 +49,7 @@ void PacManAI::update(const PacMan & pacMan, const Pellets & pellets [[maybe_unu
     return;
   }
 
-  direction = choseNewDirectionForPacMan(pacMan, pellets);
+  direction = chooseNewDirectionForPacMan(pacMan, pellets);
   pos = pacMan.position();
 }
 } // namespace pacman

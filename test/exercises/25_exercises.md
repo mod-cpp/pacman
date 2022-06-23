@@ -33,7 +33,7 @@ alive.
 <details>
    <summary>Hint: Getting started</summary>
 
-The function [PacManAI::choseNewDirectionForPacMan](../../lib/PacManAI.cpp) returns
+The function [PacManAI::chooseNewDirectionForPacMan](../../lib/PacManAI.cpp) returns
 the direction PacMan should take at an intersection. This may be a good place to implement our AI.
 
 [PacManAI::update](../../lib/PacManAI.cpp) ensures that the direction
@@ -68,7 +68,7 @@ What type provided by the standard library can be used to store and pass around 
 
 You will need to create a `std::vector<GhostPosition>`
 in `GameState.cpp` and pass it as parameter to
-`PacManAI::update()` then `PacManAI::choseNewDirectionForPacMan`.
+`PacManAI::update()` then `PacManAI::chooseNewDirectionForPacMan`.
 </details>
 
 <details>
@@ -90,7 +90,7 @@ Try to combine `pelletClosestToPacMan`, `optimalDirection` and
    <summary>Solution: Make PacMan move randomly</summary>
 
 ```cpp
-Direction PacManAI::choseNewDirectionForPacMan(const PacMan & pacMan) {
+Direction PacManAI::chooseNewDirectionForPacMan(const PacMan & pacMan) {
   const GridPosition currentPosition = pacMan.positionInGrid();
   const auto [x, y] = currentPosition;
 
@@ -151,10 +151,10 @@ void GameState::step(std::chrono::milliseconds delta) {
 
 <li>
 
-Modify the signatures of `PacManAI::update` and `PacManAI::choseNewDirectionForPacMan`
+Modify the signatures of `PacManAI::update` and `PacManAI::chooseNewDirectionForPacMan`
 
 ```cpp
-Direction choseNewDirectionForPacMan(const PacMan & pacMan,
+Direction chooseNewDirectionForPacMan(const PacMan & pacMan,
                                      const std::vector<GridPosition> & ghostPositions);
 ```
 
@@ -164,7 +164,7 @@ void update(const PacMan & pacMan, const Pellets & pellets, const
  ```
 
 Adjust  `PacManAI::update` to pass `ghostPositions`
-to `PacManAI::choseNewDirectionForPacMan`.
+to `PacManAI::chooseNewDirectionForPacMan`.
 
 </li>
 
@@ -200,11 +200,11 @@ bool hasGhost(GridPosition p, Direction d,
 
 <li>
 
-Modify `PacManAI::choseNewDirectionForPacMan` to filter out direction that cross the
+Modify `PacManAI::chooseNewDirectionForPacMan` to filter out direction that cross the
 path of a ghost. There is a small pitfall: what happens if PacMan is surrounded by ghosts?
 
 ```cpp
-Direction PacManAI::choseNewDirectionForPacMan(const PacMan & pacMan,
+Direction PacManAI::chooseNewDirectionForPacMan(const PacMan & pacMan,
                                                const std::vector<GridPosition> & ghostPositions) {
   const GridPosition currentPosition = pacMan.positionInGrid();
   const auto [x, y] = currentPosition;
@@ -250,7 +250,7 @@ Direction PacManAI::choseNewDirectionForPacMan(const PacMan & pacMan,
 Use `pelletClosestToPacman` to calculate a target for PacMan, then find then use `optimalDirection` to decide a direction.
 
 ```cpp
-Direction PacManAI::choseNewDirectionForPacMan(const PacMan & pacMan,
+Direction PacManAI::chooseNewDirectionForPacMan(const PacMan & pacMan,
                                                const Pellets & pellets) {
 
   const GridPosition pacManGridPos = pacMan.positionInGrid();

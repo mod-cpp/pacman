@@ -28,7 +28,7 @@ public:
   void reset();
 
 private:
-  Direction choseNewDirectionForPacMan(const PacMan & pacMan,
+  Direction chooseNewDirectionForPacMan(const PacMan & pacMan,
                                        const Pellets & pellets);
 
   Position pos = initialPacManPosition();
