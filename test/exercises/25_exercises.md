@@ -33,8 +33,10 @@ alive.
 <details>
    <summary>Hint: Getting started</summary>
 
-The function [PacManAI::chooseNewDirectionForPacMan](../../lib/PacManAI.cpp) returns
-the direction PacMan should take at an intersection. This may be a good place to implement our AI.
+The function [PacManAI::chooseNewDirectionForPacMan](../../lib/PacManAI.cpp) returns the direction PacMan should take at an intersection. This may be a good place to implement our AI.
+Currently, the AI will go towards the closest pellet using the functions
+you implemented in modules 21 and 22.
+Can you implement a more sucessful strategy?
 
 [PacManAI::update](../../lib/PacManAI.cpp) ensures that the direction
 is only changed at an intersection, so you do not have to handle that yourself. But maybe you could change that behavior to be faster at escaping from the relentless ghosts.
@@ -75,14 +77,6 @@ in `GameState.cpp` and pass it as parameter to
       <summary>Hint: Finding the ghosts</summary>
 
 Create a function that, for each of the possible directions, walks through each cell, starting from PacMan's position outwards, and returns true if a ghost is found. Use that function to filter out the directions where PacMan will encounter a ghost, by modifying the random solution
-
-</details>
-
-<details>
-<summary>Possible approach: let PacMan go towards the closest pellet</summary>
-
-Try to combine `pelletClosestToPacMan`, `optimalDirection` and
-`positionDistance` to find the closest pellet from PacMan and then decide which of the possible valid move is closest from that direction.
 
 </details>
 
@@ -200,8 +194,7 @@ bool hasGhost(GridPosition p, Direction d,
 
 <li>
 
-Modify `PacManAI::chooseNewDirectionForPacMan` to filter out direction that cross the
-path of a ghost. There is a small pitfall: what happens if PacMan is surrounded by ghosts?
+Modify `PacManAI::chooseNewDirectionForPacMan` to filter out direction that cross the path of a ghost. There is a small pitfall: what happens if PacMan is surrounded by ghosts?
 
 ```cpp
 Direction PacManAI::chooseNewDirectionForPacMan(const PacMan & pacMan,
@@ -243,44 +236,6 @@ Direction PacManAI::chooseNewDirectionForPacMan(const PacMan & pacMan,
 </li>
 </ul>
 </details>
-
-<details>
-<summary>Solution: Make PacMan go towards the closest pellet</summary>
-
-Use `pelletClosestToPacman` to calculate a target for PacMan, then find then use `optimalDirection` to decide a direction.
-
-```cpp
-Direction PacManAI::chooseNewDirectionForPacMan(const PacMan & pacMan,
-                                               const Pellets & pellets) {
-
-  const GridPosition pacManGridPos = pacMan.positionInGrid();
-  auto pelletPositions = pellets.allPellets();
-  if (pelletPositions.empty()) {
-    return Direction::NONE;
-  }
-
-  const GridPosition targetPos = pelletClosestToPacman(pacManGridPos, pelletPositions);
-
-  const GridPosition currentPosition = pacMan.positionInGrid();
-  const auto [x, y] = currentPosition;
-  std::array<Move, 4> possibleMoves = {
-    Move{ Direction::UP, { x, y - 1 } },
-    Move{ Direction::LEFT, { x - 1, y } },
-    Move{ Direction::DOWN, { x, y + 1 } },
-    Move{ Direction::RIGHT, { x + 1, y } }
-  };
-
-  for (auto & move : possibleMoves) {
-    if (!isValidMove(move))
-      continue;
-    move.distanceToTarget = positionDistance(move.position, targetPos);
-  }
-  return optimalDirection(possibleMoves);
-}
-```
-
-</details>
-
 
 <br/>
 
