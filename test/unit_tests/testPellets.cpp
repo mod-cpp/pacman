@@ -17,6 +17,21 @@ TEST_CASE("Pellet initialization", "[pellets]") {
   pelletInitTest(superPellets, 4, 0, 9);
 }
 
+TEST_CASE("isPellet", "[pellets]") {
+  pacman::Pellets pellets;
+  CHECK(pellets.isPellet({1, 1}));
+  CHECK(pellets.isPellet({15, 1}));
+  CHECK(pellets.isPellet({10, 5}));
+  CHECK(pellets.isPellet({21, 26}));
+  CHECK(pellets.isPellet({26, 29}));
+
+  CHECK_FALSE(pellets.isPellet({0, 0}));   // wall
+  CHECK_FALSE(pellets.isPellet({1, 3}));   // super pellet
+  CHECK_FALSE(pellets.isPellet({11, 13})); // pen
+  CHECK_FALSE(pellets.isPellet({0, 14}));  // left portal
+  CHECK_FALSE(pellets.isPellet({27, 14})); // right portal
+}
+
 template<typename T>
 static void pelletEatingTest(T & pellets, size_t countBefore, size_t countAfter, size_t x, size_t y) {
   REQUIRE(pellets.allPellets().size() == countBefore);
