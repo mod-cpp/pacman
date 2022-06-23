@@ -23,11 +23,11 @@ TEST_CASE("Is valid move", "[!shouldfail][AI]") {
     using namespace pacman;
     using TestData = std::tuple<PacManAI::Move, bool>;
     auto data = GENERATE(
-      TestData{{Direction::LEFT,  GridPosition{13, 23}}, false}, // opposite direction
-      TestData{{Direction::UP,    GridPosition{14, 22}}, false}, // wall
-      TestData{{Direction::RIGHT, GridPosition{15, 23}}, true},  // same direction
-      TestData{{Direction::DOWN,  GridPosition{14, 24}}, false}  // wall
-      );
+      TestData{ PacManAI::Move{ Direction::LEFT,  GridPosition{ 13, 23 } }, false }, // opposite direction
+      TestData{ PacManAI::Move{ Direction::UP,    GridPosition{ 14, 22 } }, false }, // wall
+      TestData{ PacManAI::Move{ Direction::RIGHT, GridPosition{ 15, 23 } }, true },  // same direction
+      TestData{ PacManAI::Move{ Direction::DOWN,  GridPosition{ 14, 24 } }, false }  // wall
+    );
 
     PacManAI AI;
 
