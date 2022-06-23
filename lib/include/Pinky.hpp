@@ -15,6 +15,8 @@ protected:
 
 private:
   Position scatterTarget() const;
+  static constexpr Position initial_position = { 11.5, 14 };
+  static constexpr Position scatter_target = { 3, -2 };
 };
 
 } // namespace pacman

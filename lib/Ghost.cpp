@@ -6,8 +6,9 @@
 
 namespace pacman {
 
-Ghost::Ghost(Atlas::Ghost spriteSet)
-  : spriteSet(spriteSet) {
+Ghost::Ghost(Atlas::Ghost spriteSet, Position initialPosition)
+  : spriteSet(spriteSet),
+    pos(initialPosition) {
 }
 
 void Ghost::frighten() {

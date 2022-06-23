@@ -3,9 +3,7 @@
 namespace pacman {
 
 Inky::Inky()
-  : Ghost(Atlas::Ghost::inky) {
-  pos = initialPosition();
-}
+  : Ghost(Atlas::Ghost::inky, initial_position) {}
 
 double Inky::speed() const {
   if (state == State::Eyes)
@@ -64,11 +62,11 @@ void Inky::setTarget(GridPosition pacManPos, Direction pacManDir, GridPosition b
 }
 
 Position Inky::initialPosition() const {
-  return { 13.5, 14 };
+  return initial_position;
 }
 
 Position Inky::scatterTarget() const {
-  return { 27, 30 };
+  return scatter_target;
 }
 
 } // namespace pacman

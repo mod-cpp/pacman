@@ -3,9 +3,7 @@
 namespace pacman {
 
 Blinky::Blinky()
-  : Ghost(Atlas::Ghost::blinky) {
-  pos = initialPosition();
-}
+  : Ghost(Atlas::Ghost::blinky, initial_position) {}
 
 double Blinky::speed() const {
   if (state == State::Eyes)
@@ -30,11 +28,11 @@ void Blinky::setTarget(Position pacManPos) {
 }
 
 Position Blinky::initialPosition() const {
-  return { 13.5, 11 };
+  return initial_position;
 }
 
 Position Blinky::scatterTarget() const {
-  return { 25, -3 };
+  return scatter_target;
 }
 
 } // namespace pacman

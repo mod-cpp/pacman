@@ -128,6 +128,8 @@ protected:
 
 private:
   Position scatterTarget() const;
+  static constexpr Position initial_position = { 15.5, 14 };
+  static constexpr Position scatter_target = { 0, 30 };
 };
 
 } // namespace pacman
@@ -146,9 +148,7 @@ private:
 namespace pacman {
 
 Clyde::Clyde()
-  : Ghost(Atlas::Ghost::clyde) {
-  pos = initialPosition();
-}
+  : Ghost(Atlas::Ghost::clyde, initial_position) {}
 
 double Clyde::speed() const {
   if (state == State::Eyes)
@@ -182,11 +182,11 @@ void Clyde::setTarget(Position pacManPos) {
 }
 
 Position Clyde::initialPosition() const {
-  return { 15.5, 14 };
+  return initial_position;
 }
 
 Position Clyde::scatterTarget() const {
-  return { 0, 30 };
+  return scatter_target;
 }
 
 } // namespace pacman
