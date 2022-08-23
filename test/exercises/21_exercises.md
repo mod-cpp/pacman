@@ -36,6 +36,10 @@ pellets while playing the game.
 Note: The test is disabled, to enable the test remove the [!shouldfail] from the tags
 on the test
 
+Note: In the [testPacmanAI.cpp][2] test called _"Is valid move"_ a Catch2 feature is
+used called a Data Generator. This lets you reuse the test across different input
+values, see the [Catch2 documentation for Data Generators][5].
+
 ```cpp
 bool PacManAI::isValidMove(const Move & move) {
   return false;
@@ -131,3 +135,4 @@ Direction PacManAI::optimalDirection(const std::array<Move, 4> & moves) {
 [2]: ../../test/unit_tests/testPacmanAI.cpp
 [3]: ../../lib/Board.cpp
 [4]: ../../lib/include/Direction.hpp
+[5]: https://github.com/catchorg/Catch2/blob/v2.x/docs/generators.md
