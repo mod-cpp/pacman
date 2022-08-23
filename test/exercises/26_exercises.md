@@ -5,7 +5,6 @@
 * [Exercise 260](#exercise-260)
 * [Exercise 261](#exercise-261)
 * [Exercise 262](#exercise-262)
-* [Exercise 263](#exercise-263)
 
 ## Exercise 260
 
@@ -52,19 +51,6 @@ int main() {
    return a;
 }
 ```
-
-## [Exercise 263][1]
-
-### Description
-
-<details>
-   <summary>Solution</summary>
-
-```cpp
-
-```
-
-</details>
 
 [1]: 26_exercises.cpp
 [2]: https://godbolt.org/z/nT54sj4hj
