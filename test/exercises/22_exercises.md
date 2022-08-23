@@ -61,6 +61,10 @@ std::vector<GridPosition> initialPelletPositions() {
 Implement [PacManAI::pelletClosestToPacman][1] and test your implementation with the
 test in [testPacmanAI.cpp][2] called _"Find pellet closest to PacMan"_
 
+Note: In the [testPacmanAI.cpp][2] test called _"Find pellet closest to PacMan"_ a
+Catch2 feature is used called a Data Generator. This lets you reuse the test across
+different input values, see the [Catch2 documentation for Data Generators][3].
+
 The function should return the position of the pellet that is "closest" to PacMan.
 
 ```cpp
@@ -108,3 +112,4 @@ GridPosition PacManAI::pelletClosestToPacman(GridPosition pacmanGridPosition,
 
 [1]: ../../lib/PacManAI.cpp
 [2]: ../../test/unit_tests/testPacmanAI.cpp
+[3]: https://github.com/catchorg/Catch2/blob/v2.x/docs/generators.md
