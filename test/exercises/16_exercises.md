@@ -65,10 +65,10 @@ ghosts.
 
 1. Clyde should inherit from Ghost
 2. Make simple implementations of the functions to make it compile
-3. Clyde should start at Position { x = 15.5, y = 14 }
+3. Clyde should start at Position { .x = 15.5, .y = 14 }
 4. Modify [Canvas.cpp](../../lib/Canvas.cpp) to make sure Clyde is rendered.
    Otherwise, it will not appear on screen.
-5. Clyde's scatter target is { x = 0, y = 30 }
+5. Clyde's scatter target is { .x = 0, .y = 30 }
 6. Clyde always targets its scatter target, unless PacMan is further than 8 tiles away
 7. Update [GameState.cpp](../../lib/GameState.cpp) with calls to the functions in
    Clyde to make Clyde move.
