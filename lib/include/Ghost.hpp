@@ -19,7 +19,7 @@ public:
     Eyes,
   };
 
-  explicit Ghost(Atlas::Ghost spriteSet, Position initialPosition);
+  Ghost(Atlas::Ghost spriteSet, Position initialPosition);
   virtual ~Ghost() = default;
 
   GridPosition currentSprite() const;

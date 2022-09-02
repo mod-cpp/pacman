@@ -119,7 +119,7 @@ namespace pacman {
 
 class Clyde final : public Ghost {
 public:
-  explicit Clyde();
+  Clyde();
   void setTarget(Position pacManPos);
 
 protected:
