@@ -100,7 +100,7 @@ function (call it `isWall`) to avoid repeating ourselves?
 1. Create a function called `isWall` between `cellAtPosition`
    and `isWalkableForPacMan` that returns true if the `GridPosition` parameter is a
    wall. A function needs to be defined before it is called, so the order of functions
-   is important. Try to define `isWall` after ``isWalkableForPacMan` or before `
+   is important. Try to define `isWall` after `isWalkableForPacMan` or before `
    cellAtPosition`. It does not compile
 
 2. Replace the checks within `isWalkableForPacMan` and `isWalkableForGhost` with your
