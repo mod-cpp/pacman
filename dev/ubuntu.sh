@@ -17,7 +17,6 @@ sudo apt install -y code
 # PacMan deps
 sudo apt install -y \
 build-essential \
-clang-12 \
 cmake \
 g++-10 \
 git \
@@ -31,3 +30,16 @@ pkg-config \
 tar \
 unzip \
 zip
+
+# Install up-to-date CMake (https://apt.kitware.com/)
+CODE_NAME=`lsb_release -cs`
+wget -O - https://apt.kitware.com/keys/kitware-archive-latest.asc 2>/dev/null | gpg --dearmor - | sudo tee /usr/share/keyrings/kitware-archive-keyring.gpg >/dev/null
+echo "deb [signed-by=/usr/share/keyrings/kitware-archive-keyring.gpg] https://apt.kitware.com/ubuntu/ ${CODE_NAME} main" | sudo tee /etc/apt/sources.list.d/kitware.list >/dev/null
+sudo apt-get update
+sudo apt-get install kitware-archive-keyring
+sudo apt-get install cmake
+
+# Install Clang last since it isn't strictly needed
+sudo apt install -y clang-12
+
+echo "PacMan development environment install done"
