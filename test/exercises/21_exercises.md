@@ -9,20 +9,24 @@
 
 ### Implement PacManAI::isValidMove
 
-#### Background: PacMan Moves
+//suggested Fix: 
+// 1. Use PacManAI in the statements so we know it's not regular pacman
+
+#### Background: PacManAI Moves
 
 At each intersection, check if there is a ghost directly inline with that path. If the
-path is free of ghosts, you are allowed to turn there. And if PacMan is moving in a
-direction, and a ghost enters his path, then PacMan will reverse.
+path is free of ghosts, you are allowed to turn there. And if PacManAI is moving in a
+direction, and a ghost enters his path, then PacManAI will reverse.
 
-For example if PacMan is at an intersection and can go either right or up, and there
-is a ghost in the path going right, then PacMan will go up. Then while PacMan is going
-up, a ghost enters that path, PacMan will go back.
+For example if PacManAI is at an intersection and can go either right or up, and there
+is a ghost in the path going right, then PacManAI will go up. Then while PacManAI is going
+up, a ghost enters that path, PacManAI will go back.
 
 You only need to worry about the grid itself and any ghosts on the
 North/South/East/West axis of PacMan.
 
 #### Exercise
+//suggestd Fix: Explainging what suggested_direction is could be helpful because technically is it okay for pacmanai to move in any direction so saying "going backwards is not allowed" can be ambiguous.
 
 As a warmup exercise, implement [PacManAI::isValidMove][1] and test your
 implementation with the test in [testPacmanAI.cpp][2] called _"Is valid move"_
@@ -87,6 +91,10 @@ bool PacManAI::isValidMove(const Move & move) {
 ### Implement PacManAI::optimalDirection
 
 #### Background: PacMan Moves
+
+// suggestd Fix:
+// The background is slightly misleading as optimalDirection is basically checking the direction for the shortest distance
+rather than explicitly checking if there is a ghost inline.
 
 At each intersection, check if there is a ghost directly inline with that path. If the
 path is free of ghosts, you are allowed to turn there. And if PacMan is moving in a
