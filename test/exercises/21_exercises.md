@@ -9,32 +9,21 @@
 
 ### Implement PacManAI::isValidMove
 
-//suggested Fix: 
-// 1. Use PacManAI in the statements so we know it's not regular pacman
-
 #### Background: PacManAI Moves
+PacManAI is an alternative gameplay option to the regular PacMan. PacmanAI moves based on
+`suggested_direction` rather than take an input from the keyboard.
+The `suggested_direction` always starts from `Direction::Right` and is updated based on `chooseNewDirectionForPacMan`.
 
-At each intersection, check if there is a ghost directly inline with that path. If the
-path is free of ghosts, you are allowed to turn there. And if PacManAI is moving in a
-direction, and a ghost enters his path, then PacManAI will reverse.
-
-For example if PacManAI is at an intersection and can go either right or up, and there
-is a ghost in the path going right, then PacManAI will go up. Then while PacManAI is going
-up, a ghost enters that path, PacManAI will go back.
-
-You only need to worry about the grid itself and any ghosts on the
-North/South/East/West axis of PacMan.
 
 #### Exercise
-//suggestd Fix: Explainging what suggested_direction is could be helpful because technically is it okay for pacmanai to move in any direction so saying "going backwards is not allowed" can be ambiguous.
 
 As a warmup exercise, implement [PacManAI::isValidMove][1] and test your
 implementation with the test in [testPacmanAI.cpp][2] called _"Is valid move"_
 
 Note: `isValidMove` will be called 4 times in a loop. If the target cell is not
-walkable the distance is set to infinity.
+walkable the distance stays as infinity.
 
-Note: Going backwards is not allowed, otherwise you'll go back and forwards between 2
+Note: Walking opposite to the suggested direction is not allowed, otherwise you'll go back and forwards between 2
 pellets while playing the game.
 
 Note: The test is disabled, to enable the test remove the [!shouldfail] from the tags
@@ -80,6 +69,8 @@ bool PacManAI::isValidMove(const Move & move) {
   if (!canWalk) {
     return false;
   }
+  
+  move.distanceToTarget = positionDistance(AI.position(), move.position);
   return true;
 }
 ```
@@ -96,18 +87,13 @@ bool PacManAI::isValidMove(const Move & move) {
 // The background is slightly misleading as optimalDirection is basically checking the direction for the shortest distance
 rather than explicitly checking if there is a ghost inline.
 
-At each intersection, check if there is a ghost directly inline with that path. If the
-path is free of ghosts, you are allowed to turn there. And if PacMan is moving in a
-direction, and a ghost enters his path, then PacMan will reverse.
+## Exercise 
+Find the direction of the pellets closest to PacManAI implement in `PacManAI::optimalDirection`
 
-For example if PacMan is at an intersection and can go either right or up, and there
-is a ghost in the path going right, then PacMan will go up. Then while PacMan is going
-up, a ghost enters that path, PacMan will go back.
+PacManAI moves in `suggested_direction`. Optimize which direction is an optimal one by finding the pellet
+closest to PacmanAI.
 
-You only need to worry about the grid itself and any ghosts on the
-North/South/East/West axis of PacMan.
-
-#### Exercise
+#### Exercise 211
 
 Implement [PacManAI::optimalDirection][1] and test your implementation with the test
 in [testPacmanAI.cpp][2] called _"Is optimal direction"_
@@ -135,7 +121,6 @@ Direction PacManAI::optimalDirection(const std::array<Move, 4> & moves) {
   return dir;
 }
 
-```
 
 </details>
 
