@@ -59,6 +59,7 @@ Direction PacManAI::chooseNewDirectionForPacMan(const PacMan & pacMan [[maybe_un
   return optimalDirection(possibleMoves);
 }
 
+// todo: why is update taking pacman as argument instead of pacManAI
 void PacManAI::update(const PacMan & pacMan, const Pellets & pellets [[maybe_unused]]) {
 
   const GridPosition pacManGridPos = pacMan.positionInGrid();

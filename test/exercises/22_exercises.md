@@ -37,6 +37,7 @@ std::vector<GridPosition> initialPelletPositions() {
 
 ```cpp
 std::vector<GridPosition> initialPelletPositions() {
+  //could be renamed to pellet position
   std::vector<GridPosition> positions;
 
   positions.reserve((ROWS * COLUMNS) / 3);
